@@ -1,0 +1,152 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+    
+    <h:form id="villeF" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">
+				<h:outputFormat value="#{editerVilleAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+					<f:param value="#{messages['ville.label']}"/>
+				</h:outputFormat>
+			</f:facet>
+			
+			<!-- Il est possible de definir pour chaque UIInput un valueChangeListener : 
+					valueChangeListener="#{bean.valueChangeMethod}" en tant qu'attribut de h:inputText
+			 -->
+            <s:decorate id="nomD" template="../../layout/edit.xhtml">
+                <ui:define name="label">
+                	<h:outputLabel value="#{messages['ville.nom.label']}" />
+                </ui:define>
+                <h:inputText id = "nom"
+                		label="#{messages['ville.nom.label']}"
+                       	required="true"
+                        size="15"
+                      	maxlength="15"
+                      	value="#{editerVilleAction.instance.nom}" >
+					<a4j:support id="onKeyUpnomD" event="onkeyup"
+							rendered="#{!editerVilleAction.managed}"
+							requestDelay="20" 
+							actionListener="#{editerVilleAction.refresh}" />
+				</h:inputText>
+            </s:decorate>
+            
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+			<!-- Version Fwk Sphinx -->
+			<!-- 
+				h:commandButton, mecanisme de POST pour mettre à jour le model (fonctions Create ou Update)
+				s:button, mecanisme de GET pour naviguer et obtenir des informations (fonction Cancel)
+			 -->
+			<h:commandButton id="doCreate" 
+					value="#{messages['default.button.create.label']}" 
+					action="#{editerVilleAction.persiste}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{!editerVilleAction.managed}"/> 							          
+			 <h:commandButton id="doUpdate" 
+					value="#{messages['default.button.validate.label']}" 
+					action="#{editerVilleAction.update}"
+					styleClass="boutonAction boutonValider"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerVilleAction.managed}"/>
+	       	<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerVilleAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerVilleAction.managed}"/>
+		
+		</rich:panel>
+
+		<rich:tabPanel id="villeTp" switchType="ajax">
+    		<rich:tab limitToList="true" reRender="villeTp,msg" immediate="true">
+  				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['ville.pays.label']}"/>
+				</f:facet>
+				
+			    <div class="association" id="villeParent">
+			        <h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerVilleAction.instance.pays == null}"/>
+			        <rich:dataTable id="villeDt"
+							var="pays" 
+			            	value="#{editerVilleAction.instance.pays}" 
+			                rendered="#{editerVilleAction.instance.pays != null}"
+							width="100%"
+							styleClass="rich-table-level2"
+							rowClasses="rich-table-cell-impair, rich-table-cell-pair">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{messages['pays.id.label']}"/>
+							</f:facet>
+							<h:outputText value="#{pays.id}"/>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{messages['pays.nom.label']}"/>
+							</f:facet>
+							<h:outputText value="#{pays.nom}"/>
+						</rich:column>
+						
+						<rich:column styleClass="rich-table-cell-action" headerClass="rich-table-cell-action">
+							<f:facet name="header">
+								<h:outputText value="#{messages['default.action.label']}"/>
+							</f:facet>
+							<h:commandButton id="doViewDetail" 
+										action="#{editerVilleAction.find}" 
+										immediate="true"
+										image="#{theme.images_statiques}/action_detail.png"
+										onmouseover="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail_hover.png'"
+										onmouseout="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail.png'"
+										alt="#{messages['default.button.show.alt']}"
+										title="#{messages['default.button.show.label']}">
+								<f:setPropertyActionListener target="#{editerPaysAction.paysId}" value="#{pays.id}"/> 
+							</h:commandButton>
+						</rich:column>
+					</rich:dataTable>
+					
+					<div class="actionButtons">
+			            <h:commandButton id="doPaysSearch"
+			            		
+			            		action="#{rechercherPaysAction.search}"
+			            		immediate="true"
+								styleClass="boutonAction boutonSelectionner"
+								onmouseover="$(this).addClassName('boutonActionHover')"
+								onmouseout="$(this).removeClassName('boutonActionHover')"
+			            		value="#{messages['default.button.select.label']}"/>
+			        </div>
+				</div>
+			</rich:tab>
+		</rich:tabPanel>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

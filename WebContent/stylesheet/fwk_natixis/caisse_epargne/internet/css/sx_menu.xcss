@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le menu BP Agence
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/sx_menu.xcss" />
+	
+	<!-- 
+		/************************************/
+		/*              MENU                */
+		/************************************/
+		
+		menuBorderColor		#8F8F8F
+		menuHoverColor		#E60106
+		menuOpenedColor		#E60106
+		menuSelectedColor	#FFE4E4
+		
+		arrière plan du menu : dégradé 
+		menuHeight			: auteur de l'image totale
+		menuGradientHeight	: taille du dégradé
+		menuBgColor			: couleur du dégradé (gradientBaseColor->menuBgColor)
+		
+	-->
+
+	<!-- fond en degradé -->
+	<u:selector name=".menuPartieGauche ul">
+		<u:style name="background-image">
+            <f:resource f:key="SphinxGradient">
+                <f:attribute name="gradientHeight" skin="menuGradientHeight"/>
+                <f:attribute name="height" skin="menuHeight"/>
+                <f:attribute name="gradientColor" skin="menuBgColor"/>
+            </f:resource>
+		</u:style>
+		<u:style name="background-repeat" value="repeat-x"/>
+	</u:selector> 
+
+	<!-- pas de dégradé gris sur les ul imbriqués -->
+	<u:selector name=".menuPartieGauche ul ul">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+
+
+	<!-- 
+		/*********************/
+		/* Menu de niveau 1  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau1 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau1 hasNoChild menuOuvert itemSelected">
+	<li class="niveau1 menuFerme/menuOuvert">
+	-->
+	
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li.hasNoChild a">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv1_7_on.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="5px 50%"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv1_7_off.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="5px 50%"/>
+	</u:selector>
+	
+		
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li.itemSelected a">
+		<u:style name="background-color" skin="menuSelectedBgColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv1.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="5px 50%"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 avec descendance et dont un fils est sélectionné
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau2 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau2 hasNoChild menuOuvert itemSelected">
+	<li class="niveau2 menuFerme/menuOuvert">
+	-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- important d ecrire ferme avant sans descendance car si le menu est sans descendance et ferme c est sans descendance qui prime -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv2_7_off.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="15px 50%"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv2.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="15px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv2_7_on.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="15px 50%"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.itemSelected a">
+		<u:style name="background-color" skin="menuSelectedBgColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv2.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="15px 50%"/>
+	</u:selector>
+
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau3 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau3 hasNoChild menuOuvert itemSelected">
+	<li class="niveau3 menuFerme/menuOuvert">
+	-->
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv3_7_off.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="27px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- important d ecrire ferme avant sans descendance car si le menu est sans descendance et ferme c est sans descendance qui prime -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.hasNoChild a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/point_niv3.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="26px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv3_7_on.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="27px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected a">
+		<u:style name="background-color" skin="menuSelectedBgColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/point_niv3.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="26px 50%"/>
+	</u:selector>
+
+
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau4 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau4 hasNoChild menuOuvert itemSelected">
+	<li class="niveau4 menuFerme/menuOuvert">
+	-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/point_niv3.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="37px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected a">
+		<u:style name="background-color" skin="menuSelectedBgColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/point_niv3.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="37px 50%"/>
+		<u:style name="color" skin="menuOpenedColor"/>
+	</u:selector>
+
+
+</f:template>
+	

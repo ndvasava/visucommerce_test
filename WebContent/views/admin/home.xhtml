@@ -1,0 +1,85 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/layout/template.xhtml">
+
+    <ui:define name="body">
+
+        <h1>Visu-commerce Administration</h1>
+   		<h:form id="menuForm">
+			<rich:panelMenu>
+				<rich:panelMenuGroup label="#{messages['pays.label']}">
+		   			<rich:panelMenuItem id="editPays"
+		   					label="#{messages['pays.menu.create.label']}" 
+		   					action="goEditPays"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="recherchePays"
+		   					label="#{messages['pays.menu.search.label']}" 
+		   					action="goRecherchePays"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+		  		<rich:panelMenuGroup label="#{messages['ville.label']}">
+		   			<rich:panelMenuItem id="editville"
+		   					label="#{messages['city.menu.create.label']}" 
+		   					action="goEditVille"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="rechercheVille"
+		   					label="#{messages['city.menu.search.label']}" 
+		   					action="goRechercheVille"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+		  		<rich:panelMenuGroup label="#{messages['devise.label']}">
+		   			<rich:panelMenuItem id="editDevise"
+		   					label="#{messages['currency.menu.create.label']}" 
+		   					action="goEditDevise"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="rechercheDevise"
+		   					label="#{messages['currency.menu.search.label']}" 
+		   					action="goRechercheDevise"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+					<rich:panelMenuItem id="AdminDevise"
+		   					label="Administration Devise" 
+		   					action="goAdminDevise"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+		  		<rich:panelMenuGroup label="#{messages['langue.label']}">
+		   			<rich:panelMenuItem id="editLangue"
+		   					label="#{messages['language.menu.create.label']}" 
+		   					action="goEditLangue"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="rechercheLangue"
+		   					label="#{messages['language.menu.search.label']}" 
+		   					action="goRechercheLangue"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+		  		<rich:panelMenuGroup label="#{messages['typeCommerce.label']}">
+		   			<rich:panelMenuItem id="editTypeCommerce"
+		   					label="Create TypeCommerce" 
+		   					action="goEditTypeCommerce"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="rechercheTypeCommerce"
+		   					label="Search TypeCommerce" 
+		   					action="goRechercheTypeCommerce"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+		  		<rich:panelMenuGroup label="#{messages['commerce.label']}">
+		   			<rich:panelMenuItem id="editCompanyAccount"
+		   					label="#{messages['company-account.menu.create.label']}" 
+		   					action="goEditCompany"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		   			<rich:panelMenuItem id="searchCompanyAccount"
+		   					label="#{messages['company-account.menu.search.label']}" 
+		   					action="goSearchCompany"
+							actionListener="#{conversationHelper.clearMyConversation()}"/>
+		  		</rich:panelMenuGroup>
+
+			</rich:panelMenu>
+		</h:form>
+
+    </ui:define>
+</ui:composition>

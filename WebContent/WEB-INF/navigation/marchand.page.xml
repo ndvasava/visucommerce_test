@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+       
+       <!-- 
+       	 o Regles d'implementation de la navigation jsf
+       	 	* La page source est indiquée au moyen de la balise <page>. Les règles de navigation pouvant être déclenchées par cette page source 
+       	 		sont spécifiées au travers de la balise <navigation>.
+       	 	* Vous précisez alors une balise <navigation> pour chaque action pouvant être exécutée sur la page source (grosso modo pour chaque lien / bouton de la page), 
+       	 		en valorisant l'attribut 'from-action' à la valeur de l'attribut 'action' du composant jsf cliqué. C'est la balise render qui pemettra 
+       	 		d'indiquer quelle est la page web à afficher.
+       
+       	 o Quelques Précisions sur Render, Redirect et la navigation via JSF
+       		* Balise <render> spécifie la page à atteindre et que la condition pour atteindre cette page est définie au moyen de l'attribut 
+       			'from-action' de la balise <navigation> et de l'attribut 'if-outcome' de la balise <rule>.
+       		* Balise <redirect> permet de faire un appel supplémentaire vers le serveur afin de "nettoyer" l'url affichée. on indique in fine 
+       			à Seam qu'il doit retourner au client un code d'erreur HTTP 302 en indiquant au navigateur d'appeler la page {view-id}.
+       		* CC : aucune différence fondamentale , ce qui impose d'utiliser render plutot que redirect pour des questions de performances.	
+        -->
+       
+       
+       	<page view-id="/views/pays/recherche_commerce_off.xhtml">
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailCommerceFrom')}"/>
+			
+			<navigation from-action="#{editerCommerceAction.find}">
+				<rule>
+	           		<render view-id="/views/pays/detail_commerce.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="#{editerCommerceAction.edit}">
+				<rule>
+		            <render view-id="/views/pays/edit_commerce.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="#{editerCommerceAction.remove}">
+				<rule>
+		        	<render view-id="/views/pays/recherche_commerce.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="goBackCommerce">
+	        	<!-- Rque 1 : redirect car navigation initiee par composant Ajax -->
+	        	<!-- Rque 2 : Pas d'operateur ternaire : le retour n'a de sens que si l'on vient d'une page, et alors 'recherchePaysFrom' aura forcement une valeur -->
+	        	<rule>
+		        	<redirect view-id="#{navigationHelper['rechercheCommerceFrom']}"/>
+		        </rule>
+	        </navigation>
+		</page>
+       
+       <!-- A declarer dans les resources de navigation seam dans le components.xml -->
+       	
+		<page view-id="/views/marchand/accueil_marchand.xhtml">
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('accueilMarchandFrom')}"/>
+			
+			<navigation from-action="goCreateMarchand">
+				<rule>
+	           		<render view-id="/views/marchand/edit_marchand.xhtml"/>
+        		</rule>
+        	</navigation>
+		</page>
+       
+        <page view-id="/views/marchand/edit_marchand.xmtml">
+        	<!-- Gestion du inscription du marchand -->
+        	<navigation from-action="#{editerMarchandAction.persist}">
+        		<rule>
+        			<render view-id="/views/marchand/accueil_marchand.xhtml"/>
+        		</rule>
+        	</navigation>
+        </page>
+        
+        <page view-id="/views/marchand/edit_societe.xhtml">
+        	<!-- Gestion de l'inscription de la societe du marchand -->
+        	<navigation from-action="#{editerSocieteAction.persist}">
+        		<rule>
+        			<render view-id="/views/marchand/accueil_marchand.xhtml"/>
+        		</rule>
+        	</navigation>
+        </page>
+</pages>

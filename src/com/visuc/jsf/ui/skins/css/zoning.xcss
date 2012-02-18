@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style parente de toutes les feuilles de style décrivant les zonings.
+		On retrouve ici des propriétés qui sont partagées par les différentes enseignes.
+		Quelles sont-elles ?
+		Les plus classiques : border, background, à l'exception des images de fond qui sont
+		définies dans les feuilles filles.
+		Ces propriétés sont, en fait, différentes d'une enseigne à l'autre puisque variabilisées.
+		Les classes .css présentes ici seront complétées dans les feuilles filles.
+		Elles sont ici nommées "body xxx". Pourquoi sont-elles préfixées par "body" ?
+		=> A cause d'un bug de Firebug qui n'affiche qu'une fois une classe .css définie à plusieurs 
+		endroits dans un même fichier fusionné.
+		Aussi, côté Etudes, on pourra appliquer la règle suivante : TOUTE PROPRIETE définie dans "body xxx" 
+		sera généralement MODIFIABLE EN INFLUANT SUR LES VARIABLES (ou en appliquant un sur-style)
+		
+	-->
+	
+	<!-- 
+		/***************************************************************/
+		/* Blocs de niveau 1 : #bandeauHaut, #conteneur, #piedsDePage  */
+		/***************************************************************/
+	 -->
+	 
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>...</div>
+			(<div id="bandeauIntermediaire">...</div>) optionnel : menu horizontal, bandeau client, bandeauAuthentification...
+			<div id="conteneur">...</div>
+			<div id="piedsDePage">...</div>
+		<body>
+	-->
+	
+	<!-- #bandeauHaut définit la zone haute : liens transversaux et univers visuel -->
+	<u:selector name="#bandeauHaut">
+		<u:style name="height" skin="bandeauHautHeight" />
+		<u:style name="background-color" skin="bandeauHautBgColor" />
+		<u:style name="border-width" skin="bandeauHautBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="bandeauHautBorderColor"/>
+	</u:selector>
+	 
+	
+									<!-- #### -->
+	
+	<!-- #conteneur définit la zone centrale : #menu, #rail et #corpsDePage -->
+	<u:selector name="#conteneur" />
+	
+	
+	<!-- 
+	#conteneur_br annule le positionnement flottant et donne si 
+	besoin une hauteur à #conteneur avec IE6 par exemple.
+	07/2010 : Pour IE6 - GCE - Internet 
+	-->
+	<u:selector name="#conteneur_br" >
+		<u:style name="display" value="none"/>
+	</u:selector>
+	
+									<!-- #### -->	
+	
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="#piedsDePage">
+		<u:style name="clear" value="both"/><!-- (1) -->
+		<u:style name="height" skin="footerHeight"/><!-- (2) -->
+		<u:style name="border-width" skin="footerBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="footerBorderColor"/>
+		<u:style name="background-color" skin="footerBgColor" />
+	</u:selector>
+	
+	<!-- (1) Ces propriétés sont mises en place pour tenir compte de la présence de flottant, respectivement
+	avant le bloc #piedsDePage et à l'intérieur de #conteneur.
+	'overflow:auto' doit être appliqué quand un bloc fils est en flottant car un bloc en flottant peut sortir
+	de son conteneur. Concrêtement, cela se traduit par un #piedsDePage qui apparait en plein milieu de l'écran.
+	Cela vient du fait que la zone #conteneur ne possède pas de taille connue d'avance. Et l'on s'en trouve réduit
+	à gérer le dépassement de cette zone.
+	'clear:both' a vocation dans un bloc suivant un bloc flottant à annuler cette dernière propriété.
+	Il permet de remplacer astucieusement un <div style="clear:both;"> après les zones en float du #corpsDePage -->
+	
+	<!-- (2) Voir effets de bord de cette valeur qui n'existait pas jusqu'alors. => Rajoutée par symétrie
+	et utile notamment dans le cas où une image de fond est appliquée au conteneur. Rajoutée également pour 
+	pallier le bug hasLayout de IE qui nécessite la spécification d'une largeur ou d'une hauteur pour pouvoir
+	décrire une couleur de fond...-->
+	
+	<!-- 
+		/****************************************************/
+		/* Blocs de niveau 2 : Descendance de #bandeauHaut  */
+		/****************************************************/
+	 -->
+	 
+	  <!-- Le code se présente sous cette forme :
+		<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>
+			<ul id="liensTransversaux" class="liensTransversaux">...</ul>
+			<div id="conteneurHeader">
+				<a id="logo">...</a>
+				<div id="liensTransversauxPicto" class="liensTransversauxPicto">...</div>
+				<div id="moteurRecherche">...</div>
+				<div id="titreAppli">...</div>				
+			</div>			
+		</div>	
+		
+		pour un rendu comme suit :
+		
+		******************************************************************************************************
+	 																						#liensTransversaux
+	 	******************************************************************************************************
+	 	#logo   |																	#liensTransversauxPicto
+	 			| #titreAppli																ou
+	 			|																		#moteurRecherche
+	 			|
+	 	******************************************************************************************************	
+		
+	 		
+	 	Important : cas d'école sur l'alignement tripartite du milieu.
+	 	- #logo (à gauche)
+	 	- #liensTransversauxPicto / #moteurRecherche (à droite)
+	 	- #titreAppli (au milieu)
+	 	
+	 	Cf "css the Missing Manual", p315 et conseil avisé de M. Jérôme THIBAULT.
+	 	L'alignement gauche / droit se fait par un float:left/right.
+	 	Mais le bloc central ne peut être en float eu égard au fait que l'on ne connaît pas exactement la taille
+	 	des 3 blocs. Il suffit que la taille cumulée soit inférieure à la taille totale de la largeur, a fortiori
+	 	si cette dernière est fixée pour que le dernier élément glisse en dessous.
+	 	=> 	Moralité : il faut choisir de ne pas mettre l'élément central en flottant mais il doit être écrit après
+	 	les éléments flottants, dans cet ordre : left, right, centre.	
+	 																									
+	 -->
+		
+	<!-- Liens situés en haut de l'application -->
+	<u:selector name="ul#liensTransversaux">
+		<u:style name="margin" value="0"/><!-- (3) -->
+		<u:style name="padding" value="0"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) Style relatif à des <ul> : réinitialisation des valeurs propres par défaut (différentes selon les navigateurs)-->
+	
+	<!-- Bloc relatif au header (logo, titre, moteur de recherche) -->
+	<u:selector name="#conteneurHeader"/>
+	
+	<!-- (Niveau 2) #conteneurHeader > Style du lien du logo comprenant une image -->
+	<u:selector name="#logo">
+		<u:style name="float" value="left"/>
+		<u:style name="margin-left" value="0"/><!-- (4) -->
+		<u:style name="padding" skin="logoPadding" default="0"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) Important : un float:left rend la margin-left mal interprétée par IE6. C'est pourquoi on remplace
+	systématiquement une margin-left par un padding-left. L'inverse est vraie pour le float:right !!!!! -->
+	
+	<!-- (Niveau 2) #conteneurHeader > Style du titre de l'application
+	=> Important le titre de l'application n'est pas en float. Le bloc correspondant occupe donc toute la
+	largeur de l'écran et doit donc se voir attribuer un padding-left pour se décaler par rapport au logo. 
+	Ce padding-left doit inclure dans sa valeur la largeur du logo, sous peine de voir le titre collé / coller
+	au logo-->
+	<u:selector name="#titreAppli">
+		<u:style name="padding-left" skin="titreAppliPaddingLeft"/>
+		<u:style name="padding-top" skin="titreAppliPaddingTop"/>
+		<u:style name="clear" skin="titreAppliClear"/>
+	</u:selector>	
+	
+	<u:selector name="#liensTransversauxPicto">
+		<u:style name="float" value="right"/>		
+	</u:selector>
+	
+	<!-- 
+		/*************************************/
+		/* Organisation de la zone centrale  */
+		/*************************************/
+	 -->
+	
+	 
+	 <!-- Le code se présente sous cette forme :
+		<div id="conteneur">
+			<ul id="rail">...</ul>
+			<div id="menu">...</div>			
+			<div id="corpsDePage">...</div>
+		</div>
+		
+		pour obtenir le rendu ci-dessous :
+		
+	#conteneur :
+		
+	 ******************************************************************************************************
+	 	#menu	|#rail
+	 			|******************************************************************************************
+	 			|#corpsDePage
+	 			|
+	 			|
+	 			|
+	 ******************************************************************************************************		
+	 
+	 ou
+	 
+	 ******************************************************************************************************
+	 		#rail
+	 ******************************************************************************************************
+	 	#menu	|#corpsDePage
+	 			|
+	 			|
+	 			|
+	 ******************************************************************************************************		
+	 	
+		
+	 #conteneur occupe toute la largeur utile. 
+	 #rail est présent dans la zone utile ci-dessus à droite (canal internet) / sur toute la largeur (canal agence).
+	 
+	 #menu est en float:left. 
+	 En revanche, #rail et #corpsDePage ne le sont pas : ils chevauchent donc le menu. et occupent toute la largeur.
+	 => Le décalage s'effectue par application d'une marge gauche, correspondant à la largeur du #menu (variable 'menuWidth')
+	 
+	 Espacement :
+	 a) entre le #menu et la partie droite (#rail, #corpsDePage). Variable: 'menuCorpsSpacing'
+	 b) entre le #menu et la partie gauche (extrémité du #conteneur). Variable : 'leftSpacing'
+	 c) entre le #menu et le #header situé au-dessus. Variable 'menuHeaderSpacing'
+	 d) entre le #rail (internet) et le #header situé au-dessus. Variable 'railHeaderSpacing'
+	 e) entre le #corpsDePage (agence) et le #header situé au-dessus. Variable 'coeurHeaderSpacing'
+	 
+	 Remarques :
+	 1) On dissocie c) et d) puisque toutes les enseignes n'ont pas le même espacement entre le #menu et le coeur de page (Cf BP Agence)
+	 2) On dissocie d) et e) puisque le #rail est situé dans le header, côté canal agence.
+	 3) Dans le cas agence, 'railHeaderSpacing' définira l'espacement entre le #rail et le reste du ... header
+	 4) Le fait que #rail ou #corpsDePage chevauche le #menu font qu'on ne peut appliquer de margin-top à #rail ou #corpsDePage
+	 => La marge haute s'appliquant à toute la largeur de l'écran, on ne pourrait obtenir un espacement différent respectivement entre
+	 #menu > #bandeauHaut et #rail/#corpsDePage > #bandeauHaut
+	 => La marge haute ne peut donc s'appliquer que pour #menu 
+	 => Les éléments de droite #rail/#corpsDePage devront appliquer leur espacement haut à l'aide d'un padding-top !	 
+	 
+	 -->
+	  
+	  								<!-- ~~~~~~~~~~~
+									 	  Niveau 1
+									  ~~~~~~~~~~~~-->
+	
+	<!-- Ce bloc contient toute la partie gauche de l'écran : le menu mais également les zones personnalisables -->								  
+	<u:selector name="#menu">
+		<u:style name="float" skin="menuFloat" default="left"/><!-- (5) -->
+		<u:style name="margin-left" value="0"/><!-- (4) -->
+		<u:style name="width" skin="menuWidth"/>		
+		<u:style name="padding-left" skin="menuPaddingLeft" default="0"/><!-- (6) -->
+		<u:style name="margin-top" skin="menuMarginTop"/><!-- (1) -->
+	</u:selector> 
+	
+	<!-- (5) Seul bloc défini en float:left, c'est lui qui permet au #corpsDePage d'être à droite.-->
+	
+	<!-- (6) Décalage par rapport au bord de l'image. Pas de margin-left sur un float:left -->
+	
+	<!-- (1) Sera négatif dans le cas Internet-->
+	
+	<!-- Le corps de page à droite -->	
+	<u:selector name="#corpsDePage">
+		<u:style name="margin" skin="corpsDePageMargin" default="0"/><!-- (7) -->
+		<u:style name="background-color" skin="corpsDePageBgColor"/><!-- (0) -->
+		<u:style name="padding" skin="corpsDePagePadding" default="0"/>
+	</u:selector>
+	
+	<!-- (7) Le corps de page est décalé de la largeur du menu. Ce décalage est complété par un padding-left
+	pour éviter qu'il ne colle à la bordure droite du menu. -->
+	
+</f:template>

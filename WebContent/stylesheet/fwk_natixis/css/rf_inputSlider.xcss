@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+
+	<!-- 
+		Feuille de style associée au composant rich:inputNumberSlider 
+		
+		Il s'agit d'une tirette permettant de matérialiser des chiffres.
+		Ce genre de composant n'est pas défini dans la charte.
+		Aussi, seules les couleurs de contour ont été repris.
+		Notamment, les couleurs du "tip" (ie le triangle contenant le chiffre 
+		sur la barre horizontale) sont celles du composant originel.
+		=> Elles peuvent désormais être surchargées par définition d'une variable 
+		à laquelle on peut faire correspondre une nouvelle image...
+		(=> Ces couleurs sont définies dans ".rich-inslider-tip")
+		Tout comme le dégradé de couleur. (Cf "rich-inslider-track" et 
+		"rich-inslider-field").
+
+	-->
+
+
+	<!-- pour des raisons de simplicité (pour le moment) on reprend pour commencer le style natif -->
+	<f:importResource src="org/richfaces/renderkit/html/css/slider.xcss" />
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Caractéristiques globales */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+	 
+	<!-- Ce style définit le composant dans son ensemble. -->
+	<u:selector name=".rich-inslider-tip">
+		<u:style name="position" value="absolute"/>
+		<u:style name="background-color" skin="insliderTipBgColor"/>
+		<u:style name="border">
+			<f:verbatim skin="insliderTipBorderWidth" default="0"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="insliderTipBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="padding" skin="insliderTipPadding" default="0 2px"/>
+		<u:style name="color" skin="insliderTipColor"/>
+		<u:style name="font-weight" skin="insliderTipFontWeight" default="normal"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Données numériques bornées   */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->	
+	
+	<!-- Style pour le chiffre constituant la borne basse (le chiffre à gauche de la tirette) -->
+	<u:selector name=".rich-inslider-left-num">
+		<u:style name="border-left">
+			<f:verbatim skin="insliderLeftNumBorderLeftWidth" default="0"/>
+			<f:verbatim skin="insliderLeftNumBorderLeftStyle" default="solid"/>
+			<f:verbatim skin="insliderLeftNumBorderLeftColor" default="transparent"/>
+		</u:style>
+		<u:style name="padding" skin="insliderLeftNumPadding" default="0 3px"/>
+		<u:style name="color" skin="insliderLeftNumColor"/>
+		<u:style name="font-weight" skin="insliderLeftNumFontWeight"/>
+	</u:selector>
+	
+	<!-- Style pour le chiffre constituant la borne haute (le chiffre à droite de la tirette) -->
+	<u:selector name=".rich-inslider-right-num">
+		<u:style name="border-right">
+			<f:verbatim skin="insliderRightNumBorderRightWidth" default="0"/>
+			<f:verbatim skin="insliderRightNumBorderRightStyle" default="solid"/>
+			<f:verbatim skin="insliderRightNumBorderRightColor" default="transparent"/>
+		</u:style>
+		<u:style name="padding" skin="insliderRightNumPadding" default="0 3px"/>
+		<u:style name="color" skin="insliderRightNumColor"/>
+		<u:style name="font-weight" skin="insliderRightNumFontWeight"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Descriptif du curseur  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->		
+	
+	<!-- Style définissant le curseur que l'on déplace. -->
+	<!-- .rich-inslider-handler  -->
+		
+	<!-- Style définissant le curseur que l'on déplace sélectionné. -->
+	<!-- .rich-inslider-handler-selected  -->
+		
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Descriptif de la barre numérique  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->
+
+	<!-- Style définissant la barre indiquant la plage numérique balayée. -->
+	<u:selector name=".rich-inslider-track">
+		<u:style name="background-color" skin="insliderTrackBgColor" default="transparent"/>	
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<f:if skin="insliderTrackBgImg"><!-- (2) -->
+			<u:style name="background-image">
+				<f:resource f:skin="insliderTrackBgImg"/>	
+			</u:style>
+		</f:if>		
+	</u:selector>
+	
+	<!-- (1) Obligatoire pour ne pas récupérer l'image de RichFaces par défaut -->
+	
+	<!-- (2) On laisse l'opportunité de surcharger l'image de fond avec un dégradé par exemple -->
+	
+	<!-- Style de la bordure extérieure -->
+	<u:selector name=".rich-inslider-track-decor-1"><!-- (3) -->
+		<u:style name="border-width" skin="insliderTrackBorderWidth" default="1px"/><!-- (4) -->
+		<u:style name="border-style" skin="insliderTrackBorderStyle" default="solid"/><!-- (4) -->
+		<u:style name="border-color" skin="insliderTrackBorderColor" default="#000000"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (3) L'utilisation des bordures avec le <f:verbatim a été retirée ici : bug constaté sur la NIV.
+	=> L'absence de précision de la propriété réelle 'border-color' semble perturber RF qui ignore toutes
+	ces variables.... -->
+	
+	<!-- Style de la bordure intérieure (non usitée : permet simplement de faire ressortir la couleur de
+	fond du champ) -->
+	<u:selector name=".rich-inslider-track-decor-2">
+		<u:style name="border">
+			<f:verbatim skin="insliderTrackBorderInterieureWidth" default="1px"/><!-- (4) -->
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="insliderTrackBorderInterieureColor" default="#ffffff"/><!-- (4) -->
+		</u:style>
+	</u:selector>
+	
+	<!-- (4) Stricto Sensu, la norme de nommage des variables n'est pas respectée ; mais comme la bordure
+	intérieure n'est là qu'à des fins de mise en évidence de la couleur de fond, on a préféré choisir un
+	nom plus parlant... -->
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Descriptif du curseur  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->
+	
+	<!-- Curseur standard -->
+	<u:selector name=".rich-inslider-handler">
+		<f:if when="#{richSkin.insliderHandlerImg != null}">
+			<u:style name="background-image">
+				<f:resource f:skin="insliderHandlerImg"/>	
+			</u:style>
+		</f:if>
+	</u:selector>
+	
+	<!-- Curseur survolé -->
+	<u:selector name=".rich-inslider-handler-selected">
+		<f:if when="#{richSkin.insliderHandlerSelectedImg != null}">
+			<u:style name="background-image">
+				<f:resource f:skin="insliderHandlerSelectedImg"/>	
+			</u:style>
+		</f:if>
+	</u:selector>
+	
+	<!-- Espacement entre la barre horizontale et les chiffres au-dessus -->
+	<u:selector name=".rich-inslider-vert-spacer">
+		<u:style name="padding" skin="insliderVertSpacerPadding" default="3px 0"/>
+	</u:selector>
+	
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Champ associé à la barre numérique  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->		
+
+	<!-- Style du champ contenant la valeur sélectionnée à l'aide de la tirette. -->
+	<u:selector name="input.rich-inslider-field">
+		<u:style name="border">
+			<f:verbatim skin="insliderFieldBorderWidth" default="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="insliderFieldBorderColor" default="#000000"/>
+		</u:style>
+		<u:style name="background-color" skin="insliderFieldBgColor" default="transparent"/><!-- (4) -->
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<f:if skin="insliderFieldBgImg"><!-- (2) -->
+			<u:style name="background-image">
+				<f:resource f:skin="insliderFieldBgImg"/>	
+			</u:style>
+		</f:if>		
+		<u:style name="padding" skin="insliderFieldPadding" default="0 2px"/>
+		<u:style name="width" skin="insliderFieldWidth" default="30px"/>
+		<u:style name="text-align" skin="insliderFieldTextAlign" default="center"/>
+		<u:style name="color" skin="insliderFieldColor" default="#000000"/>
+	</u:selector>
+	
+	<!-- (4) Pour l'heure non pris en compte puisque le style sur le champ input du formulaire possède
+	un sélecteur plus fin ! => C'est ce dernier qui est pris en compte... -->
+	
+</f:template>

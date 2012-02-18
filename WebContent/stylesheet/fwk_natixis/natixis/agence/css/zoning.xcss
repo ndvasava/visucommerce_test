@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le zoning Natixis Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/zoning.xcss" />
+		
+	<!-- La page Natixis est collée à gauche et possède un rail dans le header.
+	Elle possède des liens transversaux. 
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<ul id="liensTransversaux">...</ul>
+			<div id="conteneurHeader">
+				<a id="logo">...</a>				
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="conteneur">
+			<ul id="rail">...</ul>
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="liensFooter">...</ul>
+			<div id="copyright">...</div>
+		</div>		
+	--> 	
+		 
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #bandeauHaut (et de ses éléments fils)  */
+		/***********************************************************/
+	 --> 
+	 
+	
+	<!-- Positionnement du bloc des liens transversaux situés dans le header.
+	Cette zone occupe toute la largeur de la zone utile mais est alignée à droite -->
+	<u:selector name="ul#liensTransversaux"><!-- EXTENDS "body #liensTransversaux" -->
+		<u:style name="text-align" value="right"/>
+		<u:style name="line-height" value="20px"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Line-height pour que la hauteur globale fasse 20px au lieu de padding + height et le texte est centré obligatoirement -->
+	
+	<!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->	
+	 
+	<!-- Positionnement du #rail dans le header côté agence -->
+	<u:selector name="body #rail"><!-- EXTENDS "body #rail" -->
+		<u:style name="padding-bottom" value="3px"/>
+	</u:selector>	
+	
+	<!-- IE8 - FireFox -->
+	<u:selector name="html > body #corpsDePage">
+		<u:style name="float" value="none"/>
+		<u:style name="margin-left" value="220px"/>
+	</u:selector>
+
+	<!-- IE6 : jamais de margin-left sur un float:left-->
+	<u:selector name="#corpsDePage">
+		<u:style name="float" value="left"/>
+		<u:style name="margin-left" value="0"/><!-- (2) -->
+		<u:style name="padding-left" value="10px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) Jamais de margin-left sur un float:left-->
+	
+	<!-- Liens transversaux -->
+	<u:selector name="#navTransversal"><!-- EXTENDS "body #navTransversal" --> 
+		<u:style name="margin-bottom" value="10px"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) Non défini sur Agence (mais on le laisse par symétrie...) -->
+			
+	<!-- Les liens situés à droite avec image (imprimer...) -->
+	<u:selector name="#outilsContextuels"><!-- EXTENDS "body #outilsContextuels" --> 
+		<u:style name="position" value="relative" /><!-- (4) -->
+	</u:selector>
+	<!-- (4) Sous IE6, permet d'afficher en entier l'image de l'outil contextuel.
+		Pour plus d'infos sur position : 
+		- https://developer.mozilla.org/fr/CSS/position
+		- https://developer.mozilla.org/en/CSS/position
+	-->
+	
+	<!-- 
+		/*******************/
+		/* Bandeau Client  */
+		/*******************/
+	 -->	 
+	 
+	 <!-- Mise en place d'un bandeau client en haut de la zone utile -->
+	 <u:selector name="#bandeauClient">
+	 	<u:style name="margin" value="0px 0 10px 0"/>
+	 </u:selector>	 
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #piedsDePage (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->	 
+									
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="#piedsDePage"><!-- EXTENDS "body #piedsDePage" -->
+		<u:style name="padding" value="5px 0"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (5) Permet de situer le texte à l'intérieur du footer au milieu de la bande -->
+	 
+	 <!-- On importe le style idoine à ce footer : un ensemble liens, copyright aligné à droite -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_footer_duo_droite.xcss" />
+
+</f:template>

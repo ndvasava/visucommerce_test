@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des principaux éléments de la page Natixis Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/page.xcss" />
+		 
+	<!-- 
+		/***************************************************/
+		/* Liens transversaux (> lien1  > lien2  > lien3)  */
+		/***************************************************/
+	-->
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensTransversaux li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flecherouge.gif" />
+		</u:style>
+		<u:style name="background-position" value="left 1px"/><!-- (1) -->
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-right" value="5px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensTransversaux li a"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="9px"/><!-- (3) -->	
+	</u:selector>
+		
+	<!-- 
+		/****************/
+		/* Titre + logo */
+		/****************/
+	 -->
+	 
+	 <!-- Rendu :
+		
+		******************************************************************************************************
+			NATIXIS
+						AWS
+		******************************************************************************************************
+	 -->		
+		
+	<!-- Style spécifique au logo -->					
+	<u:selector name="body .logo"><!-- EXTENDS ".logo" -->
+		<u:style name="height" skin="logoHeight" default="80px"/>
+	</u:selector>	
+	
+	<!-- 
+		/***********************/
+		/* Moteur de recherche */
+		/***********************/
+	 -->	
+	 
+	 <!-- On surcharge le moteur de recherche standard (juste pour la police non varialisable) -->
+	<u:selector name="body .inputMoteurRecherche"><!-- EXTENDS ".inputMoteurRecherche" -->
+		<u:style name="font-familly" value="Arial"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/************************************************************/
+		/* rail (> Accueil > Rechercher client > Recherche Chargé)  */
+		/************************************************************/
+	 -->
+	 
+	 <!-- Définition de l'entrée n -->
+	<u:selector name="body ul.rail li.first">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="body ul.rail li"><!-- EXTENDS "ul.rail li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/puce_lien_grise_sphinx_7.png" />
+		</u:style>
+		<u:style name="background-position" value="left 50%"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-left" value="11px"/>
+	</u:selector>
+					
+	<!-- 
+		/********************************************************/
+		/* Liens du footer (> Mentions légales > lien2 > lien3) */
+		/********************************************************/
+	-->
+	 
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="body ul.liensFooter li"><!-- EXTENDS "ul.liensFooter li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flecherouge.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 2px"/><!-- (1) -->
+		<u:style name="padding-right" value="4px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="body ul.liensFooter li a"><!-- EXTENDS "ul.liensFooter li a" -->
+		<u:style name="padding-left" value="10px"/><!-- (3) -->			
+	</u:selector>
+		
+	
+	<!-- (1) Position de l'image : 'horizontal vertical'. -->
+		
+	<!-- (2) Espace à droite située après chaque entrée de la liste. -->
+	
+	<!-- (3) Espace entre la puce et le lien -->
+
+	<!-- 
+		/********************************************************/
+		/* Réalisation du bandeau client dans le bandeau haut */
+		/********************************************************/
+	-->
+	
+	<!-- Style pour le bandeau client (permet de définir des bordures) -->
+	<u:selector name="body .bandeauClient"/><!-- EXTENDS ".bandeauClient" -->
+	
+	<!-- Style pour définir une ligne d'information du client dans le bandeau haut -->
+	<u:selector name="body .ligneInformationsClient"/><!-- EXTENDS ".ligneInformationsClient" -->
+
+	<!-- Création d'un style pour l'information de dernière connexion.
+	Ce n'est qu'un exemple. Mais on le trouve présent dans le bandeau client
+	occupant la moitié de la largeur est bloquée à droite.
+	Aussi est-il associée à la classe css ".demiLargeur" réalisant déjà la mise en float. -->
+	<u:selector name="body .informationsDerniereConnexion"/><!-- EXTENDS ".informationsDerniereConnexion" -->
+	
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name="body .libelleBC"/><!-- EXTENDS ".libelleBC" -->
+	
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name="body .valeurBC"/><!-- EXTENDS ".valeurBC" -->
+
+	<!-- 
+		/******************************************************/
+		/* Liens vers des sites extérieurs en-dessous du menu */
+		/******************************************************/
+	-->
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensSitesExterieursMenu li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/lien_ext.gif" />
+		</u:style>
+		<u:style name="background-position" value="10px 50%"/><!-- (1) -->
+		<u:style name="background-repeat" value="no-repeat"/>
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensSitesExterieursMenu li a"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="20px"/><!-- (3) -->	
+	</u:selector>
+		
+			 
+</f:template>

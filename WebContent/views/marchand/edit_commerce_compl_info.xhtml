@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<h:form id="commerceF" styleClass="edit">
+		<rich:panel>
+			
+			<f:facet name="header">
+			 	<h:outputFormat value="#{messages['commerce.more-info.label']}"/>
+			</f:facet>
+			
+			<h:panelGrid columns="2">
+
+	   			<s:decorate id="idD" template="../../layout/display.xhtml">
+		            <ui:define name="label">
+		            	<h:outputLabel value="... #{messages['commerce.id.label']}" />
+		            </ui:define>
+		            <strong>
+		            	<h:outputText value="#{editerCommerceAction.instance.id} (#{editerCommerceAction.instance.nomCommerce})"/>
+		            </strong>
+		        </s:decorate>
+				
+				<!-- BANK RELATED INFO -->
+				<s:decorate id="ibanD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['company.iban.label']}" />
+	                </ui:define>
+	                <h:inputText id="userId" label="#{messages['company.iban.label']}"
+	                		required="true" size="32" maxlength="32"
+	                      	value="#{editerCommerceAction.instance.iban}" >
+	                </h:inputText>
+				</s:decorate>
+				
+				<!-- SHOP INFO -->
+				<s:decorate id="shopNameD" template="../../layout/edit.xhtml">
+					<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.nom.label']}" />
+	                </ui:define>
+	                <h:inputText id="userId" label="#{messages['commerce.nom.label']}"
+	                		required="true" size="32" maxlength="32"
+	                      	value="#{editerCommerceAction.shopInstance.shopName}" >
+	                </h:inputText>
+				</s:decorate>
+				
+				<s:decorate id="address1D" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.adress1.label']}" />
+	                </ui:define>
+	                <h:inputText id="userId" label="#{messages['commerce.adress1.label']}"
+	                		required="true" size="32" maxlength="32"
+	                      	value="#{editerCommerceAction.shopAddress.address1}" >
+	                </h:inputText>
+				</s:decorate>
+
+				<s:decorate id="address2D" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.adress2.label']}" />
+	                </ui:define>
+	                <h:inputText id="userId" label="#{messages['commerce.adress2.label']}"
+	                		required="false" size="32" maxlength="32"
+	                      	value="#{editerCommerceAction.shopAddress.address2}" >
+	                </h:inputText>
+				</s:decorate>
+				
+				 <s:decorate id="cityAdressCommerceD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+				 		<h:outputLabel value="#{messages['commerce.city.label']}"/>
+				 	</ui:define>
+				 	<h:selectOneMenu value="#{editerCommerceAction.shopAddress.city}" required="true">
+	   					<s:selectItems value="#{editerCommerceAction.listVille}" var="vl" label="#{vl.nom} (#{vl.pin})"/>
+	  					<s:convertEntity/>
+	             	</h:selectOneMenu>	
+				 </s:decorate>
+				
+			</h:panelGrid>
+			<div class="actionButtons">
+           		
+            	<h:commandButton id="doCreate" 
+					value="#{messages['default.button.validate.label']}"
+					action="#{editerCommerceAction.updateComplInfo}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+				
+				<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerCommerceAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerVilleAction.managed}"/>
+				
+       		</div>
+		</rich:panel>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</f:view>
+</jsp:root>

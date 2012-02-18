@@ -1,0 +1,149 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+    
+    <h:form id="deviseF" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">
+				<h:outputFormat value="#{editerDeviseAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+					<f:param value="#{messages['devise.label']}"/>
+				</h:outputFormat>
+			</f:facet>
+			
+			<!-- Il est possible de définir pour chaque UIInput un valueChangeListener : 
+					valueChangeListener="#{bean.valueChangeMethod}" en tant qu'attribut de h:inputText
+			 -->
+            <s:decorate id="nomD" template="../../layout/edit.xhtml">
+                <ui:define name="label">
+                	<h:outputLabel value="#{messages['devise.nom.label']}" />
+                </ui:define>
+                <h:inputText id = "nom"
+                		label="#{messages['devise.nom.label']}"
+                       	required="true"
+                        size="25"
+                      	maxlength="25"
+                      	value="#{editerDeviseAction.instance.nom}" >
+					<a4j:support id="onKeyUpnomD" event="onkeyup"
+							rendered="#{!editerDeviseAction.managed}"
+							requestDelay="20" 
+							actionListener="#{editerDeviseAction.refresh}" />
+				</h:inputText>
+            </s:decorate>
+            
+            <s:decorate id="symboleD" template="../../layout/edit.xhtml">
+                <ui:define name="label">
+                	<h:outputLabel value="#{messages['devise.symbole.label']}" />
+                </ui:define>
+                <h:inputText id = "symbole"
+                		label="#{messages['devise.symbole.label']}"
+                       	required="true"
+                        size="3"
+                      	maxlength="3"
+                      	value="#{editerDeviseAction.instance.symbole}" >
+					<a4j:support id="onKeyUpsymboleD" event="onkeyup"
+							rendered="#{!editerDeviseAction.managed}"
+							requestDelay="20" 
+							actionListener="#{editerDeviseAction.refresh}" />
+				</h:inputText>
+            </s:decorate>
+            
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+			<!-- Version Fwk Sphinx -->
+			<!-- 
+				h:commandButton, mecanisme de POST pour mettre à jour le model (fonctions Create ou Update)
+				s:button, mecanisme de GET pour naviguer et obtenir des informations (fonction Cancel)
+			 -->
+			<h:commandButton id="doCreate" 
+					value="#{messages['default.button.create.label']}" 
+					action="#{editerDeviseAction.persist}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{!editerDeviseAction.managed}"/> 							          
+			 <h:commandButton id="doUpdate" 
+					value="#{messages['default.button.validate.label']}" 
+					action="#{editerDeviseAction.update}"
+					styleClass="boutonAction boutonValider"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerDeviseAction.managed}"/>
+	       	<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerDeviseAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerDeviseAction.managed}"/>
+		
+		</rich:panel>
+		
+		<!--
+			Utilisation du RichSelect - PickList de RichFaces afin d'afficher une boite de dialogue 
+			pour selectionner ou supprimer des pays liés a la devise courante.
+			cf::http://www.coderanch.com/t/214372/JSF/java/Preselection-Pick-List
+		 -->
+		<rich:tabPanel id="deviseTp">
+            <rich:tab limitToList="true" reRender="deviseTp,msg" immediate="true">
+  				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['devise.listePays.label']}"/>
+				</f:facet>
+				
+				<div class="association" id="deviseChildren">
+					<h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerDeviseAction.instance.listPays == null}"/>
+				
+					<!-- rich:pickList doit contenir a gauche la liste des pays au format selectItem et a droite la liste déjà selectionné
+					Au chargement, une vérification est effectuée lors du render de la partie droite par rapport au contenu de la selectItem List.
+					Si un element de la liste de droite n'est pas également présent dans la liste SelectItem, alors cet élément ne sera pas du tout affiché.
+					Il est nécessaire de spécifier un converter pour permettre la comparaison objets a droite et selectItem a gauche. Ce converter peut etre appelé
+					via l'attribut converter de rich:pickList, converter="#{editerDeviseAction.paysConverter}"
+					OU spécifié sur la liste s:selectItems qui contiendrait des objets Pays, converti a la volée en SelectItem. ceci grace au tags seam s:selectItems
+					plus puissant que le tag f:selectItems
+					 -->
+					<rich:pickList value="#{editerDeviseAction.listSelectedPays}"
+							converter="#{editerDeviseAction.paysConverter}" 
+							rendered="#{editerDeviseAction.instance.listPays != null}"
+							copyAllControlLabel="copy All" 
+							removeAllControlLabel="remove All"   
+        					copyControlLabel="copy"   
+        					removeControlLabel="remove"
+        					showButtonsLabel="false">
+						<s:selectItems value="#{editerDeviseAction.listAvailablePays}" var="pays" label="#{pays.nom}" />
+						<s:convertEntity />
+					</rich:pickList>
+				</div>
+			</rich:tab>
+        </rich:tabPanel>
+        
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

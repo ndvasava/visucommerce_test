@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sx="http://www.natixis.com/sphinx-jsf-ui/taglib"
+	version="2.0">	
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+<!-- Le zoning interieure affine la definition du bloc menu gauche 
+et herite donc du zoning principal-->
+<ui:composition template="/layout/page/zoning/zoning.xhtml">
+	
+	<!-- ***************************************
+		   Inclusion d'un bloc menu a  gauche 
+	********************************************-->
+	
+	<!-- On va preciser le contenu du menu gauche -->
+	<ui:define name="bloc_menu_gauche">
+
+		<!-- On positionne la <div> englobant toute la portion gauche -->
+		<!-- div id="menu" class="#{varianteMenu}" -->
+		<div id="menu" class="menu">
+		
+			<!-- Inclusion d'une zone d'info liee a  l'application (option). 
+			Il pourra s'agir, par exemple, de "Connexion precedente le..."
+			Le style est laisse a  la discretion (sans mauvais jeu de mot) de l'enseigne -->
+			<ui:insert name="zone_info"/>
+			
+			<!-- Inclusion d'une zone d'info personnalisable (option). 
+			Il pourra s'agir, par exemple, de "Bonjour M. Zemmour"
+			Le style est laisse a  la discretion (sans mauvais jeu de mot) de l'enseigne -->
+			<ui:insert name="zone_perso_haut"/>
+			
+			<!-- Inclusion d'un pave de connexion ou de deconnexion (Ne contient pas Bonjour M.)-->
+			<ui:insert name="pave_connexion"/>
+			
+			<!-- Inclusion du menu proprement dit
+			=> Choix de mettre le menu par defaut-->
+			<ui:insert name="menu">
+				<ui:include src="/layout/page/fragment/simple/menu_gauche.xhtml"/>
+			</ui:insert>
+			
+			<!-- Inclusion d'une zone d'info personnalisable (option). 
+			Le style est laisse a  la discretion (sans mauvais jeu de mot) de l'enseigne -->
+			<ui:insert name="zone_perso_bas"/>
+			
+			<!-- Inclusion de fragment technique permettant au bloc menu de se retracter -->
+			<ui:insert name="menu_retractable"/>
+		
+		</div>
+		
+	</ui:define>
+		
+	<!-- ***************************************
+	         Inclusion d'un corps de page 
+	********************************************-->
+		
+	<!-- On va specifier le contenu de la zone utile a  droite -->
+	<ui:define name="corps_page">
+	
+		<!-- Definition du corps de la page (titre, outils contextuels, zone centrale...) -->
+		<div id="corpsDePage" class="corpsDePage">
+			
+			<!-- Inclusion eventuelle d'une zone de navigation transversale (liens complementaires) -->
+			<ui:insert name="navigation_transversale"/>
+			
+			<!-- Inclusion eventuelle d'un bandeau client -->
+			<ui:insert name="bandeau_client_conteneur"/>	
+			
+			<!-- Inclusion eventuelle d'une zone titre de page -->
+			<ui:insert name="zone_titre_page"/>
+			
+			<!-- Inclusion d'un titre a  la page (avec souvent des outils contextuels sous forme de liens en face) -->
+			<!-- TODO : voir insertion ulterieure -->
+			
+			<!-- Inclusion de la zone centrale -->
+			<div id="zoneCentrale">
+				
+				<!-- On considere que sur toutes les pages interieures, il y aura un bloc d'informations (erreurs, confirmation) -->
+				<ui:insert name="message_technique">
+					<ui:include src="/layout/page/fragment/technique/message_technique.xhtml"/>
+				</ui:insert>
+				
+				<!-- Inclusion du contenu applicatif -->
+				<ui:insert name="content"/>
+			
+			</div>
+		</div>				
+	</ui:define>	
+</ui:composition>
+</f:view>
+</jsp:root>

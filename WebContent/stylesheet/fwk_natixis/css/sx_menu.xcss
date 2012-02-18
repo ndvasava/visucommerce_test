@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant l'apparence du menu.
+		On trouve ici ce qui est commun à tous les menus.
+		A savoir toutes les propriétés hors images (qui ne sont pas varialisables).
+		Les paddings horizontaux sont également décrits au niveau des feuilles filles car ils
+		dépendent de l'image qui est placée devant la ligne...
+		
+		Compte tenu du grand nombre de variables, des valeurs par défaut sont positionnées pour permettre
+		aux fichiers XXX.skin.properties de fondre. N'y seront redéfinies que les variables qui ne suivent
+		pas cette logique :
+		- border-width:0
+		- border-style:solid
+		- border-color:transparent
+		- background-color:transparent
+		- font-size:1em
+		- font-weight:normal
+		- text-decoration:none				
+	-->	
+	
+	<!-- 
+		/*******************/
+		/* Styles généraux */
+		/*******************/
+	 -->
+	 
+	<!-- Contour du menu -->
+	<u:selector name=".menuPartieGauche">
+		<u:style name="border-width" skin="menuBorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuBorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuBorderColor" default="transparent"/>
+		<u:style name="background-color" skin="menuBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Propriétés générales sur les ul -->
+	<u:selector name=".menuPartieGauche ul">
+		<u:style name="margin" value="0"/>
+		<u:style name="padding" value="0"/>
+		<u:style name="list-style-type" value="none"/>
+	</u:selector>
+	
+	<!-- Propriétés générales sur les li -->
+	<u:selector name=".menuPartieGauche ul li">
+		<u:style name="width" value="100%"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-attachment" value="scroll"/>	
+		<u:style name="padding" skin="menuToutNiveauDefaultPadding"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) padding par defaut sur tous les niveaux. Peut etre redefini à chaque niveau
+	(ex : variable menuNiveau1Padding, menuNiveau2Padding ...) -->
+	
+	<!-- Propriétés générales sur les a -->
+	<u:selector name=".menuPartieGauche ul li a">
+		<u:style name="height" value="100%"/>
+		<u:style name="display" value="block"/>
+		<u:style name="background-repeat" value="no-repeat"/><!-- (1) -->
+		<u:style name="background-attachment" value="scroll"/><!-- (1) -->
+		<u:style name="padding" skin="menuLienDefaultPadding"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) On le répète ici pour le cas GCE Agence : la couleur de fond au survol (orange) doit
+	être appliquée sur le lien et non pas sur le <li>. Cependant, il importe de conserver y compris
+	au survol la couleur de fond. De ce fait, l'image est également décrite au niveau du lien et non
+	pas au niveau du <li>.-->
+	
+	<!-- (2) padding par defaut sur les liens. Peut etre redefini pour chaque niveau (ex : variable menuNiveau1LienPadding) -->
+		 
+	<!-- 
+		/*********************/
+		/* Menu de niveau 1  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau1 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau1 hasNoChild menuOuvert itemSelected">
+	<li class="niveau1 menuFerme/menuOuvert">
+	-->
+		
+	<!-- Définition du style commun pour le niveau 1 (la classe "niveau 1" est systématiquement présente) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.niveau1">
+		<u:style name="padding" skin="menuNiveau1Padding"/>
+		<u:style name="border-width" skin="menuNiveau1BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuNiveau1BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuNiveau1BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour les liens de niveau 1 -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.niveau1 a">
+		<u:style name="padding" skin="menuNiveau1LienPadding"/>
+	</u:selector><!-- (2) -->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau1NoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe au survol -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li:hover.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau1HoverNoChildBgColor" default="transparent"/>
+	</u:selector>
+		
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.hasNoChild a">
+		<u:style name="color" skin="menuNiveau1NoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau1NoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1NoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1NoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" en Hover qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.hasNoChild a:hover">
+		<u:style name="color" skin="menuNiveau1HoverNoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau1HoverNoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1HoverNoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1HoverNoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert">
+		<u:style name="background-color" skin="menuNiveau1OuvertBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert a">
+		<u:style name="color" skin="menuNiveau1OuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau1OuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1OuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1OuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert a:hover">
+		<u:style name="color" skin="menuNiveau1HoverOuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau1HoverOuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1HoverOuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1HoverOuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuFerme">
+		<u:style name="background-color" skin="menuNiveau1FermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li:hover.menuFerme">
+		<u:style name="background-color" skin="menuNiveau1HoverFermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuFerme a, a.lienMenuNiveau1, .rich-ddmenu-label"><!-- (3) -->
+		<u:style name="color" skin="menuNiveau1FermeColor"/>
+		<u:style name="font-size" skin="menuNiveau1FermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1FermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1FermeTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuFerme a:hover, a.lienMenuNiveau1:hover, .rich-ddmenu-label-select"><!-- (3) -->
+		<u:style name="color" skin="menuNiveau1HoverFermeColor"/>
+		<u:style name="font-size" skin="menuNiveau1HoverFermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1HoverFermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1HoverFermeTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- (3) Rajout de classe CSS pour permettre la gestion du menu horizontal à l'identique du menu vertical.
+	'a.lienMenuNiveau1' est utilisée dans le cadre d'un <rich:toolBar> n'ayant que des niveaux 1 ; ces derniers
+	étant obtenus à l'aide des simples liens auxquels... on rajoute la classe CSS lienMenuNiveau1:hover !
+	'.rich-ddmenu-label' est utilisée dans le cadre d'un <rich:dropDownMenu> qui permet de gérer les différents 
+	niveaux. Cette classe définissant le label de ce niveau (Cf rf_dropDownMenu.xcss). 
+	Il se peut que dans le cas du menu horizontal, on ne souhaite pas reconduire cette valeur (contraste insuffisant)
+	=> L'attribut 'color' est surchargeable à l'aide de la variable 'ddmenuLabelColor' -->
+		
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild et "menuOuvert" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.itemSelected">
+		<u:style name="background-color" skin="menuNiveau1SelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li:hover.itemSelected">
+		<u:style name="background-color" skin="menuNiveau1HoverSelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.itemSelected a">
+		<u:style name="color" skin="menuNiveau1SelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau1SelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1SelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1SelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.itemSelected a:hover">
+		<u:style name="color" skin="menuNiveau1HoverSelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau1HoverSelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau1HoverSelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau1HoverSelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 avec descendance et dont un fils est sélectionné
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Ligne de niveau 1 dont un descendant hiérarchique est sélectionné -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.groupSelected"/>
+	
+	<!-- Lien de niveau 1 dont un descendant hiérarchique est sélectionné -->				
+	<u:selector name=".menuPartieGauche ul.blocMenu li.groupSelected a"/>
+	
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau2 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau2 hasNoChild menuOuvert itemSelected">
+	<li class="niveau2 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Définition du style pour tout le bloc relatif au niveau 2 (et donc pour la descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b">
+		<u:style name="background-color" skin="menuNiveau2BgColor" default="transparent"/>
+	</u:selector>
+		
+	<!-- Définition du style commun pour le niveau 2 (la classe "niveau 2" est systématiquement présente) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.niveau2">
+		<u:style name="padding" skin="menuNiveau2Padding"/>
+		<u:style name="border-width" skin="menuNiveau2BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuNiveau2BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuNiveau2BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour les liens de niveau 2 -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.niveau2 a">
+		<u:style name="padding" skin="menuNiveau2LienPadding"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau2NoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li:hover.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau2HoverNoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild a">
+		<u:style name="color" skin="menuNiveau2NoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau2NoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2NoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2NoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" en Hover qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild a:hover">
+		<u:style name="color" skin="menuNiveau2HoverNoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau2HoverNoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2HoverNoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2HoverNoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert">
+		<u:style name="background-color" skin="menuNiveau2OuvertBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li:hover.menuOuvert">
+		<u:style name="background-color" skin="menuNiveau2HoverOuvertBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a">
+		<u:style name="color" skin="menuNiveau2OuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau2OuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2OuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2OuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a:hover">
+		<u:style name="color" skin="menuNiveau2HoverOuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau2HoverOuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2HoverOuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2HoverOuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme">
+		<u:style name="background-color" skin="menuNiveau2FermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li:hover.menuFerme">
+		<u:style name="background-color" skin="menuNiveau2HoverFermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme a">
+		<u:style name="color" skin="menuNiveau2FermeColor"/>
+		<u:style name="font-size" skin="menuNiveau2FermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2FermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2FermeTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme a:hover">
+		<u:style name="color" skin="menuNiveau2HoverFermeColor"/>
+		<u:style name="font-size" skin="menuNiveau2HoverFermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2HoverFermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2HoverFermeTextDecoration" default="none"/>
+	</u:selector>
+	
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 4ème classe (ou 3ème si présence d'un niveau sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.itemSelected">
+		<u:style name="background-color" skin="menuNiveau2SelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 4ème classe (ou 3ème si présence d'un niveau sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li:hover.itemSelected">
+		<u:style name="background-color" skin="menuNiveau2HoverSelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 4ème classe (ou 3ème si présence d'un niveau sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.itemSelected a">
+		<u:style name="color" skin="menuNiveau2SelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau2SelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2SelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2SelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 4ème classe (ou 3ème si présence d'un niveau sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.itemSelected a:hover">
+		<u:style name="color" skin="menuNiveau2HoverSelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau2HoverSelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau2HoverSelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau2HoverSelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 avec descendance et dont un fils est sélectionné
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Ligne de niveau 2 dont un descendant hiérarchique est sélectionné -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.groupSelected"/>
+	
+	<!-- Lien de niveau 2 dont un descendant hiérarchique est sélectionné -->				
+	<u:selector name=".menuPartieGauche ul.niveau1b li.groupSelected a"/>
+	
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau3 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau3 hasNoChild menuOuvert itemSelected">
+	<li class="niveau3 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Définition du style pour tout le bloc relatif au niveau 2 (et donc pour la descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b">
+		<u:style name="background-color" skin="menuNiveau3BgColor" default="transparent"/>	
+		<u:style name="border-width" skin="menuBlocNiveau3BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuBlocNiveau3BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuBlocNiveau3BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour le niveau 2 (la classe "niveau 2" est systématiquement présente) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.niveau3">
+		<u:style name="padding" skin="menuNiveau3Padding"/>
+		<u:style name="border-width" skin="menuNiveau3BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuNiveau3BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuNiveau3BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour les liens de niveau 3 -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.niveau3 a">
+		<u:style name="padding" skin="menuNiveau3LienPadding"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau3NoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li:hover.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau3HoverNoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.hasNoChild a">
+		<u:style name="color" skin="menuNiveau3NoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau3NoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3NoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3NoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" en Hover qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.hasNoChild a:hover">
+		<u:style name="color" skin="menuNiveau3HoverNoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau3HoverNoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3HoverNoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3HoverNoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert">
+		<u:style name="background-color" skin="menuNiveau3OuvertBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li:hover.menuOuvert">
+		<u:style name="background-color" skin="menuNiveau3HoverOuvertBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a">
+		<u:style name="color" skin="menuNiveau3OuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau3OuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3OuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3OuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a:hover">
+		<u:style name="color" skin="menuNiveau3HoverOuvertColor"/>
+		<u:style name="font-size" skin="menuNiveau3HoverOuvertFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3HoverOuvertFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3HoverOuvertTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme">
+		<u:style name="background-color" skin="menuNiveau3FermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li:hover.menuFerme">
+		<u:style name="background-color" skin="menuNiveau3HoverFermeBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a">
+		<u:style name="color" skin="menuNiveau3FermeColor"/>
+		<u:style name="font-size" skin="menuNiveau3FermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3FermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3FermeTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a:hover">
+		<u:style name="color" skin="menuNiveau3HoverFermeColor"/>
+		<u:style name="font-size" skin="menuNiveau3HoverFermeFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3HoverFermeFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3HoverFermeTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild et "menuOuvert" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected">
+		<u:style name="background-color" skin="menuNiveau3SelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li:hover.itemSelected">
+		<u:style name="background-color" skin="menuNiveau3HoverSelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected a">
+		<u:style name="color" skin="menuNiveau3SelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau3SelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3SelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3SelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected a:hover">
+		<u:style name="color" skin="menuNiveau3HoverSelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau3HoverSelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau3HoverSelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau3HoverSelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 avec descendance et dont un fils est sélectionné
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Ligne de niveau 3 dont un descendant hiérarchique est sélectionné -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.groupSelected"/>
+	
+	<!-- Lien de niveau 3 dont un descendant hiérarchique est sélectionné -->				
+	<u:selector name=".menuPartieGauche ul.niveau2b li.groupSelected a"/>
+	
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau4 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau4 hasNoChild menuOuvert itemSelected">
+	<li class="niveau4 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Définition du style pour tout le bloc relatif au niveau 3 (et donc pour la descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b">
+		<u:style name="background-color" skin="menuNiveau4BgColor" default="transparent"/>
+		<u:style name="border-width" skin="menuBlocNiveau4BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuBlocNiveau4BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuBlocNiveau4BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour le niveau 3 (la classe "niveau 2" est systématiquement présente) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.niveau4">
+		<u:style name="padding" skin="menuNiveau4Padding"/>
+		<u:style name="border-width" skin="menuNiveau4BorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuNiveau4BorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuNiveau4BorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Définition du style commun pour les liens de niveau 4 -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.niveau4 a">
+		<u:style name="padding" skin="menuNiveau4LienPadding"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau4NoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li:hover.hasNoChild">
+		<u:style name="background-color" skin="menuNiveau4HoverNoChildBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a">
+		<u:style name="color" skin="menuNiveau4NoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau4NoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau4NoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau4NoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "sans descendance" en Hover qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a:hover">
+		<u:style name="color" skin="menuNiveau4HoverNoChildColor"/>
+		<u:style name="font-size" skin="menuNiveau4HoverNoChildFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau4HoverNoChildFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau4HoverNoChildTextDecoration" default="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Intervient systématiquement après "hasNoChild et "menuOuvert" : se doit de remplacer toutes les valeurs qui y sont définies -->
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected">
+		<u:style name="background-color" skin="menuNiveau4SelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) au survol -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li:hover.itemSelected">
+		<u:style name="background-color" skin="menuNiveau4HoverSelectedBgColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected a">
+		<u:style name="color" skin="menuNiveau4SelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau4SelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau4SelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau4SelectedTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Gestion du cas "menu selected" qui s'intercale en 3ème classe (ou 4ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected a:hover">
+		<u:style name="color" skin="menuNiveau4HoverSelectedColor"/>
+		<u:style name="font-size" skin="menuNiveau4HoverSelectedFontSize" default="1em"/>
+		<u:style name="font-weight" skin="menuNiveau4HoverSelectedFontWeight" default="normal"/>
+		<u:style name="text-decoration" skin="menuNiveau4HoverSelectedTextDecoration" default="none"/>
+	</u:selector>					
+	 
+</f:template>

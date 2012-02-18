@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http:/jsf.exadel.com/template"
+	   xmlns:u="http:/jsf.exadel.com/template/util" 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/general.xcss" />
+	
+	 <!-- 
+		/* *********************************** */
+		/* Valeurs maîtresses de l'application */
+		/* *********************************** */		
+	 -->  
+	   
+	<u:selector name="body">
+		<u:style name="width" value="auto"/><!-- surcharge de la taille reelle du texte pour centrer -->
+	</u:selector>
+	 
+	
+	<!-- retrait de la bordure sous ie7 autour des checkbox -->
+	<u:selector name="html > body input[type=checkbox]">
+		<u:style name="border" value="none" />
+	</u:selector>
+	
+</f:template>

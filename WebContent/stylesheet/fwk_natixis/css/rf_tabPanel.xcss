@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée au composant rich:tabPanel	
+				
+	-->
+	
+	
+	<!-- 
+		/*******************************/
+		/*  Définition du bloc complet */
+		/*******************************/
+	 -->
+	
+	
+	<!-- On définit le cadre complet (pavé contenant les onglets et le corps) -->
+	<u:selector name=".rich-tabpanel">
+		<u:style name="width" value="100%"/><!-- (1) -->
+		<u:style name="margin" skin="defaultPanelMargin" default="0 0 20px 0" />
+	</u:selector>		
+	
+	<!-- (1) Impératif pour qu'il occupe toute la largeur de la zone utile et non pas une largeur liée aux données-->
+	
+	<!-- 
+		/**********************************/
+		/*  Définition de la partie haute */
+		/**********************************/
+	 -->
+	
+	<!-- Style définissant la ligne du haut (td) -->
+	<u:selector name=".rich-tab-bottom-line"/><!-- Le contour sera défini au niveau de ".rich-tabpanel-content" -->	
+	
+	<!-- Style définissant l'onglet actif -->
+	<u:selector name=".rich-tabhdr-cell-active"/>
+	
+	<!-- Style définissant l'onglet inactif -->
+	<u:selector name=".rich-tabhdr-cell-inactive"/>	
+	
+	
+	<!-- 
+		/**************************************/
+		/*  Définition d'un "tab" de l'onglet */
+		/**************************************/
+	 -->
+	
+	<!-- Style définissant les espacements entre les onglets (gauche et droite) : contient une image "spacer"
+	=> Noter que ce paramètre est lié applicativement à la valeur saisie de l'attribut "headerSpacing" qui vaut
+	par défaut 1px -->
+	<u:selector name=".rich-tabhdr-side-border">
+		<u:style name="display" skin="tabpanelCranGaucheDisplay"/>
+	</u:selector>	
+	
+	<!-- Style le tab onglet  -->
+	<u:selector name=".rich-tabhdr-side-cell"/>
+	
+	<!-- Style commun à toutes les tabs (actives, inactives...) -->
+	<u:selector name=".rich-tab-header">
+		<u:style name="border-width" value="1px 1px 0 1px"/><!-- (2) -->
+		<u:style name="border-style" value="solid"/>
+		<u:style name="padding" value="3px 10px 4px 10px"/>
+	</u:selector>
+	
+	<!-- (2) On ne met pas de trait de séparation sous le tab actif : il communique directement avec le contenu. Dans le cas inactif,
+	la bordure est déjà fournie par celle relative au .rich-tab-content -->	
+	
+	<!-- 
+		/********************************/
+		/*  Définition d'un "tab" actif */
+		/********************************/
+	 -->
+	
+	<!-- Style du tab actif -->
+	<u:selector name=".rich-tab-active">
+		<u:style name="border-color" skin="tabActiveHeaderBorderColor"/>
+		<u:style name="border-style" skin="tabActiveHeaderBorderStyle" default="solid"/>
+		<u:style name="border-width" skin="tabActiveHeaderBorderWidth"/>
+		<u:style name="color" skin="tabActiveHeaderTextColor"/>
+		<u:style name="background-color" skin="tabActiveHeaderBgColor"/>
+		<u:style name="font-weight" skin="tabActiveHeaderFontWeight"/>
+		<u:style name="font-size" skin="tabActiveHeaderFontSize"/>
+		<u:style name="text-decoration" skin="tabActiveHeaderTextDecoration"/>
+		<u:style name="cursor" value="default"/>
+	</u:selector>
+	
+	<!-- 
+		/********************************/
+		/*  Définition d'un "tab" actif */
+		/********************************/
+	 -->
+	 
+	<!-- Style du tab inactif -->
+	<u:selector name=".rich-tab-inactive">
+		<u:style name="border-color" skin="tabInactiveHeaderBorderColor"/><!-- (4) -->
+		<u:style name="border-style" skin="tabInactiveHeaderBorderStyle" default="solid"/>
+		<u:style name="border-width" skin="tabInactiveHeaderBorderWidth"/>
+		<u:style name="color" skin="tabInactiveHeaderTextColor"/>
+		<u:style name="background-color" skin="tabInactiveHeaderBgColor"/>
+		<u:style name="font-weight" skin="tabInactiveHeaderFontWeight"/>
+		<u:style name="font-size" skin="tabInactiveHeaderFontSize"/>
+		<u:style name="text-decoration" skin="tabInactiveHeaderTextDecoration"/>
+		<u:style name="cursor" value="pointer"/>
+	</u:selector>
+	
+	<!-- (4) Le tab inactif aura généralement une couleur de contour particulière-->
+	
+	<!-- Style du tab inactif au survol (s'ajoute à ".rich-tab-inactive") -->
+	<u:selector name=".rich-tbpnl-tb-sel">
+		<u:style name="border-color" skin="tabInactiveHoverHeaderBorderColor"/>
+		<u:style name="color" skin="tabInactiveHoverHeaderTextColor"/>
+		<u:style name="background-color" skin="tabInactiveHoverHeaderBgColor"/>
+		<u:style name="font-weight" skin="tabInactiveHoverHeaderFontWeight"/>
+		<u:style name="font-size" skin="tabInactiveHoverHeaderFontSize"/>
+		<u:style name="text-decoration" skin="tabInactiveHoverHeaderTextDecoration"/>
+		<u:style name="cursor" value="pointer"/>
+	</u:selector>
+	
+	<!-- 
+		/***********************************/
+		/*  Définition d'un "tab" disabled */
+		/***********************************/
+	 -->
+	
+	<!-- Style du tab disabled -->
+	<u:selector name=".rich-tab-disabled">
+		<u:style name="border-color" skin="tabDisabledHeaderBorderColor"/>
+		<u:style name="color" skin="tabDisabledHeaderTextColor"/>
+		<u:style name="background-color" skin="tabDisabledHeaderBgColor"/>
+		<u:style name="font-weight" skin="tabDisabledHeaderFontWeight"/>
+		<u:style name="font-size" skin="tabDisabledHeaderFontSize"/>
+		<u:style name="text-decoration" skin="tabDisabledHeaderTextDecoration"/>
+		<u:style name="cursor" value="default"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/************************************/
+		/*  Définition du corps des onglets */
+		/************************************/
+	 -->
+	 
+	 
+	<!-- Style définissant l'emplacement du contenu par rapport aux bordures -->
+	<u:selector name=".rich-tabpanel-content-position">
+		<u:style name="padding-left" skin="tabpanelContentPositionPaddingLeft"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (5) Compense l'espacement entre les tabs (y compris tout à fait à gauche) qui est défini dans l'onglet
+	à l'aide de l'attribut "headerSpacing" (qui vaut 1px par défaut) -->
+	
+	<!-- Style définissant le contenu -->
+	<u:selector name=".rich-tabpanel-content">
+		<u:style name="border-width" value="1px"/><!-- (6) -->
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="tabpanelBorderColor"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (6) On considère que c'est cette classe qui définit également le trait de contour haut. Qui plus est, cette ligne
+	n'apparaîtra pas sous l'onglet actif (mis en dur dans le code RichFaces sous forme de style="") -->
+	
+	<!-- (7) On définit une seule variable pour la couleur du contour. Par convention, elle sert également de couleur de contour
+	à l'onglet actif -->
+	
+		
+</f:template>

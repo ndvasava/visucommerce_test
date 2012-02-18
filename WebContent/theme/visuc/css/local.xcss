@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http:/jsf.exadel.com/template"
+	   xmlns:u="http:/jsf.exadel.com/template/util" 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	   
+	<!-- 
+		Feuille de style dynamique associee au theme Default pour l'application VisuCommerce.
+		=====================================================================================
+		
+		On trouvera ici, la definition des styles CSS specifique a l'enseigne Natixis, comme par exemple : 
+			- les couleurs et autres attributs pour les pages d'accueil et de connexion
+			- le logo Sphinx present sur toutes les pages en temps qu'image de fond de la div #universVisuel
+		
+		Cette feuille doit normalement etre chargee depuis un template de page sous la forme : 
+		. si vous etes en enseigne unique (charte Natixis) :
+			<a4j:loadStyle src="#{theme.css}/local.xcss"/>
+		. si vous etes en multi-enseigne :
+			<a4j:loadStyle src="resource:///css/local.xcss"/>
+		. si vous etes membre de visucommerce team ce sera dans head_resource.xhtml
+			
+		Chaque feuille de style local.xcss importe les styles definis dans la feuille commun.xcss
+		(styles communs a l'ensemble des enseignes).
+	 -->
+	 
+	<!-- on commence par reprendre les styles communs a toutes les enseignes -->
+	<!-- probleme avec catalina WebAppClassLoader, differe de sphinx et de lutilisation de java.lang.classloader. ne recherche que dans 
+	webinf/classes, a etudier via un context.xml dedie a visucommerce dansl a conf tomcat, comment faire pour surcharger le classloader 
+	lu par webappclassloader
+	en attendant, surcharger le buildpath du projet avec le folder stylesheet ... LoL 
+	
+	Malgre tout, une bonne pratique reconnu, est de regrouper les xcss et les ressources css dans des packages qui serton charg�s une seul
+	fois, permettant de baisser le nombre de requete vers le server en multipliant les import ou include css (via link) dans chaque page
+	-->
+	<f:importResource src="css/commun.xcss" />
+	
+	
+	<!--
+		/******************************************************************************/
+		/* Images du header (qui se retrouvent sur toutes les pages de l'application) */
+		/******************************************************************************/
+	 -->
+	
+	<!-- Definition explicite du bandeau haut : il occupe toute la largeur de l'ecran -->	
+	<u:selector name="#bandeauHaut">
+		<u:style name="background-image">
+			<f:resource f:key="theme/visuc/img/fond_bandeau_haut.png" /><!-- (1) -->
+		</u:style>
+		<u:style name="background-repeat" value="repeat"/><!-- (2) -->
+		<u:style name="height" value="120px"/><!-- (3) -->
+	</u:selector>	
+	
+	<!-- (1) Precision ici d'une image repetee qui occupe TOUTE la hauteur du header (et pas seulement, la zone de couleur) -->
+	
+	<!-- (2) Cette image est repetee sur toute la largeur (a referencer dans le fichier "src/main/resources/META-INF/resources-config.xml") -->
+	
+	<!-- (3) Definition ici de toute la largeur du #bandeauHaut (les 3 bandes reunies) -->
+		
+	<!-- Bandeau haut dans le cas standard (pas de moteur de recherche) -->
+	<u:selector name="#conteneurHeader">
+		<u:style name="background-image">
+			<f:resource f:key="theme/visuc/img/bandeau_haut_trame.png" /><!-- (4) -->
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/><!-- (5) -->
+		<u:style name="height" value="70px"/><!-- (6) -->
+	</u:selector>	
+	
+	<!-- (4) Cette image est l'image centrale avec un degrade (a referencer dans le fichier "src/main/resources/META-INF/resources-config.xml") -->
+	
+	<!-- (5) Elle n'est pas repetee contrairement au motif du bandeau haut sur lequel elle se superpose -->
+	
+	<!-- (6) Le bandeau central occupe la moitie du bandeau haut -->
+	
+	<!--
+		/******************/
+		/* Page d'accueil */
+		/******************/
+	 -->
+	 
+	 <!-- Ci-dessous, style a redefinir pour surcharger les images fonctionnelles horizontales :
+    ici, on peut redefinir la marge-gauche qui permet de caler le bloc a gauche... 
+    Le style parent est defini dans "common.xcss". La mention "body XXX" permet d'utiliser Firebug. En son absence,
+    seul, la 1ère classe figurant dans le fichier .css fusionne apparaît dans Firebug. -->
+    <u:selector name="body ul#imagesFonctionnellesHorizontales"/><!-- EXTENDS "ul#imagesFonctionnellesHorizontales" -->
+    	
+     <!-- Ci-dessous, style a redefinir pour surcharger les images fonctionnelles horizontales :
+    ici, on peut redefinir le padding-right qui permet de gerer l'espace entre les images... 
+    Le style parent est defini dans "common.xcss". La mention "body XXX" permet d'utiliser Firebug. En son absence,
+    seul, la 1ère classe figurant dans le fichier .css fusionne apparaît dans Firebug.-->
+    <u:selector name="body ul#imagesFonctionnellesHorizontales li"/><!-- EXTENDS "ul#imagesFonctionnellesHorizontales li" -->
+	
+	<!-- Dans le style Natixis, un filtre est directement positionne au niveau du body
+	Par consequent, il convient d'augmenter ici la taille des liens de la zone d'accueil 
+	Complement sur un style present dans commun.xcss -->
+	<u:selector name="ul#imagesFonctionnellesHorizontales li a">
+		<u:style name="font-size" value="1.3em"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="text-decoration" value="none"/>
+	</u:selector>
+	
+	<!-- Une couleur de fond va etre positionnee pour la page d'accueil de login et de changement de password, 
+	respectivement sur les classes css : #conteneur.conteneurAccueil.
+	Toutefois, IE6 gère très mal la presence des variantes dans un meme fichier. D'où l'ecriture reduite 
+	a ".conteneurAccueil," et ".conteneurChangePassword" -->
+	
+	<!-- Specification de l'image de fond sur la classe #conteneur.conteneurLogin. -->
+	<u:selector name=".conteneurAccueil"><!-- #conteneur.conteneurAccueil -->
+		<u:style name="background-color" skin="currentAccompagnementColor"/>
+		<u:style name="height" value="450px"/>
+	</u:selector>
+	
+	<u:selector name=".conteneurLogin"><!-- #conteneur.conteneurAccueil -->
+		<u:style name="background-image">
+			<f:resource f:key="theme/visuc/img/fond_login.png" /><!-- (4) -->
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/><!-- (5) -->
+		<u:style name="height" value="450px"/>
+	</u:selector>
+		
+	<u:selector name=".conteneurChangePassword"><!-- #conteneur.conteneurAccueil -->
+		<u:style name="background-image">
+			<f:resource f:key="theme/visuc/img/fond_change_password.png" /><!-- (4) -->
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/><!-- (5) -->
+		<u:style name="height" value="450px"/>
+	</u:selector>
+		
+	<!-- Le bouton "connexion" situee au milieu de la page d'accueil va etre mis a equidistance
+	des images horizontales et du footer. On surcharge donc la valeur par defaut definie dans le
+	fichier parent (commun.xcss). On ecrit "body xxx" pour permettre a Firebug de presenter les
+	2 classes .css (par defaut, lorsque 2 classes ont le meme nom dans un meme fichier fusionne, 
+	il ne propose que la première) -->
+	<u:selector name="body #connexion"><!-- EXTENDS #connexion -->
+		<u:style name="margin-top" value="2em"/>
+	</u:selector>
+
+	<!-- 
+		/*************************/
+		/* Page de login */
+		/*************************/
+	-->	
+	
+	<!-- La page de login contient une couleur de fond. La zone d'authentification est 
+	positionnee au milieu, avec les valeurs de margin et de padding ci-dessous -->
+	<u:selector name="#blocAuthentification">
+		<u:style name="width" value="29em"/><!-- (1) -->
+		<u:style name="padding" value="85px 0 0 0"/><!-- (2) -->
+		<u:style name="margin" value="0 0 0 650px"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (1) Permet de definir une largeur maximum. Permet d'afficher les messages d'erreur 
+	en-dessous des champs de saisie et le message d'erreur technique relativement centre.
+	(Attention penser a la page change_password.xhtml qui comporte le message de controle de
+	surface le plus long : "Nouveau password : Valeur requise." ; il ne doit pas entraîner un
+	retour a la ligne disgrâcieux...)
+	Permet egalement d'aligner au fond du bloc de connexion les liens "changement de mot de
+	passe" et le bouton se connecter a droite. Cela se fait par insertion de ces liens au
+	sein d'une <div> qui occupe toute la largeur definie ici mais qui devra compenser par une 
+	marge droite l'espacement laissee a droite des champs <input. -->
+	
+	<!-- (2) On utilise un 'padding-top' en lieu et place d'un 'margin-top' car sans cela 
+	on ne pourrait avoir une couleur de fond repartie sur tout le conteneur. (La marge verticale
+	cree un vide comblee par la couleur de fond definie dans le body).
+	Pas de precision de padding-bottom puisque l'ensemble du conteneur se voit affublee d'une valeur
+	fixe ; en cas d'erreur de surface ou technique, la page augmenterait sa hauteur.-->
+	
+	<!-- (3) Attention a ne pas mettre de marge basse qui deborderait du conteneur et 
+	qui decalerait le footer vers le bas (Bug IE6 y compris si l'on a fixe la hauteur
+	du #conteneur)-->
+	
+	<!-- Style du libelle du champ de saisie (input, password), y compris en cas d'erreur  -->
+	<u:selector name=".blocAuthentification .name">
+		<u:style name="width" value="13em"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) Elargissement de la zone contenant les labels login, password, code etablissement. Nous
+	surchargeons ici, specificiquement pour la page de login, les valeurs de base regissant la disposition 
+	de formulaire (la page de login est conçue comme un formulaire classique, ie avec utilisation des <s:decorate
+	de Seam). La largeur de base definie pour le style .name etant de 10em, elle ne permet pas d'inserer de rentrer 
+	totalement le libelle "Code etablissement".
+	-->
+	
+	
+	
+	<!-- Adaptation de l'espacement vertical entre les champs de saisie dans le bloc de connexion -->
+	<u:selector name=".blocAuthentification .edition_rubrique">
+		<u:style name="margin-bottom" value="0.5em"/><!-- (5) -->	
+	</u:selector>
+	
+	<!-- (5) Meme remarque que (4). L'utilisation classique des styles de formulaire donne une valeur par defaut
+	trop grande par rapport au souhait de la charte.-->	
+	
+	<!-- Definition du bloc contenant le bouton de connexion et le lien de changement de mot de passe -->
+	<u:selector name=".blocAuthentification #loginButtons">
+		<u:style name="margin-right" value="2em"/><!-- (6) -->	
+	</u:selector>
+	
+	<!-- (6) En (1), on a defini une largeur du bloc englobant #blocAuthentification mais celle-ci laisse
+	un peu d'espace a droite du champ <input...
+	Pour avoir un alignement complet a droite (le lien et le bouton alignes sur la droite du champ de saisie), 
+	il convient de compenser cette espacement a droite par une marge equivalente (a ajuster en fonction egalement
+	de la taille des champs <input definie en (8)...) -->
+	
+	<!-- Definition de l'alignement des liens et du bouton au sein du bloc -->
+	<u:selector name=".blocAuthentification .loginButtons">
+		<u:style name="text-align" value="right"/><!-- (7) -->	
+	</u:selector>
+	
+	<!-- (7) Si l'alignement ici etait classique a gauche, on pourrait se dispenser de definir une marge en (6) -->	
+	
+	<!--  Style pour les champs de saisie -->
+	<u:selector name=".blocAuthentification .inputLogin">
+		<u:style name="width" value="13em"/><!-- (8) -->		
+	</u:selector>
+	
+	<!-- (8) On precise une taille pour les champs Input car IE6 n'alloue pas la meme longueur au champ de type password-->
+	
+	<!-- Precision du style relatif aux liens (necessaire si l'on change les styles des liens par defaut).  -->
+	<u:selector name=".blocAuthentification a.lienLogin">
+		<u:style name="font-size" value="1em"/><!-- (9) -->
+		<u:style name="text-decoration" value="underline"/><!-- (9) -->
+	</u:selector>
+	
+	<!-- Surcharge du style du lien "Changement de mot de passe" au survol (style classique des liens par defaut) -->
+	<u:selector name=".blocAuthentification a.lienLogin:hover">
+		<u:style name="text-decoration" value="none"/>
+	</u:selector>
+	
+	<!-- (9) Necessaire car on change la valeur par defaut (1.09em / none)-->
+	
+	<!-- Realisation de l'espacement entre le lien "Changement de mot de passe" et le bouton "Se connecter" -->
+	<u:selector name=".blocAuthentification .loginButtons input">
+		<u:style name="margin-top" value="10px"/><!-- (10) -->	
+	</u:selector>
+	
+	<!-- Inclusion d'un bloc pour les messages d'erreur technique dans la page de login (user non habilite...) -->
+	<u:selector name=".blocAuthentification .rich-messages">
+		<u:style name="color" skin="errorMessageTextColor"/><!-- (11) -->
+		<u:style name="padding" value="0 0 0 11em"/><!-- (12) -->	
+		<u:style name="margin" value="0 0 1em 0"/><!-- (13) -->
+		<u:style name="height" value="auto"/><!-- (25) -->
+	</u:selector>
+	
+	<!-- (11) Utilisation ici de la variable classique des formulaires (couleur des messages d'erreur thematisee) -->
+	
+	<!-- (12) Definition ici de l'alignement du message d'erreur technique. L'alignement retenu est un alignement 
+	"a la Dalton" (l'ensemble formant un triangle vertical). Cet alignement est cree a l'aide du padding-left qui permet
+	de positionner le debut du message d'erreur au niveau du libelle "Login".-->	
+	
+	<!-- (13) On definit ici une marge basse pour regir l'espacement entre le message d'erreur et le champ de login.
+	Cette marge doit tenir compte de la longueur maximum du message d'erreur eu egard au fait que ce dernier ne sortira
+	pas du bloc qui le contient (ie #blocAuthentification fixe en largeur)-->
+	
+	<!-- (25) On remet la hauteur a auto car vu la place qu'il occupe, le message peut s'afficher sur plusieurs lignes 
+	et donc une hauteur fixe ne convient pas -->
+	
+	<!-- Bloc a redefinir eventuellement si l'on souhaite oter l'image par defaut presente en cas d'erreur technique.
+	(Il suffit ici de definir un background-image a none).  -->
+	<u:selector name=".blocAuthentification .rich-messages .warn"/>
+	
+	<!-- idem  -->
+	<u:selector name=".blocAuthentification .rich-messages .error"/>
+	
+	<!-- Alignement des erreurs de controle de surface (en drapeau ; ie sous le champ <input et non pas sous le label) -->
+	<u:selector name=".blocAuthentification .edition_rubrique .error">
+		<u:style name="margin-left" value="13.5em"/><!-- (14) -->
+		<u:style name="padding-left" value="0"/><!-- (14) -->
+	</u:selector>
+	
+	<!-- (14) L'alignement en drapeau necessite d'ajuster la marge appliquee par defaut sur la classe ".edition_rubrique .error".
+	En effet, en (4), la largeur des labels du formulaire a ete elargie pour permettre l'insertion complète du libelle "Code Etablissement". 
+	TODO : mettre en em -->
+	
+	<!-- Augmentation de l'espace entre le message d'erreur serveur et le formulaire de saisie -->
+	<u:selector name=".conteneurChangePassword .blocAuthentification .rich-messages">
+		<u:style name="margin-bottom" value="2em"/><!-- (16) -->	
+	</u:selector>
+	
+	<!-- (16) Cette valeur est mise car les messages d'erreur relatifs au changement de mot de passe sont
+	relativement longs. Ils doivent rentrer dans le losange blanc, ce qui en limite la largeur. La valeur 
+	retenue tient compte d'une plus grande hauteur du losange dans le cadre du changement de mot de passe
+	et du fait qu'on ne peut avoir simultanement et erreur technique, et controles de surface errones. -->
+	
+</f:template>

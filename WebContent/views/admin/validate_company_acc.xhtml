@@ -1,0 +1,109 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+    <h:form id="companyF">
+    	
+    	<rich:panel>
+    		<f:facet name="header" >
+				<h:outputFormat value="#{messages['commerce.label']} : #{editerCommerceAction.instance.id}" />
+			</f:facet>
+			
+    		<s:decorate id="userIdD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.user-id.label']}" />
+                </ui:define>
+                <h:outputText id="userId" label="#{messages['commerce.user-id.label']}"
+                      	value="#{editerCommerceAction.instance.userId}" />
+			</s:decorate>
+			
+			<s:decorate id="nomCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.nom.label']}" />
+                </ui:define>
+                <h:outputText id="nomCommerce" label="#{messages['commerce.nom.label']}"
+                      	value="#{editerCommerceAction.instance.nomCommerce}" />
+			</s:decorate>
+			 
+			<s:decorate id="typeCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+			 		<h:outputLabel value="#{messages['commerce.typeCommerce.label']}"/>
+			 	</ui:define>
+			 	<h:outputText label="#{messages['commerce.typeCommerce.label']}" 
+			 		value="#{editerCommerceAction.instance.type.typeCommerceName} (#{editerCommerceAction.instance.type.id})" />	
+			</s:decorate>
+			
+			<s:decorate id="regIdD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.reg-type.label']}" />
+                </ui:define>
+                <h:outputText label="#{messages['commerce.reg-type.label']}"
+                      	value="#{editerCommerceAction.instance.regId}" />
+			</s:decorate>
+
+			<s:decorate id="ownerNameD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.owner-name.label']}" />
+                </ui:define>
+                <h:outputText id="ownerNameD" label="#{messages['commerce.owner-name.label']}"
+                      	value="#{editerCommerceAction.instance.ownerName}" />
+			</s:decorate>
+
+			<s:decorate id="ownerLastnameD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.owner-lastname.label']}" />
+                </ui:define>
+                <h:outputText id="ownerLastnameD" label="#{messages['commerce.owner-lastname.label']}"
+                      	value="#{editerCommerceAction.instance.ownerLastName}" />
+			</s:decorate>
+			 
+			<s:decorate id="adress1CommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.adress1.label']}" />
+                </ui:define>
+                <h:outputText id="adress1Commerce" label="#{messages['commerce.adress1.label']}"
+                      	value="#{editerCommerceAction.instance.adress1}" />
+			</s:decorate>
+			 
+			<s:decorate id="adress2CommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.adress2.label']}" />
+                </ui:define>
+                <h:outputText id="adress2Commerce" label="#{messages['commerce.adress2.label']}"
+                      	value="#{editerCommerceAction.instance.adress2}" />
+			</s:decorate>
+			 
+			<s:decorate id="cityAdressCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+			 		<h:outputLabel value="#{messages['commerce.city.label']}"/>
+			 	</ui:define>
+			 	<h:outputText value="#{editerCommerceAction.instance.city.nom} (#{editerCommerceAction.instance.city.pin})" />
+			</s:decorate>
+			 
+			<s:decorate id="emailCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.email.label']}" />
+                </ui:define>
+                <h:outputText id="emailCommerce" label="#{messages['commerce.email.label']}"
+                      	value="#{editerCommerceAction.instance.email}" />
+			</s:decorate>
+		</rich:panel>
+	</h:form>
+
+</ui:define>
+</ui:composition>
+
+</f:view>
+</jsp:root>    

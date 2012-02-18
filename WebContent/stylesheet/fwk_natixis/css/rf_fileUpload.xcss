@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée au composant rich:fileUpload 
+		
+		Les propriétés utilisées ici sont spécifiques au fileUpload (création de variables dédiées...).
+		En revanche, les boutons de contrôle du composant (libellés internationalisés dans le messages_fr.properties)
+		sont définies en utilisant logiquement les variables relatifs aux boutons. 
+		
+		Pas de fichier fils, sauf dans le cas GCE Internet qui nécessite... des boutons arrondis			
+	-->
+	
+	<!-- pour des raisons de simplicité (pour le moment) on reprend pour commencer le style natif -->
+	<f:importResource src="org/richfaces/renderkit/html/css/fileUpload.xcss" />
+	
+	<!-- 
+		/**************************************************************/
+		/*  Définition du bloc de prévisualisation + du bandeau haut  */
+		/**************************************************************/
+	 -->
+	
+	
+	<!-- On définit le cadre complet (pavé contenant le bandeau haut + la zone de prévisualisation) -->
+	<u:selector name=".rich-fileupload-list-decor">
+		<u:style name="border-width" skin="fileUploadBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="fileUploadBorderColor"/>
+	</u:selector>
+	
+	<!-- On définit le pavé du haut (proposant le bouton de téléchargement) -->
+	<u:selector name=".rich-fileupload-toolbar-decor">
+		<u:style name="background-color" skin="fileUploadToolbarBgColor"/>
+		<u:style name="border-width" skin="fileUploadToolbarBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="fileUploadToolbarBorderColor"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**********************************************************/
+		/*  Définition du bouton (ouvrant l'explorateur Windows). */
+		/**********************************************************/
+	 -->
+	 
+	<!-- Les boutons de contrôle ("créer", "tout effacer" sont en fait du texte inclus dans des <div>,
+	on ne les traite donc pas comme des <input. Ainsi, pas de redéfinition nécessaire de la police d'écriture
+	qui est celle du texte courant...  --> 
+	
+	<!-- On s'occupe de sa bordure (surchargée par les bordures des boutons ci-dessous) -->
+	<u:selector name=".rich-fileupload-button-border">
+		<u:style name="border" value="none"/><!-- (0) -->
+	</u:selector>
+	
+	<!-- (0) On surcharge cette valeur car elle est présente dans le style natif RichFaces dont on hérite.
+	Cependant, la définition est limitée à "1px solid" sans précision explicite d'une couleur de contour 
+	qui est donc, par défaut, noire. On le désactive ici pour qu'un style spécifique soit appliqué à chaque
+	typologie de bouton... -->
+	
+	<!-- On s'occupe du bouton (style initial) : s'applique à une <div> -->
+	<u:selector name=".rich-fileupload-button">
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="buttonBorderColor"/>
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<u:style name="font-weight" skin="buttonFontWeight"/>
+		<u:style name="font-size" skin="buttonFontSize"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="text-decoration" skin="buttonTextDecoration"/>
+		<u:style name="padding" value="2px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- On s'occupe du style du bouton au survol : s'applique à une <div> -->
+	<u:selector name=".rich-fileupload-button-light">
+		<u:style name="background-color" skin="buttonHoverBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonHoverBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="buttonHoverBorderColor"/>
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<u:style name="font-weight" skin="buttonHoverFontWeight"/>
+		<u:style name="font-size" skin="buttonHoverFontSize"/>
+		<u:style name="color" skin="buttonHoverTextColor"/>
+		<u:style name="text-decoration" skin="buttonHoverTextDecoration"/>
+		<u:style name="padding" value="2px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- On s'occupe du style du bouton lorsqu'il est pressé : s'applique à une <div> -->
+	<u:selector name=".rich-fileupload-button-press">
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="buttonBorderColor"/>
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<u:style name="font-weight" skin="buttonFontWeight"/>
+		<u:style name="font-size" skin="buttonFontSize"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="text-decoration" skin="buttonTextDecoration"/>
+		<u:style name="padding" value="2px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) On hérite du style RichFaces qui fournit une image de fond -->
+	
+	<!-- (2) On met explicitement les paddings qui ont dans le style natif des valeurs différentes selon les états -->
+	
+	<!-- Définition du contenu du bouton -->
+	<u:selector name=".rich-fileupload-button-content"/><!-- C'est là qu'on définit les paddings du texte par rapport aux bordures -->	
+		
+	<!-- Style de l'écriture du bouton (ATTENTION jamais utilisé seul : peut être surchargé par les classes définies à côté...) -->
+	<u:selector name=".rich-fileupload-font"/><!-- Non usité : on le décrit dans chacune des classes spécifiques... -->
+	
+	
+	<!-- 
+		/*******************************************************************************************************/
+		/*  Définition des icônes contenus dans la barre (croix bleue, flèche verte, carré rouge, croix rouge) */
+		/*******************************************************************************************************/
+	 -->
+	
+	<!-- Style de la croix qui propose l'ajout -->
+	<u:selector name=".rich-fileupload-ico-add"/>
+	
+	<!-- Style de la croix (désactivée) qui propose l'ajout (quand il propose le téléchargement) -->
+	<u:selector name=".rich-fileupload-ico-add-dis"><!-- (3) -->
+		<u:style name="background-color" skin="buttonInactifBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="font-weight" skin="buttonInactifFontWeight"/>
+		<u:style name="font-size" skin="buttonInactifFontSize"/>
+		<u:style name="color" skin="buttonInactifTextColor"/>
+		<u:style name="text-decoration" skin="buttonInactifTextDecoration"/>
+	</u:selector>
+	
+	<!-- (3) On se sert de cette classe pour conférer au bouton globalement un aspect inactif. Mais on enlève la background-image:none pour
+	garder la puce grise... On vire également la bordure qui s'insère à l'intérieur de la bordure existante...-->
+	
+	<!-- Style de la flèche verte qui propose le téléchargement effectif -->
+	<u:selector name=".rich-fileupload-ico-start"/>
+	
+	<!-- Style de la flèche verte (désactivée) qui propose le téléchargement effectif -->
+	<u:selector name=".rich-fileupload-ico-start-dis"/>
+	
+	<!-- Style de la puce (carré rouge) qui permet d'arrêter le téléchargement -->
+	<u:selector name=".rich-fileupload-ico-stop"/>
+	
+	<!-- Style de la croix qui permet de nettoyer la prévisualisation -->
+	<u:selector name=".rich-fileupload-ico-clear"/>
+	
+	
+	<!-- 
+		/***************************************************************************************************************/
+		/*  Définition de la zone, contenant l'élément en cours de téléchargement (avec une action "annuler" à droite) */
+		/****************************************************************************************************************/
+	 -->
+	 
+	<!-- Style du réceptacle de la liste des éléments à télécharger (définit aussi le trait de séparation entre les éléments de la liste) -->
+	<u:selector name=".rich-fileupload-table-td">
+		<u:style name="border-width" skin="fileUploadListBorderWidth"/>
+		<u:style name="border-style" skin="fileUploadListBorderStyle"/>
+		<u:style name="border-color" skin="fileUploadListBorderColor"/>		
+	</u:selector>
+	
+	<!-- Style pour décrire le nom du fichier à télécharger (ainsi que le résultat du téléchargement : "Terminé") -->
+	<u:selector name=".rich-fileupload-name"/><!-- On laisse le style de base pour l'instant... -->
+	
+	<!-- u:selector name=".rich-fileupload-name">
+		<u:style name="color" skin="fileUploadFileNameColor"/>	
+		<u:style name="font-size" skin="fileUploadFileNameFontSize"/>
+		<u:style name="font-weight" skin="fileUploadFileNameFontWeight"/>
+		<u:style name="text-decoration" skin="fileUploadFileNameTextDecoration"/>
+	</u:selector -->
+	
+	<!-- Style du bouton d'annulation du téléchargement (utilisé à droite de ".rich-fileupload-font"). S'applique à une <div> -->
+	<u:selector name=".rich-fileupload-del"/>
+	
+	<!-- Style du lien "a" d'annulation (Si rien de spécifié, le style général sur les liens s'appliquent.. -->
+	<u:selector name=".rich-fileupload-anc"/> 
+		
+	<!-- Style du scroller (situé à droite) pour faire défiler la liste des images à télécharger -->
+	<u:selector name=".rich-fileupload-scroll"/>
+	
+	<!-- Style pour adapter l'espacement entre plusieurs éléments à télécharger -->
+	<u:selector name=".rich-fileupload-name-padding">
+		<u:style name="padding" value="2px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) On met explicitement un padding, car par défaut un padding-left:0 est appliqué, ce qui tronque un peu les lettres... -->
+		
+</f:template>

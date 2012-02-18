@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_datatable.xcss" />
+
+	<!-- 
+		/* ********* */
+		/* Tableaux  */
+		/* ********* */
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Structure globale du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		
+		/* Propriété globale du tableau */
+		
+	-->
+
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Entête du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+	<!-- 
+		titre du tableau 
+		ici, on doit utiliser un span rich-table-title inclut dans le caption du tableau
+	-->
+	<u:selector name=".rich-table-caption, .rich-table caption">
+		<u:style name="text-align" value="left"/>
+		<u:style name="padding" value="4px 0"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-title">
+		<u:style name="font-weight" skin="panelHeaderFontWeight"/>
+		<u:style name="color" skin="panelHeaderTextColor"/>
+		<u:style name="background-color" skin="panelHeaderBgColor"/>
+		<u:style name="padding" value="4px 10px"/>
+	</u:selector>
+	
+	
+	<!--
+		/* ~~~~~~~~~~~~~~~~~~~~ */
+		/* => Corps du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~~ */
+	-->		
+
+		
+
+	<!--
+		/* ~~~~~~~~~~~~~~~~~~~ */
+		/* => Pied du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~ */
+	-->
+	<u:selector name=".rich-table-footer,.rich-subtable-footer">
+		<u:style name="font-weight" skin="tableFooterFontWeight"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-footercell, .rich-subtable-footercell">
+		<u:style name="border-color" skin="defaultTableBorder"/>
+		<u:style name="border-width" value="0 1px 1px 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="padding" value="4px"/>
+		<u:style name="text-align" value="right"/>
+		<u:style name="font-weight" skin="tableFooterFontWeight"/>
+		<u:style name="background-color" skin="tableFooterBgColor"/>
+		<u:style name="color" skin="tableFooterTextColor"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-subfooter">
+		<u:style name="background-color" skin="tableFooterBgColor"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-subfootercell">
+		<u:style name="border-color" skin="defaultTableBorder"/>
+		<u:style name="border-width" value="0 1px 1px 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="padding" value="4px"/>
+		<u:style name="text-align" value="left"/>
+		<u:style name="color" skin="tableFooterTextColor"/>
+	</u:selector>
+		
+
+
+	
+</f:template>

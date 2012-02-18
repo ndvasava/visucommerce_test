@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_datatable.xcss" />
+
+
+	<!-- 
+		/* ********* */
+		/* Tableaux  */
+		/* ********* */
+	-->
+
+	<u:selector name=".rich-table">
+		<u:style name="margin-bottom" value="10px"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="defaultTableBorder"/>
+		<u:style name="width" value="100%"/>
+		<u:style name="empty-cells" value="show"/>
+	</u:selector>
+
+	<u:selector name=".rich-table td, .rich-table th">
+		<u:style name="border-right" value="1px solid #d4d8e3"/>
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-color" skin="dimmedBorderColor"/>
+		<u:style name="border-right-width" value="1px"/>
+		<u:style name="border-right-style" value="solid"/>
+		<u:style name="border-right-color" skin="dimmedBorderColor"/>
+		
+	</u:selector>
+		
+	<!--  sauf pour les tableaux imbriqués -->
+	<u:selector name=".rich-table-cell td">
+		<u:style name="padding" value="0"/>
+		<u:style name="border" value="none"/>
+	</u:selector>
+
+	<!--  et pour les cellules du footer -->
+	<u:selector name=".rich-table td.rich-table-footercell">
+		<u:style name="border" value="none"/>
+	</u:selector>
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Entête du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~~~ */
+	-->
+	<!-- 
+		titre du tableau 
+		ici, on doit utiliser un span rich-table-title inclut dans le caption du tableau
+	-->
+	<u:selector name=".rich-table-caption, .rich-table caption">
+		<u:style name="text-align" value="left"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-title">
+		<u:style name="font-weight" skin="panelHeaderFontWeight"/>
+		<u:style name="color" skin="panelHeaderTextColor"/>
+		<u:style name="background-color" skin="panelHeaderBgColor"/>
+		<u:style name="padding" value="1px 6px"/>
+	</u:selector>
+
+	<!-- Couleurs des lignes de l'entête -->
+	<u:selector name=".rich-subtable-headercell, 
+					.rich-table-subheadercell">
+		<u:style name="background-color" skin="tableHeaderBgColor"/>
+		<u:style name="color" skin="tableHeaderTextColor"/>
+		<u:style name="padding" value="1px 6px"/>
+		<u:style name="text-align" value="left"/>
+	</u:selector>
+	
+	<!-- 
+		utilisation des headers et footers pour les boutons 
+	-->
+	<u:selector name=".rich-table-header">
+		<u:style name="text-align" value="left"/>
+	</u:selector>
+
+	<!-- diminution de la taille du bloc de pagination quand il est contenu dans la table -->
+	<u:selector name=".rich-table .blocPagination">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="font-size" value="1em"/>
+	</u:selector>
+
+	<!-- div des boutons actions dans la table -->
+	<u:selector name=".rich-table .tableActions">
+		<u:style name="margin" value="5px"/>
+		<u:style name="font-weight" value="normal"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table .rich-table-footer-checkbox">
+		<u:style name="margin" value="0"/>
+	</u:selector>
+
+	<!--
+		idem pour les tableaux sans titre dont on veut que les entêtes de colonne soit de la couleur habituelle
+		du titre : à mettre dans l'attribut headerClass du rich:datatable
+	-->
+	<u:selector name=".rich-table-headerLevel1">
+		<u:style name="font-weight" skin="panelHeaderFontWeight"/>
+		<u:style name="color" skin="panelHeaderTextColor"/>
+		<u:style name="background-color" skin="panelHeaderBgColor"/>
+	</u:selector>
+
+	<!-- 
+		style à appliquer aux cellules dont on veut qu'elles ressemblent à un sous titre
+		=> à mettre dans l'attribut headerClass, rowclasses, etc... (suivant les cas) 
+		du rich:datatable
+	-->
+	<u:selector name=".rich-table-headerLevel2">
+		<u:style name="background-color" skin="tableCellPairBgColor"/>
+		<u:style name="color" skin="tableHeaderTextColor"/>
+		<u:style name="font-weight" skin="tableHeaderFontWeight"/>
+	</u:selector>
+
+	<!-- 
+		variante tableau de niveau 2
+	-->
+
+	<!-- 
+		style des entêtes de tableaux de second niveau (généralement le même que Level1 sauf pour GBP !!)
+		(à mettre en styleClass du rich-table)
+	 -->
+	<u:selector name=".rich-table-level2 .rich-table-headercell,
+					  .rich-table-level2 .rich-subtable-headercell, 
+					  .rich-table-level2 .rich-table-subheadercell">
+	</u:selector>
+
+	<!-- style du titre  (à priori c'est le même que d'habitude : 
+		sauf pour GBP où il faut mettre du vert : le même que les panels imbriqués !!)
+		
+		
+		et ba non, ... on ne fait ça que dans un rich-panel
+	-->
+	<u:selector name=".rich-panel .rich-table-caption .rich-table-title">
+		<u:style name="color" skin="subpanelHeaderTextColor"/>
+		<u:style name="background-color" skin="subpanelHeaderBgColor"/>
+	</u:selector>
+
+
+	<!-- 
+		tri :
+			TODO : exemple 
+	-->
+
+	<!-- 
+		style des entêtes de tableaux triables (généralement le même que Level1 ou Level2)
+		(à mettre en styleClass du rich-table)
+	 -->
+	<u:selector name=".rich-table-sortable .rich-table-headercell,
+					  .rich-table-sortable .rich-subtable-headercell, 
+					  .rich-table-sortable .rich-table-subheadercell">
+		<u:style name="font-weight" skin="tableHeaderFontWeight"/>
+		<u:style name="color" skin="tableHeaderTextColor"/>
+		<u:style name="background-color" skin="tableHeaderBgColor"/>
+	</u:selector>
+
+	<!-- lien en couleur normale -->
+	<u:selector name=".rich-table-subheadercell a, .rich-table-subheadercell a:hover">
+		<u:style name="color" skin="tableHeaderTextColor"/>
+		<u:style name="text-decoration" value="none"/>
+	</u:selector>
+	
+	<!-- lien sur une colonne triée -->
+	<u:selector name=".rich-table th.sorted a, .rich-table th.sorted a:hover">
+		<u:style name="color" skin="tableHeaderSortedTextColor"/>
+	</u:selector>
+ 
+	<!-- header de la colonne triée -->
+	<u:selector name=".rich-table-header .sorted,
+					.rich-subtable-header .sorted, 
+					.rich-table-subheader .sorted,
+					.rich-table-header-continue .sorted">
+		<u:style name="background-color" skin="tableHeaderSortedBgColor"/>
+		<u:style name="color" skin="tableHeaderSortedTextColor"/>
+	</u:selector>
+
+	<!-- colonne action -->
+	<u:selector name=".rich-table-cell-action, .rich-table-cell-checkbox">
+		<u:style name="text-align" value="center"/>
+		<u:style name="white-space" value="nowrap"/>
+	</u:selector>
+		
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~ */
+		/* => Corps du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~~ */
+
+		.rich-table-firstrow .rich-table-cell,
+		.rich-subtable-firstrow .rich-subtable-cell {	
+		}
+	-->
+		
+	<u:selector name=".rich-table-cell, .rich-subtable-cell">
+		<u:style name="empty-cells" value="show"/>
+	</u:selector>
+
+	<!-- mise en place du pyjama (ie de l'alternance de couleur de la ligne) -->
+	<u:selector name=".rich-table-cell-pair">
+		<u:style name="background-color" skin="tableCellPairBgColor"/>
+	</u:selector>
+		
+	<!--  aspects des liens dans les cellules (défaut + souligné au survole)-->
+	<u:selector name=".rich-table-cell a">
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+		
+	<u:selector name=".rich-table-cell a:hover">
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+		
+	<u:selector name=".rich-table-cell a img">
+		<u:style name="border" value="none"/>
+	</u:selector>
+		
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~ */
+		/* => Pied du tableau  */
+		/* ~~~~~~~~~~~~~~~~~~~ */
+	-->	
+	
+	<!-- 
+		/*  effet de roll over */
+		/* a préciser dans le tableau : 
+		**	rich:dataTable var="charge" 
+		**		onRowMouseOver="this.addClassName('rich-table-row-over')"
+		**		onRowMouseOut="this.removeClassName('rich-table-row-over')
+		**								*/
+	-->
+	<u:selector name=".rich-table-row-over">
+		<u:style name="background-color" skin="tableRowHoverBgColor"/>
+		<u:style name="color" skin="tableRowHoverTextColor"/>
+		<u:style name="cursor" value="pointer"/>
+	</u:selector>
+		
+	<!-- div associé au tableau sur laquelle porte la selection -->
+	<u:selector name=".rich-table-footer-checkbox">
+		<u:style name="margin" value="-11px 0 0"/>
+		<u:style name="padding-top" value="5px"/>
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+		
+	<!--  div pour les liens selection tous|aucun -->
+	<u:selector name=".rich-table-footer-checkAll">
+		<u:style name="float" value="left"/>
+	</u:selector>
+		
+	<!-- aspect des liens tous et aucun -->
+	<u:selector name=".rich-table-footer-checkAll a">
+		<u:style name="color" skin="tableSelectionLinkColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+		
+	<!-- aspect du label Sélectionner -->
+	<u:selector name=".rich-table-footer-checkAll label">
+		<u:style name="padding-right" value="0.5em"/>
+	</u:selector>
+		
+	<!-- entête de colonne triable -->
+	<!-- espacement icone de tri libelle -->
+	<u:selector name=".rich-table-subheadercell img">
+		<u:style name="padding" value="0 3px"/>
+	</u:selector>
+
+</f:template>

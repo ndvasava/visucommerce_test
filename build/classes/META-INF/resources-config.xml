@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-config>
+
+<!-- 
+	Fichier contenant la declaration des ressources pseudo statiques chargees dans des fichiers XCSS 
+	et qui peuvent, par des effets de bord lies au systeme de cache des navigateurs, ne pas avoir ete 
+	enregistre dans le cache serveur ... (suite e un redemarrage du serveur alors que le navigateur connait 
+	deja le CSS -> il ne le redemande pas au serveur. Les images contenues dans le CSS qui n'ont pas ete
+	lues par le browser lors des sessions precedentes sont redemandees explicitement au serveur qui crache alors
+	l'erreur suivante : 
+
+	WebApp        E   [Servlet Error]-[Faces Servlet]: org.ajax4jsf.resource.ResourceNotFoundException: Resource not registered : img/info.gif
+	
+	=> une solution provisoire consiste simplement a forcer le rechargement du CSS en appuyant sur CRTL-F5 ou d'attendre
+	qu'un collegue titille le serveur avec IE6 ou FF sans avoir le CSS initial en cache.
+-->
+
+	<resource>
+		<name>theme/visuc/img/bandeau_haut.png</name>
+		<path>theme/visuc/img/bandeau_haut.png</path>
+	</resource>
+	<resource>
+		<name>theme/visuc/img/bandeau_haut_trame.png</name>
+		<path>theme/visuc/img/bandeau_haut_trame.png</path>
+	</resource>
+	<resource>
+		<name>theme/visuc/img/fond_bandeau_haut.png</name>
+		<path>theme/visuc/img/fond_bandeau_haut.png</path>
+	</resource>
+	<resource>
+		<name>theme/visuc/img/fond_change_password.png</name>
+		<path>theme/visuc/img/fond_change_password.png</path>
+	</resource>
+	<resource>
+		<name>theme/visuc/img/fond_login.png</name>
+		<path>theme/visuc/img/fond_login.png</path>
+	</resource>
+	
+
+	<!--
+		/********************************/
+		/*     VisuCommerce Images      */
+		/********************************/
+	 -->
+	<resource>
+		<name>charte/img/visuc/puce_chevron.png</name>
+		<path>com/visuc/jsf/ui/skins/visuc/img/puce_chevron.png</path>
+	</resource>
+	<resource>
+		<name>charte/img/visuc/puce_liens_transversaux_blanc.png</name>
+		<path>com/visuc/jsf/ui/skins/visuc/img/puce_liens_transversaux_blanc.png</path>
+	</resource>
+	<resource>
+		<name>charte/img/visuc/puce_liens_footer.png</name>
+		<path>com/visuc/jsf/ui/skins/visuc/img/puce_liens_footer.png</path>
+	</resource>
+	
+	<!--
+		/**********************************************************/
+		/*     Resources xcss utilisees dans main visuc.xcss      */
+		/**********************************************************/
+	 -->
+	<resource>
+	    <name>com/visuc/jsf/ui/skins/css/page.xcss</name>
+	    <path>com/visuc/jsf/ui/skins/css/page.xcss</path>
+	</resource>
+	
+	<resource>
+	    <name>com/visuc/jsf/ui/skins/css/zoning.xcss</name>
+		<path>com/visuc/jsf/ui/skins/css/zoning.xcss</path>
+	</resource>
+	
+	<resource>
+	    <name>com/visuc/jsf/ui/skins/css/visuc/page.xcss</name>
+		<path>com/visuc/jsf/ui/skins/css/visuc/page.xcss</path>
+	</resource>
+	
+	<resource>
+	    <name>com/visuc/jsf/ui/skins/css/visuc/zoning.xcss</name>
+		<path>com/visuc/jsf/ui/skins/css/visuc/zoning.xcss</path>
+	</resource>
+	
+	
+	<!-- Main xcss for the style visuc.xcss -->
+	<resource>
+		<name>META-INF/skins/visuc.xcss</name>
+		<path>META-INF/skins/visuc.xcss</path>
+	</resource>
+	
+	<!-- 
+		===================================
+		Place your custom resources here 
+		Describe them as follows
+		===================================
+		<resource>
+			<name>org/foo/bar/scripts/foo.js</name>
+			<path>org/foo/bar/scripts/foo.js</path>
+			<renderer class="org.ajax4jsf.resource.ScriptRenderer"/>
+		</resource>
+		<resource class="org.foo.renderkit.html.FooImage">
+			<name>org.foo.renderkit.html.FooImage</name>
+		</resource>
+	  <resource>
+	    <name>org/foo/bar/css/foo.xcss</name>
+	    <path>org/foo/bar/css/foo.xcss</path>
+	  </resource>
+	  ======================================
+	  ======================================
+	-->
+
+
+	<resource class="org.richfaces.renderkit.html.CustomizeableGradient">
+		<name>org.richfaces.renderkit.html.CustomizeableGradient</name>
+	</resource>
+</resource-config>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 	
+		Feuille de style décrivant le menu BP Internet
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/sx_menu.xcss" />
+	
+	<!-- 
+		/************************************/
+		/*              MENU                */
+		/************************************/
+		
+		menuBorderColor=#81A6D0
+		menuOpenedColor=#00A6EB
+		menuSelectedColor=#2F8D99
+		menuTextColor=#0E4096
+		menuLevel4BgColor=#D5E8EB
+	-->
+
+	<u:selector name=".menuPartieGauche a">
+		<u:style name="border-top-style" value="solid"/>
+		<u:style name="border-top-width" value="1px"/>
+		<u:style name="border-top-color" skin="menuBorderColor"/>
+		<u:style name="padding-left" value="1.5em"/>
+	</u:selector> 
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 1  */
+		/*********************/
+	 -->
+	 
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv1_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="5px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuFerme a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv1_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="5px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 1 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	
+	
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+ 						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme a">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 2 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	 
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.niveau3 a">
+		<!-- plus de bordure à partir de ce niveau -->
+		<u:style name="border-top" value="none"/>
+	</u:selector>
+
+ 						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv3_7_ouvert.png" />
+		</u:style>
+		<u:style name="background-position" value="16px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv3_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="16px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 3 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv3_7_on_en_cours.png" />
+		</u:style>
+	</u:selector>
+
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	
+ 						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 sans descendance
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 menu ouvert
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+	<u:selector name=".menuPartieGauche ul.niveau3b li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv4_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="26px 50%"/>
+	</u:selector>
+	
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 menu fermé
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+	<u:selector name=".menuPartieGauche ul.niveau3b li.menuFerme a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_niv4_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="26px 50%"/>
+	</u:selector>
+
+						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+							  Cas Niveau 4 menu selected
+						~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+</f:template>

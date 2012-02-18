@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+       
+       
+       	<page view-id="/views/marchand/recherche_commerce.xhtml">
+		<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('searchCommerceView')}"/>
+			
+			<navigation from-action="#{editerCommerceAction.find}">
+				<rule>
+	           		<render view-id="/views/marchand/show_company.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="#{editerCommerceAction.edit}">
+				<rule>
+	           		<render view-id="/views/marchand/edit_commerce.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="goCompanyAccountHome">
+    	    	<render view-id="/views/marchand/company_acc_home.xhtml"/>
+	    	</navigation>
+       	</page>
+       
+		<page view-id="/views/marchand/edit_commerce.xhtml">
+			
+			<action execute="#{navigationHelper.addCurrentViewId('editCommerceView')}"/>
+			
+			<navigation from-action="#{editerCommerceAction.persistCommerceAccount}">
+				<rule if-outcome="create_OK">
+	           		<redirect view-id="/views/marchand/create_account_success.xhtml"/>
+        		</rule>
+        	</navigation>
+        </page>
+        
+        <page view-id="/views/marchand/create_account_success.xhtml">            	
+	    	<navigation from-action="goEditCompanyMoreInfo">
+    	    	<render view-id="/views/marchand/edit_commerce_compl_info.xhtml"/>
+	    	</navigation>
+	    </page>
+
+        <page view-id="/views/marchand/show_company.xhtml">            	
+	    	<navigation from-action="goEditCompanyMoreInfo">
+    	    	<render view-id="/views/marchand/edit_commerce_compl_info.xhtml"/>
+	    	</navigation>
+	    	
+	    	<navigation from-action="goDownloadContract">
+	    		<render view-id="/views/marchand/show_blank_contract.xhtml"/>
+	    	</navigation>
+	    </page>
+
+       	<!-- page view-id="/views/marchand/search_companies_for_validation.xhtml"-->
+			
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<!-- action execute="#{navigationHelper.addCurrentViewId('searchForValidationCommerceView')}"/>
+			
+        	<navigation from-action="#{editerCommerceAction.findForValidation}">
+				<rule>
+	           		<render view-id="/views/marchand/validate_company_acc.xhtml"/>
+        		</rule>
+        	</navigation>
+       	</page-->
+	    
+	    <page view-id="/views/marchand/edit_commerce_compl_info.xhtml">
+			
+			<action execute="#{navigationHelper.addCurrentViewId('editCommerceComplInfoView')}"/>
+			<navigation from-action="#{editerCommerceAction.updateComplInfo}">
+				<rule if-outcome="UPDATE_OK">
+	           		<redirect view-id="/views/marchand/show_company.xhtml"/>
+        		</rule>
+        	</navigation>
+        </page>
+        
+        <page view-id="/views/marchand/company_acc_home.xhtml">
+        
+        	<action execute="#{navigationHelper.addCurrentViewId('editCommerceComplInfoView')}"/>
+        	<navigation from-action="goEditCompanyMoreInfo">
+    	    	<render view-id="/views/marchand/edit_commerce_compl_info.xhtml"/>
+	    	</navigation>
+	    	<navigation from-action="viewCompany">
+		        <render view-id="/views/marchand/show_company.xhtml"/>
+			</navigation>
+        </page>
+</pages>

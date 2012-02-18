@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	   
+<!-- +=====================================================================+ -->	   
+<!-- |								Page principale 					   | -->	   
+<!-- +=====================================================================+ -->	   
+	   
+<u:selector name="@media print, xscreen">
+
+	<u:selector name="#bandeauHaut">
+		<!-- 
+		<u:style name="background-image" default="none!important"/>
+		-->
+		<u:style name="background-image" skin="print_bandeauHautBgImage"/>
+		
+		<u:style name="width" default="auto!important"/>	 
+		<u:style name="background-color" default="#fff!important" skin="print_bandeauHautBgColor"/>
+	</u:selector>
+	
+	
+	<u:selector name="#titreAppli">
+		<u:style name="color" default="#000000" skin="print_titreAppliColor"/>	 
+	</u:selector>
+	
+	<u:selector name="#rail ">
+		<u:style name="padding-left" default="0px!important"/>	 
+	</u:selector>
+	
+	<u:selector name="#bandeauClient">
+		<u:style name="display" default="none"/>	 
+	</u:selector>
+
+	<u:selector name="#outilsContextuels">
+		<u:style name="display" default="none"/>	 
+	</u:selector>
+	
+	<u:selector name="#liensTransversauxPicto">
+		<u:style name="display" default="none"/>	 
+	</u:selector>
+	
+	<u:selector name="#menu">
+		<u:style name="display" default="none"/>
+	</u:selector>
+	
+	<u:selector name="#piedsDePage">
+		<u:style name="display" default="none"/>
+	</u:selector>
+	
+	<u:selector name="#corpsDePage">
+		<u:style name="margin-left" default="0!important"/>
+		<!-- 
+		<u:style name="width" default="745px!important"/>
+		 -->
+		<u:style name="width" default="auto!important"/>	 
+	
+		<u:style name="padding" default="0px!important"/>
+	</u:selector>
+	
+		<u:selector name="#conteneurHeader, ul#liensTransversaux, #conteneur, #piedsDePage">
+		<!-- 
+		<u:style name="width" default="745px!important"/>
+		 -->
+		<u:style name="width" default="auto!important"/>	 
+	</u:selector>
+	
+	<u:selector name="body">
+		<u:style name="background-color" default="#fff!important"/>
+		<u:style name="width" default="auto!important"/>	 	
+		<u:style name="padding" default="5px!important"/>	 				
+	</u:selector>
+	
+	<u:selector name="body #conteneur">
+		<u:style name="background-image" default="none!important"/>
+	</u:selector>
+	
+	<u:selector name="body #zoneCentrale">
+		<!-- 
+		<u:style name="width" default="745px!important"/>
+		 -->
+		<u:style name="width" default="auto!important"/>	 
+	</u:selector>
+	
+	<u:selector name="ul#liensTransversaux, #rechForm">
+		<u:style name="visibility" default="hidden"/>
+	</u:selector>
+	
+	
+	<u:selector name="#theme">
+		<u:style name="float" default="left!important"/>
+		<u:style name="position" default="static!important"/>
+	</u:selector>
+
+</u:selector>
+
+
+<!-- +=====================================================================+ -->	   
+<!-- |								Sélecteur de themes					   | -->	   
+<!-- +=====================================================================+ -->	   
+
+
+<u:selector name="@media print">
+	<u:selector name="#theme">
+		<u:style name="display" default="none"/>
+	</u:selector>
+</u:selector>
+
+
+
+<!-- +=====================================================================+ -->	   
+<!-- |								Page Popup		 					   | -->	   
+<!-- +=====================================================================+ -->	   
+
+<u:selector name="@media print, xscreen">
+
+	<u:selector name=".modalPrintPopup">
+		<u:style name="top" default="0px!important"/>
+		<u:style name="left" default="0px!important"/>
+	</u:selector>
+
+	<u:selector name="
+		body.modalPrintConteneur #bandeauHaut,
+		body.modalPrintConteneur #conteneur,
+		body.modalPrintConteneur #footer,
+		body.modalPrintConteneur #theme,
+		.rich-mpnl-controls,
+		.modalButtons	
+	">
+		<u:style name="display" default="none"/>
+	</u:selector>
+
+	<u:selector name=".rich-mpnl-mask-div">
+		<u:style name="background-color" default="#fff!important"/>
+		<u:style name="opacity" default="0!important"/>
+	</u:selector>
+
+</u:selector>
+
+</f:template>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+	<ui:composition>
+	
+		<ui:remove>
+			Ce fragment integre les liens en haut de la page : contacts aide plan du site...
+			Ce fragment est partage par toutes les enseignes. Si jamais, un fragment specifique devait
+			etre ecrit pour une enseigne, il convient de ne pas modifier ce fichier mais d'en ecrire
+			un specifique dans le repertoire : /layout/page/fragment/theme/XXX/YYY/liens_transversaux.xhtml
+			ou XXX designe 'agence' ou 'internet' et YYY designe 'natixis', 'caisse-epargne' ou 'banque-populaire'.
+		</ui:remove>
+		
+		<!-- Creation du conteneur -->
+		<ul id="liensTransversaux" class="liensTransversaux">
+			
+			<a4j:repeat value="#{localeSelector.supportedLocales}" var="item" rowKeyVar="i">
+				<li class="#{i==0 ? 'first' : ''}">
+					<s:link action="#{localeSelector.selectLanguage(param.locale)}" rendered="#{locale.toString() != item.value}" value="#{item.label}">
+						<f:param name="locale" value="#{item.value}"/>
+					</s:link>
+					<h:outputText value="#{item.label}" rendered="#{locale.toString() == item.value}" styleClass="lienTransversal"/>
+				</li>
+			</a4j:repeat>
+			
+			<li class="first">
+				<s:link view="/accueil.xhtml" accesskey="1">lienTransversal1</s:link>
+			</li>
+			
+			<li>
+				<s:link view="/accueil.xhtml" accesskey="2">lienTransversal2</s:link>
+			</li>
+			
+			<s:fragment rendered="#{identity.loggedIn}" >
+				<li class="last">
+					<s:link id="lienDeconnexion" action="#{identity.logout}" value="#{messages['button.logout.label']}"/>
+				</li>
+			</s:fragment>
+			
+		</ul>
+		
+		<ui:remove>
+			Explications : en terme de rendu css, id="liensTransversaux" et class="liensTransversaux" sont 
+			tous deux essentiels meme s'ils n'ont pas le meme role.
+			L'id '#liensTransversaux' definit le positionnement alors que '.liensTransversaux' definit l'apparence.
+			Ils sont definis dans le frameworks respectivement dans :
+			sphinx-jsf-css\src\main\resources\com\natixis\sphinx\jsf\ui\skins\YYY\ZZZ\css\zoning.xcss
+			et 
+			sphinx-jsf-css\src\main\resources\com\natixis\sphinx\jsf\ui\skins\YYY\ZZZ\css\implementation_page.xcss
+			Avant de surcharger dans l'application l'un ou l'autre de ces 2 styles, veillez a verifier au prealable
+			qu'il n'existe pas de variables a redefinir simplement dans le fichier
+			src\main\resources\META-INF\skins\XXXTTT.skin.properties de votre module Web.						 
+		</ui:remove>
+		
+		<ui:remove>
+			Les libelles des liens peuvent etre internationalises en mettant en lieu et place de 'lienTransversal1'
+			un code du style :#{messages['liens_transversaux.lien1']}					 
+		</ui:remove>
+		
+		<ui:remove>
+			La page cible du s:link	est definie dans l'attribut 'views' sans preciser la racine de contexte.
+			Les regles de navigation regissant la navigation sont definies dans le fichier :
+			src\main\webapp\WEB-INF\pages.xml
+		</ui:remove>
+		
+	</ui:composition>
+</f:view>
+</jsp:root>

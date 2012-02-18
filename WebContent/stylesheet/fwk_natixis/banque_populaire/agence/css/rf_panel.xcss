@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant l'apparence des composants <rich:panel.
+		Ils sont présents dans toutes les pages et revêtent l'apparence de cadres bien 
+		utiles dans la gestion des formulaires.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_panel.xcss" />
+	
+	<!-- 
+		/* ****** */
+		/* Panel  */
+		/* ****** */
+		
+	-->
+	 
+	<!-- Titre du cadre de niveau 1 -->
+	<u:selector name=".rich-panel .rich-panel-header"><!-- EXTENDS "body .rich-panel .rich-panel-header" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/bloc1_title_bg.gif" />
+		</u:style>
+	</u:selector>
+	
+	<!-- 
+		/* *************************** */
+		/* Panel de niveaux supérieurs */
+		/* *************************** */	
+		
+		Les panels imbriqués sont utilisés pour donner un aspect multi-colonnes aux formulaires.
+	-->
+
+	<u:selector name=".formulaireImbrique .rich-panel-header">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	
+
+</f:template>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http:/jsf.exadel.com/template"
+	   xmlns:u="http:/jsf.exadel.com/template/util" 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	   
+
+	<!-- 
+		/* *********************************** */
+		/* Valeurs maîtresses de l'application */
+		/* *********************************** */		
+	 -->  
+	 
+	 <u:selector name="body">
+		<u:style name="width" skin="defaultPageWidth"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="padding" value="0"/>
+		<u:style name="font-family" value="Arial"/>
+		<u:style name="color" skin="defaultTextColor"/>
+		<u:style name="font-family" value="Arial"/>
+		<u:style name="font-size" skin="defaultFontSize"/>
+		<u:style name="background-color" skin="defaultBgColor"/>
+	 </u:selector>
+	 
+	<!-- 
+		/* ******************************** */
+		/* Redéfinition des balises de base */
+		/* ******************************** */		
+	 -->  
+	 
+	 <u:selector name="input, select, textarea">
+		<u:style name="border-color" skin="inputBorderColor" />	
+		<u:style name="border-style" value="solid" />
+		<u:style name="border-width" value="1px" />
+		<u:style name="width" skin="14.5em" />	
+	 </u:selector>
+	 
+	 <u:selector name="a">
+	 	<u:style name="text-decoration" value="none"/>
+	 	<u:style name="color" skin="defaultLinkColor"/>
+	 	<u:style name="cursor" value="pointer"/>
+	 </u:selector>	
+	 
+	 <u:selector name="a:hover">
+	 	<u:style name="color" skin="linkHoverColor"/>
+	 </u:selector>	
+	 
+	 <u:selector name="h1,h2,h3">
+	 	<u:style name="margin" value="0"/>
+	 	<u:style name="padding" value="0"/>
+	 </u:selector>	
+	 	
+	 <u:selector name="h1">
+	 	<u:style name="font-size" value="1.3em"/>
+	 	<u:style name="font-weight" value="bold"/>
+	 </u:selector>	
+	 
+	 <u:selector name="h2">
+	 	<u:style name="font-size" value="1.3em"/>
+	 </u:selector>	
+	 	
+	 <u:selector name="h3">
+	 	<u:style name="font-size" value="1em"/>
+	 </u:selector>	
+	
+</f:template>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+
+	<!-- 
+		Feuille de style associée au composant rich:inputNumberSpinner
+	-->
+	
+	<f:importResource src="org/richfaces/renderkit/html/css/spinner.xcss" />
+	
+	<!-- Le composant se compose de 2 grandes parties :
+	- à gauche, le champ de saisie : td.rich-spinner-input-container
+	- à droite, les flèches pour faire défiler les chiffres : input.rich-spinner-buttons -->
+	
+	<!-- Style du <table> englobant le tout -->
+	<u:selector name="table.rich-spinner-c"/>
+	
+	<!-- Style du <td> entourant le input -->
+	<u:selector name="td.rich-spinner-input-container">
+		<u:style name="border-width" skin="spinnerInputBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="spinnerInputBorderColor"/>
+		<u:style name="background-image" value="none"/><!-- (1) -->
+		<u:style name="background-color" skin="inputBgColor"/>
+		<u:style name="margin" skin="spinnerInputContainerMargin" default="0"/>
+		<u:style name="padding" skin="spinnerInputContainerPadding" default="0"/>
+	</u:selector>
+	
+	<!-- (1) Pour écraser l'image émanant de RichFaces -->
+
+	<u:selector name="input.rich-spinner-input">
+		<u:style name="padding" value="1px 0 1px 3px"/>
+		<u:style name="color" skin="spinnerInputColor"/>
+		<u:style name="border" value="0"/>
+	</u:selector>
+	
+	<u:selector name="td.rich-spinner-buttons">
+		<u:style name="border-width" skin="spinnerInputButtonsBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="spinnerInputButtonsBorderColor"/>
+		<u:style name="background-color" skin="spinnerInputButtonsBgColor"/>
+		<f:if skin="spinnerButtonsBgImg"><!-- (2) -->
+			<u:style name="background-image">
+				<f:resource f:skin="spinnerButtonsBgImg"/>	
+			</u:style>
+		</f:if>	
+	</u:selector>
+	
+	<!-- (2) On laisse l'opportunité de surcharger l'image de fond -->
+	
+	<!-- corrige la taille fixee par ".value input" ou la taille des champs est a 1.3em -->
+	<u:selector name=".rich-spinner-buttons input.rich-spinner-btn">
+		<u:style name="height" value="auto"/>
+	</u:selector>
+	
+	<u:selector name="input.rich-spinner-btn">
+		<u:style name="margin" skin="spinnerBtnMargin" default="0 1px 1px 0"/>
+		<u:style name="padding" skin="spinnerBtnPadding" default="0"/>
+	</u:selector>
+	
+	<u:selector name="input.rich-spinner-button">
+		<u:style name="border-width" value="1px 1px 1px 0"/>
+		<u:style name="border-color" skin="inputBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+</f:template>

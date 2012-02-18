@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée au composant rich:calendar 
+		http://docs.jboss.org/richfaces/latest_3_3_X/en/devguide/html/rich_calendar.html
+		
+		Les propriétés utilisées ici sont : 
+		- calendarExteriorBorderColor : couleur du contour du calendrier
+		- calendarHeaderBorderColor : couleur du contour du header
+		- calendarHeaderBgColor : couleur du fond du header
+		- calendarHeaderFontWeight : graisse d'écriture du header
+		- calendarHeaderTextColor : couleur du texte du header
+		- calendarFooterBgColor : couleur de fond du footer
+		- calendarFooterTextColor : couleur du texte du footer
+		- calendarDaysBorderColor : couleur de contour de la zone décrivant les noms du jour
+		- calendarDaysBgColor : couleur de fond de la zone décrivant les noms du jour
+		- calendarDaysTextColor : couleur du texte de la zone décrivant les noms du jour
+		- calendarWeekBorderColor : couleur de contour de la zone décrivant les numéros de semaine
+		- calendarWeekBgColor : couleur de fond de la zone décrivant les numéros de semaine
+		- calendarWeekTextColor : couleur du texte de la zone décrivant les numéros de semaine
+		- calendarWeekendsTextColor : couleur du texte des mots "samedi" et "dimanche"
+		- calendarHollyColor : couleur des jours fériés
+		- calendarHollyBgColor : couleur de fond de la cellule des jours non ouvrés
+		- calendarBoundaryColor : couleur du texte des jours du mois d'à côté
+		- calendarCellBorderColor : couleur de séparation des cellules intérieures
+		- calendarBgColor : couleur du fond d'une cellule standard (ie ni sélectionnée, ni celle du jour)
+		- calendarTodayTextColor : couleur du texte du jour actuel
+		- calendarTodayBgColor : couleur du fond du jour actuel		
+		- calendarSelectTextColor : couleur du texte du jour sélectionné
+		- calendarSelectBgColor : couleur du fond du jour sélectionné	
+		- calendarHoverTextColor : couleur du texte d'un jour survolé
+		- calendarHoverBgColor : couleur du fond d'un jour survolé
+		- calendarDatePopupBgColor : couleur de fond de la popup permettant de modifier la date (mois / année) [ne doit pas être transparent]
+		- calendarDatePopupBorderColor : couleur de bordure de la popup permettant de modifier la date (mois / année)
+		- calendarDatePopupSeparateurBorderColor : couleur, dans la popup de modification de la date, du trait de séparation central
+		- calendarDatePopupButtonBorderColor : couleur, dans la popup de modification de la date, des bordures des boutons "Ok" et "Annuler"
+		- calendarDatePopupButtonBgColor : couleur, dans la popup de modification de la date, du fond des boutons "Ok" et "Annuler"
+		- calendarButtonTextColor : couleur, dans la popup de modification de la date, du texte des boutons "Ok" et "Annuler"
+		- calendarButtonTextWeight : graisse, dans la popup de modification de la date, du texte des boutons "Ok" et "Annuler"
+		- calendarHourPopupBgColor : couleur de fond de la popup permettant de modifier l'heure [ne doit pas être transparent]  
+		- calendarHourPopupBorderColor : couleur de bordure de la popup permettant de modifier l'heure
+		- calendarHourPopupInputBorderColor : couleur de contour des zones permettant de changer l'heure
+		- calendarHourPopupInputBgColor : couleur de fond de la zone permettant de changer l'heure
+		- calendarHourPopupSpinnerBgColor : couleur de fond de la zone contenant les flèches de défilement permettant de changer l'heure
+			
+	-->
+	
+
+	<!-- pour des raisons de simplicité (pour le moment) on reprend pour commencer le style natif -->
+	<f:importResource src="org/richfaces/renderkit/html/css/calendar.xcss" />
+	
+	<!-- Champ de saisie associé à un calendrier -->
+	<u:selector name=".rich-calendar-input">
+		<u:style name="background-color" skin="inputBgColor"/>
+		<u:style name="border-color" skin="inputBorderColor"/>	
+		<u:style name="border-style" value="solid" />
+		<u:style name="border-width" skin="inputBorderWidth" default="1px"/>
+		<u:style name="font-size" skin="inputFontSize" default="1em"/>
+		<u:style name="font-family" skin="inputFontFamily" default="Arial"/>
+	</u:selector>
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Aspects structurels (Bordures, Header, Footer) */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->	
+
+	<!-- Style du cadre extérieur -->
+	<u:selector name=".rich-calendar-exterior">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="calendarExteriorBorderColor"/>
+	</u:selector>
+
+	<!-- Partie Haute du calendrier -->
+	<u:selector name=".rich-calendar-header, .rich-calendar-header-optional">
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-color" skin="calendarHeaderBorderColor"/>
+		<u:style name="padding" value="7px"/>
+		<u:style name="height" value="22px"/>
+		<u:style name="background-color" skin="calendarHeaderBgColor"/>
+	</u:selector>
+
+	<!-- Zone supérieure (flèches de navigation) -->
+	<!-- ".rich-calendar-tool" désigne les flèches de navigation situées en haut du calendrier -->
+	<!-- ".rich-calendar-month" désigne le mois courant situé en haut du calendrier -->
+	<u:selector name=".rich-calendar-tool, .rich-calendar-month">
+		<u:style name="font-weight" skin="calendarHeaderFontWeight"/>
+		<u:style name="color" skin="calendarHeaderTextColor"/>
+		<u:style name="vertical-align" value="middle"/>
+		<u:style name="text-align" value="center"/>
+	</u:selector>
+	
+	<!-- Effet des boutons de la 1ère face-->
+	<u:selector name=".rich-calendar-tool-btn">
+		<u:style name="text-decoration" skin="calendarToolBtnTextDecoration" value="none"/>
+		<u:style name="font-weight" skin="calendarToolBtnFontWeight" value="bold"/>
+	</u:selector>
+	
+	<!-- Effet des boutons de la 1ère face au survol-->
+	<u:selector name=".rich-calendar-tool-btn-hover">
+		<u:style name="border">
+			<f:verbatim value="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="calendarToolBtnHoverColor" default="#ffffff"/>
+		</u:style>
+		<u:style name="text-decoration" value="none"/>
+	</u:selector>
+	
+	<u:selector name=".rich-calendar-tool-btn-press">
+		<u:style name="border" value="none"/>
+		<u:style name="padding" value="2px 3px"/>
+	</u:selector>
+	
+	<!-- Pour l'image de séparation entre le mois et le bouton Fermer -->
+	<u:selector name=".rich-calendar-tool-close">
+		<f:if when="#{!empty richSkin.calendarToolCloseImg }">
+			<u:style name="background-image">
+				<f:resource f:skin="calendarToolCloseImg"/>	
+			</u:style>
+		</f:if>
+	</u:selector>
+	
+	<u:selector name=".rich-bottom-cell">
+		<u:style name="border-bottom-width" value="0"/>
+	</u:selector>
+
+	<u:selector name=".rich-calendar-footer, .rich-calendar-footer-optional">
+		<u:style name="background-color" skin="calendarFooterBgColor"/>
+		<u:style name="color" skin="calendarFooterTextColor"/>
+		<u:style name="border" value="none"/>
+	</u:selector>
+	
+	<u:selector name=".rich-calendar-toolfooter">
+		<u:style name="padding" value="0 7px"/>
+	</u:selector>
+
+	<u:selector name=".rich-calendar-footer-optional">
+		<u:style name="padding" value="7px"/>
+		<u:style name="height" value="22px"/>
+	</u:selector>
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Les différents types de jour (Jour, Férié, WE) */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+
+	<!-- Style d'affichage des jours de la semaine (lundi, mardi, mercredi...) -->
+	<u:selector name=".rich-calendar-days">
+		<u:style name="border-bottom-color" skin="calendarDaysBorderColor"/>
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="background-color" skin="calendarDaysBgColor"/>
+		<u:style name="color" skin="calendarDaysTextColor"/>
+	</u:selector>
+
+	<!-- Zone d'affichage du numéro de semaine -->
+	<u:selector name=".rich-calendar-week">
+		<u:style name="border-color" skin="calendarWeekBorderColor"/>
+		<u:style name="border-width" value="0 1px 1px 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="background-color" skin="calendarWeekBgColor"/>
+		<u:style name="color" skin="calendarWeekTextColor"/>		
+	</u:selector>
+		
+	<!-- Style de l'affichage des mots "Samedi" et "Dimanche" -->
+	<u:selector name=".rich-calendar-weekends">
+		<u:style name="color" skin="calendarWeekendsTextColor"/>
+	</u:selector>
+		
+	
+		
+	<!-- Style du curseur lors du survol des jours des mois contigus, inactifs -->
+	<u:selector name=".rich-calendar-btn">
+		<u:style name="cursor" value="pointer"/>
+	</u:selector>
+
+	<!-- Le jour standard -->
+	<!-- ".rich-calendar-editor-btn" correspond dans la popup ouverte en cliquant
+	sur le mois en haut, au mois ou à l'année quelconque -->
+	<u:selector name=".rich-calendar-cell">
+		<u:style name="border-color" skin="calendarCellBorderColor"/>
+		<u:style name="border-width" value="0 1px 1px 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="background-color" skin="calendarCellBgColor" default="#ffffff"/>
+		<u:style name="font-weight" skin="calendarCellFontWeight" default="normal"/>
+	</u:selector>
+
+	<u:selector name=".rich-right-cell">
+		<u:style name="border-right" value="none"/>
+	</u:selector>
+	
+	<!-- Style des jours fériés et chomés (Dimanche...) -->
+	<u:selector name=".rich-calendar-holly">
+		<u:style name="color" skin="calendarHollyColor"/>
+		<u:style name="background-color" skin="calendarHollyBgColor"/>
+	</u:selector>
+		
+	<!-- Style des jours des mois contigüs, inactifs -->
+	<u:selector name=".rich-calendar-boundary-dates">
+		<u:style name="color" skin="calendarBoundaryColor"/>
+		<u:style name="background-color" skin="calendarBoundaryBgColor"/>
+	</u:selector>
+
+	<!-- Style de la date du jour -->
+	<u:selector name=".rich-calendar-today">
+		<u:style name="font-weight" skin="calendarTodayFontWeight" default="bold"/>
+		<u:style name="color" skin="calendarTodayTextColor"/>
+		<u:style name="background-color" skin="calendarTodayBgColor"/>
+	</u:selector>
+		
+	<!-- Style de la date qui a déjà été sélectionnée -->
+	<u:selector name=".rich-calendar-select">
+		<u:style name="font-weight" skin="calendarSelectFontWeight" default="bold"/>
+		<u:style name="color" skin="calendarSelectTextColor"/>
+		<u:style name="background-color" skin="calendarHoverBgColor"/>
+	</u:selector>
+	
+	<!-- Style d'un jour quelconque non encore sélectionné que l'on survole
+	(précisément pour changer la date déjà sélectionnée) -->
+	<u:selector name=".rich-calendar-hover">
+		<u:style name="font-weight" skin="calendarHoverFontWeight" default="bold"/>
+		<u:style name="color" skin="calendarHoverTextColor"/>
+		<u:style name="background-color" skin="calendarHoverBgColor"/>
+	</u:selector>
+		
+	<!-- espace avant bouton calendrier cf usabilite -->
+	<u:selector name=".rich-calendar-button">
+		<u:style name="padding-left" value="5px"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Popup d'ouverture du changement de date   */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+		
+	<!-- Ce style correspond à la popup qui s'ouvre quand on clique sur le mois "en haut".
+	Elle propose une sélection parmi les mois et les années -->	
+	<u:selector name=".rich-calendar-date-layout">
+		<u:style name="background-color" skin="calendarDatePopupBgColor"/><!-- (1) -->
+		<u:style name="border-color" skin="calendarDatePopupBorderColor"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>	
+	<!-- (1) Cette couleur ne doit pas être transparente car sinon on verra en dessous le calendrier courant -->
+
+	<!-- ".rich-calendar-editor-btn" correspond dans la popup ouverte en cliquant
+	sur le mois en haut, au mois ou à l'année quelconque -->
+	<u:selector name=".rich-calendar-editor-btn">
+		<u:style name="border-color" skin="calendarCellBorderColor"/>
+		<u:style name="border-width" value="0 1px 1px 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="background-color" skin="calendarEditorBtnBgColor" default="#ffffff"/>
+	</u:selector>
+	
+	<!-- ".rich-calendar-editor-btn-selected" correspond dans la popup ouverte en cliquant
+	sur le mois en haut, au mois ou à l'année actuellement sélectionné -->
+	<u:selector name=".rich-calendar-editor-btn-selected">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" skin="calendarSelectTextColor"/>
+		<u:style name="background-color" skin="calendarEditorBtnSelectedBgColor"/>
+	</u:selector>
+	
+	<!-- ".rich-calendar-editor-btn-hover" correspond dans la popup ouverte en cliquant
+	sur le mois en haut, au mois ou à l'année survolée -->
+	<!-- TODO : Bug navigateur / RichFaces. Ce style n'est pas correctement interprété par le navigateur.
+	Il est rajouté par une fonction Prototype.
+	Mais seules les propriétés suivantes sont prises en compte par le navigateur :
+	.rich-calendar-editor-btn-over {
+		border:1px solid;
+		padding:1px;
+	}
+	C'est d'ailleurs, ce dernier padding qui est à l'origine de l'effet d'enfoncement de la touche
+	 -->
+	<u:selector name=".rich-calendar-editor-btn-hover">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" skin="calendarHoverTextColor"/>
+		<u:style name="background-color" skin="calendarHoverBgColor"/>
+	</u:selector>
+	
+	<!-- Ce style permet dans la popup ouverte en cliquant sur le mois en haut de fournir
+	un trait de séparation entre les mois à gauche et les années à droite -->
+	<u:selector name=".rich-calendar-date-layout-split">
+		<u:style name="border-color" skin="calendarDatePopupSeparateurBorderColor"/>
+		<u:style name="border-width" value="0 1px 0 0"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+	<!-- Ce style permet dans la popup ouverte en cliquant sur le mois en haut de décrire
+	les zones contenant les boutons "OK" ou "Annuler" en bas -->
+	<u:selector name=".rich-calendar-date-layout-ok, .rich-calendar-date-layout-cancel">
+		<u:style name="border-color" skin="calendarDatePopupButtonBorderColor"/>
+		<u:style name="border-width" value="1px 0 0 0"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="background-color" skin="calendarDatePopupButtonBgColor"/>
+	</u:selector>
+	
+	<!-- Ce style commun à la popup de type date et à celle de type time décrit
+	le bouton situé "OK" ou "Annuler" situé en bas -->
+	<u:selector name=".rich-calendar-time-btn">
+		<u:style name="border-color" skin="calendarButtonBorderColor"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="background-color" skin="calendarButtonBgColor"/>
+		<u:style name="color" skin="calendarButtonTextColor"/>
+		<u:style name="padding" value="2px 10px"/>
+		<u:style name="text-align" value="center"/>
+		<u:style name="font-weight" skin="calendarButtonTextWeight"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Popup d'ouverture du changement d'heure   */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+	
+	<!-- Ce style correspond à la popup qui s'ouvre quand on clique sur l'heure en bas
+	(à condition d'avoir précisé un pattern incluant les heures).
+	Elle offre une popup proposant une montre à quartz permettant de changer l'heure -->	
+	<u:selector name=".rich-calendar-time-layout">
+		<u:style name="background-color" skin="calendarHourPopupBgColor"/>
+		<u:style name="border-color" skin="calendarHourPopupBorderColor"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+	<!-- ".rich-calendar-spinner-input-container" décrit dans la montre de la popup la
+	zone relative aux chiffres (Ex 12h). Ce style a un style fils ".rich-calendar-spinner-input"
+	qui ne contient que la zone de saisie.-->
+	<u:selector name=".rich-calendar-spinner-input-container">
+		<u:style name="background-image" value="none"/>
+		<u:style name="border-color" skin="calendarHourPopupInputBorderColor"/>
+		<u:style name="background-color" skin="calendarHourPopupInputBgColor"/>
+	</u:selector>
+	
+	<!-- ".rich-calendar-spinner-buttons" correspond au style des sélecteurs de la montre, c'est à dire
+	aux flèches haute et basse permet le défilement des heures et des minutes.
+	 -->
+	<u:selector name=".rich-calendar-spinner-buttons">
+		<u:style name="background-image" value="none"/>
+		<u:style name="border-width" value="1px 1px 1px 0"/>
+		<u:style name="border-color" skin="calendarHourPopupInputBorderColor"/>
+		<u:style name="background-color" skin="calendarHourPopupSpinnerBgColor"/>
+	</u:selector>
+			
+</f:template>

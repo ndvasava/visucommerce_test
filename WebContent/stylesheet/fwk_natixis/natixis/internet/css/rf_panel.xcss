@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	 
+	<!-- 	
+		Feuille de style décrivant l'apparence des composants <rich:panel.
+		Ils sont présents dans toutes les pages et revêtent l'apparence de cadres bien 
+		utiles dans la gestion des formulaires.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_panel.xcss" />
+	
+	
+	<!-- 
+		/* ***************** */
+		/* Panel de niveau 1 */
+		/* ***************** */		
+	-->
+	
+	<!-- Titre du cadre de niveau 1 -->
+	<u:selector name="body .rich-panel .rich-panel-header"><!-- EXTENDS "body .rich-panel .rich-panel-header" -->
+		<u:style name="padding" value="0px 10px"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Evite que le titre ne colle à la bordure -->
+	
+	<!-- Style du corps du cadre de niveau 1 -->
+	<u:selector name="body .rich-panel .rich-panel-body"><!-- EXTENDS "body .rich-panel .rich-panel-body" -->
+		<u:style name="padding" value="20px 10px 0 10px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) Espacement du corps du texte par rapport aux bordures -->
+	
+	<!-- Style permettant de réinitialiser certaines valeurs du .rich-panel-body (padding...) -->
+	<u:selector name="body .rich-panel .rich-panel-body .boutonsExt">
+		<u:style name="padding-top" value="0"/><!-- (3) -->
+	</u:selector>
+		
+	<!-- (3) TODO : vérifier l'utilité -->
+	
+	<!-- 
+		/* *************************** */
+		/* Panel de niveaux supérieurs */
+		/* *************************** */	
+		
+		Les panels imbriqués sont utilisés pour donner un aspect multi-colonnes aux formulaires.
+	-->
+	
+	<!-- Titre d'un cadre imbriqué -->
+	<u:selector name="body .formulaireImbrique .rich-panel-header">
+		<u:style name="margin" value="-8px 10px 0pt 0pt"/>
+	</u:selector>
+	
+	<!-- Corps d'un cadre imbriqué -->
+	<u:selector name="body .formulaireImbrique .rich-panel-body">
+		<u:style name="margin-top" value="-8px"/>
+		<u:style name="margin-bottom" value="20px"/>
+		<u:style name="padding" value="20px 10px 0"/>
+	</u:selector>	
+	
+</f:template>

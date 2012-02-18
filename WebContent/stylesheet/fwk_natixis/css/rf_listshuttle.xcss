@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée aux composants de sélection rich:picklist
+
+		Les propriétés utilisées ici sont : 
+
+			# couleur de la sélection	
+			listActiveBgColor
+			listActiveTextColor
+			
+			# couleur des bordures de cadre par défaut
+			defaultPanelBorder
+	-->
+
+	<!-- reprise provisoire des styles natifs -->
+	<f:importResource src="org/richfaces/renderkit/html/css/listShuttle.xcss" />
+	
+	<!-- Cadre entourant l'ensemble du composant (liste gauche, bouton, liste droite) -->
+	<u:selector name=".listShuttle">
+		<u:style name="border-width" skin="listPickListBorderWidth"/>
+		<u:style name="border-style" skin="listPickListBorderStyle"/>
+		<u:style name="border-color" skin="listPickListBorderColor"/>
+	</u:selector>
+	
+	<u:selector name=".listShuttle .rich-list-shuttle-caption">
+		<u:style name="font-weight" value="bold"/>
+	</u:selector>
+	
+	<!-- Cadre entourant la liste des items à gauche et celle des items à droite -->
+	<u:selector name=".listShuttle .rich-shuttle-source-items, .listShuttle .rich-shuttle-target-items">
+		<u:style name="border-width" skin="picklistListBorderWidth" default="1px"/>
+		<u:style name="border-style" skin="picklistListBorderStyle" default="solid"/>
+		<u:style name="border-color" skin="picklistListBorderColor" default="#000000"/>	
+		<u:style name="margin" skin="picklistListMargin" default="0 0 8px 0"/>
+	</u:selector>
+	
+	<u:selector name=".listShuttle .rich-shuttle-list">
+		<u:style name="background-color" skin="picklistListBgColor" default="#ffffff"/>
+	</u:selector>
+	
+	<!-- Contenu des boutons -->
+	<u:selector name=".listShuttle .rich-list-shuttle-button-content">
+		<u:style name="font-weight" skin="buttonFontWeight"/>
+		<u:style name="font-size" skin="buttonFontSize"/>
+		<u:style name="background-color" skin="menuSelectedColor"/><!--  dimmedBgColor pour BP internet.... -->
+		<u:style name="border" value="0 solid #000000"/>
+	</u:selector>	
+	
+	<u:selector name=".rich-list-shuttle-button">
+		<u:style name="cursor" value="pointer"/>		
+	</u:selector>
+	
+	<!-- Style générique sur les boutons (écrase les valeurs par défaut de RichFaces) -->
+	<u:selector name=".rich-list-shuttle-button, .rich-list-shuttle-button-disabled">
+		<u:style name="background-color" skin="buttonBgColor"/><!-- (1) -->
+		<u:style name="background-image" value="none"/>
+	</u:selector>	
+	
+	<!-- (1) Essentiel pour neutraliser la couleur de fond apportée par RichFaces -->
+	
+	<u:selector name=".rich-list-shuttle-button-light">
+		<u:style name="background-color" skin="buttonHoverBgColor"/>
+		<u:style name="background-image" value="none"/>
+		<u:style name="color" skin="buttonHoverTextColor"/>
+		<u:style name="padding" skin="picklistButtonLightPadding" default="2px"/><!-- (2) -->
+		<u:style name="border-style" value="none"/>
+	</u:selector>
+	
+	<!-- (2) Essentiel pour éviter l'effet d'enfoncement du bouton au survol -->
+	
+	<!-- Conteneur des différentes listes -->
+	<u:selector name=".rich-picklist-list">
+		<u:style name="background-color" skin="picklistListBgColor" default="#ffffff"/>
+	</u:selector>
+	
+	<u:selector name=".rich-shuttle-controls"/>
+	<u:selector name=".rich-shuttle-control-remove"/>
+	<u:selector name=".rich-shuttle-control-img"/>
+	<u:selector name=".rich-shuttle-controls"/>
+	<u:selector name=".rich-shuttle-control-copyall"/>
+	<u:selector name=".rich-shuttle-control-removeall"/>
+	
+	<u:selector name=".rich-shuttle-control-top, .rich-shuttle-control-bottom, 
+	.rich-shuttle-control-up, .rich-shuttle-control-down, .rich-shuttle-control-copyall, 
+	.rich-shuttle-control-copy, .rich-shuttle-control-remove, .rich-shuttle-control-removeall">
+		<u:style name="border-width" skin="buttonBorderWidth"/>
+		<u:style name="border-color" skin="buttonBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+	<u:selector name=".rich-shuttle-control-disabled">
+		<u:style name="border-width" skin="buttonInactifBorderWidth"/>
+		<u:style name="border-color" skin="buttonInactifBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+	
+	<!-- Style du lien (a) dès lors qu'il est sélectionnable -->
+	<u:selector name="a.rich-list-shuttle-button-selection">
+		<u:style name="color" skin="buttonTextColor"/>		
+	</u:selector>
+	
+	<!-- Style du lien (a) dès lors qu'il est sélectionnable au survol -->
+	<u:selector name="a.rich-list-shuttle-button-selection:hover">
+		<u:style name="color" skin="buttonHoverTextColor"/>		
+	</u:selector>
+	
+	<u:selector name=".rich-list-shuttle-button-disabled">
+		<u:style name="color" skin="buttonInactifTextColor"/>
+		<u:style name="background-color" skin="buttonInactifBgColor"/>
+	</u:selector>
+	
+	<!-- Style du lien (a) lorsqu'il est pressé -->
+	<u:selector name=".rich-list-shuttle-button-press">
+		<u:style name="padding" skin="picklistButtonPressPadding" default="2px"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) Idem (2) : permet d'éviter l'effet d'enfoncement lorsque l'on presse le bouton -->
+	
+	<!-- La couleur des lignes sélectionnées -->
+	<u:selector name=".rich-shuttle-source-row-selected">
+		<u:style name="background-color" skin="picklistSourceRowSelectedBgColor" default="#ffffff"/>
+		<u:style name="color" skin="picklistSourceRowSelectedColor"/>
+	</u:selector>
+	
+	
+	
+	
+	
+	
+	<!-- Tableau contenant la liste : n'occupe que la zone contenant des items et pas toute la hauteur du cadre -->
+	<u:selector name=".rich-picklist-internal-tab"/>
+		
+	<u:selector name=".rich-picklist-body"/>
+	
+	
+	<u:selector name=".rich-picklist-list-content"/>
+	
+	<u:selector name=".rich-picklist-source-row"/>
+	
+	<!-- Style s'appliquant à la cellule (td) -->
+	<u:selector name=".rich-picklist-source-cell">
+		<u:style name="color" skin="picklistSourceCellColor" default="#000000"/>
+	</u:selector>
+	
+	<u:selector name=".rich-picklist-source-cell-selected"/>
+	
+	<!-- Cadre entourant la liste des items à droite -->
+	<u:selector name=".rich-picklist-target-items"/>		
+
+</f:template>

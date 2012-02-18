@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	
+	<!-- Le contexte de persistence référencé ici est utilisé dans le entityManager local afin d'associer la dataSource
+		et le contexte de persistence niveau 1 : dialect + hbm2dll.auto mode.
+		Necessite le chargement des librairies hibernate-*.jar
+		org.hibernate.ejb.HibernatePersistence.createContainerEntityManagerFactory appel org.slf4j.LoggerFactory
+	-->
+	
+	<persistence-unit name="localScoped" transaction-type="RESOURCE_LOCAL">
+		
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.cache.provider_class"	value="org.hibernate.cache.HashtableCacheProvider" />
+			<!-- property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" / -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		</properties>
+		
+	</persistence-unit>
+	
+</persistence>

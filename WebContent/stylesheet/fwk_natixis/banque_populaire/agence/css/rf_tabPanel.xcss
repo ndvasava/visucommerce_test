@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée au composant rich:tabPanel	
+				
+	-->
+	
+	<!-- 
+		/********************************/
+		/*  Définition d'un "tab" actif */
+		/********************************/
+	 -->
+	
+	<!-- Style du tab actif -->
+	<u:selector name=".rich-tab-active">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/tab_actif.gif" />
+		</u:style>
+	</u:selector>
+	
+	<!-- 
+		/********************************/
+		/*  Définition d'un "tab" actif */
+		/********************************/
+	 -->
+	 
+	<!-- Style du tab inactif -->
+	<u:selector name=".rich-tab-inactive">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/tab_inactif.gif" />
+		</u:style>
+	</u:selector>
+	
+	<!-- 
+		/***********************************/
+		/*  Définition d'un "tab" disabled */
+		/***********************************/
+	 -->
+	
+	<!-- Style du tab disabled -->
+	<u:selector name=".rich-tab-disabled">
+	</u:selector>
+	
+</f:template>

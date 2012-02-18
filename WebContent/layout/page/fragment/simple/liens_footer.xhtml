@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+	<ui:composition>
+	
+		<ui:remove>
+			Ce fragment intègre les liens en bas de la page : > Mentions légales > aide > plan du site...
+			Ce fragment est partagé par toutes les enseignes. Si jamais, un fragment spécifique devait
+			être écrit pour une enseigne, il convient de ne pas modifier ce fichier mais d'en écrire
+			un spécifique dans le répertoire : /layout/page/fragment/theme/XXX/YYY/liens_transversaux.xhtml
+			où XXX désigne 'agence' ou 'internet' et YYY désigne 'natixis', 'caisse-epargne' ou 'banque-populaire'.
+		</ui:remove>
+		
+		<!-- Création du conteneur -->
+		<ul id="liensFooter" class="liensFooter">
+			<li class="first">
+				<s:link view="/accueil.xhtml" accesskey="1" value="#{messages['default.mentions.legales.label']}"/>
+			</li>
+			<li>
+				<s:link view="/accueil.xhtml" rendered="#{!identity.loggedIn}" accesskey="1" value="lienFooterNonConnecte2"/>
+				<s:link view="/accueil.xhtml" rendered="#{identity.loggedIn}" accesskey="1" value="lienFooterConnecte2"/>
+			</li>
+			<li class="last">
+				<s:link view="/accueil.xhtml" rendered="#{!identity.loggedIn}" accesskey="1" value="lienFooterNonConnecte3"/>
+				<s:link view="/accueil.xhtml" rendered="#{identity.loggedIn}" accesskey="1" value="lienFooterConnecte3"/>
+			</li>
+		</ul>
+		
+		<ui:remove>
+			Explications : en terme de rendu css, id="liensFooter" et class="liensFooter" sont 
+			tous deux essentiels même s'ils n'ont pas le même rôle.
+			L'id '#liensFooter' définit le positionnement alors que '.liensFooter' définit l'apparence.
+			Ils sont définis dans le frameworks respectivement dans :
+			sphinx-jsf-css\src\main\resources\com\natixis\sphinx\jsf\ui\skins\YYY\ZZZ\css\zoning.xcss
+			et 
+			sphinx-jsf-css\src\main\resources\com\natixis\sphinx\jsf\ui\skins\YYY\ZZZ\css\implementation_page.xcss
+			Avant de surcharger dans l'application l'un ou l'autre de ces 2 styles, veillez à vérifier au préalable
+			qu'il n'existe pas de variables à redéfinir simplement dans le fichier
+			src\main\resources\META-INF\skins\XXXTTT.skin.properties de votre module Web.						 
+		</ui:remove>
+		
+		<ui:remove>
+			Les libellés des liens peuvent être internationalisés en mettant en lieu et place de 'lienFooter1'
+			un code du style :#{messages['liens_footer.lien1']}					 
+		</ui:remove>
+		
+		<ui:remove>
+			La page cible du s:link	est définie dans l'attribut 'views' sans préciser la racine de contexte.
+			Les règles de navigation régissant la navigation sont définies dans le fichier :
+			src\main\webapp\WEB-INF\navigation\pages.xml
+		</ui:remove>
+		
+	</ui:composition>
+</f:view>
+</jsp:root>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 
+	
+		Feuille de style qui définit les formulaires, c'est à dire l'utilisation des templates Seam dans les pages 
+		
+		Les propriétés utilisées ici sont : 
+		- processusBorderColor : couleur du trait de séparation séparant le processus du reste du formulaire
+		- processusBgColor : couleur de fond du calque contenant la liste des processus
+		- processusSelectedTextColor : couleur d'écriture du processus actif
+		- processusSelectedBgColor : couleur de fond entourant le processus actif	
+		
+	-->
+	
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss" />
+	
+	<!-- Spécificité de cette enseigne : les messages d'erreur de validation du formulaire doivent être
+	décalées sous le champ "input" et non pas sous le champ "label".
+	=> Autrement dit, on applique des styles permettant d'appliquer les margin et les padding idoines.
+	Ces styles sont mis à disposition par l'importation de la feuille transverse ci-dessous -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire_validation_decalee.xcss" />
+	
+	<!-- 
+		/*************************************************/
+		/* Formulaire : Espacement entre les rubriques   */
+		/*************************************************/
+	 -->
+	
+	<u:selector name=".detail_rubrique, .edition_rubrique">
+		<u:style name="margin-bottom" value="0"/>
+		<u:style name="padding-bottom" value="0.4em"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************************************************/
+		/* Formulaire : Style en consultation du champ modifié   */
+		/*********************************************************/
+	 -->
+	
+	<!-- Style en consultation du champ modifié -->
+	<u:selector name=".detail_rubrique .value">
+		<u:style name="font-weight" value="normal"/>
+		<u:style name="height" value="1em"/>
+		<u:style name="display" value="block"/>
+	</u:selector>
+	
+	<!-- Style spécifique Firefox -->
+	<u:selector name="html>body .detail_rubrique .value">
+		<u:style name="height" value="auto"/>
+		<u:style name="min-height" value="1em"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : Style des Processus   */
+		/**************************************/
+	 -->
+	
+	<u:selector name=".processus">
+	    <u:style name="margin-bottom" value="10px" />
+	    <u:style name="border-bottom-width" value="1px" />
+	    <u:style name="border-bottom-style" value="solid" />
+	    <u:style name="border-bottom-color" skin="processusBorderColor" />
+	    <u:style name="padding" value="10px 0" /><!-- surcharge de la valeur par defaut -->
+	</u:selector>
+
+	<u:selector name=".processus li">
+	    <u:style name="padding" value="2px 16px 2px 6px" /><!-- surcharge de la valeur par defaut -->
+	</u:selector>
+	
+	<!-- 
+		*******************************************************************
+		*************** GESTION DES ARRONDIS  *****************************
+		*******************************************************************
+		
+		Styles pour la gestion des bords arrondis sur 
+			les boutons, 
+			les titres de panel, 
+			les titres de tableaux, 
+			etc.
+			
+			
+			Un exemple :
+				
+	 --><!--
+
+    <f:verbatim>
+
+		span.rounded-button, span.rounded-cancel-button{
+        	background-color: transparent;
+        	/*background-image: url('/sav/theme/internet/caisse-epargne/img/fond_bouton_rouge.png');*/
+        	background-position: right 50%;
+        	background-repeat: no-repeat;
+        	padding: 0px 5px 0px 0;
+        	margin: 0 10px 0 0;
+        	font-weight: bold;
+        	font-size:17px; /* pour obtenir un taille du span exactement de 19px */
+        }
+
+/*		span.rounded-cancel-button{
+        	background-image: url('/sav/theme/internet/caisse-epargne/img/fond_bouton_marron.png');
+        }
+	*/	
+        .rounded-button input, .rounded-cancel-button input {
+        	background-color: transparent!important;
+        	background-position: 0 50%;
+        	background-repeat: no-repeat;
+        	padding: 0px 0 0px 10px!important;
+        	margin: 0;
+        	overflow: visible;
+        	font-size:14px;  /* pour obtenir un taille du bouton exactement de 19px */
+        }
+
+	</f:verbatim>
+
+	<u:selector name="span.rounded-button, .rounded-button input">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/fond_bouton_rouge.png" />	
+		</u:style>
+	</u:selector>
+
+	<u:selector name="span.rounded-cancel-button, .rounded-cancel-button input">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/fond_bouton_marron.png" />	
+		</u:style>
+	</u:selector>
+
+
+	-->	<f:verbatim>
+       .rounded-panel1 {
+	       	background-color: transparent;
+	       	background-image: url('/aws/theme/internet/caisse-epargne/img/fond_panel.png');
+	       	background-position: right 50%;
+	       	background-repeat: no-repeat;
+	       	padding: 2px 0;
+       }
+       .rounded-panel2 {
+	       	background-color: transparent!important;
+	       	background-image: url('/aws/theme/internet/caisse-epargne/img/fond_panel.png')!important;
+	       	background-position: 0 50%;
+	       	background-repeat: no-repeat;
+	       	padding: 2px;
+	       	margin: 0;
+       }
+
+       .rounded-table-right {
+	       	background-color: transparent;
+	       	background-image: url('/aws/theme/internet/caisse-epargne/img/fond_table.png');
+	       	background-position: right 50%;
+	       	background-repeat: no-repeat;
+       }
+       .rounded-table-left {
+	       	background-color: transparent;
+	       	background-image: url('/aws/theme/internet/caisse-epargne/img/fond_table.png');
+	       	background-position: 0 50%;
+	       	background-repeat: no-repeat;
+       }
+    </f:verbatim>
+
+	<!-- modele pour la suite, une fois les images officielles intégrées et les padding ajustés -->
+	<!-- u:selector name=".rich-tab-active">
+		<u:style name="padding" value="5px 0 8px 8px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/onglet_haut.gif" />	
+		</u:style>
+		<u:style name="background-position" value="0 0"/>
+		<u:style name="color" skin="tabActiveHeaderTextColor"/>
+		<u:style name="font-weight" skin="tabActiveHeaderFontWeight"/>
+	</u:selector -->	
+
+	<!-- 
+		/***********************************************/
+		/* Formulaire : Messages d'erreur de RichFaces */
+		/***********************************************/
+	 -->
+	
+	<!-- Style du message général situé en amont du formulaire -->
+	<u:selector name=".rich-messages .info">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .warn">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .error">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+
+</f:template>

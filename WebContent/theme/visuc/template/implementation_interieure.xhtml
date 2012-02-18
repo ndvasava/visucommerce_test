@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	version="2.0">	
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+<!-- On importe de la page parente l'ensemble des blocs disponibles positionnés dans le code html -->
+<ui:composition template="/layout/page/zoning/zoning_interieure.xhtml">
+
+	<!-- ***************************************
+		 Sélection des éléments du bandeau haut 
+	********************************************-->
+	
+	<!-- Inclusion des liens transversaux (lien du haut de la page) -->
+	<ui:define name="liens_transversaux">
+		<ui:include src="/layout/page/fragment/simple/liens_transversaux.xhtml"/>
+	</ui:define>
+	
+	<!-- Inclusion du logo qui dépend de l'enseigne mais dont l'URL est thématisée-->
+	<ui:define name="logo">
+		<ui:include src="/layout/page/fragment/simple/logo.xhtml"/>
+	</ui:define>
+	
+	
+	<!-- ****************************************
+		 Sélection des éléments du coeur de page 
+	*********************************************-->
+	
+	<!-- A réaliser dans les pages filles... -->
+	
+		
+	<!-- ****************************************
+		 Sélection des éléments du footer 
+	*********************************************-->
+	
+	<!-- Inclusion des liens du footer (lien du bas de la page) -->
+	<ui:define name="liens_footer">
+		<ui:include src="/layout/page/fragment/simple/liens_footer.xhtml"/>
+	</ui:define>
+	
+	<!-- Inclusion du copyright -->
+	<ui:define name="copyright">
+		<ui:include src="/layout/page/fragment/theme/visuc/copyright.xhtml"/>
+	</ui:define>
+	
+</ui:composition>
+</f:view>
+</jsp:root>

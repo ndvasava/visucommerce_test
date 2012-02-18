@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+
+	<!-- 
+		Feuille de style associée au composant rich:modalPanel		
+
+	-->
+	
+	<!-- On importe les ressources de base RichFaces -->
+	<f:importResource src="org/richfaces/renderkit/html/css/modalPanel.xcss" />
+	
+	<!-- 
+		/****************************************/
+		/*  Classes spécifiques aux composants  */
+		/****************************************/
+	 -->
+	
+	<!-- modalPanel complète (y compris la page de fond mise en grisée) -->
+	<u:selector name=".rich-modalpanel"/>		
+	
+	<!-- Vraie modalPanel (carré réellement actif en superposition)  -->
+	<u:selector name=".rich-mpnl-content">
+		<u:style name="border-width" skin="modalpanelBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="modalpanelBorderColor"/>
+		<u:style name="padding" value="0"/><!-- (0) -->
+	</u:selector>
+	
+	<!-- (0) Possède une valeur par défaut de '1px' -->
+	
+	<!-- Bloc décrivant la page du dessous (rendue désormais inactive) -->
+	<u:selector name=".rich-mpnl-mask-div">
+		<u:style name="background-color" value="#d0d0d0"/><!-- (1) -->	
+		<u:style name="opacity" value="0.5"/><!-- (2) -->	
+		<u:style name="filter" value="alpha(opacity=50)"/>		
+	</u:selector>
+	
+	<!-- (1) Couleur du dessous (fenêtre inactive)... associée à une opacité (% de visibilité de l'écran) -->	
+	
+	<!-- (2) Définition de l'opacité (% de visibilité de l'écran) -->	
+	
+	<!-- Classe permettant de positionner le bloc dans l'écran (position:absolute..) => Jouer là-dessus pour faire varier la position initiale -->
+	<u:selector name=".rich-mp-container"/>
+	
+	<!-- Classe pour définir le texte situé dans les facet : header, control (puce de fermeture) -->
+	<u:selector name=".rich-mpnl-text"/><!-- (3) -->	
+	
+	<!-- (3) On pourrait définir ici les données relatives aux textes que l'on trouve dans les facets (titre, control si l'on n'usait pas d'images).
+	Néanmoins, cette classe est toujours utilisée en duo (1ère position) avec .rich-mpnl-header et .rich-mpnl-controls qui auraient, au final le dernier
+	mot.-->
+			
+	<!-- Titre de la modalPanel -->
+	<u:selector name=".rich-mpnl-header">
+		<u:style name="font-size" skin="modalpanelHeaderFontSize"/>
+		<u:style name="font-weight" skin="modalpanelHeaderFontWeight"/>
+		<u:style name="border-width" skin="modalpanelHeaderBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="modalpanelHeaderBorderColor"/>
+		<u:style name="background-color" skin="modalpanelHeaderBgColor"/>
+		<u:style name="color" skin="modalpanelHeaderTextColor"/>
+		<u:style name="background-image" value="none"/><!-- (4) -->	
+		<u:style name="padding" skin="modalpanelHeaderPadding"/><!-- (5) -->	
+	</u:selector>
+	
+	<!-- (4) On le met explicitement puisqu'on importe le style RichFaces, qui intègre, lui, une image -->	
+	
+	<!-- (5) Définit l'espacement du texte par rapport au bloc contenant le titre -->
+	
+	<!-- Propriétés relatives à la zone de contrôle (qui contient les puces de fermeture) -->
+	<u:selector name=".rich-mpnl-controls"/>
+	
+	<!-- Pour traiter spécifiquement les images de la zone de contrôle (Pas d'image de fond puisqu'associée à un onClick) -->
+	<u:selector name=".rich-mpnl-controls img"/>
+		
+	<!-- Corps de la modalPanel -->
+	<u:selector name=".rich-mpnl-body">
+		<u:style name="font-size" skin="modalpanelBodyFontSize"/>
+		<u:style name="font-weight" skin="modalpanelBodyFontWeight"/>
+		<u:style name="border-width" skin="modalpanelBodyBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="modalpanelBodyBorderColor"/>
+		<u:style name="background-color" skin="modalpanelBodyBgColor"/>
+		<u:style name="color" skin="modalpanelBodyTextColor"/>
+		<u:style name="padding" skin="modalpanelBodyPadding"/><!-- (6) -->	
+	</u:selector>
+	
+	<!-- (6) Définit l'espacement du corps du texte par rapport au bloc contenant le corps de texte  -->	
+	
+	<u:selector name=".rich-mpnl-shadow">
+		<u:style name="border" value="none"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**********************************************************************************/
+		/*  Classes spécifiques à Sphinx (pour intégrer les boutons de confirmation...)      */
+		/**********************************************************************************/
+	 -->
+	 
+	 <!-- On proposera 2 classes (à appeler dans le code Etudes via des <div>
+	 
+	 	<rich:modalPanel id="mp" minHeight="200" minWidth="400" >
+            <f:facet name="header">
+                ... titre de la popin
+            </f:facet>
+            <f:facet name="controls">
+				... bouton de fermeture
+	        </f:facet>
+	        <div class="modalContent">
+             	... corps du texte à afficher
+            </div>
+            <div class="modalButtons">
+				... boutons
+			</div>
+	 
+	  -->
+	  
+	<!-- La zone contenant le texte ne contient plus par défaut une image de fond -->	 
+	<u:selector name=".rich-mpnl-body .modalContent">
+		<u:style name="padding" value="5px 10px 10px 10px"/>
+	</u:selector>
+	
+	<!-- Les propriétés propres au positionnement des boutons sont définies dans bouton.xcss -->	 
+	<u:selector name=".rich-mpnl-body .modalButtons"/>
+	
+	<!-- TODO : voir si on garde (spacer par défaut...) -->
+	<u:selector name=".rich-mpnl-spacer, .rich-mpnl-resizer">
+		<u:style name="background-image" value="none"/><!-- (4) -->	
+	</u:selector>
+		
+</f:template>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+	<ui:composition>
+	
+		<ui:remove>
+			Ce fragment intègre le logo en haut gauche de l'application.
+			Ce fragment peut être utilisé en l'état, dans la mesure où l'URL de l'image a été variabilisée 
+			via l'utilisation de l'El : #{theme.images}/logo.png
+			On suppose donc que l'image s'appelle 'logo.png' et qu'elle située dans le répertoire correspondant
+			à la valeur de la clef 'images' présente dans les fichiers :
+			src\main\resources\themeXXXYYY.properties du module Web.
+			
+			On suppose également que l'image est cliquable avec une URL à changer ici mais fixe quelle que soit
+			l'enseigne. Même chose pour l'attribut 'alt' positionné sur l'image.
+			
+			Ce fragment est partagé par toutes les enseignes. Si jamais, un fragment spécifique devait
+			être écrit pour une enseigne, il convient de ne pas modifier ce fichier mais d'en écrire
+			un spécifique dans le répertoire : /layout/page/fragment/theme/XXX/YYY/liens_transversaux.xhtml
+			où XXX désigne 'agence' ou 'internet' et YYY désigne 'natixis', 'caisse-epargne' ou 'banque-populaire'.
+			
+			On peut se contenter d'une variabilisation a minima en créant un fichier 'logo.xhtml' dans le répertoire
+			'src\main\webapp\layout\page\fragment\parametre' et qui utiliserait des variables #{url}, #{alt} ;
+			Ces paramètres étant définis, en amont, lors de l'inclusion de ce fragment via 'ui:include...' par 
+			ajout de composants fils 'ui:param' comme suit :
+			&lt;ui:include src="/layout/page/fragment/parametre/logo.xhtml"&gt;
+    			&lt;ui:param name="url" value="..."/&gt;
+    			&lt;ui:param name="alt" value="..."/&gt;
+  			&lt;/ui:include&gt;			
+			
+		</ui:remove>
+		
+		<!-- Création du conteneur -->
+		<s:link id="logo" styleClass="logo" view="/accueil.xhtml">
+			<h:graphicImage value="#{theme.images}/logo.png" alt="#{messages['default.back.accueil.alt']}"/>
+		</s:link> 
+		
+		<ui:remove>
+			Explications : en terme de rendu css, id="logo" est défini dans :
+			sphinx-jsf-css\src\main\resources\com\natixis\sphinx\jsf\ui\skins\YYY\ZZZ\css\zoning.xcss
+			L'espacement du logo par rapport à la bordure gauche du conteneur est variabilisé via la
+			variable 'leftSpacing'.
+			L'ajout d'une marge droite ne permet pas de décaler le titre de l'application : l'alignement
+			utilisant les 'float' .css, le bloc du milieu (titre de l'application) a été placé après les
+			blocs définis à droite. Ce bloc du milieu, en non flottant, occupe donc toute la largeur de la
+			page et le décalage logo - titre ne peut se faire que par adjonction d'un 'padding-left" sur 
+			le titre de l'application, variabilisé via 'titreLeftSpacing'.
+		</ui:remove>
+		
+		<ui:remove>
+			L'attribut 'alt' de l'image peut être internationalisé en mettant en lieu et place de 'lienTransversal1'
+			un code du style :#{messages['logo.alt']}					 
+		</ui:remove>
+		
+	</ui:composition>
+</f:view>
+</jsp:root>

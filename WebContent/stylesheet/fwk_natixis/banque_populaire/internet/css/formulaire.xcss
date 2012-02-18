@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 
+	
+		Feuille de style qui définit les formulaires, c'est à dire l'utilisation des templates Seam dans les pages 
+		
+		Les propriétés utilisées ici sont : 
+		- processusBorderColor : couleur du trait de séparation séparant le processus du reste du formulaire
+		- processusBgColor : couleur de fond du calque contenant la liste des processus
+		- processusSelectedTextColor : couleur d'écriture du processus actif
+		- processusSelectedBgColor : couleur de fond entourant le processus actif	
+		
+	-->
+	
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss" />
+	
+	<!-- Spécificité de cette enseigne : les messages d'erreur de validation du formulaire doivent être
+	décalées sous le champ "input" et non pas sous le champ "label".
+	=> Autrement dit, on applique des styles permettant d'appliquer les margin et les padding idoines.
+	Ces styles sont mis à disposition par l'importation de la feuille transverse ci-dessous -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire_validation_decalee.xcss" />
+	
+	
+	<!-- Mention champs obligatoire situé en haut (pour agence) du formulaire -->
+	<u:selector name=".mention">
+		<u:style name="color" skin="defaultTextColor"/><!-- surcharge de la valeur par defaut -->
+	</u:selector>
+	
+	<!-- 
+		/*************************************************/
+		/* Formulaire : Espacement entre les rubriques   */
+		/*************************************************/
+	 -->
+	
+	<u:selector name=".detail_rubrique, .edition_rubrique">
+		<u:style name="margin-bottom" value="0"/>
+		<u:style name="padding-bottom" value="0.8em"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************************************************/
+		/* Formulaire : Style en consultation du champ modifié   */
+		/*********************************************************/
+	 -->
+	
+	<!-- Style en consultation du champ modifié -->
+	<u:selector name=".detail_rubrique .value">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="height" value="1em"/>
+		<u:style name="display" value="block"/>
+	</u:selector>
+	
+	<!-- Style spécifique Firefox -->
+	<u:selector name="html>body .detail_rubrique .value">
+		<u:style name="height" value="auto"/>
+		<u:style name="min-height" value="1em"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : Style des Processus   */
+		/**************************************/
+	 -->
+	
+	<u:selector name=".processus">
+	    <u:style name="border-bottom-width" value="1px" />
+	    <u:style name="border-bottom-style" value="solid" />
+	    <u:style name="border-bottom-color" skin="processusBorderColor" />
+	    <u:style name="padding" value="5px 0 10px 5px" /><!-- surcharge de la valeur par defaut -->
+	</u:selector>
+
+	<!-- 
+		/***********************************************/
+		/* Formulaire : Messages d'erreur de RichFaces */
+		/***********************************************/
+	 -->
+	
+	<!-- Style du message général situé en amont du formulaire -->
+	<u:selector name=".rich-messages .info">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .warn">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .error">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/erreur.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="20px"/>
+	</u:selector>	
+	
+	<u:selector name=".rich-messages-label">
+		<u:style name="color" skin="errorMessageTextColor"/>
+	</u:selector>
+
+</f:template>

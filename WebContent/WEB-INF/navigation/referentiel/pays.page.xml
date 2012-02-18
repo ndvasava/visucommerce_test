@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+       
+       <!-- A declarer dans les resources de navigation seam dans le components.xml -->
+       
+		<page view-id="/views/pays/recherche_pays.xhtml">
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailPaysFrom')}"/>
+			
+			<navigation from-action="#{editerPaysAction.find}">
+				<rule>
+	           		<render view-id="/views/pays/detail_pays.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="#{editerPaysAction.edit}">
+				<rule>
+		            <render view-id="/views/pays/edit_pays.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="#{editerPaysAction.remove}">
+				<rule>
+		        	<render view-id="/views/pays/recherche_pays.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="goBackPays">
+	        	<!-- Rque 1 : redirect car navigation initiee par composant Ajax -->
+	        	<!-- Rque 2 : Pas d'operateur ternaire : le retour n'a de sens que si l'on vient d'une page, et alors 'recherchePaysFrom' aura forcement une valeur -->
+	        	<rule>
+		        	<redirect view-id="#{navigationHelper['recherchePaysFrom']}"/>
+		        </rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/pays/detail_pays.xhtml">
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Pays : le detail d'un pays permet d'aller voir le detail d'une devise : methode necessaire pour revenir ici -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailDeviseFrom')}"/>
+	        <navigation from-action="#{editerDeviseAction.find}">
+	        	<rule>
+		            <render view-id="/views/devise/detail_devise.xhtml"/>
+	            </rule>
+	        </navigation>
+	        
+	        <navigation from-action="#{editerPaysAction.remove}">
+	        	<rule>
+		            <render view-id="#{empty navigationHelper['detailPaysFrom'] ? '/home.xhtml' : navigationHelper['detailPaysFrom']}"/>
+	           	</rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/pays/edit_pays.xhtml">
+			<!-- GESTION AVANCEE DES FONCTIONS INTERFONCTIONNALITES (lien vers autres fonctionnalites, mode de retour, etc.) -->
+    		<!-- recuperation des donnees en sortie d'une navigation interfonctionnalite. -->
+    		<!--  methode editerPariAction#wire a ecrire -->
+    		<action execute="#{editerPaysAction.wire}"/>
+			
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Devise : le detail d'une devise permet d'aller voir le detail du devise : methode necessaire pour revenir ici -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailDeviseFrom')}"/>
+			<!-- AVANCE INTERFONCTIONNALITES : necessaire d'aller selectionner un devise : il faut aller dans recherche_devise.xhtml et revenir ici ! -->
+			<action execute="#{navigationHelper.addCurrentViewId('rechercheDeviseFrom')}"/>
+			
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Devise : on peut visualiser le detail du devise a partir de cette devise ! -->
+	        <navigation from-action="#{editerDeviseAction.find}">
+	        	<rule>
+		            <render view-id="/views/devise/detail_devise.xhtml"/>
+	            </rule>
+	        </navigation>
+	        <navigation from-action="#{rechercherDeviseAction.search}">
+	        	<rule>
+		            <render view-id="/views/devise/recherche_devise.xhtml"/>
+	            </rule>
+	        </navigation>
+			
+			<navigation from-action="#{editerPaysAction.persist}">
+	        	<rule>
+		            <render view-id="/views/pays/detail_pays.xhtml"/>
+		        </rule>
+	        </navigation>
+	        <navigation from-action="#{editerPaysAction.update}">
+	        	<rule>
+		            <render view-id="/views/pays/detail_pays.xhtml"/>
+	            </rule>
+	        </navigation>
+	        <navigation from-action="#{editerPaysAction.cancel}">
+	        	<rule>
+					<render view-id="/views/pays/detail_pays.xhtml"/>
+				</rule>
+	        </navigation>
+		</page>
+       
+</pages>

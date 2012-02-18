@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f="http://jsf.exadel.com/template"
+   	xmlns:u="http://jsf.exadel.com/template/util" 
+   	xmlns="http://www.w3.org/1999/xhtml" >	
+
+	<!-- 
+		Feuille de style associée au composant rich:suggestionBox
+
+		Les propriétés utilisées ici sont : 
+
+			# couleur de la sélection	
+			listActiveBgColor
+			listActiveTextColor
+			
+			# couleur des bordures de cadre par défaut
+			defaultPanelBorder
+	-->
+	
+	<!-- Conteneur global (code généré en haut de la page) -->
+	<u:selector name=".rich-sb-common-container"/>
+	 	
+	<!-- 1er cadre entourant la liste résultat : s'applique à une <div> -->
+	<u:selector name=".rich-sb-ext-decor-1">
+		<u:style name="background-color" skin="suggestionboxBgColor" default="#ffffff"/>
+		<u:style name="border-width" value="1px" />
+        <u:style name="border-style" value="solid" />
+        <u:style name="border-color" skin="suggestionboxBorderColor" />
+	</u:selector>
+	
+	<!-- 2ème cadre entourant la liste résultat : s'applique à une <div> -->
+	<u:selector name=".rich-sb-ext-decor-2"/>
+	
+	<!-- 3ème cadre entourant la liste résultat : s'applique à un <table> -->
+	<u:selector name=".rich-sb-ext-decor-3"/>
+	
+	<!-- Style s'appliquant à la liste résultat -->
+	<u:selector name=".rich-sb-int-decor-table"/>	
+	
+	<!-- Style permettant de définir le padding au niveau des cellules du tableau -->
+	<u:selector name=".rich-sb-cell-padding"/>	
+	
+	<!-- Style technique pour définir le dépassement -->
+	<u:selector name=".rich-sb-overflow"/>
+	
+	<!-- Style définissant une ligne du tableau -->
+	<u:selector name=".rich-sb-int" />
+	
+	<!-- Style contenant un élément sélectionné de la liste  : s'applique au <tr> -->
+	<u:selector name=".richfaces_suggestionEntry"/>
+		
+	<!-- Style contenant un élément sélectionné de la liste : s'applique au <tr> -->
+	<u:selector name=".rich-sb-int-sel">
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="background-color" skin="listActiveBgColor"/>
+		<u:style name="color" skin="listActiveTextColor"/>
+	</u:selector>
+	
+	<!-- Style contenant un élément sélectionné de la liste : s'applique au <td> -->
+	<u:selector name=".richfaces_suggestionSelectValue"/>
+	
+	<!-- Bordure située en bas de la liste de sélection (ombre, effet 3D) -->
+	<u:selector name=".rich-sb-shadow">
+		<u:style name="border" value="none"/>
+	</u:selector>
+	
+</f:template>

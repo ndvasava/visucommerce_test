@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	version="2.0">	
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+<!-- Le zoning accueil est extrêmement bref. Il permet juste de définir un corps_page.
+L'objectif étant que les pages filles n'aient pas à implémenter le corps_page. 
+A leur niveau, seule la zone content est à définir.
+Ceci favorise la composition ascendante.-->
+<ui:composition template="/layout/page/zoning/zoning.xhtml">
+		
+		<!-- ***************************************
+		         Inclusion d'un corps de page 
+		********************************************-->
+		
+		<!-- On va définir le corps de la page avec délégation au page
+		fille de spécifier le content -->
+		<ui:define name="corps_page">		
+			<ui:insert name="content"/>				
+		</ui:define>
+		
+</ui:composition>
+</f:view>
+</jsp:root>

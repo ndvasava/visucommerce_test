@@ -1,0 +1,187 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+   	xmlns:a4j="http://richfaces.org/a4j"
+   	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<style>
+        .panelc {
+            width:25%;
+            height:100%;
+            vertical-align:top;         
+        }
+        .dropTargetPanel {
+            width:90%;
+        }
+        .footerClass {
+            text-align: center;
+            padding-top: 5px;
+        }
+    </style>
+    
+    <!--  pour la construction d'un objet a4j:repeat contenant des panel drag&drop
+    		http://www.coderanch.com/t/432593/JSF/java/create-list-inplaceInput-tags-array
+    -->
+    
+    <!--  definit le dragINdicator, comportement de l'element durant la transition par "glissage" -->
+    <rich:dragIndicator id="indicatorD2P" />
+    <rich:dragIndicator id="indicatorP2D" />
+    
+    <h:form id="form">
+    
+    	<!-- <a4j:poll> component allows periodical sending of Ajax requests to a server and is used for a page updating according to a specified time interval. -->
+    	<!-- a4j:poll reRender="testId" interval="10000" action="# { adminDeviseAction.populateViewData}"/ -->
+    
+    	<h:panelGrid columnClasses="panelc" columns="2" width="100%" >
+			<h:panelGroup>    	
+	    		<rich:panel style="width:150px" styleClass="dropTargetPanel"> 
+	                
+	                <f:facet name="header">
+	                    <h:outputText value="Source List" />
+	                </f:facet>
+	                
+	                <rich:dropSupport acceptedTypes="PaysZone" 
+		                		dropValue="noDevise"
+		                    	dropListener="#{adminDeviseAction.processDropNoDevise}" 
+		                    	reRender="regionDropPanel,src" />
+	                
+	                <!--  Attention a prevoir les regles pour le rerender de la source avec un return "reset" de la part du bean action. Sinon rien n'est rarfraichit
+	                	A implementer dans page.devise.xml -->
+	                
+	                <h:dataTable id="src" value="#{adminDeviseAction.listPays}" var="pays" footerClass="footerClass">
+	
+	                    <h:column>
+	                    	<!--
+	                    		Definit le lien entre l'item draggable et la zone droppable via le couple dragType et accepedType. UNe seul valeur possible
+	                    		indiquant une famille de type, ou un type unique. L'evenement declenche eventDrop gere les valeurs definies par les 2 attributs
+	                    		dragValue (le pays dragged) et dropValue (la devise ou est droppe le pays) 
+	                    		
+	                    		le fait de rendre le drag&drop bijectif empeche la specification du type dndParam en drag ou drop, de meme ne 
+	                    		pas changer le name du dndParam sinon l'indicator n'est pas correctement rafraichit et il perd le nom du pays.
+	                    	 -->
+	                    
+	                    
+	                        <a4j:outputPanel style="width:100px;border:1px solid gray;padding:2px" layout="block">
+	                            <rich:dragSupport dragIndicator=":indicatorD2P" dragType="DeviseZone" dragValue="#{pays}">
+	                                <rich:dndParam name="label" value="#{pays.nom}" />
+	                            </rich:dragSupport>
+	                            <h:outputText value="#{pays.nom}"></h:outputText>
+	                        </a4j:outputPanel>
+	                    </h:column>
+	                    
+	                </h:dataTable>
+	                
+	            </rich:panel>
+			</h:panelGroup>
+			
+			<h:panelGroup>
+			
+			<!--  A verifier le remplacement du ui:repeat par le a4j:repeat pour 
+					permettre une identification correcte de la zone a rerendre. Sinon il rafraichit tous les panel... 
+					Le ReRender du dropSupport n'est pas declenche sur le h:dataTable contrairement au comportement
+					d'un richPanel présent seul dans une page avec un id clairement identifié et non surchargé par 
+					l'iterateur de ui:repeat
+				  l'iterateur ajax permet d'identifier de facon sur quel est l'element impacte dans la liste d'element repete.
+					via ajaxKeys et rowKeyVar on peut identifier chaque element de facon distincte. Ensuite au niveau de l'element on place
+					a4j:support avec un a4j:actionparam, qui pointe sur un element Integer du actionBean rowUpdated
+					
+					Attention, le h:panelGrid voit le ui:repeat comme un uniquement element, ce qui affiche
+				les rich:panel de facon verticale ... 
+					
+					Finalement, la bonne solution est l'utilisation du richDataGrid comme repetiteur du rich:Panel
+			-->
+			 
+				<rich:dataGrid id="regionDropPanel" 
+						value="#{adminDeviseAction.listDevises}" 
+						rowKeyVar="rowIndex" var="d"
+						columnClasses="panelc" 
+						columns="3" elements="3" width="600px">
+					<rich:panel id="#{rowIndex}Panel" bodyClass="inpanelBody">
+		                <f:facet name="header">
+		                    <h:outputText value="#{d.nom}" />
+		                </f:facet>
+		                
+		                <rich:dropSupport acceptedTypes="DeviseZone" 
+		                		dropValue="#{d}"
+		                    	dropListener="#{adminDeviseAction.processDrop}" 
+		                    	reRender="regionDropPanel,src" />
+		                
+		                <h:dataTable id="#{rowIndex}dataTable" value="#{d.listPays}" var="p">
+		                    <h:column>
+		                    	<a4j:outputPanel style="width:100px;border:1px solid gray;padding:2px" layout="block">
+			                    	<rich:dragSupport dragIndicator=":indicatorP2D" dragType="PaysZone" dragValue="#{p}" >
+			                    		<rich:dndParam name="label" type="drag" value="#{p.nom}" />
+			                    	</rich:dragSupport>
+					                <h:outputText value="#{p.nom}" />
+								</a4j:outputPanel>
+		                    </h:column>
+		                </h:dataTable>
+		            </rich:panel>
+				</rich:dataGrid>
+			
+			<!-- 
+				<h:panelGrid id="regionTestPanel" columnClasses="panelc" columns="1" width="100%">
+					< ! - -  a4j:repeat value="# { adminDeviseAction.listDevises}" var="d" rowKeyVar="rowIndex" - - >
+						<h:panelGroup>
+							<rich:panel id="Panel" styleClass="dropTargetPanel">
+				                <f:facet name="header">
+				                    <h:outputText value="Euro" />
+				                </f:facet>
+				                
+				                <rich:dropSupport id="dropSupport" acceptedTypes="DeviseZone" dropValue="# { d}"
+				                    dropListener="# { adminDeviseAction.processDrop}" reRender="regionPanel,src">
+				                </rich:dropSupport>
+				                
+				                <h:dataTable id="euroDataTable" value="# { adminDeviseAction.listDevises.get(0).listPays}" var="p">
+				                    <h:column>
+				                    	<a4j:outputPanel style="width:100px;border:1px solid gray;padding:2px" layout="block">
+					                    	<rich:dragSupport dragIndicator=":indicatorP2D" dragType="PaysZone" dragValue="# { p}" >
+					                    		<rich:dndParam name="label" type="drag" value="# { p.nom}" />
+					                    	</rich:dragSupport>
+				                        	<h:outputText value="# { p.nom}" />
+				                        </a4j:outputPanel>
+				                    </h:column>
+				                </h:dataTable>
+							</rich:panel>
+						</h:panelGroup>
+					<! - -  /a4j:repeat - - >
+				</h:panelGrid>
+			-->
+			
+			</h:panelGroup>
+			
+		</h:panelGrid>
+		
+		<h:commandButton id="doUpdate"
+					value="#{messages['default.button.validate.label']}" 
+					action="#{adminDeviseAction.update}"
+					styleClass="boutonAction boutonValider"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"/>
+		<!-- l'apport du a4j est de permettre l'acces au rerender, sinon il faut donner un a4j:support a un bouton, ce qui est deconseille -->
+		<a4j:commandButton action="#{adminDeviseAction.reset}" 
+						value="#{messages['default.button.cancel.label']}" 
+						reRender="src,regionDropPanel"/>
+		
+		
+	</h:form>
+	
+	<a4j:outputPanel ajaxRendered="true">
+        <h:messages></h:messages>
+    </a4j:outputPanel>
+
+</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

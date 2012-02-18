@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<h:form id="commerceF" styleClass="edit">
+		<rich:panel>
+			
+			<f:facet name="header">
+			 	<h:outputFormat value="#{messages['commerce.more-info.label']}"/>
+			</f:facet>
+			
+			<h:panelGrid columns="2">
+			<rich:panel>
+	   			<s:decorate id="idD" template="../../layout/display.xhtml">
+		            <ui:define name="label">
+		            	<h:outputLabel value="#{messages['commerce.id.label']}" />
+		            </ui:define>
+		            <strong>
+		            	<h:outputText value="#{editerCommerceAction.instance.id} (#{editerCommerceAction.instance.nomCommerce})"/>
+		            </strong>
+		        </s:decorate>
+
+	   			<s:decorate id="addressD" template="../../layout/display.xhtml">
+		            <ui:define name="label">
+		            	<h:outputLabel value="#{messages['shop.address.label']}" />
+		            </ui:define>
+		            <strong>
+		            	<h:outputText value="#{editerCommerceAction.shopInstance.shopAddress.address1}"/>
+		            </strong>
+		        </s:decorate>
+
+				<s:decorate id="shopNameD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['shop.name.label']}" />
+	                </ui:define>
+	                <h:inputText id="shopName" label="#{messages['shop.name.label']}"
+	                		size="30" maxlength="30"
+	                      	value="#{editerCommerceAction.shopInstance.shopName}" >
+	                </h:inputText>
+				</s:decorate>
+
+				<s:decorate id="phoneD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['shop.phone.label']}" />
+	                </ui:define>
+	                <h:inputText id="shopName" label="#{messages['shop.phone.label']}"
+	                		size="20" maxlength="20"
+	                      	value="#{editerCommerceAction.shopInstance.phoneWork}" >
+	                </h:inputText>
+				</s:decorate>
+	
+				<s:decorate id="openTimeD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.plageOuverture.label']}" />
+	                </ui:define>
+	                <h:inputText id="openTime" label="#{messages['commerce.plageOuverture.label']}"
+	                		size="15" maxlength="15"
+	                      	value="#{editerCommerceAction.shopInstance.openTime}" >
+	                </h:inputText>
+				</s:decorate>
+	
+				<s:decorate id="moreInfoD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.more-info.label']}" />
+	                </ui:define>
+	                <h:inputText id="moreInfo" label="#{messages['commerce.more-info.label']}"
+	                		size="15" maxlength="15"
+	                      	value="#{editerCommerceAction.shopInstance.additionalInfo}" >
+	                </h:inputText>
+				 </s:decorate>
+	
+				 <s:decorate id="deliveryD" template="../../layout/edit.xhtml">
+				 	<ui:define name="label">
+	                	<h:outputLabel value="#{messages['commerce.delivery.label']}" />
+	                </ui:define>
+	                <h:selectBooleanCheckbox id="delivery" label="#{messages['commerce.delivery.label']}"
+	                		value="#{editerCommerceAction.shopInstance.deliveryStatus}" />
+				 </s:decorate>
+			</rich:panel>
+			<rich:panel>
+				<rich:fileUpload fileUploadListener="#{editerCommerceAction.photoUploadEventListener}"
+									maxFilesQuantity="4"
+									id="uploadIdImage" acceptedTypes="jpg, gif, png, bmp">
+									<a4j:support event="onuploadcomplete" reRender="infoSeam, importHeader" />
+				</rich:fileUpload>
+	               
+	            <h:panelGroup id="infoSeam">
+	            	<rich:panel bodyClass="info">
+	                 <h:outputText value="No files currently uploaded"
+	                     rendered="#{editerCommerceAction.shopInstance.shopPics == null}" />
+	                 <rich:dataGrid columns="1" value="#{editerCommerceAction.shopPicsDataModel}"
+	                 	rendered="#{editerCommerceAction.shopPicsDataModel != null}"
+	                     var="img" rowKeyVar="row">
+	                     <rich:panel >
+	                         <h:panelGrid columns="2" rendered="#{img.content != null}">
+	                         	<s:graphicImage value="#{img.content}" width="80px" height="80px"/>
+	                             <h:panelGrid columns="1">
+	                                 <h:outputText value="Img Name:" />
+	                                 <h:outputText value="#{img.name}" />
+	                                 <h:outputText value="Img Length(bytes):" />
+	                                 <h:outputText value="#{img.length}" />
+	                             </h:panelGrid>
+	                         </h:panelGrid>
+	                     </rich:panel>
+	                 </rich:dataGrid>
+	             </rich:panel>
+	             <rich:spacer height="3"/>
+	             <br />
+	             <a4j:commandButton action="#{editerCommerceAction.clearUploadData}"
+	                 reRender="infoSeam, uploadDrapeau, importHeader" value="#{messages['commerce.button.clear-upload-pic.label']}"
+	                 rendered="#{editerCommerceAction.shopInstance.shopPics != null}" />
+	         	</h:panelGroup>
+			</rich:panel>
+			</h:panelGrid>
+			<div class="actionButtons">
+           		
+            	<h:commandButton id="doCreate" 
+					value="#{messages['default.button.validate.label']}"
+					action="#{editerCommerceAction.updateShopInfo}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+				
+				<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerCommerceAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerVilleAction.managed}"/>
+				
+       		</div>
+		</rich:panel>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</f:view>
+</jsp:root>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f="http:/jsf.exadel.com/template"
+	   xmlns:u="http:/jsf.exadel.com/template/util" 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	   
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/general.xcss" />
+	
+	<!-- 
+		/* ******************************** */
+		/* Redéfinition des balises de base */
+		/* ******************************** */		
+	 -->  
+	 
+	 <u:selector name="h1">
+	 	<u:style name="font-family" value="Verdana, Arial"/>
+	 </u:selector>	
+	 
+	 <u:selector name="h2">
+	 	<u:style name="font-family" value="Verdana, Arial"/>
+	 </u:selector>	
+	 	
+	 <u:selector name="h3">
+	 	<u:style name="font-family" value="Verdana, Arial"/>
+	 </u:selector>	
+	
+</f:template>
+
+

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des principaux éléments de la page CE Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/page.xcss" />
+		 
+	<!-- 
+		/***************************************************/
+		/* Liens transversaux (sous forme de picto)         */
+		/***************************************************/
+	-->
+	
+	<!-- Style des images au sein du bloc #liensTransversauxPicto -->
+	<u:selector name=".liensTransversauxPicto a">
+		<u:style name="padding-right" value="15px"/><!-- Valeur pour BP Agence -->
+	</u:selector>
+	
+	<!-- 
+		/****************/
+		/* Titre + logo */
+		/****************/
+	 -->
+	 
+	 <!-- Rendu :
+		
+		******************************************************************************************************
+			AWS
+		******************************************************************************************************
+	 -->		
+	
+	<!-- 
+		/************************************************************/
+		/* rail ( Accueil  Rechercher client  Recherche Chargé)  */
+		/************************************************************/
+	 -->
+	 
+	 	 
+	<!-- Définition de l'entrée n -->
+	<u:selector name="ul.rail li.first">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_chemin_progression.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 5px"/>
+		<u:style name="padding-left" value="16px"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="ul.rail li"><!-- EXTENDS "body ul.rail li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/separateur_fil_ariane_7.png" />
+		</u:style>
+		<u:style name="background-position" value="left 50%"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-left" value="10px"/>
+	</u:selector>
+	
+	<!-- TODO : mettre une image pour le rail (n'existait pas jusqu'alors => un simple chevron dans le code) -->
+	
+	<!-- Complément sur le titre (ajout d'une image) -->
+	<u:selector name=".titrePage"><!-- EXTENDS "body titrePage" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/image_titre_zone.gif" />
+		</u:style>
+		<u:style name="background-position" value="left 6px"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-left" value="15px"/>
+	</u:selector>
+	
+	<!-- On masque la navigation transversale qui n'a de sens que pour Internet -->
+	<u:selector name=".navTransversal">
+		<u:style name="display" value="none"/>
+	</u:selector>
+				
+	<!-- 
+		/********************************************************/
+		/* Liens du footer (> Mentions légales > lien2 > lien3) */
+		/********************************************************/
+	-->
+	 
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensFooter li"><!-- EXTENDS "body ul.liensFooter li" -->
+		<u:style name="background-image" value="none"/>
+		<u:style name="padding-right" value="4px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensFooter li a"><!-- EXTENDS "body ul.liensFooter li a" -->
+		<u:style name="padding-left" value="4px"/><!-- (3) -->			
+	</u:selector>
+		
+	
+	<!-- (1) Position de l'image : 'horizontal vertical'. -->
+		
+	<!-- (2) Espace à droite située après chaque entrée de la liste. -->
+	
+	<!-- (3) Espace entre la puce et le lien -->
+	
+	<u:selector name="ul.informationsPosteClient">
+		<u:style name="font-size" skin="liensFooterFontSize"/>
+		<u:style name="margin" value="0 0 0 20px"/>
+		<u:style name="padding" value="2px 0 0 0"/>
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.informationsPosteClient li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.informationsPosteClient li">
+		<u:style name="display" value="inline"/><!-- (3) -->
+		<u:style name="color" skin="liensFooterColor"/>	
+		<u:style name="text-decoration" skin="liensFooterTextDecoration"/>	
+		<u:style name="font-weight" skin="liensFooterFontWeight"/>	
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.informationsPosteClient li.last"/>
+	
+	<!-- (3) Solution permettant d'afficher le lien à l'horizontal. Cette solution n'est à envisager que si l'on
+	n'a pas besoin d'éléments de largeur identique (il faudrait alors utiliser une solution en 'float')-->
+	
+	<!-- (4) Cette propriété définit un couple de valeurs : 'horizontal vertical'. 
+	En l'espèce, l'image est collée à gauche du <li> et est située '0.25em' du haut. -->
+	
+	<!-- (5) Cette propriété définit l'espace à droite située après chaque entrée de la liste. On ne combine pas 
+	ici avec un padding-left (redondant). Le 'padding-left' sera utilisé pour séparer la puce '>' du lien proprement
+	dit. -->
+	
+	<u:selector name="ul.informationsPosteClient .libelleInformation">
+		<u:style name="font-weight" value="normal"/>	
+	</u:selector>	
+	
+	<!-- 
+		/********************************************************/
+		/* Réalisation du bandeau client dans le bandeau haut */
+		/********************************************************/
+	-->
+	
+	<!-- Style pour le bandeau client (permet de définir des bordures) -->
+	<u:selector name="body .bandeauClient"/><!-- EXTENDS ".bandeauClient" -->
+	
+	<!-- Style pour définir une ligne d'information du client dans le bandeau haut -->
+	<u:selector name="body .ligneInformationsClient"/><!-- EXTENDS ".ligneInformationsClient" -->
+		
+	<!-- Création d'un style pour l'information de dernière connexion.
+	Ce n'est qu'un exemple. Mais on le trouve présent dans le bandeau client
+	occupant la moitié de la largeur est bloquée à droite.
+	Aussi est-il associée à la classe css ".demiLargeur" réalisant déjà la mise en float. -->
+	<u:selector name="body .informationsDerniereConnexion"><!-- EXTENDS ".informationsDerniereConnexion" -->
+		<!-- IE6 effecute un saut de ligne si on laisse la taille à 50% -->	
+		<!-- u:style name="width" value="49%"/-->
+	</u:selector>
+	
+	
+			
+	
+	<!-- 
+		/*************************************************************************/
+		/* Réalisation des commandes fermer et ouvrir du bandeau haut horizontal */
+		/*************************************************************************/
+	-->
+
+	<u:selector name=".bandeauHautFermer,.bandeauHautOuvrir">
+		<u:style name="background-color" value="#cccccc"/>
+		<u:style name="border-bottom" value="1px solid #666666"/>
+		<u:style name="font-size" value="0.1em"/>
+		<u:style name="height" value="10px"/>
+		<u:style name="text-align" value="center"/>
+		<u:style name="margin-top" value="2px"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="center center"/>
+		<u:style name="background-attachment" value="scroll"/>
+	</u:selector>
+	
+	<u:selector name=".bandeauHautOuvrir">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/bcli_ouvre.gif" />							   
+		</u:style>		
+	</u:selector>
+	
+	<u:selector name=".bandeauHautFermer">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/bcli_ferme.gif" />							   
+		</u:style>		
+	</u:selector>
+	
+	<u:selector name="html > body .bClialwaysHere">	
+		<u:style name="height" value="23px"/><!-- (8) -->		                       
+	</u:selector>
+	
+	<!-- (8) On précise une hauteur fixe car la <div> correspondante contient des éléments en float qui, par conséquent
+	n'occupent aucune largeur. Or, le bandeau rétractable ne doit pas recouvrir cette zone.
+	Cependant, cela gène IE6 qui renvoie l'information de dernière connexion à la ligne.
+	Aussi, nous ne précisons ça que pour Firefox. -->
+	
+	<u:selector name=".bCliHideOrNot">	
+		<u:style name="clear" value="both"/><!-- (9) -->	
+	</u:selector>
+	
+	<!-- (9) Essentiel car suit des éléments en flottant. Sans ça, le panneau rétractable est chassé vers le bas... -->
+	
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name="body .valeurBC"/><!-- EXTENDS ".valeurBC" -->
+		
+			 
+	
+	<!-- 
+		/**************************************************************************/
+		/* Réalisation des commandes fermer et ouvrir du bandeau gauche vertical  */
+		/**************************************************************************/
+	-->
+	
+	<u:selector name=".bandeauGaucheFermer, .bandeauGaucheOuvrir">
+		<u:style name="background-color" value="#cccccc"/>
+		<u:style name="width" value="9px"/>
+		<u:style name="height" value="1px"/>
+		<u:style name="border-left" value="1px solid #ffffff"/>
+		<u:style name="border-right" value="1px solid #666666 "/>
+		<u:style name="float" value="left"/>				
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="center center"/>
+		<u:style name="background-attachment" value="scroll"/>				
+	</u:selector>
+		
+	<u:selector name=".bandeauGaucheFermer">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/nav_btn_ferme.gif" />							   
+		</u:style>		
+	</u:selector>
+
+	<u:selector name=".bandeauGaucheOuvrir">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/nav_btn_ouvre.gif" />							   
+		</u:style>		
+	</u:selector>
+	
+	<!-- 
+	/***********************/
+	/* Moteur de recherche */
+	/***********************/
+	--> 
+
+	<!-- On surcharge le moteur de recherche standard (juste pour la police non varialisable) -->
+
+	<u:selector name="body .inputMoteurRecherche"><!-- EXTENDS ".inputMoteurRecherche" -->
+		<u:style name="font-familly" value="Arial"/>
+	</u:selector>
+	
+	<!-- 
+		/******************************************************/
+		/* Liens vers des sites extérieurs en-dessous du menu */
+		/******************************************************/
+	-->
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensSitesExterieursMenu li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/lien_ext.gif" />
+		</u:style>
+		<u:style name="background-position" value="10px 50%"/><!-- (1) -->
+		<u:style name="background-repeat" value="no-repeat"/>
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensSitesExterieursMenu li a"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="20px"/><!-- (3) -->	
+	</u:selector>
+			 
+</f:template>

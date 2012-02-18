@@ -1,0 +1,170 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. Ajouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Associe au Faces JSF le jar jboss-seam-ui pour les tag seam s: 
+			c. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+   	xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<h:form id="deviseF">
+	    <rich:panel>
+			<f:facet name="header">
+				<h:outputFormat value="#{messages['default.show.label']}">
+					<f:param value="#{messages['devise.label']}" />
+				</h:outputFormat>
+   			</f:facet>
+   			
+   			<s:decorate id="nomD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['devise.nom.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerDeviseAction.instance.nom}"/>
+	        </s:decorate>
+	        
+	        <s:decorate id="symboleD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['devise.symbole.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerDeviseAction.instance.symbole}"/>
+	        </s:decorate>
+	
+	        <div style="clear:both" />
+	
+			<!-- Version Sphinx -->
+			<div class="actionButtons">
+				<s:button id="goUpdate" 
+					view="/views/devise/edit_devise.xhtml" 
+					value="#{messages['default.button.update.label']}" 
+					styleClass="boutonAction boutonModifier"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" /> 
+				<a4j:commandButton id="doDelete" 
+					action="#{modalPanelAction.showModalPanel('mpDevise')}"
+					ajaxSingle="true"
+				   	limitToList="true"
+				   	reRender="mpOp,msg"
+					value="#{messages['default.button.delete.label']}"
+				   	styleClass="boutonAction boutonSupprimer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					oncomplete="Richfaces.showModalPanel('mpDevise')" />
+				<s:button id="goBack"
+					view="#{navigationHelper['detailDeviseFrom']}"
+				    value="#{messages['default.button.back.label']}"
+				    rendered="#{not empty navigationHelper['detailDeviseFrom']}"
+				   	styleClass="boutonAction boutonRetour"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+			</div>
+		<!-- -->
+	
+	    </rich:panel>
+	
+		<!-- TabPanel permettant d'afficher un sous tableau avec les details du Pays lies a la ville -->
+		<rich:tabPanel id="deviseTp" switchType="ajax">
+
+    		<rich:tab limitToList="true" reRender="villeTp,msg" immediate="true">
+				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['pays.label']}"/>
+				</f:facet>
+				
+				<div class="association" id="paysParent">
+       			 	<h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerDeviseAction.instance.listPays == null}"/>
+	        
+       			 	<rich:dataTable id="paysDt"
+       			 				var="pays" 
+	                   			value="#{editerDeviseAction.instance.listPays}" 
+	                    		rendered="#{editerDeviseAction.instance.listPays != null}"
+								width="100%"
+								styleClass="rich-table-level2"
+								rowClasses="rich-table-cell-impair, rich-table-cell-pair">
+								
+						<rich:column>
+		                	<f:facet name="header">
+		                		<h:outputText value="#{messages['pays.id.label']}"/>
+		                	</f:facet>
+		                	<h:outputText value="#{pays.id}"/>
+           		   		</rich:column>
+           		   		<rich:column>
+		                	<f:facet name="header">
+		                		<h:outputText value="#{messages['pays.nom.label']}"/>
+		                	</f:facet>
+		                	<h:outputText value="#{pays.nom}"/>
+           		   		</rich:column>
+           		   		
+           		   		<rich:column styleClass="rich-table-cell-action" headerClass="rich-table-cell-action">
+	    					<f:facet name="header">
+	    						<h:outputText value="#{messages['default.action.label']}"/>
+	    					</f:facet>
+							<h:commandButton id="doDetail" 
+									action="#{editerPaysAction.find}" 
+									immediate="true"
+	        					    image="#{theme.images_statiques}/action_detail.png"
+									onmouseover="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail_hover.png'"
+									onmouseout="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail.png'"
+									alt="#{messages['default.button.show.alt']}"
+									title="#{messages['default.button.show.label']}">
+								<f:setPropertyActionListener target="#{editerPaysAction.paysId}" value="#{pays.id}"/> 
+							</h:commandButton>
+						</rich:column>
+					</rich:dataTable>
+				</div>
+			</rich:tab>
+		</rich:tabPanel>
+	
+	</h:form>
+	
+	<a4j:outputPanel id="mpOp">
+		<rich:modalPanel id="mpDevise" minHeight="150" minWidth="450" height="150" width="500" zindex="2000"
+				rendered="#{modalPanelAction.modalPanelRendered['mpDevise']}">
+            <f:facet name="header">
+                <h:outputText value="#{messages['default.header.delete.confirm.label']}" />
+            </f:facet>
+            <f:facet name="controls">
+				<h:graphicImage  value="#{theme.skinImages}/modal_close.png" 
+					onclick="Richfaces.hideModalPanel('mpDevise')"/>
+	        </f:facet>
+			<h:form id="mpF">	
+		        <div class="modalContent">
+              		<p><h:outputText value="#{messages['default.button.delete.confirm.message']}" /></p>
+              	</div>
+              	<div class="modalButtons">
+					<h:commandButton id="doConfirmDelete" 
+							action="#{editerDeviseAction.remove}"
+							immediate="true"
+							value="#{messages['default.button.confirm.label']}" 
+							styleClass="boutonAction boutonConfirmer"
+							onmouseover="$(this).addClassName('boutonActionHover')"
+							onmouseout="$(this).removeClassName('boutonActionHover')"
+							onclick="Richfaces.hideModalPanel('mpDevise')" />
+					<h:commandButton id="doCancelDelete" 
+							value="#{messages['default.button.cancel.label']}" 
+							styleClass="boutonAction boutonAnnuler"
+							onmouseover="$(this).addClassName('boutonActionHover')"
+							onmouseout="$(this).removeClassName('boutonActionHover')"
+							onclick="Richfaces.hideModalPanel('mpDevise');return false" />
+				</div>
+			</h:form>
+		</rich:modalPanel>
+	</a4j:outputPanel>
+			
+</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

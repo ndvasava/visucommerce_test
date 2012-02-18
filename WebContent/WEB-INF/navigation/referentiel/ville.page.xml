@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+       
+       <!-- 
+       	 o Regles d'implementation de la navigation jsf
+       	 	* La page source est indiquée au moyen de la balise <page>. Les règles de navigation pouvant être déclenchées par cette page source 
+       	 		sont spécifiées au travers de la balise <navigation>.
+       	 	* Vous précisez alors une balise <navigation> pour chaque action pouvant être exécutée sur la page source (grosso modo pour chaque lien / bouton de la page), 
+       	 		en valorisant l'attribut 'from-action' à la valeur de l'attribut 'action' du composant jsf cliqué. C'est la balise render qui pemettra 
+       	 		d'indiquer quelle est la page web à afficher.
+       
+       	 o Quelques Précisions sur Render, Redirect et la navigation via JSF
+       		* Balise <render> spécifie la page à atteindre et que la condition pour atteindre cette page est définie au moyen de l'attribut 
+       			'from-action' de la balise <navigation> et de l'attribut 'if-outcome' de la balise <rule>.
+       		* Balise <redirect> permet de faire un appel supplémentaire vers le serveur afin de "nettoyer" l'url affichée. on indique in fine 
+       			à Seam qu'il doit retourner au client un code d'erreur HTTP 302 en indiquant au navigateur d'appeler la page {view-id}.
+       		* CC : aucune différence fondamentale , ce qui impose d'utiliser render plutot que redirect pour des questions de performances.	
+        -->
+       
+       <!-- A declarer dans les resources de navigation seam dans le components.xml -->
+       
+		<page view-id="/views/ville/recherche_ville.xhtml">
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailVilleFrom')}"/>
+			
+			<navigation from-action="#{editerVilleAction.find}">
+				<rule>
+	           		<render view-id="/views/ville/detail_ville.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="#{editerVilleAction.edit}">
+				<rule>
+		            <render view-id="/views/ville/edit_ville.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="#{editerVilleAction.remove}">
+				<rule>
+		        	<render view-id="/views/ville/recherche_ville.xhtml"/>
+	        	</rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/ville/detail_ville.xhtml">
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Ville : le detail d'une ville permet d'aller voir le detail du pays : methode necessaire pour revenir ici -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailPaysFrom')}"/>
+	        <navigation from-action="#{editerPaysAction.find}">
+	        	<rule>
+		            <render view-id="/views/pays/detail_pays.xhtml"/>
+	            </rule>
+	        </navigation>
+	        
+			<navigation from-action="#{editerVilleAction.remove}">
+	        	<rule>
+		            <render view-id="#{empty navigationHelper['detailVilleFrom'] ? '/home.xhtml' : navigationHelper['detailVilleFrom']}"/>
+	           	</rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/ville/edit_ville.xhtml">
+			<!-- GESTION AVANCEE DES FONCTIONS INTERFONCTIONNALITES (lien vers autres fonctionnalites, mode de retour, etc.) -->
+    		<!-- recuperation des donnees en sortie d'une navigation interfonctionnalite. -->
+    		<!--  methode editerPariAction#wire a ecrire -->
+    		<action execute="#{editerVilleAction.wire}"/>
+			
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Ville : le detail d'une ville permet d'aller voir le detail du pays : methode necessaire pour revenir ici -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailPaysFrom')}"/>
+			<!-- AVANCE INTERFONCTIONNALITES : necessaire d'aller selectionner un pays : il faut aller dans recherche_pays.xhtml et revenir ici ! -->
+			<action execute="#{navigationHelper.addCurrentViewId('recherchePaysFrom')}"/>
+			
+			<!-- AVANCE INTERFONCTIONNALITES Debranchement detail Ville : on peut visualiser le detail du pays a partir de cette ville ! -->
+	        <navigation from-action="#{editerPaysAction.find}">
+	        	<rule>
+		            <render view-id="/views/pays/detail_pays.xhtml"/>
+	            </rule>
+	        </navigation>
+	        <navigation from-action="#{rechercherPaysAction.search}">
+	        	<rule>
+		            <render view-id="/views/pays/recherche_pays.xhtml"/>
+	            </rule>
+	        </navigation>
+			
+			<navigation from-action="#{editerVilleAction.persist}">
+	        	<rule>
+		            <render view-id="/views/ville/detail_ville.xhtml"/>
+		        </rule>
+	        </navigation>
+	        <navigation from-action="#{editerVilleAction.update}">
+	        	<rule>
+		            <render view-id="/views/ville/detail_ville.xhtml"/>
+	            </rule>
+	        </navigation>
+	        <navigation from-action="#{editerVilleAction.cancel}">
+	        	<rule>
+					<render view-id="/views/ville/detail_ville.xhtml"/>
+				</rule>
+	        </navigation>
+		</page>
+       
+</pages>

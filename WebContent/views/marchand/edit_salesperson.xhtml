@@ -1,0 +1,137 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+	<ui:composition template="../../layout/template.xhtml">
+		<ui:define name="body">
+		
+		<style>
+			.customPanelGrid {
+			   border-collapse: collapse;
+			   border: 1px solid white;
+			   margin-left:auto;
+			   margin-right:auto;
+			}
+			.localEditMarchandSeparator {
+			   margin: 10px 0px 10px 0px;
+			}
+		</style>
+	
+		<h:form id="CreateMarchandForm">
+		
+			<h:panelGrid columns="1" width="75%" styleClass="customPanelGrid">
+				<rich:panel >
+		            <f:facet name="header">
+						<h:outputFormat value="#{editerSalespersonAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+							<f:param value="#{messages['sp.infos.label']}"/>
+						</h:outputFormat>
+					</f:facet>
+					
+					<h:panelGrid columns="1">
+						<rich:panel>
+							<s:decorate id="spNameD" template="../../layout/edit.xhtml">
+				                <ui:define name="label">
+				                	<h:outputLabel value="#{messages['sp.name.label']}" />
+				                </ui:define>
+				                <h:inputText id = "spName"
+				                		label="#{messages['sp.name.label']}"
+				                       	required="true" size="15" maxlength="15"
+				                      	value="#{editerSalespersonAction.instance.prenom}" >
+								</h:inputText>
+				            </s:decorate>
+				            
+				            <s:decorate id="spLastnameD" template="../../layout/edit.xhtml">
+				                <ui:define name="label">
+				                	<h:outputLabel value="#{messages['sp.lastname.label']}" />
+				                </ui:define>
+				                <h:inputText id = "spLastname"
+				                		label="#{messages['sp.lastname.label']}"
+				                       	required="true" size="15" maxlength="15"
+				                      	value="#{editerSalespersonAction.instance.nom}" >
+								</h:inputText>
+				            </s:decorate>
+				            
+				            <div style="clear:both" />
+						</rich:panel>
+					
+						<rich:panel>
+							        
+							<rich:fileUpload fileUploadListener="#{editerSalespersonAction.listener}"
+								maxFilesQuantity="1"
+								id="uploadIdImage"
+								acceptedTypes="jpg, gif, png, bmp">
+								<a4j:support event="onuploadcomplete" reRender="infoSeam, importHeader" />
+							</rich:fileUpload>
+			                
+			                <h:panelGroup id="infoSeam">
+			                	<rich:panel bodyClass="info">
+				                    <h:outputText value="No files currently uploaded"
+				                        rendered="#{editerSalespersonAction.instance.photo == null}" />
+				                    <rich:dataGrid columns="1" value="#{editerSalespersonAction.instance.photo}"
+				                    	rendered="#{editerSalespersonAction.instance.photo != null}"
+				                        var="img" rowKeyVar="row">
+				                        <rich:panel >
+				                            <h:panelGrid columns="2" rendered="#{img.content != null}">
+				                            	<s:graphicImage value="#{img.content}" width="80px" height="80px"/>
+				                                <h:panelGrid columns="1">
+				                                    <h:outputText value="Img Name:" />
+				                                    <h:outputText value="#{img.name}" />
+				                                    <h:outputText value="Img Length(bytes):" />
+				                                    <h:outputText value="#{img.length}" />
+				                                </h:panelGrid>
+				                            </h:panelGrid>
+				                        </rich:panel>
+				                    </rich:dataGrid>
+				                </rich:panel>
+				                <rich:spacer height="3"/>
+				                <br />
+				                <a4j:commandButton action="#{editerSalespersonAction.clearUploadData}"
+				                    reRender="infoSeam, uploadDrapeau, importHeader" value="#{messages['langue.remove.drapeau.label']}"
+				                    rendered="#{editerSalespersonAction.instance.photo != null}" />
+				            </h:panelGroup>   
+						</rich:panel>		
+																	
+			        </h:panelGrid>
+				</rich:panel>
+				
+				<rich:panel>
+					<h:commandButton id="doCreate" 
+								value="#{messages['default.button.create.label']}" 
+								action="#{editerSalespersonAction.persist}"
+								styleClass="boutonAction boutonCreer"
+								onmouseover="$(this).addClassName('boutonActionHover')"
+								onmouseout="$(this).removeClassName('boutonActionHover')"
+								rendered="#{!editerSalespersonAction.managed}" />
+					<h:commandButton id="doUpdate" 
+								value="#{messages['default.button.validate.label']}" 
+								action="#{editerSalespersonAction.update}"
+								styleClass="boutonAction boutonValider"
+								onmouseover="$(this).addClassName('boutonActionHover')"
+								onmouseout="$(this).removeClassName('boutonActionHover')"
+								rendered="#{editerSalespersonAction.managed}" />
+				    <s:button id="doCancel" 
+								value="#{messages['default.button.cancel.label']}" 
+								action="#{editerSalespersonAction.cancel}"
+								styleClass="boutonAction boutonAnnuler"				                          
+								onmouseover="$(this).addClassName('boutonActionHover')"
+								onmouseout="$(this).removeClassName('boutonActionHover')"
+								rendered="#{editerSalespersonAction.managed}" />
+				</rich:panel>
+			</h:panelGrid>
+			
+		</h:form>
+		
+		</ui:define>
+	</ui:composition>
+	
+</f:view>
+</jsp:root>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée aux composants <rich:contextMenu>.
+		Elle s'appuie pour les éléments énumérés sur le composant <rich:menuItem>
+		(commun avec d'autres composants : <rich:dropDownMenu>, <rich:toolBar>) et
+		qui fait l'objet d'une feuille spécifique.	
+	-->
+
+	<!-- Reprise des styles natifs -->
+	<f:importResource src="org/richfaces/renderkit/html/css/menucomponents.xcss" />
+	
+	<!-- Style du carré entourant la liste des liens -->
+	<u:selector name=".rich-menu-list-border">
+		<u:style name="border-width" skin="menuListBorderWidth" default="1px"/>
+		<u:style name="border-style" skin="menuListBorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuListBorderColor" default="#000000"/>
+		<u:style name="background-color" skin="menuListBgColor"  default="#ffffff"/>
+	</u:selector>	
+	
+	<!-- Style du fond du carré entourant la liste des liens -->
+	<u:selector name=".rich-menu-list-bg">
+		<u:style name="border-left"><!-- (1) -->
+			<f:verbatim skin="menuListBgBorderWidth" default="0"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuListBgBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="border-right"><!-- (1) -->
+			<f:verbatim skin="menuListBgBorderWidth" default="0"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuListBgBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="border-top"><!-- (1) -->
+			<f:verbatim skin="menuListBgBorderWidth" default="0"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuListBgBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="background-color" value="transparent"/><!-- (2) -->
+		<f:if skin="menuListBgImg"><!-- (4) -->
+			<u:style name="background-image">
+				<f:resource f:skin="menuListBgImg"/><!-- (3) -->	
+			</u:style>
+		</f:if>	
+		<u:style name="background-repeat" value="repeat-y"/>	
+		<u:style name="background-attachment" value="scroll"/>
+		<u:style name="background-position" value="left center"/>		
+	</u:selector>	
+	
+	<!-- (1) Changement de la convention du composant de base : plutôt qu'affecter une couleur de contour
+	de la div intérieure égale à la couleur... de fond (pour la masquer), on s'emploie plutôt à ne pas
+	lui donner de couleur et de taille -->
+	
+	<!-- (2) On n'applique pas de couleur de fond ici : elle est définie via 'menuListBgColor' -->
+	
+	<!-- (3) Image permettant d'obtenir un dégradé à côté de la liste des items -->	
+	
+	<!-- (4) Cette image est optionnelle : elle est donc entourée par un conditionnement sous peine de faire
+	planter le thème... -->
+	
+	<!-- <div> située tout en bas de la liste... et qui n'a d'intérêt que si on veut que la liste n'arrive pas
+	jusqu'en bas... -->
+	<u:selector name=".rich-menu-list-strut">
+		<u:style name="border" value="0 none"/>
+		<u:style name="font-size" value="0"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="position" value="relative"/>
+	</u:selector>
+
+</f:template>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Tableau simple.
+| - Définition de la couleur et de la taille des bordures
+| Idéalement :
+| - même couleur même taille pour les bordures intérieures et extérieures
+| - pas de bordure sur le footer
++===============================================================================
+-->		
+
+<!-- 
++===============================================================================
+| Table
+| - pas de bordure
++===============================================================================
+-->	
+	<u:selector name=".rich-table">
+		<u:style name="border" value="none"/>
+		<u:style name="border-collapse" skin="tableSimpleBorderCollapse" default="collapse"/>
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Header : cellule
++===============================================================================
+-->		
+	<u:selector name="
+		.sx-table-header .rich-table-headercell,
+		.rich-table-subheadercell, .rich-subtable-headercell
+	">
+		<u:style name="border-color" skin="tableSimpleHeaderBorderColor" />		 
+		<u:style name="border-style" default="solid"/>
+		<u:style name="border-width" skin="tableSimpleHeaderBorderWidth" default="1px"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Header : 1ere cellule à gauche
++===============================================================================
+-->		
+	<u:selector name=".sx-table-header .firstColumn,.rich-table-subheader .firstColumn">
+		<u:style name="border-left" skin="tableSimpleHeaderFirstColumnBorderLeft" />	
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Header : dernière cellule à droite
++===============================================================================
+-->		
+	<u:selector name=".sx-table-header .lastColumn, .rich-table-subheader .lastColumn">
+		<u:style name="border-right" skin="tableSimpleHeaderLastColumnBorderRight" />	
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body : cellule
++===============================================================================
+-->		
+
+	<u:selector name=".rich-table-cell, .rich-subtable-cell">
+		<u:style name="border-color" skin="tableSimpleCellBorderColor" /> 
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" skin="tableSimpleCellBorderWidth" default="1px"/>		
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body : 1ere ligne, 1ere cellule à gauche
++===============================================================================
+-->			
+	<u:selector name=".rich-table-row .firstColumn">
+		<u:style name="border-left" skin="tableSimpleCellFirstColumnBorderLeft" />	
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Body : 1ere ligne, cellule
++===============================================================================
+-->			
+	<u:selector name=".rich-table-firstrow .rich-table-cell">
+		<u:style name="border-top" skin="tableSimpleCellFirstRowBorderTop"  />	
+	</u:selector>
+	
+</f:template>

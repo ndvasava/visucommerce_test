@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		===========================================================
+		Feuille de style dynamique générale pour l'application AWS.
+		===========================================================
+		
+		On trouvera ici la définition des styles CSS communs à l'ensemble des enseignes.
+		
+		Cette feuille doit normalement être chargée par le feuille de style dynamique
+		local.xcss (qui contient elle les styles spécifiques à une enseigne donné) via
+		l'instruction : 
+
+			<f:importResource src="/css/commun.xcss" />
+
+				
+		A noter, même si l'application en mono-enseigne, il existera une feuille de style local.xcss.
+		Cette feuille de style est redondante dans ce cas avec commun.xcss, mais il permet de conserver
+		un fonctionnement simple de notre générateur de code.
+		
+		La feuille de style local.xcss est chargée par vos pages jsf via l'instruction :
+		. si l'application est multi-enseigne (multi-thèmes) :
+			<a4j:loadStyle src="#{theme.css}/local.xcss"/>
+		. si l'application est mono-enseigne (n'implémente que la charte natixis) :
+			<a4j:loadStyle src="resource:///css/local.xcss"/>
+	 -->
+	 
+	 <!--
+		/******************/
+		/* Page d'accueil */
+		/******************/
+	 -->
+	
+	<!-- Gestion des images fonctionnelles horizontales -->
+	<u:selector name="ul#imagesFonctionnellesHorizontales">
+		<u:style name="height" value="125px"/><!-- (1) -->
+		<u:style name="padding" value="0"/><!-- (2) -->
+		<u:style name="margin" value="1em 0 0 130px"/><!-- (5) -->		
+	</u:selector>
+	
+	<!-- (1) Impératif de fixer une hauteur ici car l'ensemble va être mis en float:left.
+	Il sera difficile aux éléments fils de reprendre le flux (bouton connexion).
+	La hauteur spécifiée doit être la somme du texte + des images -->
+	
+	<!-- (2) L'espacement doit être placé ici car "li" est un élément 'inline' donc horizontal
+	et sans valeur possible de padding-top et padding-bottom...-->
+	
+	<!-- Gestion des images fonctionnelles horizontales -->
+	<u:selector name="ul#imagesFonctionnellesHorizontales li">
+		<u:style name="display" value="inline"/>
+		<u:style name="float" value="left"/><!-- (3) -->
+		<u:style name="text-align" value="center"/><!-- (4) -->	
+		<u:style name="margin" value="0 30px"/><!-- (5) -->			
+	</u:selector>
+	
+	<!-- (3) Impératif pour aligner le texte sur les images -->
+	
+	<!-- (4) Pour aligner le texte au milieu de la largeur de l'image -->
+	
+	<!-- (5) Jouer sur ces 2 valeurs pour répartir horizontalement les images (ici sur une base de 3).
+	De la même façon, cela devrait être fait dans les feuilles filles dès que la structure globale de 
+	la page sera différente : ainsi l'alignement centré de Caisse d'épargne nécessite de revoir les marges
+	horizontales à la baisse puisque celles-ci sont évaluées en fonction du conteneur. On pourra ne 
+	redéfinir que ces valeurs dans le fichier local.xcss de ladite enseigne en positionnant les nouvelles
+	valeurs dans des classes "body xxx" (pour permettre un repérage dans Firebug). -->
+	
+	<u:selector name="#connexion">
+		<u:style name="margin" value="1em 0 2em"/><!-- (6) -->
+		<u:style name="text-align" value="center"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (6) Doivent être utilisées en lieu et place de 'margin'. Car dans le cas d'une image de fond répétée,
+	cela décale l'image vers le bas. -->
+	
+	<!-- (7) Jouer là-dessus pour aligner le bouton "connexion" au-milieu de l'écran. Même remarque que pour le (5) -->
+	
+	<!-- Suppression de l'étoile * sur les champs "required" de l'authentification -->
+	<u:selector name="#blocAuthentification .required, #blocAuthentificationInterieure .required">
+		<u:style name="display" value="none" /> 
+	</u:selector>
+	
+	<!--
+		/******************/
+		/* Fenêtre modale */
+		/******************/
+	 -->
+	 
+	<!-- Exemple de code permettant d'inclure une image de fond dans une modale, positionnée en 
+	haut à gauche... Le texte restant placé à droite :
+	
+	<div class="modalContent">
+        
+		<h:graphicImage id="mon_image_centrale" url="/img/confirm_message.gif" alt="" styleClass="modalImg"/>
+			
+		<div class="modalTxt">
+			<p>Pour vous connecter (en DEVELOPPEMENT), veuillez saisir : </p>
+         		<ul>
+         			<li>Login : <i>demo</i></li>
+         			<li>Password : <i>2222</i></li>
+         		</ul>
+    	</div>
+    </div>        
+	-->
+		 
+	<!-- Style permettant de positionner une image en haut à gauche d'une fenêtre modale -->
+	<u:selector name=".modalImg">
+		<u:style name="float" value="left"/> 
+	</u:selector>
+	
+	<!-- Style permettant de décaler le texte situé à droite... de la largeur de l'image -->
+	<u:selector name=".modalTxt">
+		<u:style name="margin-left" value="70px"/> 
+	</u:selector>
+	
+	<!--
+		/******************/
+		/* Spécifique AWS */
+		/******************/
+	 -->
+	
+	<!-- Positionnement du sélecteur de theme et du status Ajax -->
+	<u:selector name=".ajaxStatus">
+		<u:style name="bottom" value="0"/> 
+		<u:style name="right" value="0"/> 
+		<u:style name="position" value="fixed"/> 
+		<u:style name="width" value="20px"/> 
+		<u:style name="z-index" value="5000"/> 
+	</u:selector>
+	
+	<!-- Le pavé de #theme en bas à droite -->
+	<u:selector name="#theme">
+		<u:style name="bottom" value="10px"/> 
+		<u:style name="right" value="10px"/> 
+		<u:style name="position" value="fixed"/> 
+		<u:style name="z-index" value="5000"/> 
+		<u:style name="text-align" value="right"/> 
+		<u:style name="font-size" value="12px"/> 
+		<u:style name="background-color" value="#eeeeee"/> 
+		<u:style name="border" value="1px solid black"/>
+		<u:style name="padding" value="5px"/> 
+		<u:style name="float" value="right"/> 
+		<u:style name="margin" value="5px"/> 
+	</u:selector>
+		
+</f:template>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style transverse qui intervient spécifiquement sur les formulaires dont la validation est décalée.
+		On entend par là le fait de ne pas avoir le message d'erreur situé sous le libellé du champ en erreur 
+		mais sous le champ input.
+		Autrement dit, des margin sont appliqués pour décaler le message d'erreur, un margin équivalent à la largeur
+		du libellé.
+		Cette largeur a été définie par défaut à "defaultWidthLabel" (Cf com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss) mais
+		peut varier par adjonction d'un sur-style ".widthLabelx" défini dans com/natixis/sphinx/jsf/ui/skins/css/commun.xcss
+		
+		Les propriétés utilisées ici sont : 
+		- espacementLabelInput : espacement entre ":" et le champ "input" (utile pour décaler le message d'erreur sous le champ input)
+		- defaultWidthLabel : largeur par défaut du label du formulaire (Celui-ci est modifiable, ponctuellement dans une page par un sur-style : widthLabelX)
+		
+		
+	-->
+		
+	<!-- 
+		/************************************************************************/
+		/* Formulaire : Décalage correspondant à la largeur du label à gauche   */
+		/************************************************************************/
+	 -->
+	
+	<!-- Ce style permet de décaler le message d'erreur d'une marge (margin-left) équivalente à la largeur par défaut.
+	Auquel on ajoute un padding-left correspondant à l'espacement entre les ":" et la zone input -->
+	<u:selector name=".edition_rubrique .error">
+		<u:style name="padding-left" skin="espacementLabelInput"/><!-- Cf remarque (1) -->
+		<u:style name="margin-left" skin="defaultWidthLabel"/>
+	</u:selector>	
+	
+	<!-- (1) Cette propriété fait écho à l'espace séparant les ":" du formulaire du début du champ "input".
+	Autrement dit, si l'on souhaite positionner le message d'erreur en dessous du champ "input" 
+	et non pas en dessous du libellé du formulaire, il convient d'appliquer un padding-left d'autant.
+	Ceci est défini dans com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss -->
+	
+	
+	<!-- 
+		/******************************************************************/
+		/* Formulaire : Décalage pour la prise en compte des sur-styles   */
+		/******************************************************************/
+	 -->
+	
+	<u:selector name=".widthLabel5 .edition_rubrique .error">
+		<u:style name="margin-left" value="5em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel8 .edition_rubrique .error">
+		<u:style name="margin-left" value="8em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel10 .edition_rubrique .error">
+		<u:style name="margin-left" value="10em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel15 .edition_rubrique .error">
+		<u:style name="margin-left" value="15em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel20 .edition_rubrique .error">
+		<u:style name="margin-left" value="20em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel25 .edition_rubrique .error">
+		<u:style name="margin-left" value="25em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel30 .edition_rubrique .error">
+		<u:style name="margin-left" value="30em"/>
+	</u:selector>
+	
+</f:template>

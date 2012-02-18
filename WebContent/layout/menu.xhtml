@@ -1,0 +1,119 @@
+<rich:toolBar
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:rich="http://richfaces.org/rich">
+    <rich:toolBarGroup>
+        <h:outputText value="#{projectName}:"/>
+        <s:link id="menuHomeId" view="/home.xhtml" value="Home" propagation="none"/>
+    </rich:toolBarGroup>
+    
+    <rich:toolBarGroup>
+        <s:link id="menuHomeTId" view="/home_template.xhtml" value="HomeT" propagation="none"/>
+    </rich:toolBarGroup>
+	
+    <rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+        <f:facet name="label">Administration Referentiel</f:facet>
+        
+       	<rich:menuItem rendered="#{!identity.loggedIn}">
+	    	<s:link view="/login.xhtml"
+	           	value="#{messages['menu.login.label']}"
+	           	id="LoginId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	    </rich:menuItem>
+        
+        <rich:menuItem rendered="#{authenticator.admin}">
+        	<!-- Attention a propagation=none, imlique la creation d'une nouvelle conversation, mais sans detruire la precedente qui 
+        		sera recharge au moment de termine son successeur.
+        		Mieux vaut declencher un nettoyage des conversations des que l'on clique sur un item du menu via : 
+        		ATTENTION les EL sont resolus dans les pages xhtml meme si elles sont encapsules dans un commentaire -> 
+        	 -->
+        	 
+        	 <!--
+        	 	Un lien s:link ou h:link, pointant directement sur une vue jsf et non sur une action doit appeler le clearConversation via le tage action, et non
+        	 	actionlistener. (sinon la conversation est vidé en fin de cylce JSF, et le beanAction a perdu son instance au moment de la résolution des EL du RenderResponse
+        	 	A la différence d'un menuItem, qui lui pointe sur une action="goEditObjet", avec une actionListener="clearConversation". Le goEditObjet est lui mappé
+        	 	dans pages.xml pour un render viewId="views/objet/edit_objet.xhtml" 
+        	  -->
+	    	<s:link view="/views/pays/recherche_pays.xhtml"
+	           	value="#{messages['pays.menu.search.label']}"
+	           	id="SearchPaysMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/pays/edit_pays.xhtml"
+	           	value="#{messages['pays.menu.create.label']}"
+	           	id="CreatePaysMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/ville/recherche_ville.xhtml"
+	           	value="#{messages['city.menu.search.label']}"
+	           	id="SearchVilleMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/ville/edit_ville.xhtml"
+	           	value="#{messages['city.menu.create.label']}"
+	           	id="CreateVilleMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/devise/recherche_devise.xhtml"
+	           	value="#{messages['currency.menu.search.label']}"
+	           	id="SearchDeviseMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/devise/edit_devise.xhtml"
+	           	value="#{messages['currency.menu.create.label']}"
+	           	id="CreateDeviseMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/langue/recherche_langue.xhtml"
+	           	value="#{messages['language.menu.search.label']}"
+	           	id="SearchLangueMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/langue/edit_langue.xhtml"
+	           	value="#{messages['language.menu.create.label']}"
+	           	id="CreateLangueMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/marchand/edit_commerce.xhtml"
+	           	value="#{messages['company-account.menu.create.label']}"
+	           	id="CreateCommerceMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     <rich:menuItem rendered="#{authenticator.admin}">
+	    	<s:link view="/views/marchand/recherche_commerce.xhtml"
+	           	value="#{messages['company-account.menu.search.label']}"
+	           	id="SearchCommerceMenuId"
+				includePageParams="false"
+				action="#{conversationHelper.clearMyConversation()}"/>
+	     </rich:menuItem>
+	     
+	</rich:dropDownMenu>
+    
+    <!-- @newMenuItem@ -->
+    <rich:toolBarGroup location="right">
+        <h:outputText  id="menuWelcomeId" value="signed in as: #{credentials.username}" rendered="#{identity.loggedIn}"/>
+        <s:link id="menuLoginId" view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
+        <s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+    </rich:toolBarGroup>
+</rich:toolBar>

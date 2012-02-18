@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+	<ui:composition>
+	
+		<ui:remove>
+			Ce fragment intègre le message situé en haut du formulaire.
+			Il apporte des informations (confirmation d'authentification) et les messages d'erreur.			
+		</ui:remove>
+		
+		<!-- Création du conteneur -->
+		<rich:messages id="msg" infoClass="info" warnClass="warn" errorClass="error" globalOnly="true"/>
+		
+		<ui:remove>
+			En terme de rendu .css, #msg va définir le positionnement de la rubrique et ses marges par rapport aux alentours.
+			D'autres styles interviennent pour l'apparence :
+			'.rich-messages' définit le padding (marges intérieures) du texte par rapport à l'ensemble de cet élément.
+			'.rich-messages-label' définit l'apparence du texte (couleur, police, taille)
+			'.rich-messages .info', '.rich-messages .warn', '.rich-messages .error' permettent de spécifier l'image à utiliser
+			dans tous ces cas et l'espacement entre l'image et le texte. ('info, 'warn' et 'error' étant les noms spécifiés comme
+			valeur des attributs 'infoClass', 'warnClass', 'errorClass')
+			=> Ces 3 derniers styles sont définis dans l'application et non pas dans le .jar du framework
+		</ui:remove>
+		
+		<ui:remove>
+			L'option 'globalOnly' positionnée à 'true' permet de ne pas réafficher les
+			messages liés à l'invalidation des contrôles de surface ; ces derniers étant positionnés
+			à côté des champs de formulaire en erreur. (A condition que le champ en question soit
+			inséré au sein d'un template Seam ... d'édition)	
+			L'option 'ajaxRendered' (positionnée à 'true' par défaut pour le rich:messages) 
+			indique que ce fragment est parcouru et mis à jour consécutivement à chaque requête Ajax.(A ce moment
+			précis, l'ensemble des composants de type UIContainer est osculté, ce qui n'est pas sans conséquence 
+			sur les performances => une optimisation proposée reviendra à utiliser l'option 'limitToList' dans le
+			composant à l'origine de la requête Ajax mais qui doit être associée à un 'reRender' explicite vers
+			ce présent composant : ceci justifie la présence d'un id="msg")
+		</ui:remove>
+		
+	</ui:composition>
+</f:view>
+</jsp:root>

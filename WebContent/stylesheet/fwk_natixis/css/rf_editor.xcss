@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée aux composants de sélection rich:picklist
+
+		Les propriétés utilisées ici sont : 
+
+			# couleur de la sélection	
+			listActiveBgColor
+			listActiveTextColor
+			
+			# couleur des bordures de cadre par défaut
+			defaultPanelBorder
+	-->
+
+	<!-- reprise provisoire des styles natifs -->
+	<f:importResource src="org/richfaces/renderkit/html/css/editor.xcss" />
+	
+	<!-- Cadre entourant l'ensemble du composant (liste gauche, bouton, liste droite) -->
+	<u:selector name=".richfacesSkin .mceMenu td">
+		<u:style name="background" value="none repeat scroll 0 0 white"/>
+	</u:selector>
+	
+	<!-- bordures de l'editeur -->
+	<u:selector name="body .richfacesSkin table.mceLayout">
+		<u:style name="border-color" skin="richEditorBorderColor"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+	<u:selector name="body .richfacesSkin .mceIframeContainer">
+		<u:style name="border-color" skin="richEditorBorderColor"/>
+		<u:style name="border-width" value="0"/>
+		<u:style name="border-style" value="none"/>
+	</u:selector>
+	
+	<u:selector name="body .richfacesSkin table.mceLayout tr.mceFirst td">
+		<u:style name="border-color" skin="richEditorBorderColor"/>
+		<u:style name="border-width" value="0 0 1px"/>
+		<u:style name="border-style" value="none none solid"/>
+	</u:selector>
+	
+	<u:selector name="body .richfacesSkin table.mceLayout tr.mceLast td">
+		<u:style name="border-color" skin="richEditorBorderColor"/>
+		<u:style name="border-width" value="0"/>
+		<u:style name="border-style" value="none"/>
+	</u:selector>
+	
+	<!-- bordures des selectbox de l'editeur -->
+	<u:selector name=".richfacesSkin .mceListBox .mceText">
+		<u:style name="border-color" skin="richEditorBorderColor"/>
+		<u:style name="border-width" skin="1px"/>
+		<u:style name="border-style" value="solid"/>
+	</u:selector>
+	
+</f:template>

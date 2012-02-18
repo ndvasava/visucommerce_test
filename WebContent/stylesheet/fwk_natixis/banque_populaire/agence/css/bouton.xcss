@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des boutons Natixis Internet.
+		Elle hérite d'une feuille de style principale qui définit les propriétés communes
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/bouton.xcss" />
+	
+	<!-- 
+		/**********************************/
+		/**   BLOCS DE BOUTONS           **/
+		/**********************************/
+	-->
+	
+	<!-- Positionnement dans les popus -->
+	<u:selector name=".modalButtons"><!-- EXTENDS ".modalButtons" -->
+		<u:style name="bottom" value="30px"/>
+	</u:selector>
+	
+	<!-- Positionnement dans les footers de tableaux -->
+	<u:selector name=".tableButtons"><!-- EXTENDS ".tableButtons" -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************************/
+		/**   BOUTONS SPECIFIQUES                    **/
+		/**           DE FORMULAIRES (actionButtons) **/
+		/**********************************************/
+	-->
+	
+	<!-- positionnement en bas de formulaire dans un cadre rich-panel pour IE6 -->
+	<u:selector name=".actionButtons input">
+		<u:style name="position" value="relative"/>
+		<u:style name="top" value="17px"/>
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE FOOTERS DE TABLEAUX (tableButtons)    **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".tableButtons input">
+		<u:style name="margin" value="0 3px"/>
+		<u:style name="position" value="relative"/>		
+		<u:style name="top" value="17px"/>
+	</u:selector>
+	
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE BLOCS DE PAGINATION (blocPagination)  **/
+		/***************************************************/
+	-->
+	
+	<!-- positionnement dans les blocs de pagination -->
+	<u:selector name=".blocPagination a">
+		<u:style name="color" skin="tableSelectionLinkColor"/>
+	</u:selector>
+
+</f:template>

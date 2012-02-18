@@ -1,0 +1,90 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+    
+    <h:form id="typeCommerceF" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">
+				<h:outputFormat value="#{editerTypeCommerceAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+					<f:param value="#{messages['typeCommerce.label']}"/>
+				</h:outputFormat>
+			</f:facet>
+			
+			<!-- Il est possible de définir pour chaque UIInput un valueChangeListener : 
+					valueChangeListener="#{bean.valueChangeMethod}" en tant qu'attribut de h:inputText
+			 -->
+            <s:decorate id="typeCoD" template="../../layout/edit.xhtml">
+                <ui:define name="label">
+                	<h:outputLabel value="#{messages['typeCommerce.nom.label']}" />
+                </ui:define>
+                <h:inputText id = "typeCo"
+                		label="#{messages['typeCommerce.nom.label']}"
+                       	required="true"
+                        size="15"
+                      	maxlength="15"
+                      	value="#{editerTypeCommerceAction.instance.typcom}" >
+				</h:inputText>
+            </s:decorate>
+            
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+			<!-- Version Fwk Sphinx -->
+			<!-- 
+				h:commandButton, mecanisme de POST pour mettre à jour le model (fonctions Create ou Update)
+				s:button, mecanisme de GET pour naviguer et obtenir des informations (fonction Cancel)
+			 -->
+			<h:commandButton id="doCreate" 
+					value="#{messages['default.button.create.label']}" 
+					action="#{editerTypeCommerceAction.persist}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{!editerTypeCommerceAction.managed}"/> 							          
+			 <h:commandButton id="doUpdate" 
+					value="#{messages['default.button.validate.label']}" 
+					action="#{editerTypeCommerceAction.update}"
+					styleClass="boutonAction boutonValider"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerTypeCommerceAction.managed}"/>
+	       	<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerTypeCommerceAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerTypeCommerceAction.managed}"/>
+		
+		</rich:panel>
+		
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

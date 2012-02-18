@@ -1,0 +1,212 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<style>
+		.customPanel{
+			margin: 0 0 20px;
+		}
+		.linkPagination a{
+			margin: 0 3px;
+		}
+		.rich-table-row-over{
+			background-color:	olive;
+			color:	gray;
+			cursor:	pointer;
+		}
+	</style>
+	
+    <h1>#{messages['company-account.menu.search.toValidate.label']}</h1>
+    
+  	<rich:panel rendered="#{commerceSearchAction.resultListNotEmpty}">
+	<h:form id="resF">
+		<rich:dataTable id="commerceDt" var="commerce" value="#{commerceSearchAction.dataModel}" 
+				rows="#{commerceSearchAction.pageSize}"
+				rowClasses="rich-table-cell-impair, rich-table-cell-pair"
+				onRowMouseOver="#{not empty navigationHelper['recherchePaysFrom']? '$(this).addClassName(\'rich-table-row-over\')' : ''}"
+               	onRowMouseOut="#{not empty navigationHelper['recherchePaysFrom']? '$(this).removeClassName(\'rich-table-row-over\')' : ''}">
+       			
+       			<rich:column styleClass="firstColumn " headerClass="firstColumn left">
+            		<f:facet name="header">#{messages['commerce.id.label']}</f:facet>
+           			<h:outputText value="#{commerce.id}" />
+       			</rich:column>
+       			<rich:column headerClass="left">
+            		<f:facet name="header">#{messages['commerce.nom.label']}</f:facet>
+           			<h:outputText value="#{commerce.nomCommerce}" />
+       			</rich:column>
+       			
+       			<rich:column styleClass="lastColumn rich-table-cell-action" headerClass="lastColumn rich-table-cell-action" rendered="#{empty navigationHelper['recherchePaysFrom']}">
+      					<f:facet name="header">
+      						<h:outputText value="#{messages['default.action.label']}"/>
+      					</f:facet>
+					
+					<!-- -->
+					<h:commandButton id="doFF" 
+							action="#{editerCommerceAction.findForValidation}"
+							value="View" 
+							immediate="true"
+							alt="#{messages['default.button.show.alt']}"
+							title="#{messages['default.button.show.label']}">
+						<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/> 
+					</h:commandButton>
+					
+					<a4j:commandButton id="findCompanyAccToValidate"
+            			value="#{messages['commerce.rechercheForm.recherche.label']}" 
+            			action="#{editerCommerceAction.findForValidation}" 
+            			reRender="companyAccToValidate">
+            			<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/>
+            		</a4j:commandButton>
+            			
+				</rich:column>
+				
+       	</rich:dataTable>
+       	
+       	<div class="linkPagination">
+			<s:fragment rendered="#{commerceSearchAction.previousPageAvailable}">
+		   		<a4j:commandLink id="doFirstBottom" 
+		   				action="#{commerceSearchAction.firstComAccToValidate}" 
+		   				ajaxSingle="true"
+		   				value="#{messages['default.paginate.first']}"
+		   				reRender="searchResults,resF,msg"
+		   				limitToList="true"/>
+		        <a4j:commandLink id="doPreviousBottom"
+		        		action="#{commerceSearchAction.prevComAccToValidate}" 
+		        		ajaxSingle="true"
+		        		value="#{messages['default.paginate.prev']}"
+		   				reRender="searchResults,resF,msg"
+		   				limitToList="true"/>
+		   	</s:fragment>
+	        <a4j:commandLink id="doNextBottom"
+	        		action="#{commerceSearchAction.nextComAccToValidate}" 
+	        		ajaxSingle="true"
+	        		rendered="#{commerceSearchAction.nextPageAvailable}" 
+	        		value="#{messages['default.paginate.next']}"
+	   				reRender="searchResults,resF,msg"
+	   				limitToList="true"/>
+		</div>
+	</h:form>	
+	</rich:panel>
+
+	<a4j:outputPanel id="companyAccToValidate" >
+	<h:form>
+	<rich:panel id="companyAccToValidatePanel" 
+			rendered="#{(editerCommerceAction.idDefined) and (editerCommerceAction.instance.accStatus == 0)}">
+		<s:decorate id="userIdD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.user-id.label']}" />
+            </ui:define>
+            <h:outputText id="userId" label="#{messages['commerce.user-id.label']}"
+                  	value="#{editerCommerceAction.instance.userId}" />
+		</s:decorate>
+		
+		<s:decorate id="nomCommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.nom.label']}" />
+            </ui:define>
+            <h:outputText id="nomCommerce" label="#{messages['commerce.nom.label']}"
+                  	value="#{editerCommerceAction.instance.nomCommerce}" />
+		</s:decorate>
+		 
+		<s:decorate id="typeCommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+		 		<h:outputLabel value="#{messages['commerce.typeCommerce.label']}"/>
+		 	</ui:define>
+		 	<h:outputText label="#{messages['commerce.typeCommerce.label']}" 
+		 		value="#{editerCommerceAction.instance.type.typeCommerceName} (#{editerCommerceAction.instance.type.id})" />	
+		</s:decorate>
+		
+		<s:decorate id="regIdD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.reg-type.label']}" />
+            </ui:define>
+            <h:outputText label="#{messages['commerce.reg-type.label']}"
+                  	value="#{editerCommerceAction.instance.regId}" />
+		</s:decorate>
+
+		<s:decorate id="ownerNameD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.owner-name.label']}" />
+            </ui:define>
+            <h:outputText id="ownerNameD" label="#{messages['commerce.owner-name.label']}"
+                  	value="#{editerCommerceAction.instance.ownerName}" />
+		</s:decorate>
+
+		<s:decorate id="ownerLastnameD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.owner-lastname.label']}" />
+            </ui:define>
+            <h:outputText id="ownerLastnameD" label="#{messages['commerce.owner-lastname.label']}"
+                  	value="#{editerCommerceAction.instance.ownerLastName}" />
+		</s:decorate>
+		 
+		<s:decorate id="adress1CommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.adress1.label']}" />
+            </ui:define>
+            <h:outputText id="adress1Commerce" label="#{messages['commerce.adress1.label']}"
+                  	value="#{editerCommerceAction.instance.address.address1}" />
+		</s:decorate>
+		 
+		<s:decorate id="adress2CommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.adress2.label']}" />
+            </ui:define>
+            <h:outputText id="adress2Commerce" label="#{messages['commerce.adress2.label']}"
+                  	value="#{editerCommerceAction.instance.address.address2}" />
+		</s:decorate>
+		 
+		<s:decorate id="cityAdressCommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+		 		<h:outputLabel value="#{messages['commerce.city.label']}"/>
+		 	</ui:define>
+		 	<h:outputText value="#{editerCommerceAction.instance.address.city.nom} (#{editerCommerceAction.instance.address.city.pin})" />
+		</s:decorate>
+
+		<s:decorate id="emailCommerceD" template="../../layout/edit.xhtml">
+		 	<ui:define name="label">
+               	<h:outputLabel value="#{messages['commerce.email.label']}" />
+            </ui:define>
+            <h:outputText id="emailCommerce" label="#{messages['commerce.email.label']}"
+                  	value="#{editerCommerceAction.instance.email}" />
+		</s:decorate>
+		
+		<div class="actionButtons">
+		<a4j:commandButton id="validateCompanyAcc" rendered="#{editerCommerceAction.instance.accStatus == 0}"
+            			value="#{messages['company.validateForm.validateButton.label']}" 
+            			action="#{editerCommerceAction.validateCompanyAcc}" 
+            			reRender="companyAccToValidate"/>
+        <a4j:commandButton id="rejectCompanyAcc" rendered="#{editerCommerceAction.instance.accStatus == 0}"
+            			value="#{messages['company.validateForm.rejectButton.label']}" 
+            			action="#{editerCommerceAction.rejectCompanyAcc}" 
+            			reRender="companyAccToValidate"/>
+        </div>
+	</rich:panel>
+	</h:form>
+	</a4j:outputPanel>
+	
+	
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

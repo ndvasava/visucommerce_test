@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 	
+		Feuille de style décrivant le menu Natixis Agence
+	-->	
+	
+	<!-- Om importe la feuille de style principale... -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/sx_menu.xcss"/>
+	
+	<!-- 
+		/**************/
+		/* Bloc Menu  */
+		/**************/
+	 -->
+	
+	<!-- Application d'une couleur de contour -->
+	<u:selector name=".menuPartieGauche">
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuBgImage"/>
+		</u:style>
+		<u:style name="background-position" value="right 0"/>
+		<u:style name="background-repeat" value="repeat-y"/>
+	</u:selector>
+	
+	<!-- Regle generale : pas de pointer pour la souris au survol sur les menu deja selectionnes -->
+	<u:selector name=".menuPartieGauche li.itemSelected a:hover, .menuPartieGauche li.groupSelected a:hover">
+		<u:style name="cursor" value="default"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 1  */
+		/*********************/
+	 -->
+	
+	<!-- 
+	<li class="niveau1 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau1 hasNoChild menuOuvert itemSelected">
+	<li class="niveau1 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Définition du style commun pour le niveau 1 (la classe "niveau 1" est systématiquement présente) -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.niveau1">
+		<u:style name="line-height" value="17px"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau2 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau2 hasNoChild menuOuvert itemSelected">
+	<li class="niveau2 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Fonctionnellement, le cas sans descendance "hasNoChild" (Cf fonctionnalité "Chargé de clientèle") est
+	traité différemment du reste : une image unique (puce grise vers le bas) quel que soit le cas :
+	fermé, ouvert, sélectionné...
+	En revanche, dès lors qu'ils ont une descendance, les styles "menuFerme", "menuOuvert" ont des images différentes.
+	Compte tenu de la disposition des styles ci-dessus, on va traiter les styles dans cet ordre :
+		- menuFerme (pour traiter le cas des menus fermés AVEC descendance)
+		- menuOuvert (pour traiter le cas des menus ouverts AVEC descendance)
+		- hasNoChild (pour traiter les autres cas : menus fermés / ouverts / sélectionnés SANS descendance)
+	(L'usage de ce dernier APRES les autres permet d'écraser les valeurs précédentes qui s'appliqueraient quand même
+	eu égard à la syntaxe en <li class="niveau2 hasNoChild menuFerme/menuOuvert">)
+	 -->
+	
+	<!-- Style pour le menu de niveau 2 fermé AVEC descendance -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuNiveau2FermeBgImage"/>
+		</u:style>
+		<u:style name="background-position" value="9px 9px"/>
+	</u:selector>
+	
+	<!-- Style pour le menu de niveau 2 SANS descendance (s'applique pour les cas ouverts, fermés, sélectionnés) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuNiveau2NoChildBgImage"/>
+		</u:style>
+		<u:style name="background-position" value="9px 9px"/>
+	</u:selector>
+	
+	<!-- Style pour le menu de niveau 2 ouvert AVEC descendance -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuOuvert" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuNiveau2OuvertBgImage"/>
+		</u:style>
+		<u:style name="background-position" value="10px 8px"/>
+		<u:style name="border-width" skin="menuNiveau2OuvertBorderWidth" default="0"/>
+		<u:style name="border-style" skin="menuNiveau2OuvertBorderStyle" default="solid"/>
+		<u:style name="border-color" skin="menuNiveau2OuvertBorderColor" default="transparent"/>
+	</u:selector>
+	
+	<!-- On rétablit le padding par défaut qui a été modifié dans le cas précédent (5). Car <li class="niveau2 hasNoChild menuOuvert itemSelected"> -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.itemSelected"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.itemSelected" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuNiveau2SelectedBgImage"/>
+		</u:style>
+		<u:style name="background-position" value="9px 9px"/>
+	</u:selector>
+	
+	<!-- (6) On reprend directement la variable située dans la feuille mère -->
+		
+		
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau3 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau3 hasNoChild menuOuvert itemSelected">
+	<li class="niveau3 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Mêmes remarques que pour le niveau 1 et qui justifient l'ordre d'implémentation : menuFerme, menuOuvert, hasNoChild-->
+	
+	<!-- Style pour le bloc contenant le niveau 3. -->
+	<u:selector name=".menuPartieGauche ul.niveau2b"><!-- EXTENDS ".menuPartieGauche ul.niveau2b" -->
+		<u:style name="margin-left" value="12px"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (7) Décalage du bloc de niveau 3 -->
+			
+	<!-- Définition du style commun pour les menus de niveau 2 -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.niveau3"><!-- EXTENDS ".menuPartieGauche ul.niveau2b li.niveau3" -->
+		<u:style name="border-width" value="0"/>
+	</u:selector>
+			
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	
+	<!-- 
+	<li class="niveau4 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau4 hasNoChild menuOuvert itemSelected">
+	<li class="niveau4 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Style général pour le bloc de niveau 4 (on définit une bordure) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b"><!-- EXTENDS ".menuPartieGauche ul.niveau3b" -->
+		<u:style name="margin-left" value="12px"/><!-- (10) -->
+	</u:selector>
+	
+	<!-- Définition du style commun pour les menus de niveau 4 -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.niveau4"><!-- EXTENDS ".menuPartieGauche ul.niveau2b li.niveau3" -->
+		<u:style name="border-width" value="0"/>
+	</u:selector>
+			
+	
+	<!-- (10) On décale le bloc de niveau 4 -->
+		
+	<!-- Il s'agit du dernier niveau : puce à droite si selectionne -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected"><!-- EXTENDS ".menuPartieGauche ul.niveau3b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentMenuNiveau4SelectedBgImage" />
+		</u:style>
+		<u:style name="background-position" value="right 7px"/>
+	</u:selector>
+	
+	<!-- (6) On reprend directement la variable située dans la feuille mère -->
+	
+	<!-- Il s'agit du dernier niveau : pas de puce -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.niveau3b li.hasNoChild" -->
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+		
+</f:template>

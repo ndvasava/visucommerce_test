@@ -1,0 +1,141 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+	<ui:composition template="../../layout/template.xhtml">
+		<ui:define name="body">
+			
+		<style>
+			.rich-panel .bodyCadreExterieurQuadrillage {
+			  padding:0;
+			  overflow:hidden;
+			  zoom:1;
+			}
+			
+			.rich-panel .panelQuadrille {
+			   margin:0;
+			   float:left;
+			   border:invert;
+			}
+			
+			.rich-panel .panel1, .rich-panel .panel3 {
+			   width:49%;
+			   border-right:2px dotted pink;
+			}
+	
+			.rich-panel .panel2, .rich-panel .panel4 {
+			   width:50%;
+			}
+			
+			.traitHorizontal {
+			   border-top:2px dotted pink;
+			}
+			
+			
+			.customPanelGrid {
+			   border-collapse: collapse;
+			   border: 1px solid white;
+			   margin-left:auto;
+			   margin-right:auto;
+			}
+			html > body .customPanelGrid {
+			   border-collapse: collapse;
+			   border-style: hidden;
+			}
+			.customPanGrid td {
+			   border: 2px dotted pink;
+			}
+			.customPanGrid tbody {
+			   vertical-align: top;
+			}
+			
+			.left {
+				border-right:border: 2px black;
+				vertical-align: top;
+				height: 100%;
+			}
+			.right {
+				vertical-align: top;
+				height: 100%;
+			}
+			.insideAccountPanel{
+				background-color:gray;
+			}
+		</style>
+						
+		<br/>
+		<br/>
+		<br/>
+		
+		<h:form id="acceuilMarchandForm">
+		
+			<h:panelGrid columns="2" width="75%" styleClass="customPanelGrid" columnClasses="left,right">
+				
+				<rich:panel id="companyInfoPanel" bodyClass="inpanelBody">
+					<h:outputText value="company information" 
+						style="font-weight:bold;font-size:larger;margin-bottom:20px;text-aling:center;" />
+					<br/>
+					<br/>
+					<!-- utilise s:button car on est sur de la navigation pur, sans besoin de poster le formulaire, peux directement
+					faire reference au view-id cible, sinon il faut utiliser les regles de navigation dans pages.xml -->
+					<s:button value="#{messages['default.button.go.label']}" action="viewCompany"/>
+					
+				</rich:panel>
+				<rich:panel id="complInfoPanel" bodyClass="inpanelBody" 
+						rendered="#{editerCommerceAction.instance.accStatus == 1}">
+					<h:outputText value="#{messages['company.more-info.edit.label']}" 
+						style="font-weight:bold;font-size:larger;margin-bottom:20px;text-aling:center;" />
+					<br/>
+					<br/>
+					<!-- utilise s:button car on est sur de la navigation pur, sans besoin de poster le formulaire, peux directement
+					faire reference au view-id cible, sinon il faut utiliser les regles de navigation dans pages.xml -->
+					<s:button value="#{messages['default.button.go.label']}" action="goEditCompanyMoreInfo"/>
+				</rich:panel>
+				
+				<rich:panel id="contractPanel" bodyClass="inpanelBody" 
+						rendered="#{editerCommerceAction.instance.accStatus == 2}">
+					<h:outputText value="#{messages['company.contract.download.label']}" 
+						style="font-weight:bold;font-size:larger;margin-bottom:20px;text-aling:center;" />
+					<br/>
+					<br/>
+					<!-- utilise s:button car on est sur de la navigation pur, sans besoin de poster le formulaire, peux directement
+					faire reference au view-id cible, sinon il faut utiliser les regles de navigation dans pages.xml -->
+					<h:commandButton value="#{messages['default.button.go.label']}" action="downloadContract"
+						alt="#{messages['company.contract.download.label']}"/>
+				</rich:panel>
+				
+				<rich:panel id="salesPersonPanel" bodyClass="inpanelBody" 
+						rendered="#{editerCommerceAction.instance.accStatus == 2}">
+					<h:outputText value="#{messages['sp.add.label']}" 
+						style="font-weight:bold;font-size:larger;margin-bottom:20px;text-aling:center;" />
+					<br/>
+					<br/>
+					<!-- utilise s:button car on est sur de la navigation pur, sans besoin de poster le formulaire, peux directement
+					faire reference au view-id cible, sinon il faut utiliser les regles de navigation dans pages.xml -->
+					<h:commandButton id="doAddSalesperson"	action="goEditSalesperson"
+						value="#{messages['default.button.go.label']}"
+						alt="#{messages['default.button.update.alt']}"
+						title="#{messages['commerce.button.add-salesperson.label']}"> 
+						<f:setPropertyActionListener target="#{editerSalespersonAction.companyAccId}" 
+									value="#{editerCommerceAction.instance.id}"/> 	
+				</h:commandButton>	
+				</rich:panel>
+				
+			</h:panelGrid>
+			 
+		</h:form>
+			
+		</ui:define>
+	</ui:composition>
+	
+</f:view>
+</jsp:root>

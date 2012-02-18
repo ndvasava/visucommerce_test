@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée aux composants <rich:menuItem>.
+		Qui se retrouvent utilisés dans les composants suivants :
+		- <rich:dropDownMenu>
+		- <rich:contextMenu>
+		Ces derniers font l'objet d'une déclaration spécifique...
+		
+		En revanche, on va inclure ici <rich:menuGroup> puisqu'ils 
+		n'ont pas de sens graphiques en dehors de <rich:menuItem>...
+		=> On leur donne le même style que l'item unitaire.		
+	-->
+	
+	<!-- 
+		/***************************************/
+		/*  <rich:menuItem>, <rich:menuGroup>  */
+		/***************************************/
+	 -->
+	
+	<!-- Style basique d'un lien, couplé à '.rich-menu-item-enabled' ou ''.rich-menu-item-hover'  -->	
+	<u:selector name=".rich-menu-item">
+		<u:style name="text-align" skin="menuItemTextAlign" default="left"/>
+		<u:style name="border">
+			<f:verbatim skin="menuItemBorderWidth" default="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuItemBorderColor" default="transparent"/><!-- (4) -->
+		</u:style>
+	</u:selector>	
+	
+	<!-- (4) Couleur du cadre entourant l'item lorsqu'il est survolé (masqué par la propriété 
+	'border' de la classe '.rich-menu-item-enabled' en temps normal) -->
+	
+	<!-- Style d'un lien à l'affichage standard ; vient compléter '.rich-menu-item' -->
+	<u:selector name=".rich-menu-item-enabled, .rich-menu-group-enabled">
+		<u:style name="border">
+			<f:verbatim skin="menuItemEnabledBorderWidth" default="0"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuItemEnabledBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="padding" value="2px 36px 2px 2px"/>
+	</u:selector>
+	
+	<!-- Style d'un lien lorsqu'il est survolé ; vient compléter '.rich-menu-item' -->	
+	<u:selector name=".rich-menu-item-hover, .rich-menu-group-hover">
+		<u:style name="background-color" skin="menuItemHoverBgColor" default="transparent"/>
+		<u:style name="border">
+			<f:verbatim skin="menuItemHoverBorderWidth" default="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuItemHoverBorderColor" default="transparent"/>
+		</u:style>
+	</u:selector>	
+	
+	<!-- Style d'un lien lorsqu'il est désactivé -->	
+	<u:selector name=".rich-menu-item-disabled">
+		<u:style name="border" value="0 solid transparent"/>
+	</u:selector>
+	
+	<!-- Classe permettant d'inclure une icône via l'attribut 'icon' -->
+	<u:selector name=".rich-menu-item-icon, .rich-menu-group-icon">
+		<u:style name="margin-right" value="10px"/>
+	</u:selector>
+	
+	<!-- Classe permettant de positionner l'image triangulaire permettant d'accéder aux sous-menus -->
+	<u:selector name=".rich-menu-item-icon img, .rich-menu-group-icon img">
+		<u:style name="vertical-align" value="middle"/>
+	</u:selector>
+	
+	<!-- Style pour les liens à l'intérieur -->
+	<u:selector name=".rich-menu-item a, .rich-menu-group a">
+		<u:style name="text-decoration" skin="menuItemLinkTextDecoration" default="none"/>
+	</u:selector>
+	
+	<!-- Style des liens du menu contextuel -->
+	<u:selector name=".rich-menu-item-label, .rich-menu-group-label">
+		<u:style name="color" skin="menuItemLabelColor" default="#000000"/>
+		<u:style name="font-weight" skin="menuItemLabelFontWeight" default="normal"/>
+	</u:selector>
+	
+	<!-- Image triangulaire permettant d'accéder aux sous-rubriques... -->
+	<u:selector name=".rich-menu-node-icon">
+		<f:if skin="menuNodeIconBgImg"><!-- (5) -->
+			<u:style name="background-image">
+				<f:resource f:skin="menuNodeIconBgImg"/><!-- (5) -->	
+			</u:style>
+		</f:if>	
+	</u:selector>
+	
+	<!-- (5) Elle est par défaut noire et s'obtient à l'adresse suivante :
+	"/aws/a4j/g/3_3_2.SR1org.richfaces.renderkit.html.images.MenuNodeImage/DATB/eAFjYGBYvnYjAAQGAgY_" 
+	=> Elle peut être remplacée en spécifiant une nouvelle image dans la variable 'menuNodeIconBgImg'.
+	Le conditionnement <f:if> permet de rendre optionnelle cette spécification sans faire planter 
+	l'application.
+	L'absence de valeur par défaut permet de ne pas écraser l'image par défaut présente dans RichFaces.
+	-->
+	
+	<!-- 
+		/**************************/
+		/*  <rich:menuSeparator>  */
+		/**************************/
+	 -->
+	
+	<!-- Le trait de séparation au sein du menu -->
+	<u:selector name=".rich-menu-separator">
+		<u:style name="border-top">
+			<f:verbatim skin="menuSeparatorBorderWidth" default="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="menuSeparatorBorderColor"/><!-- (6) -->
+		</u:style>
+		<u:style name="cursor" value="default"/>
+		<u:style name="font-size" value="0"/>
+		<u:style name="margin" skin="menuSeparatorMargin" default="2px 0 2px 24px"/>
+	</u:selector>	
+	
+	<!-- (6) Le composant natif n'inclut pas de couleur de bordure... C'est donc la valeur par 
+	défaut de la propriété 'color' qui s'applique !-->
+	
+</f:template>

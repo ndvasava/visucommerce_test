@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 	
+		Feuille de style décrivant le menu Caisse Epargne Agence
+	-->	
+	
+	<!-- Om importe la feuille de style principale... -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/sx_menu.xcss"/>
+	
+	<!-- Particularité de cette enseigne : on définit une couleur de fond au survol sur les liens à partir
+	du niveau 2. Seulement, cette couleur ne s'applique pas au <li> mais seulement au lien <a>.
+	Ainsi, la propriété "background-color" est appliquée sur les liens... 
+	Cependant, l'image de fond doit demeurée présente, y compris au survol : elle est donc définie elle-aussi
+	au niveau du lien. 
+	
+	Au survol, toute la largeur de la ligne doit être colorée, d'où l'absence de marge sur les <ul> englobant
+	toutes les sous-structures. On joue plutôt sur la position de l'image (avec une valeur de gauche qui compense
+	la marge gauche) et la valeur du padding-left appliquée au lien. 
+	
+	La structure du code (originale par rapport aux autres menus) est la suivante, pour chaque niveau X:
+	
+	- ".menuPartieGauche ul.niveau(X-1)b li.niveauX a" qui définit le padding-left pour le lien X
+	- ".menuPartieGauche ul.niveau(X-1)b li.menuYYY a, .menuPartieGauche ul.niveau(X-1)b li.menuYYY a:hover"
+	qui définit l'image pour le lien X, YYY valant successivement "Ferme, Ouvert, Selected"
+	- ".menuPartieGauche ul.niveau(X-1)b li.menuYYY a" qui définit la couleur de fond pour le lien X
+	- ".menuPartieGauche ul.niveau(X-1)b li.menuYYY a:hover" qui définit la couleur de fond pour le lien X au survol
+	
+	Noter l'absence de "body..." qui rentre en conflit... et l'emporte à mauvais escient sur les classes standard.
+	
+	Noter, enfin, ponctuellement, l'application d'un padding-left corrigé pour les éléments de niveau 3 sans enfant 
+	qui n'ont pas de puce et qui, par conséquent, doivent avoir un padding-left moindre que les autres.
+	
+	Dernier point, on retrouve pour les niveaux 2 et 3 des images équivalentes... mais qui sont répétées... pour des 
+	questions de priorité : en factorisant, le menu 3 fermé, fils d'un menu 2 ouvert a une puce ... ouverte :)
+	-->
+	
+	<!-- 
+		/*******************/
+		/* Styles communs  */
+		/*******************/
+	 -->
+	
+	<!-- Définition du style commun pour les liens -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li a">
+		<u:style name="font-family" value="Arial"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) La police est reprécisée ici : elle est différente de celle définie dans le body -->
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau2 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau2 hasNoChild menuOuvert itemSelected">
+	<li class="niveau2 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Fonctionnellement, le cas sans descendance "hasNoChild" (Cf fonctionnalité "Chargé de clientèle") est
+	traité différemment du reste : une image unique (puce grise vers le bas) quel que soit le cas :
+	fermé, ouvert, sélectionné...
+	En revanche, dès lors qu'ils ont une descendance, les styles "menuFerme", "menuOuvert" ont des images différentes.
+	Compte tenu de la disposition des styles ci-dessus, on va traiter les styles dans cet ordre :
+		- menuFerme (pour traiter le cas des menus fermés AVEC descendance)
+		- menuOuvert (pour traiter le cas des menus ouverts AVEC descendance)
+		- hasNoChild (pour traiter les autres cas : menus fermés / ouverts / sélectionnés SANS descendance)
+	(L'usage de ce dernier APRES les autres permet d'écraser les valeurs précédentes qui s'appliqueraient quand même
+	eu égard à la syntaxe en <li class="niveau2 hasNoChild menuFerme/menuOuvert">)
+	 -->
+			
+											<!-- ~~~~~~~~~~~~~~~~
+									 	  	     Menu Fermé
+									  		~~~~~~~~~~~~~~~~~~~~-->
+		
+	<!-- Style pour le menu de niveau 2 fermé AVEC descendance : précision de l'image -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuFerme a, .menuPartieGauche ul.niveau1b li.menuFerme a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme a" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_ouvrir.png" />
+		</u:style>
+		<u:style name="background-position" value="8px 4px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4)Cf explications en entête : pas de margin sur l'<ul> englobante : donc décalage par positionnement décalé de l'image -->
+	
+											<!-- ~~~~~~~~~~~~~~~~
+									 	  	     Menu Ouvert
+									  		~~~~~~~~~~~~~~~~~~~~-->
+									  		
+	<!-- Style pour le menu de niveau 2 ouvert AVEC descendance : précision de l'image -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a, .menuPartieGauche ul.niveau1b li.menuOuvert a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme a" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_fermer.png" />
+		</u:style>
+		<u:style name="background-position" value="8px 4px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- Style pour le menu de niveau 2 ouvert AVEC descendance : précision de la couleur de fond (au survol) -->	
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme a" -->
+		<u:style name="background-color" skin="menuNiveau2HoverOuvertLienBgColor" default="transparent"/>		
+	</u:selector>
+	
+											<!-- ~~~~~~~~~~~~~~~~~~~~~~~~
+									 	  	     Menu sans descendance
+									  		~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+			
+	<!-- Style pour le menu de niveau 2 SANS descendance (s'applique pour les cas ouverts, fermés, sélectionnés) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild a, .menuPartieGauche ul.niveau1b li.hasNoChild a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.hasNoChild" -->
+		<u:style name="background-image" value="none"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (5) Pas d'image pour les éléments sans descendance -->
+	
+		
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau3 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau3 hasNoChild menuOuvert itemSelected">
+	<li class="niveau3 menuFerme/menuOuvert">
+	-->
+	
+	<!-- (6) Incrémentation du décalage située en (3)-->
+	
+											<!-- ~~~~~~~~~~~~~~~~
+									 	  	     Menu Fermé
+									  		~~~~~~~~~~~~~~~~~~~~-->
+			
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a, .menuPartieGauche ul.niveau2b li.menuFerme a:hover">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_ouvrir.png" />
+		</u:style>
+		<u:style name="background-position" value="22px 4px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuFerme a:hover">
+		<u:style name="background-color" skin="menuNiveau3HoverFermeLienBgColor" default="transparent"/>		
+	</u:selector>
+	
+											<!-- ~~~~~~~~~~~~~~~~
+									 	  	     Menu Ouvert
+									  		~~~~~~~~~~~~~~~~~~~~-->
+	
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a, .menuPartieGauche ul.niveau2b li.menuOuvert a:hover">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_fermer.png" />
+		</u:style>
+		<u:style name="background-position" value="22px 4px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.menuOuvert a:hover">
+		<u:style name="background-color" skin="menuNiveau3HoverOuvertLienBgColor" default="transparent"/>		
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.itemSelected a">
+		<u:style name="background-color" skin="menuNiveau3SelectedLienBgColor" default="transparent"/>		
+	</u:selector>	
+		
+	<!-- Style pour le menu de niveau 2 SANS descendance (s'applique pour les cas ouverts, fermés, sélectionnés) -->
+	<u:selector name=".menuPartieGauche ul.niveau2b li.hasNoChild a, .menuPartieGauche ul.niveau2b li.hasNoChild a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau2b li.hasNoChild" -->
+		<u:style name="background-image" value="none"/>
+		<u:style name="padding-left" value="24px"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (7) Important : le niveau 3 sans enfant n'a pas de puce : le padding-left défini en (6) est donc amoindri... -->
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	
+	<!-- 
+	<li class="niveau4 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau4 hasNoChild menuOuvert itemSelected">
+	<li class="niveau4 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Définition du style pour les liens de menu de niveau 4 -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.niveau4 a, .menuPartieGauche ul.niveau3b li.niveau4 a:hover">
+		<u:style name="padding-left" value="42px"/><!-- (4) -->
+	</u:selector>	
+							
+	<!-- Il s'agit du dernier niveau : la puce standard est "hasNoChild" -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a, .menuPartieGauche ul.niveau3b li.hasNoChild a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau3b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/agence/img/puce_noire.png" />
+		</u:style>
+		<u:style name="background-position" value="34px center"/>
+	</u:selector>
+	
+	<!-- Style pour le menu de niveau 2 ouvert AVEC descendance : précision de la couleur de fond (normal) -->	
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme a" -->
+		<u:style name="background-color" skin="menuNiveau4NoChildLienBgColor" default="transparent"/>		
+	</u:selector>
+	
+	<!-- Style pour le menu de niveau 2 ouvert AVEC descendance : précision de la couleur de fond (au survol) -->	
+	<u:selector name=".menuPartieGauche ul.niveau3b li.hasNoChild a:hover"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuFerme a" -->
+		<u:style name="background-color" skin="menuNiveau4HoverNoChildLienBgColor" default="transparent"/>		
+	</u:selector>
+	
+	<!-- Gestion du cas "menu fermé" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b li.itemSelected a">
+		<u:style name="background-color" skin="menuNiveau4SelectedLienBgColor" default="transparent"/>		
+	</u:selector>
+		 
+</f:template>

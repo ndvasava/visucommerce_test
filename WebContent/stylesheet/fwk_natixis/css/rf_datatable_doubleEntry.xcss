@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Double Entrée : surcharge des propriétés 
+| - rf_datatable_cadre.xcss
+| - rf_datatable_simple.xcss
+| - rf_datatable.xcss 
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Caption
+| 07/2010 : internet uniquement
++===============================================================================
+-->
+
+	<u:selector name="	.rich-table-doubleEntry .rich-table-caption,
+						.rich-table-doubleEntry .rich-table caption">
+
+		<u:style name="border-color" skin="tableDoubleEntryCaptionBorderColor"/>
+		<u:style name="border-style" default="solid" skin="tableDoubleEntryCaptionBorderStyle"/>
+		<u:style name="border-width" skin="tableDoubleEntryCaptionBorderWidth"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Caption - [FF]
+| 07/2010 : internet uniquement
++===============================================================================
+-->
+	<u:selector name="	html:not([lang*='']) .rich-table-doubleEntry .rich-table-caption,
+						html:not([lang*='']) .rich-table-doubleEntry .rich-table caption">
+						
+		<u:style name="border-width" skin="tableDoubleEntryCaptionBorderWidth_FF"/>
+		<u:style name="border-color" skin="tableDoubleEntryCaptionBorderColor_FF"/>
+		<u:style name="margin" skin="tableDoubleEntryCaptionBorderMargin_FF"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Header - Cellule
++===============================================================================
+-->
+	<u:selector name="	.rich-table-doubleEntry .sx-table-header .rich-table-headercell,
+						.rich-table-doubleEntry .rich-table-subheadercell, 
+						.rich-table-doubleEntry .rich-subtable-headercell">
+						
+		<u:style name="background-color"	skin="tableDoubleEntryHeadercellBgColor"/>
+		<u:style name="border-color" 		skin="tableDoubleEntryHeadercellBorderColor"/>
+		<u:style name="border-style" 		skin="tableDoubleEntryHeadercellBorderStyle" default="solid" />
+		<u:style name="border-width" 		skin="tableDoubleEntryHeadercellBorderWidth"/>			
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - Colonnes de gauche
++===============================================================================
+-->
+	<u:selector name=".sx-table-doubleEntryHeaderContinue">
+	
+		<u:style name="background-color"	skin="tableDoubleEntryHeaderContinueBgColor"/>
+		<u:style name="border-color" 		skin="tableDoubleEntryHeaderContinueBorderColor"/>		
+		<u:style name="border-width" 		skin="tableDoubleEntryHeaderContinueBorderWidth"/>
+		<u:style name="font-weight" 		skin="tableDoubleEntryHeaderContinueFontWeight" default="normal" />
+		<u:style name="text-align" 			default="center"/>
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Body - Cellule
++===============================================================================
+-->	
+	<u:selector name="	.rich-table-doubleEntry .rich-table-cell, 
+						.rich-table-doubleEntry .rich-subtable-cell">
+						
+		<u:style name="border-color"	skin="tableDoubleEntryCellBorderColor"/>		
+		<u:style name="border-style" 	skin="tableDoubleEntryCellBorderStyle" default="solid"/>
+		<u:style name="border-width" 	skin="tableDoubleEntryCellBorderWidth"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - données - 1ere ligne
++===============================================================================
+-->
+	<u:selector name=".rich-table-doubleEntry .rich-table-firstrow .rich-table-cell">
+	
+		<u:style name="border-top" skin="tableDoubleEntryCellFirstLineBorderTop"/>
+	</u:selector>
+	
+
+<!-- 
++===============================================================================
+| Body - Cellule - données - 1ere colonne
++===============================================================================
+-->	
+	<u:selector name=".rich-table-doubleEntry .doubleEntryFirstCell">	
+		<u:style name="border-left" skin="tableDoubleEntryFirstCellBorderLeft"/>
+	</u:selector>
+	
+	
+</f:template>

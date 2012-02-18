@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des boutons CE Internet.
+		Elle hérite d'une feuille de style principale qui définit les propriétés communes
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/bouton.xcss" />
+	
+	<!-- 
+		/**********************************/
+		/**   BLOCS DE BOUTONS           **/
+		/**********************************/
+	-->
+	<!-- si on est dans un cadre :  on deborde sur le bord et on retire le border-top-->
+	<u:selector name=".rich-panel .actionButtons">
+		<u:style name="border" value="none"/>
+		<u:style name="margin-top" value="0"/>
+		<u:style name="padding-top" value="0"/>
+	</u:selector>
+
+	<!-- Positionnement dans les footers de tableaux -->
+	<u:selector name=".tableButtons"><!-- EXTENDS ".tableButtons" -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- Positionnement dans les blocs de pagination -->
+	<u:selector name=".blocPagination"><!-- EXTENDS ".blocPagination" -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <input>    **/
+		/**********************************/
+	-->
+	
+	<!-- Style pour le bouton OK (qui n'a pas de flèches blanches) -->
+ 	<u:selector name="input.boutonOK">
+ 		<u:style name="background-color" value="#00a6eb"/>
+		<u:style name="width" value="30px"/>
+		<u:style name="height" value="18px"/><!-- (1) -->
+		<u:style name="padding" value="0 0 1px 0"/><!-- TODO : voir si on garde ici -->
+ 	</u:selector>
+ 	
+ 	<!-- (1) Nécessaire car s'applique à un bouton dont on précise la taille du texte : le bouton se contracte...-->
+
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <a>        **/
+		/**********************************/
+	-->
+	
+	<!-- Style utilisé conjointement avec le style .boutonAction -->
+	<u:selector name="a.boutonDeconnexion">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/puce_deconnexion_9.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="6px 50%"/><!-- (1) -->
+		<u:style name="padding-left" value="21px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Permet de positionner l'image au sein du rectangle bleu -->
+	<!-- (2) Permet de définir l'espacement entre l'image et le texte -->
+	
+	<!-- 
+		/**********************************************/
+		/**   BOUTONS SPECIFIQUES                    **/
+		/**           DE FORMULAIRES (actionButtons) **/
+		/**********************************************/
+	-->
+
+	<u:selector name=".rich-panel .actionButtons input">
+		<u:style name="position" value="relative"/>
+		<u:style name="top" value="16px"/>
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE FOOTERS DE TABLEAUX (tableButtons)    **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".tableButtons input">
+		<u:style name="margin" value="0 3px"/>		 
+		<u:style name="position" value="relative"/>		
+		<u:style name="top" value="11px"/>
+	</u:selector>
+	
+	<!-- 
+		/**************************************/
+		/**   BOUTONS SPECIFIQUES            **/
+		/**      AUTRES (A REVOIR)           **/
+		/**************************************/
+	-->
+
+	<!-- complement pour les composants rf non standards -->
+	
+	<!-- picklist -->	
+	<u:selector name=".rich-list-picklist-button-content">
+		<u:style name="background-color" skin="dimmedBgColor"/>
+		<u:style name="border" value="0 solid #000000"/>
+		<u:style name="color" value="#000000"/>
+	</u:selector>
+		
+</f:template>

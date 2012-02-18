@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 	
+		Feuille de style décrivant le menu BP Agence
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/sx_menu.xcss" />
+	
+	
+	<!-- 
+		/*******************/
+		/* Styles communs  */
+		/*******************/
+	 -->
+	
+	<!-- Définition du style commun pour les liens -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li a, a.lienMenuNiveau1, .rich-ddmenu-label"><!-- (2) -->
+		<u:style name="font-family" value="Arial"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) La police est reprécisée ici : elle est différente de celle définie dans le body -->
+	
+	<!-- (2) Rajout de classe CSS pour permettre la gestion du menu horizontal à l'identique du menu vertical.
+	'a.lienMenuNiveau1' est utilisée dans le cadre d'un <rich:toolBar> n'ayant que des niveaux 1 ; ces derniers
+	étant obtenus à l'aide des simples liens auxquels... on rajoute la classe CSS lienMenuNiveau1:hover !
+	'.rich-ddmenu-label' est utilisée dans le cadre d'un <rich:dropDownMenu> qui permet de gérer les différents 
+	niveaux. Cette classe définissant le label de ce niveau (Cf rf_dropDownMenu.xcss) -->
+			 
+	<!-- 
+		/*********************/
+		/* Menu de niveau 1  */
+		/*********************/
+	 -->
+	
+	<!-- 
+	<li class="niveau1 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau1 hasNoChild menuOuvert itemSelected">
+	<li class="niveau1 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.hasNoChild, .menuPartieGauche ul.blocMenu li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.blocMenu li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/niveau1.gif" />
+		</u:style>
+		<u:style name="background-position" value="10px 12px"/>
+	</u:selector>
+	
+	<!-- Rajout de l'image pour les menus ouverts de niveau 1 -->
+	<u:selector name=".menuPartieGauche ul.blocMenu li.menuOuvert, .menuPartieGauche ul.blocMenu li.itemSelected"><!-- EXTENDS ".menuPartieGauche ul.blocMenu li.menuOuvert" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_blanc_open.gif" />
+		</u:style>
+		<u:style name="background-position" value="left 5px"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 2  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau2 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau2 hasNoChild menuOuvert itemSelected">
+	<li class="niveau2 menuFerme/menuOuvert">
+	-->
+	
+		
+	<!-- Rajout de l'image pour le menu de niveau 2 sans descendance (sans descendance : Ex : rechercher charge) -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.hasNoChild, .menuPartieGauche ul.niveau1b li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_bleu_close2.gif" />
+		</u:style>
+		<u:style name="background-position" value="left top"/>
+	</u:selector>
+	
+	<!-- Rajout de l'image pour le menu de niveau 2 avec descendance mais ouvert -->
+	<u:selector name=".menuPartieGauche ul.niveau1b li.menuOuvert, .menuPartieGauche ul.niveau1b li.itemSelected"><!-- EXTENDS ".menuPartieGauche ul.niveau1b li.menuOuvert" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_blanc_open1.gif" />
+		</u:style>
+		<u:style name="background-position" value="left top"/>
+	</u:selector>
+		
+	<!-- 
+		/*********************/
+		/* Menu de niveau 3  */
+		/*********************/
+	 -->
+	 
+	<!-- 
+	<li class="niveau3 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau3 hasNoChild menuOuvert itemSelected">
+	<li class="niveau3 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Style pour le bloc contenant le niveau 3. -->
+	<u:selector name=".menuPartieGauche ul.niveau2b"><!-- EXTENDS ".menuPartieGauche ul.niveau1b" -->
+		<u:style name="margin" value="3px 0 0 24px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) L'image carrée ne doit pas empiéter sur l'image de niveau 2 arrondie située juste au-dessus.
+	On définit ici une marge gauche pour que les éléments de niveau 3 ne dépassent pas à gauche les
+	éléments de niveau 2 ; on peut ainsi une couleur de fond qui ne déborde sur toute la largeur du menu.
+	Une couleur de fond s'applique pour toute la descendance ; se met au niveau 2 pour que les éléments
+	de niveau 3 soient plongés dans un carré décrit par cette couleur de fond. Ceci ne se verra pas au niveau du
+	niveau 2 puisqu'il y a, à cet endroit, des images... -->
+	
+	
+	<!-- (5) Pour que l'image de niveau 3 soit indentée par rapport à celle de niveau 2 : son extrêmité gauche doit être aligné
+	avec la flèche située à l'intérieur de l'image de niveau 2 -->
+	
+	<!-- Gestion du cas "sans descendance" qui s'intercale en 2ème classe -->
+	<u:selector name="body .menuPartieGauche ul.niveau2b li.hasNoChild, .menuPartieGauche ul.niveau2b li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.niveau2b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_bleu_close3_sphinx.gif" />
+		</u:style>
+		<u:style name="background-position" value="left 50%"/>
+	</u:selector>
+		
+	<!-- Gestion du cas "menu ouvert" qui s'intercale en 2ème classe (ou 3ème si présence d'un niveau 1 sans descendance) -->
+	<u:selector name="body .menuPartieGauche ul.niveau2b li.menuOuvert, .menuPartieGauche ul.niveau2b li.itemSelected"><!-- EXTENDS ".menuPartieGauche ul.niveau2b li.menuOuvert" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_blanc_open3b_sphinx.gif" />
+		</u:style>
+		<u:style name="background-position" value="left top"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************/
+		/* Menu de niveau 4  */
+		/*********************/
+	 -->
+	
+	<!-- 
+	<li class="niveau4 hasNoChild menuFerme/menuOuvert">
+	<li class="niveau4 hasNoChild menuOuvert itemSelected">
+	<li class="niveau4 menuFerme/menuOuvert">
+	-->
+	
+	<!-- Style général pour le bloc de niveau 4 (on définit une bordure) -->
+	<u:selector name=".menuPartieGauche ul.niveau3b"><!-- EXTENDS ".menuPartieGauche ul.niveau3b" -->
+		<u:style name="margin" value="3px 0 0 12px"/><!-- (8) -->
+	</u:selector>
+	
+	<!-- (8) Le rectangle bleu ne déborde pas sur l'image du dessus.
+	Le rectangle bleu ne colle pas à gauche... Il est aligné avec la flèche contenue dans l'image du dessus.
+	Les liens de niveau 4 sont, TOUS ENSEMBLE, encadrés par un rectangle bleu... Ceci est redéfini dans la feuille mère.
+	Il existe ainsi 2 variables pour définir les bordures : celle qui s'applique à chaque <li> de la liste et qui fait
+	que l'on obtient n rectangles ; celle qui s'applique au bloc dans sa globalité et qui fait que l'on a qu'un seul rectangle. -->
+	
+	<!-- (11) Espacement d'écriture au sein du niveau 4 -->
+					
+	<!-- Il s'agit du dernier niveau : la puce standard est "hasNoChild" -->
+	<u:selector name="body .menuPartieGauche ul.niveau3b li.menuFerme"><!-- EXTENDS ".menuPartieGauche ul.niveau3b li.hasNoChild" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_bleu_trait3_sphinx.gif" />
+		</u:style>
+		<u:style name="background-position" value="left top"/>
+	</u:selector>
+		
+	<!-- Il s'agit du dernier niveau : la puce sélectionnée de la standard "hasNoChild" -->
+	<u:selector name="body .menuPartieGauche ul.niveau3b li.menuOuvert"><!-- EXTENDS ".menuPartieGauche ul.niveau3b li.itemSelected" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/arrondi_blanc_trait3_sphinx.gif" />
+		</u:style>
+		<u:style name="background-position" value="left top"/>
+	</u:selector>
+	
+</f:template>

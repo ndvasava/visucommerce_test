@@ -1,0 +1,194 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+    
+    <h:form id="paysF" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">
+				<h:outputFormat value="#{editerPaysAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+					<f:param value="#{messages['pays.label']}"/>
+				</h:outputFormat>
+			</f:facet>
+
+            <s:decorate id="nomD" template="../../layout/edit.xhtml">
+                <ui:define name="label">
+                	<h:outputLabel value="#{messages['pays.nom.label']}" />
+                </ui:define>
+                <h:inputText id="nom"
+                		label="#{messages['pays.nom.label']}"
+                      required="true"
+                          size="15"
+                     maxlength="15"
+                         value="#{editerPaysAction.instance.nom}">
+                </h:inputText>
+            </s:decorate>
+            
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+		<!-- Version Fwk Sphinx -->
+		<!-- 
+			h:commandButton, mecanisme de POST pour mettre à jour le model (fonctions Create ou Update)
+			s:button, mecanisme de GET pour naviguer et obtenir des informations (fonction Cancel)
+		 -->
+		<h:commandButton id="doCreate" 
+				value="#{messages['default.button.create.label']}" 
+				action="#{editerPaysAction.persist}"
+				styleClass="boutonAction boutonCreer"
+				onmouseover="$(this).addClassName('boutonActionHover')"
+				onmouseout="$(this).removeClassName('boutonActionHover')"
+				rendered="#{!editerPaysAction.managed}"/> 							          
+		 <h:commandButton id="doUpdate" 
+				value="#{messages['default.button.validate.label']}" 
+				action="#{editerPaysAction.update}"
+				styleClass="boutonAction boutonValider"
+				onmouseover="$(this).addClassName('boutonActionHover')"
+				onmouseout="$(this).removeClassName('boutonActionHover')"
+				rendered="#{editerPaysAction.managed}"/>
+       	<s:button id="doCancel" 
+				value="#{messages['default.button.cancel.label']}" 
+				action="#{editerPaysAction.cancel}"
+				styleClass="boutonAction boutonAnnuler"				                          
+				onmouseover="$(this).addClassName('boutonActionHover')"
+				onmouseout="$(this).removeClassName('boutonActionHover')"
+				rendered="#{editerPaysAction.managed}"/>
+
+		<rich:tabPanel id="paysTp" switchType="ajax">
+    		<rich:tab limitToList="true" reRender="paysTp,msg" immediate="true">
+  				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['pays.devise.label']}"/>
+				</f:facet>
+				
+			    <div class="association" id="deviseParent">
+			        <h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerPaysAction.instance.devise == null}"/>
+			        <rich:dataTable id="deviseDt"
+							var="devise" 
+			            	value="#{editerPaysAction.instance.devise}" 
+			                rendered="#{editerPaysAction.instance.devise != null}"
+							width="100%"
+							styleClass="rich-table-level2"
+							rowClasses="rich-table-cell-impair, rich-table-cell-pair">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{messages['devise.id.label']}"/>
+							</f:facet>
+							<h:outputText value="#{devise.id}"/>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{messages['devise.nom.label']}"/>
+							</f:facet>
+							<h:outputText value="#{devise.nom}"/>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="#{messages['devise.symbole.label']}"/>
+							</f:facet>
+							<h:outputText value="#{devise.symbole}"/>
+						</rich:column>
+						
+						<rich:column styleClass="rich-table-cell-action" headerClass="rich-table-cell-action">
+							<f:facet name="header">
+								<h:outputText value="#{messages['default.action.label']}"/>
+							</f:facet>
+							<h:commandButton id="doViewDetail" 
+										action="#{editerDeviseAction.find}" 
+										immediate="true"
+										image="#{theme.images_statiques}/action_detail.png"
+										onmouseover="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail_hover.png'"
+										onmouseout="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail.png'"
+										alt="#{messages['default.button.show.alt']}"
+										title="#{messages['default.button.show.label']}">
+								<f:setPropertyActionListener target="#{editerDeviseAction.deviseId}" value="#{devise.id}"/> 
+							</h:commandButton>
+						</rich:column>
+					</rich:dataTable>
+					
+					<div class="actionButtons">
+			            <h:commandButton id="doPaysSearch"
+			            		
+			            		action="#{rechercherDeviseAction.search}"
+			            		immediate="true"
+								styleClass="boutonAction boutonSelectionner"
+								onmouseover="$(this).addClassName('boutonActionHover')"
+								onmouseout="$(this).removeClassName('boutonActionHover')"
+			            		value="#{messages['default.button.select.label']}"/>
+			        </div>
+				</div>
+			</rich:tab>
+			
+			<rich:tab limitToList="true" reRender="paysTp,msg" immediate="true">
+  				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['pays.langue.label']}"/>
+				</f:facet>
+				
+			    <div class="association" id="langueParent">
+			        <h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerPaysAction.instance.setLangues == null}" />
+			        
+			        <rich:pickList value="#{editerPaysAction.listSelectedLangues}"
+							rendered="#{editerPaysAction.instance.setLangues != null}"
+							copyAllControlLabel="copy All" 
+							removeAllControlLabel="remove All"   
+        					copyControlLabel="copy"   
+        					removeControlLabel="remove"
+        					showButtonsLabel="false">
+						<s:selectItems value="#{editerPaysAction.listAvailableLangues}" var="langue" label="#{langue.nom}" />
+						<s:convertEntity />
+					</rich:pickList>
+				</div>
+			</rich:tab>
+			
+			<rich:tab limitToList="true" reRender="paysTp,msg" immediate="true">
+  				<f:facet name="label">
+					<h:outputText styleClass="rounded-tab" value="#{messages['pays.ville.label']}"/>
+				</f:facet>
+				
+			    <div class="association" id="villeParent">
+			        <h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerPaysAction.instance.listVilles == null}" />
+			        
+			        <rich:pickList value="#{editerPaysAction.listSelectedVilles}"
+							rendered="#{editerPaysAction.instance.listVilles != null}"
+							copyAllControlLabel="copy All" 
+							removeAllControlLabel="remove All"   
+        					copyControlLabel="copy"   
+        					removeControlLabel="remove"
+        					showButtonsLabel="false">
+						<s:selectItems value="#{editerPaysAction.listAvailableVilles}" var="ville" label="#{ville.nom}" />
+						<s:convertEntity />
+					</rich:pickList>
+				</div>
+			</rich:tab>
+		</rich:tabPanel>
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+   xmlns:u='http:/jsf.exadel.com/template/util' 
+   xmlns="http://www.w3.org/1999/xhtml" >
+   
+   <!-- 
+		Feuille de style associée aux composants <rich:dropDownMenu>.
+		Il est utilisé pour créer un menu horizontal en liaison avec d'autres composants que sont :
+		- <rich:toolBar> pour faire la barre horizontale
+		- <rich:menuItem> pour faire les éléments du menu de niveau 2 (pour faire des éléments de niveau 
+		ultérieur, il faut insérer les items au sein d'un <rich:menuGroup>
+		- <rich:separator> pour faire une barre de séparation
+		
+		Le titre du menu de niveau 1 se spécifie à l'aide d'une <f:facet name="label">
+		
+		Exemple de menu
+		<rich:toolBar>
+  			<rich:dropDownMenu>
+		    	 <f:facet name="label"> 
+	                 <h:outputText value="File"/>
+	             </f:facet>
+	             <rich:menuItem value="Zoom In" onclick="enlarge('pic');" id="zin"/>
+		         <rich:menuItem value="Zoom Out" onclick="decrease('pic');" id="zout"/>
+	             <rich:menuGroup value="Save As...">
+                    <rich:menuItem submitMode="ajax" value="Save" 
+                        icon="/images/icons/save.gif" />
+                    <rich:menuItem submitMode="ajax" value="Save All"/>                       
+                 </rich:menuGroup>
+		    </rich:dropDownMenu>
+		    ...
+		</rich:toolBar>	
+		
+		A noter : les icônes présentées en exemple sur le site RichFaces ont été ramenées dans Sphinx.
+		=> On peut donc désormais écrire : 
+		icon="#{theme.imagesStandard}/save.gif" en lieu et place de icon="/images/icons/save.gif"
+	-->
+
+	<!-- Pas de reprise du style natif (effet de bord sur les images de <rich:menuItem> -->
+	
+	<!--
+	
+	Ci-dessous les classes CSS usitées
+	
+	.rich-ddmenu-label
+	.rich-ddmenu-label-unselect
+	.rich-ddmenu-label-disabled
+	.rich-ddmenu-label-select
+	.rich-label-text-decor
+	
+	Attention, le duo '.rich-ddmenu-label, .rich-ddmenu-label-disabled' doit être définie 
+	avant '.rich-ddmenu-label-unselect'. Car l'apparition d'une bordure au survol fait "sauter"
+	la barre : un padding rétrécie de l'épaisseur de la barre compense cet effet !!!!
+	L'ordre est rendu nécessaire par l'écriture-même des classes CSS '.rich-ddmenu-label' et
+	'.rich-ddmenu-label-unselect' qui sont mentionnées côte-à-côte dans le CSS.
+	
+	-->
+	
+	<!-- Style du label du dropDowMenu, cela équivaut au niveau 1 du menu horizontal
+	=> Son style est donc défini au niveau de <sx:menu> -->
+	<u:selector name=".rich-ddmenu-label, a.lienMenuNiveau1"><!-- déjà défini au niveau du <sx:menu> -->
+		<u:style name="color" skin="ddmenuLabelColor"/><!-- (1) -->
+		<u:style name="text-decoration" skin="ddmenuLabelTextDecoration" default="none"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Style du label du dropDownMenu quand il survolé permettant de faire apparaître les menus inférieurs -->
+	<u:selector name=".rich-ddmenu-label-select, a.lienMenuNiveau1:hover"><!-- déjà défini au niveau du <sx:menu> -->
+		<u:style name="color" skin="ddmenuLabelSelectColor"/><!-- (1) -->
+		<u:style name="text-decoration" skin="ddmenuLabelSelectTextDecoration" default="none"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Important : cette valeur est définie au niveau du menu... Mais il se peut 
+	que les valeurs du menu gauche ne soient pas systématiquement reconductibles. Un aplat
+	de couleur horizontal n'est par exemple pas souhaitable ; si l'on applique un dégradé, 
+	la couleur d'écriture pourrait ne pas être suffisamment contrastée. On laisse la possibilité
+	ici de surcharger la valeur. Surcharge veut donc dire facultatif : d'où le choix délibéré de 
+	ne pas mettre de valeur par defaut (default="transparent")
+	-->
+	
+	<!-- (2) Idem pour le text-decoration qui peut sembler en trop lorsque le cadre est déjà entouré.
+	La logique est cependant inverse : on considère qu'ils n'ont pas d'effet 'souligné' par défaut.-->
+	
+	<!-- Reprise du style originel -->
+	<u:selector name=".rich-ddmenu-label-select">
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="background-color" skin="ddmenuLabelSelectBgColor" default="transparent"/><!-- (3) -->
+		<u:style name="border">
+			<f:verbatim skin="ddmenuLabelSelectBorderWidth" default="1px"/><!-- (4) -->
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="ddmenuLabelSelectBorderColor" default="transparent"/>
+		</u:style>
+	</u:selector>
+	
+	<!-- (3) Cette propriété n'existe pas dans le composant natif et permet d'appliquer une couleur de fond
+	au survol-->
+	
+	<!-- Style de la zone contenant le label de niveau 1 -->
+	<u:selector name=".rich-ddmenu-label, .rich-ddmenu-label-disabled">
+		<u:style name="height" skin="ddmenuLabelHeight" default="auto"/>
+		<u:style name="width" skin="ddmenuLabelWidth" default="auto"/>
+		<u:style name="left" value="0"/>
+		<u:style name="top" value="0"/>
+		<u:style name="padding" skin="ddmenuLabelPadding" default="2px 5px"/><!-- (4) -->
+		<u:style name="white-space" value="nowrap"/>
+	</u:selector>
+	
+	<!-- Style du label de niveau1 hors survol -->
+	<u:selector name=".rich-ddmenu-label-unselect">
+		<u:style name="border">
+			<f:verbatim skin="ddmenuLabelUnselectBorderWidth" default="0"/><!-- (4) -->
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="ddmenuLabelUnselectBorderColor" default="transparent"/>
+		</u:style>
+		<u:style name="padding" skin="ddmenuLabelUnselectPadding" default="3px 6px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) Attention aux effets d'élargissement de la barre, dus à la présence d'une bordure au survol.
+	C'est pourquoi les padding 'ddmenuLabelPadding' et '.rich-ddmenu-label-unselect' ont un delta équivalent
+	à l'épaisseur de la bordure 'ddmenuLabelSelectBorderWidth'-->
+		
+</f:template>

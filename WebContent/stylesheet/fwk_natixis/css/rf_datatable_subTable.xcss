@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Sous Tableau : surcharge des propriétés 
+| - rf_datatable_cadre.xcss
+| - rf_datatable_simple.xcss
+| - rf_datatable.xcss 
+|
+| 07/2010 : GCE Internet pour l'instant
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Body - Cellule
++===============================================================================
+-->		
+	<u:selector name=" 	.rich-table-subTable .rich-table-cell, 
+						.rich-table-subTable .rich-subtable-cell">	
+						
+		<u:style name="border-bottom" 	skin="tableSubTableCellBorderBottom"/>
+		<u:style name="border-left" 	skin="tableSubTableCellBorderLeft"/>
+		<u:style name="border-right" 	skin="tableSubTableCellBorderRight"/>						
+		<u:style name="border-top" 		skin="tableSubTableCellBorderTop"/>
+		
+		<u:style name="border-color" 	skin="tableSubTableCellBorderColor"/>
+		
+	</u:selector>
+	
+	<u:selector name=" 	.rich-table-subTable .lastColumn">	
+		<u:style name="border-left" 	skin="tableSubTableCellLastBorderLeft" />
+		<u:style name="border-right" 	skin="tableSubTableCellLastBorderRight" />
+	</u:selector>
+
+	<u:selector name=" 	.rich-table-subTable .rich-table-cell-impair .rich-table-cell, 
+						.rich-table-subTable .rich-table-cell-impair .rich-subtable-cell,
+						.rich-table-subTable .rich-table-row  .rich-table-cell-impair
+						">	
+
+		<u:style name="border-bottom" 	skin="tableSubTableCellImpairBorderBottom"/>
+		<u:style name="border-left" 	skin="tableSubTableCellImpairBorderLeft"/>
+		<u:style name="border-right" 	skin="tableSubTableCellImpairBorderRight"/>						
+		<u:style name="border-top" 		skin="tableSubTableCellImpairBorderTop"/>
+	</u:selector>
+	
+</f:template>

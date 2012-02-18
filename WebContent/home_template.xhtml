@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+
+	<ui:composition template="/theme/visuc/template/implementation_accueil.xhtml">
+
+	    <ui:define name="content">
+	    
+	    <style>
+	    	.rich-panel{
+	    		width:350px;
+	    		height:300px;
+	    		margin-left:auto;
+		   		margin-right:auto;
+	    	}
+	    	.gridContent{
+	    		margin-left:auto;
+		   		margin-right:auto;
+	    	}
+	    	.marchandBody {
+	    		background:#5d9ab4 url('theme/visuc/img/commerce_proximite.jpg') center;
+	    		margin-left:auto;
+				margin-right:auto;
+				text-align:center;
+				width:350px;
+	    		height:300px;
+	    		padding:0px;
+	    	}
+	    	.clientBody {
+	    		background:#5d9ab0 url('theme/visuc/img/caddie-persojaune.jpg') no-repeat center;
+	    		margin-left:auto;
+				margin-right:auto;
+				text-align:center;
+				width:350px;
+	    		height:300px;
+	    		padding:0px;
+	    	}
+	    </style>
+	
+	        <h1>Bienvenue - Welcome - Willkommen - Bienvenidos</h1>
+	        
+            <h:panelGrid columns="2" columnClasses="gridContent" width="100%">
+            	<!-- 
+                <h:graphicImage value="/img/seamlogo.png" alt="Seam logo"/>
+                <s:div styleClass="info">
+                    <p><strong>VisuCommerce project is deployed!</strong> Here are some of the features this project provides:</p>
+                    <ul class="bullets">
+                        <li>Ant build script</li>
+                        <li>Deployment to JBoss AS (EAR or WAR)</li>
+                        <li>Development and production profiles</li>
+                        <li>Integration testing using TestNG and Embedded JBoss</li>
+                        <li>JavaBean or EJB 3.0 Seam components</li>
+                        <li>JPA entity classes</li>
+                        <li>A configurable DataSource and JPA EntityManager</li>
+                        <li>Templated Facelets views</li>
+                        <li>RichFaces panels and tables</li>
+                        <li>Default CSS stylesheet</li>
+                        <li>Internationalization support</li>
+                    </ul>
+                </s:div>
+               -->
+				<rich:panel id="MarchandPanel" bodyClass="marchandBody">
+					<!-- h:graphicImage title="Accueil Marchand" url="/theme/visuc/img/commerce_proximite.jpg"/ -->
+					<s:button value="#{messages['default.button.marchand.iam']}" 
+								 view="/views/accueil_marchand.xhtml" />
+					<!-- h:outputText value="#{messages['default.button.marchand.iam']}" / -->
+				</rich:panel>
+					
+				<rich:panel id="ClientPanel" bodyClass="clientBody">
+						<!-- h:graphicImage title="Accueil Client" url="/theme/visuc/img/caddie-persojaune.jpg" / -->
+						<s:button value="#{messages['default.button.client.iam']}" 
+								view="/views/client/accueil_client.xhtml" />
+						<!-- h:outputText value="#{messages['default.button.client.iam']}" / -->
+				</rich:panel>  
+			</h:panelGrid>
+
+		        
+	    </ui:define>
+	    
+	</ui:composition>
+
+</f:view>
+</jsp:root>

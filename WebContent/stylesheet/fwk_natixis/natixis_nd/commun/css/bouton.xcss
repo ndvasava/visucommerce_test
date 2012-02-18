@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des boutons Natixis Internet.
+		Elle hérite d'une feuille de style principale qui définit les propriétés communes
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/bouton.xcss" />
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <input>    **/
+		/**********************************/
+	-->
+		
+	<u:selector name="input.boutonAction,input.boutonActionHover" />
+	
+	<!-- Bouton Ok uniquement visible pour internet sur la page de login -->
+	
+	<u:selector name="input.boutonOK">
+		<u:style name="padding" value="0 2px 1px 2px"/>
+		<u:style name="height" value="17px"/>
+		<u:style name="font-size" value="1em"/>
+		<u:style name="vertical-align" value="middle"/>
+	</u:selector>
+	
+	<!-- Hack pour IE6  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="* html input.boutonOK">
+		<u:style name="padding" value="0 2px 0 2px"/>
+		<u:style name="vertical-align" value="bottom"/>
+	</u:selector>
+	
+	<!-- Hack pour IE7  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="*+html input.boutonOK">
+		<u:style name="padding" value="0 2px 0 2px"/>
+		<u:style name="vertical-align" value="baseline"/>
+	</u:selector>
+	
+	<!-- 
+		/********************************************/
+		/**   BOUTONS SPECIFIQUES                  **/
+		/**      DE FORMULAIRES (actionButtons)    **/
+		/********************************************/
+	-->
+	<u:selector name=".actionButtons input">
+		<u:style name="position" value="relative"/>
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE FOOTERS DE TABLEAUX (tableButtons)    **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".tableButtons">
+		<u:style name="padding-bottom" value="30px"/>
+	</u:selector>
+	
+	<!-- zone action liée aux données du tableau -->
+	<u:selector name=".tableButtons input">
+		<u:style name="float" value="right"/>
+	</u:selector>
+	
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE BLOCS DE PAGINATION (blocPagination)  **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".blocPagination a">
+		<u:style name="color" skin="tableSelectionLinkColor"/>
+	</u:selector>
+	
+	<u:selector name=".blocPagination a:hover">
+		<u:style name="margin" value="0px 3px"/>
+		<u:style name="text-decoration" value="none"/>
+		<u:style name="color" skin="tableSelectionLinkColor"/>
+	</u:selector>
+	
+</f:template>

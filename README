@@ -1,0 +1,13 @@
+-----------
+test nv 17/10/2011
+
+-----------
+Ajout des répertoires du projet julien - visucommerce v0.9 le 17/10/2011. 
+	Présence du templating, 
+	Ouverture aux xcss, 
+	Brouillon de page d'accueil visucommerce(client VS marchand), 
+	Brouillon de page d'accueil marchand (avec ou sans compte)
+	Brouillon de page de création d'un vendeur(gérant) et son commerce
+	Démonstration d'une page avec rich:picklist
+	Démonstration d'une page avec drag&drop ajax
+	Démonstration d'une page avec import et save sous blob de photos

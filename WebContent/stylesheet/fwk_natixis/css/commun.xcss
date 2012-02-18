@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style très, très générale valable quelle que soit l'enseigne 
+		
+		Les propriétés utilisées ici sont : 
+		
+	-->
+	
+	<!-- Uniformiser l'aspect sur tous les navigateurs -->
+	<u:selector name="p">
+		<u:style name="margin" value="0px 0px 0.75em"/>
+	</u:selector>
+	
+	
+	<!-- Image sans bordure -->
+	<u:selector name="img">
+		<u:style name="border" value="0"/>
+	</u:selector>
+	
+	<!-- Formulaire sans margin pour IE6 -->
+	<u:selector name="form">
+		<u:style name="margin" value="0px"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**************************************/
+		/* Alignement (gauche, droit, centré) */
+		/**************************************/
+	 -->
+	 
+	<u:selector name=".left">
+		<u:style name="text-align" value="left!important"/>
+	</u:selector>
+	
+	<u:selector name=".right">
+		<u:style name="text-align" value="right!important"/>
+	</u:selector>
+	
+	<u:selector name=".center">
+		<u:style name="text-align" value="center!important"/>
+	</u:selector>
+	
+
+	<!-- 
+		/**************************************/
+		/* Font */
+		/**************************************/
+	 -->
+
+	<u:selector name=".bold">
+		<u:style name="font-weight" value="bold"/>
+	</u:selector>	
+
+	<u:selector name=".normal">
+		<u:style name="font-weight" value="normal"/>
+	</u:selector>	
+	
+	<!-- 
+		/******************************************/
+		/* Flottant (pour sortir du flux courant) */
+		/******************************************/
+	 -->
+	 
+	<u:selector name=".floatLeft">
+		<u:style name="float" value="left"/>
+	</u:selector>
+	
+	<u:selector name=".floatRight">
+		<u:style name="float" value="right"/>
+	</u:selector>
+	
+	<u:selector name=".floatNone">
+		<u:style name="float" value="none"/>
+	</u:selector>
+	
+	<!-- 
+		/*******************************/
+		/* Elargissement de formulaire */
+		/*******************************/
+	 -->
+	
+	<!-- Styles utilitaires permettant d'élargir des zones de formulaire.
+	Ces classes sont à positionner dans une div englobante -->
+	<u:selector name=".widthLabel5 .name">
+		<u:style name="width" value="5em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel8 .name">
+		<u:style name="width" value="8em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel10 .name">
+		<u:style name="width" value="10em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel12 .name">
+		<u:style name="width" value="12em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel15 .name">
+		<u:style name="width" value="15em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel20 .name">
+		<u:style name="width" value="20em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel25 .name">
+		<u:style name="width" value="25em"/>
+	</u:selector>
+	
+	<u:selector name=".widthLabel30 .name">
+		<u:style name="width" value="30em"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/********************************/
+		/*   Propriété de <h:panelGrid  */
+		/********************************/
+	 -->
+	
+	<!-- à appliquer au niveau du <h:panelGrid styleClass="" -->
+	<u:selector name=".panelGridWithCollapsedCell">
+		<u:style name="border-collapse" value="collapse"/>
+	</u:selector>
+	
+	<!-- A appliquer au niveau de <h:panelGrid columnClasses=""  -->
+	<u:selector name=".panelGridWithNoPadding">
+		<u:style name="padding" value="0"/>
+	</u:selector>
+	
+	<!-- A appliquer au niveau de <h:panelGrid columnClasses="panelGridWithNoPadding panelGridWithPaddingTop"  -->
+	<u:selector name=".panelGridWithPaddingTop">
+		<u:style name="padding-top" value="1em"/>
+	</u:selector>
+	
+	<!-- A appliquer au niveau de <h:panelGrid columnClasses="panelGridWithNoPadding panelGridWithPaddingRight"  -->
+	<u:selector name=".panelGridWithPaddingRight">
+		<u:style name="padding-right" value="1em"/>
+	</u:selector>
+	
+	<!-- A appliquer au niveau de <h:panelGrid columnClasses="panelGridWithNoPadding panelGridWithPaddingBottom"  -->
+	<u:selector name=".panelGridWithPaddingBottom">
+		<u:style name="padding-bottom" value="1em"/>
+	</u:selector>
+	
+	<!-- A appliquer au niveau de <h:panelGrid columnClasses="panelGridWithNoPadding panelGridWithPaddingLeft"  -->
+	<u:selector name=".panelGridWithPaddingLeft">
+		<u:style name="padding-left" value="1em"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************************/
+		/* correction des h:panelGrid sans décalage   */
+		/* dans des formulaires                       */
+		/* (voir demojsf/formulaire3b)                */
+		/**********************************************/
+	 -->
+	
+	<!-- à appliquer au niveau du <h:panelGrid -->
+	<u:selector name=".tableInvisible">
+		<u:style name="border-collapse" value="collapse"/>
+	</u:selector>
+	
+	<u:selector name=".tableInvisible td">
+		<u:style name="padding" value="0"/>
+	</u:selector>
+	
+	
+	
+	<!-- retrait de la bordure dans le cas des tableaux par exemple
+	 avec un style différent entre l'interieur et le tour -->
+	<u:selector name=".noBorder">
+		<u:style name="border" value="none!important"/>
+	</u:selector>
+	
+	<!-- complément pour les rich:separator -->
+	<u:selector name=".rich-separator">
+	    <u:style name="height" value="0.5em" />
+	    <u:style name="background-repeat" value="repeat-x" />
+	    <u:style name="background-position" value="center" />
+	</u:selector>
+	
+	
+	<!-- 
+		/*************************************************************************************/
+		/* Style pour découper la largeur de l'écran en 2  (cas d'un alignement horizontal)  */
+		/*************************************************************************************/
+	 -->
+	
+	<!-- Permet d'appliquer un style pour définir la moitié de la largeur du conteneur -->
+	<u:selector name=".demiLargeur">
+		<u:style name="width" value="50%"/>
+		<u:style name="display" value="block"/>
+		<u:style name="float" value="left"/>
+	</u:selector>
+
+</f:template>

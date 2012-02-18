@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+	no-conversation-view-id="/login.xhtml">
+	
+	<!-- Configuration de la navigation sous SEAM. Remplace la déclaration des règles de navigation sous faces-config.xml pour 
+	le framework JSF. 
+		Ajout des rootage suite à exception levé dans l'application
+		Ajout des pages utilisant la securite seam : login via seam.identity-->
+
+<!-- - - - - - - - - - - - gestion des Masques d'URL generiques - - - - - - - - - - - - -->
+
+	<!-- 
+	1. /views/*
+	Actions : 
+	=> On s'assure que ces pages sont executees dans une conversation longue.
+	=> On ajoute la page demander a la liste des pages a afficher dans le rail.
+		La page n'est effectivement ajoutee que si la balise description est definie 
+		dans le fichier xxx.page.xml.
+	 -->
+	<page view-id="/views/*" login-required="true">
+		<begin-conversation join="true"/>
+	</page>
+
+<!-- - - - - - - - - - - - gestion login identity - - - - - - - - - - - - -->
+
+	<!-- redirection global suite au logOut dans le header.xhtml -->
+	<page view-id="*">
+		<navigation from-action="#{identity.logout}">
+				<redirect view-id="/login.xhtml" />
+		</navigation>
+	</page>
+
+	<!-- modifie par la mise en place de l'authentification directement dans seam seam, security:identity -->
+	<page view-id="/login.xhtml">
+		<!-- pour que identity soit evalue il faut le noter en seam-EL, donc avec #{} -->
+		<navigation from-action="#{identity.login}">
+			<!-- appel non pas la methode mais la propriete puisque contrairement a hasRole on est sur un booleen pour loggedIn -->
+			<rule if="#{identity.loggedIn}">
+				<redirect view-id="/home.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+
+	<!-- modifie par la mise en place de l'authentification directement dans seam seam, security:identity -->
+	<!-- page view-id="/views/accueil_marchand.xhtml">
+		<navigation from-action="#{identity.login}">
+			<rule if="#{identity.loggedIn}">
+				<redirect view-id="/views/marchand/company_acc_home.xhtml" />
+			</rule>
+		</navigation>
+	</page-->
+	<!-- 
+	***********************************************************************
+			Definition de liens transverses : header, rail			
+	*********************************************************************** 
+	-->
+
+	<!-- Actions de securite (proviennent de toutes les pages de l'application) -->
+    <page view-id="*">
+    	<navigation from-action="#{identity.logout}" >
+			<redirect view-id="/home.xhtml"/>
+        </navigation>  
+		
+		<!-- Administration des Referentiels de donnees -->
+			<!-- [SPHINX] BEGIN MENU NAVIGATION Pays -->	            	
+			    <navigation from-action="goEditPays">
+		    	    <render view-id="/views/pays/edit_pays.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goRecherchePays">
+			       <render view-id="/views/pays/recherche_pays.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Pays -->
+			
+			<!-- [SPHINX] BEGIN MENU NAVIGATION Ville -->
+			    <navigation from-action="goEditVille">
+		    	    <render view-id="/views/ville/edit_ville.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goRechercheVille">
+			       <render view-id="/views/ville/recherche_ville.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Ville -->
+			
+			<!-- [SPHINX] BEGIN MENU NAVIGATION Devise -->
+			    <navigation from-action="goEditDevise">
+		    	    <render view-id="/views/devise/edit_devise.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goRechercheDevise">
+			       <render view-id="/views/devise/recherche_devise.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goAdminDevise">
+			       <render view-id="/views/devise/admin_devise.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Devise -->
+			
+			<!-- [SPHINX] BEGIN MENU NAVIGATION Langue -->
+			    <navigation from-action="goEditLangue">
+		    	    <render view-id="/views/langue/edit_langue.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goRechercheLangue">
+			       <render view-id="/views/langue/recherche_langue.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Langue -->
+			
+			<!-- [SPHINX] BEGIN MENU NAVIGATION TypeCommerce -->
+			    <navigation from-action="goEditTypeCommerce">
+		    	    <render view-id="/views/typeCommerce/edit_typeCommerce.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goRechercheTypeCommerce">
+			       <render view-id="/views/typeCommerce/recherche_typeCommerce.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Langue -->
+			
+			<!-- [SPHINX] BEGIN MENU NAVIGATION Commerce -->
+			    <navigation from-action="goEditCompany">
+		    	    <render view-id="/views/marchand/edit_commerce.xhtml"/>
+			    </navigation>
+			    <navigation from-action="goSearchCompany">
+			       <render view-id="/views/marchand/recherche_commerce.xhtml"/>
+			    </navigation>
+			    <navigation from-action="#{commerceSearchAction.searchCompanyAccToValidate}">
+			    	<render view-id="/views/marchand/search_companies_for_validation.xhtml"/>
+			    </navigation>
+			<!-- [SPHINX] END  MENU NAVIGATION Langue -->
+		
+	<!-- [SPHINX] pages.xml view-id="*" MENU NAVIGATION -->
+    </page>
+    
+<!-- - - - - - - - - - - - gestion exception generique - - - - - - - - - - - - -->
+
+	<!-- permet de ne pas cracher le defaut error lors d'une erreur de login -->
+	<exception class="org.jboss.seam.security.NotLoggedInException">
+        <redirect view-id="/login.xhtml">
+            <message>You must be logged in to perform this action</message>
+        </redirect>
+    </exception>
+    
+    <exception class="org.jboss.seam.security.AuthorizationException">
+        <end-conversation/>
+        <redirect view-id="/security_error.xhtml">
+            <message>You do not have the necessary security privileges to perform this action.</message>
+        </redirect>
+    </exception>
+	
+	
+</pages>
+	

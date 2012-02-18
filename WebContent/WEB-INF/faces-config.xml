@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Librairies à inclure pour un projet JSF 1.2 :: myfaces-api-1.2.10.jar & myfaces-impl-1.2.10.jar 
+													commons-logging.jar
+													commons-discovery.jar
+													commons-digester.jar
+													commons-collection.jar
+													commons-beanutils.jar
+													-->
+													
+<!-- Suite à l'exécution du serveur, l'interrogation de la jsp via http://localhost:8086/visucommerce/faces/Home.jsp provoque
+	une erreur, classNotFound sur jstl. la lib jstl-api et son implémentation jstl-impl ont besoin du la brique commons-codec pour 
+	s'executer correctement. On les ajoute donc au WEB-INF/lib dans le projets de départs -->
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+    
+    <render-kit>
+				<render-kit-id>HTML_BASIC</render-kit-id>
+  	</render-kit>
+    
+    <!-- Facelets support -->
+    <application>
+      	
+      	<!-- On doit lister ici la liste des locales supportées alors que le components.xml
+        liste les .properties qui seront utilisées  -->
+		<locale-config>
+			<default-locale>fr</default-locale>
+			<supported-locale>fr</supported-locale>
+		</locale-config>
+        
+        <!-- This VariableResolver makes all Spring beans available in EL by their bean id. The use of Spring beans in 
+        	EL is not limited to injection. Spring beans may be used anywhere that EL expressions are used in Seam: process 
+        	and pageflow definitions, working memory assertions, etc ...
+        -->
+        <!-- variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver -->
+        <!-- indique à JSF que la résolution des EL est déléguée à Spring -->
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        
+        <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+        
+    </application>
+    
+</faces-config>

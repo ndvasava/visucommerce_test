@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template' xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<!-- 
+		
+		Fichier principal du skin Natixis.
+		
+		Il est référencé directement dans le fichier de propriétés du skin (META-INF/skins/xxx.skin.properties)
+		comme valeur du paramétre "generalStyleSheet"
+		
+		ex : 
+		generalStyleSheet=resource:///com/natixis/sphinx/jsf/ui/skins/natixis.xcss
+		
+		
+		On y trouve essentiellement (et uniquement) les feuilles de styles dynamiques
+		qui composeront le skin par inclusion à l'aide de la balise f:importReource. 
+		Rem : 
+		On aurait très bien pu y mettre directement des styles CSS mais pour des raisons de maintenabilité, 
+		il est préférable de séparer les styles par fonctionnalité ou par composant auquel ils se rapportent.
+		Il est ainsi possible de factoriser les CSS d'un même composant Richfaces pour toutes les enseignes après lui
+		avoir appliqué des propriétés (couleurs) spécifique à l'enseigne.
+		
+		On distinguera deux types de feuilles : 
+		- communes à toutes les enseignes : com/natixis/sphinx/jsf/ui/css
+		- spécifique à l'enseigne : com/natixis/sphinx/jsf/ui/skins/<enseigne>/css
+		
+		
+	-->
+
+	<!-- styles très généraux -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/commun.xcss" />
+
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_datascroller.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_calendar.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_fileUpload.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_inputSlider.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_inputSpinner.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_modalpanel.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_tabPanel.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_panelbar.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_picklist.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_suggestionbox.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_highlight.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_tree.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_combo.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_tooltip.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_panel.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_listshuttle.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_editor.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_contextmenu.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_menuItem.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_toolbar.xcss" />
+	
+
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/general.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/formulaire.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/rf_datatable_1.2.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_extendedDataTable.xcss" />
+	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_progressBar.xcss" />
+	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/sx_menu.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_dropDownMenu.xcss" />
+	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/bouton.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/page.xcss" />
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/css/zoning.xcss" />
+	
+	
+	
+	
+
+	<!-- Styles d'impression -->
+    <f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/print.xcss"/>    
+
+
+</f:template>

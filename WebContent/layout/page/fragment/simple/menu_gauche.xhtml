@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sx="http://www.natixis.com/sphinx-jsf-ui/taglib"
+	version="2.0">
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+<ui:composition>
+
+	<h:form id="menuForm">
+	
+		<rich:panelMenu>
+		
+			<rich:panelMenuGroup label="PAYS">
+	   			<rich:panelMenuItem id="editPays"
+	   					label="Create Pays" 
+	   					action="goEditPays"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	   			<rich:panelMenuItem id="recherchePays"
+	   					label="Search Pays" 
+	   					action="goRecherchePays"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	  		</rich:panelMenuGroup>
+	  		
+	  		<rich:panelMenuGroup label="VILLE">
+	   			<rich:panelMenuItem id="editville"
+	   					label="Create Ville" 
+	   					action="goEditVille"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	   			<rich:panelMenuItem id="rechercheVille"
+	   					label="Search Ville" 
+	   					action="goRechercheVille"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	  		</rich:panelMenuGroup>
+	  		
+	  		<rich:panelMenuGroup label="DEVISE">
+	   			<rich:panelMenuItem id="editDevise"
+	   					label="Create Devise" 
+	   					action="goEditDevise"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	   			<rich:panelMenuItem id="rechercheDevise"
+	   					label="Search Devise" 
+	   					action="goRechercheDevise"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+				<rich:panelMenuItem id="AdminDevise"
+	   					label="Administration Devise" 
+	   					action="goAdminDevise"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	  		</rich:panelMenuGroup>
+	  		
+	  		<rich:panelMenuGroup label="LANGUE">
+	   			<rich:panelMenuItem id="editLangue"
+	   					label="Create Langue" 
+	   					action="goEditLangue"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	   			<rich:panelMenuItem id="rechercheLangue"
+	   					label="Search Langue" 
+	   					action="goRechercheLangue"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	  		</rich:panelMenuGroup>
+	  		
+	  		<rich:panelMenuGroup label="TYPECOMMERCE">
+	   			<rich:panelMenuItem id="editTypeCommerce"
+	   					label="Create TypeCommerce" 
+	   					action="goEditTypeCommerce"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	   			<rich:panelMenuItem id="rechercheTypeCommerce"
+	   					label="Search TypeCommerce" 
+	   					action="goRechercheTypeCommerce"
+						actionListener="#{conversationHelper.clearMyConversation()}"/>
+	  		</rich:panelMenuGroup>
+	  		
+		</rich:panelMenu>
+		
+	</h:form>
+
+</ui:composition>
+</f:view>
+</jsp:root>

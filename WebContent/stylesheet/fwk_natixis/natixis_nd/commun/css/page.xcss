@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des principaux éléments de la page Natixis Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/page.xcss"/>
+		 
+	<!-- 
+		/***************************************************/
+		/* Liens transversaux (> lien1  > lien2  > lien3)  */
+		/***************************************************/
+	-->
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.first">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensTransversaux li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentLiensTransversauxSeparatorBgImage" />
+		</u:style>
+		<u:style name="background-position" value="left 4px"/><!-- (1) -->
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-right" value="5px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensTransversaux li a, .lienTransversal"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="9px"/><!-- (3) -->
+	</u:selector>
+		
+	<!-- 
+		/****************/
+		/* Titre + logo */
+		/****************/
+	 -->
+	 
+	 <!-- Rendu :
+		
+		******************************************************************************************************
+			NATIXIS
+						AWS
+		******************************************************************************************************
+	 -->		
+		
+	<!-- Style spécifique au logo -->					
+	<u:selector name="body .logo"><!-- EXTENDS ".logo" -->
+		<u:style name="height" skin="logoHeight" default="40px"/>
+	</u:selector>	
+	
+	<!-- On précise explicitement une famille différente -->
+	<u:selector name="body .titreAppli"><!-- EXTENDS ".titreAppli" -->
+		<u:style name="font-family" value="Arial"/>
+		<u:style name="text-align" skin="titreAppliAlign"/>
+	</u:selector>	
+	
+	<!-- 
+		/***********************/
+		/* Moteur de recherche */
+		/***********************/
+	 -->	
+		
+	<u:selector name="body .inputMoteurRecherche"><!-- EXTENDS ".inputMoteurRecherche" -->
+		<u:style name="font-family" skin="defaultFontFamily"/>
+		<u:style name="background-color" skin="moteurRechercheInputBgColor"/>
+		<u:style name="border-color" skin="moteurRechercheInputBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" value="1px 0 1px 1px"/>
+		<u:style name="height" value="14px"/>
+		<u:style name="margin-right" value="0"/>
+	</u:selector>
+	
+	<!-- Texte au dessus du moteur de recherche uniquement pour Natixis NIV Internet -->
+	<u:selector name="#moteurRecherche .texteMoteurRecherche">
+		<u:style name="font-family" skin="defaultFontFamily"/>
+		<u:style name="color" skin="moteurRechercheTextColor"/>
+		<u:style name="font-size" value="1.1em"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="margin-bottom" value="5px"/>
+	</u:selector>
+	
+	<u:selector name="#moteurRecherche input.boutonLoupe">
+		<u:style name="background-color" skin="moteurRechercheInputBgColor"/>
+		<u:style name="background-image">
+			<f:resource f:skin="currentMoteurRechercheLoupeBgImage" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="0 center"/>
+		<u:style name="padding" value="0"/>
+		<u:style name="border-color" skin="moteurRechercheInputBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" value="1px 1px 1px 0px"/>
+		<u:style name="vertical-align" value="bottom"/><!-- (1) -->
+		<u:style name="height" value="18px"/>
+		<u:style name="width" value="16px"/>
+	</u:selector>
+	
+	<!-- (1) Obligatoire pour aligner la puce avec le champ de saisie. On le compense pour IE6 avec la
+	valeur par défaut : 'baseline' (Cf (2)) -->
+	
+	<!-- Hack pour IE6  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="* html #moteurRecherche input.boutonLoupe">
+		<u:style name="font-size" value="9px"/><!-- (3) -->
+		<u:style name="vertical-align" value="baseline"/><!-- (2) -->
+		<u:style name="margin-left" value="-1px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (3) Essentiel pour que l'image soit de la même taille que le champ de saisie... -->
+	
+	<!-- Hack pour IE7  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="*+html  #moteurRecherche input.boutonLoupe">
+		<u:style name="font-size" value="9px"/><!-- (3) -->
+		<u:style name="vertical-align" value="baseline"/><!-- (2) -->
+		<u:style name="margin-left" value="-1px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) Permet d'éviter un trait blanc entre le bouton et le champ de saisie -->
+	
+	
+	<!-- 
+		/*****************************/
+		/*  Navigation transversale  */
+		/*****************************/
+	 -->
+	<u:selector name="body ul.navTransversal"><!-- EXTENDS "ul.navTransversal" -->
+		<u:style name="height" value="21px"/>
+		<u:style name="line-height" value="21px"/>
+	</u:selector>
+	 
+	 <!-- Elément unitaire de la liste -->
+	 <u:selector name="body ul.navTransversal li"><!-- EXTENDS "ul.navTransversal li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentNavTransversalSeparatorOffBgImage" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 2px"/>
+		<u:style name="padding-left" value="10px"/>
+	</u:selector>
+	
+	 <u:selector name="body ul.navTransversal li.itemSelected"><!-- EXTENDS "ul.navTransversal li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentNavTransversalSeparatorOnBgImage" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 5px"/>
+		<u:style name="padding-left" value="8px"/>
+	</u:selector>
+	
+	<!-- 
+		/************************************************************/
+		/* rail (> Accueil > Rechercher client > Recherche Chargé)  */
+		/************************************************************/
+	 -->
+	 
+	 <!-- Définition de l'entrée n -->
+	<u:selector name="body ul.rail li.first">
+		<u:style name="background-image" value="none"/>
+		<u:style name="padding-left" value="0"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="body ul.rail li"><!-- EXTENDS "ul.rail li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentRailSeparatorBgImage" />
+		</u:style>
+		<u:style name="background-position" value="left 50%"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-left" value="17px"/>
+		<u:style name="font-style" value="italic"/><!-- (0) -->
+		<u:style name="font-size" value="1.1em"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (0) Spécificité New deal : rail en italic -->
+	
+	<!-- (1) Temporaire : augmentation de la taille tant qu'on reste en Verdana -->
+	
+	<!-- 
+		/********************************************************/
+		/* Liens du footer (> Mentions légales > lien2 > lien3) */
+		/********************************************************/
+	-->
+	
+	<!-- Mention métier située en bas à gauche du footer -->
+	<u:selector name=".mentionMetier">
+		<u:style name="color" skin="mentionMetierColor"/>
+		<u:style name="font-size" skin="mentionMetierFontSize"/>
+		<u:style name="font-weight" skin="mentionMetierFontWeight"/>
+		<u:style name="text-decoration" skin="mentionMetierTextDecoration"/>
+	</u:selector>
+	
+	<!-- Mention métier selectionnée (celle dans laquelle l'application se trouve) -->
+	<u:selector name=".mentionMetier .mentionMetierSelected">
+		<u:style name="font-weight" value="bold"/>
+	</u:selector>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="body ul.liensFooter li"><!-- EXTENDS "ul.liensFooter li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentLienFooterSeparatorBgImage" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="right 4px"/><!-- (1) -->
+		<u:style name="padding-right" value="7px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="body ul.liensFooter li a"><!-- EXTENDS "ul.liensFooter li a" -->
+		<u:style name="padding-left" value="7px"/><!-- (3) -->			
+	</u:selector>
+	
+	<!-- 
+		/********************************************************/
+		/* Réalisation du bandeau client dans le bandeau haut */
+		/********************************************************/
+	-->
+	
+	<!-- Style pour le bandeau client (permet de définir des bordures) -->
+	<u:selector name="body .bandeauClient"/><!-- EXTENDS ".bandeauClient" -->
+	
+	<!-- Style pour définir une ligne d'information du client dans le bandeau haut -->
+	<u:selector name="body .ligneInformationsClient"/><!-- EXTENDS ".ligneInformationsClient" -->
+	
+	<!-- Création d'un style pour l'information de dernière connexion.
+	Ce n'est qu'un exemple. Mais on le trouve présent dans le bandeau client
+	occupant la moitié de la largeur est bloquée à droite.
+	Aussi est-il associée à la classe css ".demiLargeur" réalisant déjà la mise en float. -->
+	<u:selector name="body .informationsDerniereConnexion"/><!-- EXTENDS ".informationsDerniereConnexion" -->
+	
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name="body .libelleBC"/><!-- EXTENDS ".libelleBC" -->
+	
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name="body .valeurBC"/><!-- EXTENDS ".valeurBC" -->
+	
+	<!-- 
+		/******************************************************/
+		/* Liens vers des sites extérieurs en-dessous du menu */
+		/******************************************************/
+	-->
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensSitesExterieursMenu li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:skin="currentLiensSitesExterieursLeft" />
+		</u:style>
+		<u:style name="background-position" value="10px 50%"/><!-- (1) -->
+		<u:style name="background-repeat" value="no-repeat"/>
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensSitesExterieursMenu li a"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="20px"/><!-- (3) -->	
+	</u:selector>
+	
+	<!-- 
+		/********************************/
+		/* Bloc de connexion intérieure */
+		/********************************/
+	-->
+	
+	<!-- Encadrement du bloc authentification avec couleur de fond et bordure -->
+	<u:selector name="body .blocAuthentificationInterieure ">
+		<u:style name="border-color" skin="blocConnexionInterieureBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" skin="blocConnexionInterieureBorderWidth"/>
+		<u:style name="background-color" skin="blocConnexionInterieureBgColor"/>
+		<u:style name="padding" value="5px"/>
+	</u:selector>
+	
+	<u:selector name="body .blocAuthentificationInterieure .name ">
+		<u:style name="width" value="auto"/>
+		<u:style name="text-align" value="left"/>
+		<u:style name="float" value="none"/>
+		<u:style name="height" value="20px"/>
+		<u:style name="line-height" value="20px"/>
+	</u:selector>
+	
+	<!-- Style du lien du bloc de déconnexion -->
+	<u:selector name=".blocDeconnexionInterieure a">
+		<u:style name="color" skin="blocConnexionInterieureLienColor"/>
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienTextDecoration"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLienFontWeight"/>	
+		<u:style name="font-size" skin="blocConnexionInterieureLienFontSize"/>
+	</u:selector>
+	
+	<!-- Style du lien du bloc de déconnexion au survol -->
+	<u:selector name=".blocDeconnexionInterieure a:hover">
+		<u:style name="color" skin="blocConnexionInterieureLienHoverColor"/>	
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienHoverTextDecoration"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLienHoverFontWeight"/>	
+	</u:selector>
+		
+	<!-- 
+		/************************************/
+		/*  Bloc de déconnexion intérieure  */
+		/************************************/
+	 -->
+	
+	<!-- Style du lien du bloc de déconnexion -->
+	<u:selector name=".blocDeconnexionInterieure">
+		<u:style name="border-color" skin="blocDeconnexionInterieureBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" skin="blocDeconnexionInterieureBorderWidth"/>
+		<u:style name="background-color" skin="blocDeconnexionInterieureBgColor"/>
+		<u:style name="padding" value="5px"/>
+	</u:selector>
+	
+	<!-- Style du lien du bloc de déconnexion -->
+	<u:selector name=".blocDeconnexionInterieure a">
+		<u:style name="background-image">
+			<f:resource f:skin="currentBlocDeconnexionInterieureLienLeftBgImage" />
+		</u:style>
+		<u:style name="background-position" value="0 0"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-left" value="20px"/>
+		<u:style name="color" skin="blocDeconnexionInterieureLienColor"/>
+		<u:style name="text-decoration" skin="blocDeconnexionInterieureLienTextDecoration"/>
+		<u:style name="font-weight" skin="blocDeconnexionInterieureLienFontWeight"/>	
+		<u:style name="font-size" skin="blocDeconnexionInterieureLienFontSize"/>
+	</u:selector>
+	
+	<!-- Style du lien du bloc de déconnexion au survol -->
+	<u:selector name=".blocDeconnexionInterieure a:hover">
+		<u:style name="color" skin="blocDeconnexionInterieureLienHoverColor"/>
+		<u:style name="text-decoration" skin="blocDeconnexionInterieureLienHoverTextDecoration"/>
+		<u:style name="font-weight" skin="blocDeconnexionInterieureLienHoverFontWeight"/>
+	</u:selector>
+		
+	<!-- 
+		/*****************************/
+		/*  Zones personnalisables  */
+		/*****************************/
+	 -->
+	
+	<!-- Style par défaut des zones personnalisables -->	
+	<u:selector name=".zoneInfo, .zonePersoHaut, .zonePersoBas">
+		<u:style name="border" value="10px solid #e9e9e9"/>
+	</u:selector>
+	
+</f:template>

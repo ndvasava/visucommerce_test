@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style associée au composant rich:datascroller 
+		
+	-->
+
+	<!-- datascroller dans le bloc ... doit partir à droite pour internet (ok pour IE,
+			mais faut rajouter le inline-table pour FF -->
+	<u:selector name=".blocPagination .rich-dtascroller-table">
+		<u:style name="display" value="inline-table"/>
+	</u:selector>
+	
+	<u:selector name=".rich-datascr">
+		<u:style name="color" value="#ffffff"/>
+	</u:selector>
+	
+	<u:selector name=".rich-datascr-button">
+		<u:style name="background-color" skin="datascrollerBgColor"/>
+		<u:style name="border" value="none"/>
+		<u:style name="text-align" value="center"/>
+		<u:style name="cursor" value="pointer"/>
+		<!-- u:style name="width" value="15px"/>
+		<u:style name="padding-top" value="2px"/ -->
+	</u:selector>
+	
+	<u:selector name=".rich-dtascroller-table">
+		<u:style name="background-color" skin="datascrollerBgColor"/>
+		<u:style name="border" value="none"/>
+	</u:selector>
+	
+	<u:selector name=".rich-datascr-act">
+		<u:style name="color" skin="datascrollerTextColor" default="#FFFFFF"/>
+		<u:style name="border" value="none"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="padding" value="0 2px 2px 2px"/>
+		<u:style name="width" value="15px"/>
+		<u:style name="text-align" value="center"/>
+	</u:selector>
+	
+	<u:selector name=".rich-datascr-inact">
+		<u:style name="color" skin="datascrollerTextColor" default="#FFFFFF"/>
+		<u:style name="border" value="none"/>
+		<u:style name="text-decoration" value="underline"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="padding" value="0 2px 2px 2px"/>
+		<u:style name="width" value="15px"/>
+		<u:style name="text-align" value="center"/>
+	</u:selector>
+	
+	<!-- desactivation des boutons inactifs du datascroller -->
+	<u:selector name=".rich-datascr-button-dsbld">
+		<u:style name="cursor" value="auto"/>
+	</u:selector>
+
+</f:template>

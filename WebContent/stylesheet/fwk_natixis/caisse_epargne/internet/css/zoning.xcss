@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le zoning Caisse d'Epargne Internet.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/zoning.xcss" />
+		
+	<!-- La page Caisse d'épargne Internet est centrée, par l'importation de : --> 	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_page_centre.xcss" />
+	
+	<!-- 
+	07/2010 : 
+	  Surcharge de #conteneur_br
+	  Pour IE6 - GCE - Internet 
+	-->
+	<u:selector name="#conteneur_br" >
+		<u:style name="display" value="block"/>
+		<u:style name="clear" 	value="both"/>
+	</u:selector>
+	
+	<!-- L'enseigne est centrée : on doit donc lui spécifier une valeur de 'width' pour #zoneCentrale
+	(puisque la valeur de 'width' au niveau du body doit être valorisée à 'auto').
+	=> Cependant, il y a un problème dès lors que le contenu du #corpsDePage est dépassé : l'attribut
+	'overflow' de #zoneCentrale étant positionné à 'hidden', on perd l'affichage des éléments extérieurs.
+	=> On définit donc une largeur à #corpsDePage et un dépassement horizontal (overflow-x) positionné
+	à 'auto' pour faire afficher l'ascenseur le cas échéant...  
+	Cette solution est préférable à positionner un overflow-x:auto sur le #conteneur puisque ce dernier
+	est constitué d'une image de fond répétée (que même un overflow-y:hidden ne suffit à corriger) -->
+	
+	<!-- Pour FF, Chrome -->
+	<u:selector name="#corpsDePage" >
+		<u:style name="overflow-x" value="auto"/>
+		<u:style name="width" value="730px"/>
+	</u:selector>
+	
+	<!-- Hack pour IE6 --> 
+	<u:selector name="* html #corpsDePage">
+		<u:style name="width" value="727px"/>
+	</u:selector>
+	
+	<!-- 
+	
+	Elle possède des liens transversaux et les 3 blocs principaux possèdent des images de fond :
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<ul id="liensTransversaux">...</ul>
+			<div id="conteneurHeader">
+				<a id="logo">...</a>	
+				<div id="moteurRecherche">...</div>			
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="conteneur">
+			<ul id="rail">...</ul>
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="liensFooter">...</ul>
+			<div id="copyright">...</div>
+		</div>	
+	-->
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #bandeauHaut (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->
+		
+	
+	
+	
+	<!-- #bandeauHaut définit la zone haute : liens transversaux et univers visuel -->
+	<u:selector name="body #bandeauHaut"><!-- EXTENDS "#bandeauHaut" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/top_page.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 1px"/>		
+	</u:selector>
+	
+	<!-- Positionnement du bloc des liens transversaux situés dans le header.
+	Cette zone occupe toute la largeur de la zone utile mais est alignée à droite -->
+	<u:selector name="body ul#liensTransversaux"><!-- EXTENDS "#liensTransversaux" -->
+		<u:style name="padding" value="0.5em 14em 0 0"/><!-- (1) -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- (1) Positionnement par rapport au haut de page et à la droite de l'écran (cas où le lien serait seul) -->
+	
+	<!-- (Niveau 2) #conteneurHeader > Moteur de recherche -->
+	<u:selector name="body #moteurRecherche">
+		<u:style name="float" value="right"/><!-- (2) -->
+		<u:style name="margin" value="1em 0 0 0"/>
+		<u:style name="padding" value="0 2em 0 0"/>
+		<u:style name="text-align" value="right"/> <!-- (3) -->
+	</u:selector>
+		
+	<!-- (2) Une autre solution a été tentée : suppression du flottant. Seulement la reprise du flux 
+	ne se fait pas correctement sous IE6 (les éléments #logo et #titreAppli étant en float:left).
+	Le bloc de recherche passe à la ligne. 
+	Même remarque que plus haut : pas de -->
+	
+	<!-- (3) Cette propriété remplace la valeur bizarroïde "width:25%". Elle était directement liée au point (7) et
+	ne se comprenait qu'en liaison avec la propriété "width:74%" sur le champ <input situé à l'intérieur de ce bloc.
+	Pour éviter que le moteur de recherche ne passe à la ligne, il faut absolument que la taille du calque #moteurRecherche 
+	soit inférieure	à la somme des tailles #logo + #titreAppli. -->
+	
+	
+	<!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->	 
+
+	<!-- Changement de la taille du menu -->
+	<u:selector name="#menu">
+		<u:style name="overflow" value="hidden"/>
+		<u:style name="margin-left" value="10px"/>
+		<u:style name="font-size" value="1em"/>
+	</u:selector> 
+	
+	<u:selector name="html>body #menu">
+		<u:style name="margin-left" value="15px"/>
+	</u:selector>
+	
+	<!-- zone d'infos et autres -->
+	<u:selector name="#zoneInfo, #zonePersoHaut, #zonePersoBas">
+		<u:style name="border" value="1px solid #DDDDDD"/>
+		<u:style name="margin" value="10px 0"/>
+		<u:style name="padding-bottom" value="15px"/>
+		<u:style name="padding-left" value="10px"/>
+		<u:style name="padding-top" value="15px"/>
+	</u:selector>
+	
+
+	<!-- #conteneur définit la zone centrale : #menu, #rail et #corpsDePage -->
+	<u:selector name="body #conteneur">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/side_page.png" />
+		</u:style>
+		<u:style name="background-repeat" value="repeat"/><!-- (4) -->
+		<u:style name="overflow" value="hidden"/><!-- (5) -->
+	</u:selector>
+			
+	<!-- (4) Valeur optionnelle mais mise pour faciliter la compréhension. L'image utilisée a une très faible 
+	hauteur (4px) et est répétée car le #conteneur n'a pas de hauteur fixe. -->
+	
+	<!-- (5) Permet de conserver le background du conteneur à l'interieur de celui-ci, le menu est plus grand 
+	en hauteur que le corps de page -->
+	
+	<!-- Positionnement du #rail -->
+	<u:selector name="body #rail"><!-- EXTENDS "#rail" -->
+		<u:style name="margin-bottom" value="10px"/><!-- (6) -->
+	</u:selector>
+	
+	<!-- (6) Marge séparant le #rail du reste du corps de page (#corpsDePage) -->
+	
+	<!-- Bloc de login à l'intérieur des pages -->
+	<u:selector name="#blocAuthentificationInterieure">
+		<u:style name="background-color" skin="blocConnexionInterieureBackgroundColor"/>
+		<u:style name="background-repeat" value="repeat"/>
+		<u:style name="background-position" value="0 50%"/>
+		<u:style name="border-width" skin="blocConnexionInterieureBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureBorderColor"/>
+		<u:style name="padding" skin="blocConnexionInterieurePadding"/>
+		<u:style name="margin" value="10px 0"/>
+		<u:style name="background-image">
+            <f:resource f:key="SphinxGradient">
+                <f:attribute name="gradientHeight" value="100px"/>
+                <f:attribute name="height" value="150px"/>
+                <f:attribute name="gradientColor" skin="blocConnexionInterieureBackgroundColor"/>
+            </f:resource>
+		</u:style>
+	</u:selector>
+	
+	<!-- Bloc de login à l'intérieur des pages, une fois connexté -->
+	<u:selector name="#blocAuthentificationInterieure.connected">
+		<u:style name="background-color" value="transparent"/>
+	</u:selector>
+	
+	<!-- Style du pavé généré par le s:decorate -->
+	<u:selector name="#blocAuthentificationInterieure .edition_rubrique">
+		<u:style name="margin-bottom" value="0"/>		
+	</u:selector>
+	
+	<!-- Style du libellé Identifiant... -->
+	<u:selector name="#blocAuthentificationInterieure .edition_rubrique .name">
+		<u:style name="color" skin="blocConnexionInterieureLabelColor"/>
+		<u:style name="font-size" skin="blocConnexionInterieureLabelFontSize"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLabelFontWeight"/>
+		<u:style name="padding" value="0"/>
+	</u:selector>
+	
+	<!-- Style de la zone de saisie ... -->
+	<u:selector name="#blocAuthentificationInterieure .edition_rubrique .value input">
+		<u:style name="border-width" skin="blocConnexionInterieureBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureBorderColor"/>
+		<u:style name="width" skin="blocConnexionInterieureInputWidth"/>		
+	</u:selector>
+
+	<!-- Style du bouton de connexion ... -->
+	<u:selector name="#blocAuthentificationInterieure .login, #blocAuthentificationInterieure .logout">
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="background-image" value="none"/>
+		<u:style name="border" value="none"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="font-size" value="1em"/>
+		<u:style name="margin-top" value="-2.17em"/>
+		<u:style name="padding" value="1px!important"/>
+		<u:style name="overflow" value="visible"/>
+	</u:selector>
+	
+	<u:selector name="#blocAuthentificationInterieure .login">
+		<u:style name="float" value="right"/>
+	</u:selector>
+	
+	<u:selector name="#blocAuthentificationInterieure .logout">
+		<u:style name="float" value="none"/>
+	</u:selector>
+	
+	<u:selector name="html>body #blocAuthentificationInterieure .login, #blocAuthentificationInterieure .logout">
+		<u:style name="margin-top" value="-2em"/>
+	</u:selector>
+
+	<!-- 
+		position du bouton OK à côté du mot de passe 
+		(faut modifier sa largeur et ajouter une marge gauche)
+	-->
+	<u:selector name="#blocAuthentificationInterieure .value input.login">
+	 	<u:style name="width" value="auto"/>
+		<u:style name="margin-left" value="5px"/>
+	 	<u:style name="border" value="none"/>
+	</u:selector>
+	
+	<!-- Style des liens ... -->
+	<u:selector name="#blocAuthentificationInterieure a">
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienTextDecoration"/>
+	</u:selector>
+	
+	<!-- Style des liens au survol... -->
+	<u:selector name="#blocAuthentificationInterieure a:hover">
+		<u:style name="color" skin="linkHoverColor"/>
+	</u:selector>
+	
+	<!-- Positionnement du #corpsDePage qui occupe toute la largeur mais est décalé de la largeur du menu (+padding) -->
+	<u:selector name="body #corpsDePage"><!-- EXTENDS "#corpsDePage" -->
+		<u:style name="padding-right" value="10px"/><!-- (7) -->
+	</u:selector>
+		
+	<!-- (7) Pour éviter que le contenu de la zone utile (images, bande des liens transversaux) ne colle 
+	à la bordure droite -->
+	
+	<!-- Liens transversaux -->
+	<u:selector name="body #navTransversal"><!-- EXTENDS "#navTransversal" --> 
+		<u:style name="margin-bottom" value="10px"/>
+		<u:style name="line-height" value="17px"/>
+	</u:selector>
+			
+	<!-- La zone contenant le coeur de l'application : formulaires ; On souhaite la restreindre en largeur -->
+	<u:selector name="body #zoneCentrale"><!-- EXTENDS "#zoneCentrale" --> 
+		<u:style name="width" skin="zoneCentraleWidth" default="725px"/><!-- (8) -->
+	</u:selector>
+	
+	<!-- (8) Voir si c'est gênant dans le cas de tableaux trop larges ; pourra être surchargé grâce à la variable -->
+	
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #piedsDePage (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->	
+	
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="body #piedsDePage"><!-- EXTENDS "#piedsDePage" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bottom_page.png"/>
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="padding-top" value="13px"/><!-- (9) -->		
+	</u:selector>
+	
+	<!-- (9) Permet de situer le texte à l'intérieur du footer EN DESSOUS DE L'IMAGE -->
+	 
+	 <!-- On importe le style idoine à ce footer : un ensemble liens, copyright aligné à droite -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_footer_duo_droite.xcss" />
+	
+</f:template>

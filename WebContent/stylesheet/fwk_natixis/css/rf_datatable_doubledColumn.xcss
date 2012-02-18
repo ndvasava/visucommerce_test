@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Colonnes Doublées : surcharge des propriétés 
+| - rf_datatable_cadre.xcss
+| - rf_datatable_simple.xcss
+| - rf_datatable.xcss 
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Caption
+| 07/2010 : internet uniquement
++===============================================================================
+-->
+	<u:selector name="	.rich-table-doubledColumn .rich-table-caption,
+						.rich-table-doubledColumn .rich-table caption">
+
+		<u:style name="border-color" skin="tableDoubledColumnCaptionBorderColor"/>
+		<u:style name="border-style" skin="tableDoubledColumnCaptionBorderStyle"/>
+		<u:style name="border-width" skin="tableDoubledColumnCaptionBorderWidth"/>
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Caption - FF - Internet
+| 07/2010 : internet uniquement
++===============================================================================
+-->
+	<u:selector name="	html:not([lang*='']) .rich-table-doubledColumn .rich-table-caption,
+						html:not([lang*='']) .rich-table-doubledColumn .rich-table caption">
+						
+		<u:style name="border-bottom-width" skin="tableDoubledColumnCaptionBorderBottomWidth_FF"/>
+		<u:style name="margin" 				skin="tableDoubledColumnCaptionBorderMargin_FF"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - [1er ligne]
++===============================================================================
+-->
+	<u:selector name="	.rich-table-doubledColumn .sx-table-header .rich-table-headercell,
+						.rich-table-doubledColumn .rich-table-subheadercell, 
+						.rich-table-doubledColumn .rich-subtable-headercell">
+
+		<u:style name="border-color" skin="tableDoubledColumnHeadercellBorderColor"/>
+		<u:style name="border-style" skin="tableDoubledColumnHeadercellBorderStyle"/>		
+		<u:style name="border-width" skin="tableDoubledColumnHeadercellBorderWidth"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - [lignes suivantes]
++===============================================================================
+-->
+	<u:selector name=".sx-table-doubledColumnHeaderContinue">
+	
+		<u:style name="font-weight" default="normal" skin="tableDoubledColumnHeaderContinueFontWeight"/>
+	</u:selector>
+	
+
+<!-- 
++===============================================================================
+| Body - Cellule - [1ere ligne]
++===============================================================================
+-->	
+	<u:selector name=".rich-table-doubledColumn .rich-table-firstrow .rich-table-cell">
+		<u:style name="border-top" skin="tableDoubledColumnCellFirstLineBorderTop"/>	
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule
++===============================================================================
+-->		
+	<u:selector name=" 	.rich-table-doubledColumn .rich-table-cell, 
+						.rich-table-doubledColumn .rich-subtable-cell">	
+						
+		<u:style name="border-color" skin="tableDoubledColumnCellBorderColor"/>
+		<u:style name="border-style" skin="tableDoubledColumnCellBorderStyle"/>
+		<u:style name="border-width" skin="tableDoubledColumnCellBorderWidth"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - Gauche
++===============================================================================
+-->
+	<u:selector name="	.rich-table-doubledColumn .rich-table-cell:FIRST-CHILD,
+						.rich-table-doubledColumn .rich-subtable-cell:FIRST-CHILD">
+						
+		<u:style name="border-color" 	  skin="tableDoubledColumnFirstCellBorderColor"/>
+		<u:style name="border-left-width" skin="tableDoubledColumnFirstCellBorderLeftWidth"/>
+	</u:selector>
+	
+
+<!-- 
++===============================================================================
+| Footer - Cellule
++===============================================================================
+-->
+	<u:selector name=".rich-table-doubledColumn .rich-table-footercell">
+		<u:style name="border-color" skin="tableDoubledColumnFootercellBorderColor"/>
+		<u:style name="border-style" skin="tableDoubledColumnFootercellBorderStyle"/>
+		<u:style name="border-width" skin="tableDoubledColumnFootercellBorderWidth"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Footer - NoHeight
+| - Permet de mettre une bordure top en bas du tableau
++===============================================================================
+-->
+	<u:selector name="tr.rich-table-doubledColumn-footerNoHeight">
+		<u:style name="display" skin="tableDoubledColumnFooterDisplay"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-doubledColumn-footerNoHeight .rich-table-footercell div">
+		<u:style name="display" value="none"/>
+	</u:selector>
+	
+</f:template>

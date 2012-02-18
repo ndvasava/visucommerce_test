@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+   xmlns:u='http:/jsf.exadel.com/template/util' 
+   xmlns="http://www.w3.org/1999/xhtml" >
+   
+   <!-- 
+		Feuille de style associée aux composants <rich:toolBar>.
+		Il ne s'utilise pas seul mais couplé :
+		- soit avec des composants <rich:dropDownMenu> (menu niveau 1) qui contiennent eux-mêmes une série
+		de <rich:menuItem> pour les niveaux inférieurs.	
+		- soit avec une succession d'autres composants (lien, <rich:menuItem>)
+		
+		Dans le cas d'un lien, présent dans la barre, on veut généralement lui donner l'apparence du lien
+		de niveau 1 du menu (Dans le cas où il y a plusieurs niveaux, on utilisera un <rich:dropDownMenu>).	
+		=> Pour ce faire, on spécifie au niveau du lien lui-même la classe 'lienMenuNiveau1' comme suit :
+		<rich:toolBar>
+	  		<s:link action="goEditClient" styleClass="lienMenuNiveau1">Lien intérieure</s:link>
+	  	</rich:toolBar>
+	  	
+	-->
+
+	<!-- Reprise des styles natifs -->
+	<f:importResource src="org/richfaces/renderkit/html/css/toolBar.xcss" />
+	
+	<!-- La barre proprement dite -->
+	<u:selector name=".rich-toolbar"><!-- S'applique à un <table> -->
+		<u:style name="background-color" skin="toolbarBgColor" default="transparent"/>
+		<f:if skin="toolbarBgImg">
+			<u:style name="background-image">
+				<f:resource f:skin="toolbarBgImg"/>
+			</u:style>
+		</f:if>	
+		<u:style name="background-position" value="left top"/>
+		<u:style name="background-repeat" value="repeat-x"/>
+		<u:style name="border">
+			<f:verbatim skin="toolbarBorderWidth" default="1px"/>
+			<f:verbatim value="solid"/>
+			<f:verbatim skin="toolbarBorderColor" default="#000000"/>
+		</u:style>
+		<u:style name="padding" skin="toolbarPadding" default="0"/>
+		<u:style name="height" skin="toolbarHeight"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Cette propriété n'est pas présente dans le composant de base. On la rajoute, délibérement 
+	sans précision de valeur par défaut, pour pouvoir prendre la main... ultérieurement. -->
+	
+	<!-- Un des éléments de la barre. 
+	Remarque importante : le style proprement dit du lien de niveau 1 est défini au niveau html dans
+	une <div> inférieure portée par le composant <rich:dropDownMenu>. Le style reprend celui du menu
+	de niveau 1. -->
+	<u:selector name=".rich-toolbar-item"><!-- S'applique à un <td> -->
+		<u:style name="padding" skin="toolbarItemPadding" default="2px 10px"/>
+		<u:style name="white-space" value="nowrap"/>
+	</u:selector>
+		
+</f:template>

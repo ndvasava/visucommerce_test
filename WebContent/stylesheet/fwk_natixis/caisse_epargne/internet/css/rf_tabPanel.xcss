@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Feuille de style associée au composant rich:tabPanel mais avec les spécificités GCE Internet (bouton arrondi)
+				
+	-->
+	
+	<!-- On hérite des propriétés de base -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_tabPanel.xcss" />
+		
+	<!-- 
+		/****************************************************************/
+		/*  Ancienne façon de faire (avec un duo d'images superposées)  */
+		/****************************************************************/
+	 -->
+	 
+	 <!-- Principes : 2 images décalées : l'une collée à gauche permettant le bord arrondi gauche... et l'autre collée
+	 à droite permettant le bord arrondi droit.
+	 Que le tab soit actif ou inactif (ou disabled), les images sont les mêmes. C'est pourquoi, c'est la classe commune
+	 (".rich-tab-header") à tous les types de tabulation qui porte le style (l'image en l'espèce).
+	 La propriété ".rounded-tab" entoure le libellé contenu dans le tab. Il est donc écrit au moyen d'une <f:facet comme suit :
+	 <f:facet name="label">
+		<h:outputText styleClass="rounded-tab" value="#{messages['personne.section.label']}"/>
+	</f:facet>
+	   -->	 
+	 
+	 <!-- Style commun à toutes les tabs (actives, inactives...) et qui permet de définir l'image gauche -->
+	<u:selector name="body .rich-tab-header"><!-- EXTENDS ".rich-tab-header" -->
+		<u:style name="border" value="none"/><!-- (1) -->
+		<u:style name="padding" value="2px 0 2px 15px"/><!-- (2) -->	
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/onglet_avec_fleche.gif" />	
+		</u:style>
+		<u:style name="background-position" value="0 0"/><!-- (3) -->
+		<u:style name="background-attachment" value="scroll"/><!-- (4) -->
+		<u:style name="background-repeat" value="no-repeat"/><!-- (4) -->			
+	</u:selector>
+	
+	<!-- (1) Réinitialisation de la valeur héritée : plus de bordure, eu égard à la présence d'images -->
+	
+	<!-- (2) Changement des valeurs héritées pour intercaler le texte -->
+	
+	<!-- (3) L'image est calée à gauche -->
+	
+	<!-- (4) Propriétés qui seront également valables pour l'image de droite -->	
+	
+	<!-- Style appliqué sur le libellé via une <f:facet et qui permet de réaliser l'image de droite -->
+	<u:selector name="body .rich-tab-header .rounded-tab">
+		<u:style name="padding" value="2px 8px 2px 0"/><!-- (5) -->	
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/onglet_bas.gif" />	
+		</u:style>
+		<u:style name="background-position" value="right 0"/><!-- (6) -->	
+	</u:selector>
+	
+	<!-- (5) Réinitialisation du padding établi en (2) -->	
+	
+	<!-- (6) L'image est calée à droite -->	
+		
+</f:template>

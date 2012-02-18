@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+ 	<!-- 
+		/**********************************/
+		/**   BLOCS DE BOUTONS           **/
+		/**********************************/
+	-->
+	
+	<!-- On définit le pavé contenant les boutons à l'intérieur du cadre du formulaire  -->
+	<u:selector name=".actionButtons">
+		<u:style name="padding" skin="actionButtonsPadding" default="10px 0 30px 0"/>
+		<u:style name="margin" skin="actionButtonsMargin" default="0"/>
+	</u:selector>
+	
+	<!-- (1) Le pavé des boutons est séparé du cadre des formulaires par un trait pointillé horizontal ;
+	celui-ci ne touchant pas les contours du cadre -->
+	<!-- (2) On ne met pas de marges entre le trait pointillé horizontal et les autres champs de saisie -->
+	<!-- (3) En revanche, on laisse un espace entre le trait pointillé et le bouton proprement dit -->
+	<!-- (4) Pour permettre un certain ordre d'alignement (variable selon les enseignes) -->
+	
+	<!-- Les boutons de formulaire sont situés à l'intérieur d'un bloc situé dans le cadre du formulaire  -->
+	<u:selector name=".actionButtons, .modalButtons">
+		<u:style name="border-width" skin="blocButtonBorderWidth"/><!-- (1) -->
+		<u:style name="border-style" skin="blocButtonBorderStyle"/><!-- (1) -->
+		<u:style name="border-color" skin="blocButtonBorderColor"/><!-- (1) -->
+		<u:style name="text-align" skin="blocButtonTextAlign"/><!-- (2) -->
+	</u:selector>
+	 
+	<!-- (1) Style du trait de séparation entre le bloc des boutons et le reste du formulaire...-->
+	
+	<!-- (2) Permet au sein du bloc qui occupe toute la largeur du panel de positionner soit à gauche,
+	soit à droite. Attention, cela ne permet pas de permuter l'ordre des boutons ; ceci sera réalisé par 
+	application d'une propriété float:right directement sur les boutons... -->
+	
+	<!-- Positionnement dans les popus -->
+	<u:selector name=".modalButtons">
+		<u:style name="padding" value="10px 0 0 0"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="position" value="absolute" />
+		<u:style name="bottom" value="10px" />
+		<u:style name="width" value="100%" />
+	</u:selector>
+	
+	<!-- zone action au dessus des tableaux -->
+	<u:selector name=".tableActions">
+		<u:style name="margin-bottom" value="1em"/>
+	</u:selector>
+	
+	<!-- Positionnement dans les footers de tableaux -->
+	<u:selector name=".tableButtons"><!--
+		<u:style name="height" value="30px"/>
+		<u:style name="line-height" value="30px"/>
+		<u:style name="text-align" value="right"/>
+	--></u:selector>
+	
+	<!-- Positionnement dans les blocs de pagination -->
+	<u:selector name=".blocPagination">
+		<u:style name="margin-bottom" value="5px"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <input>    **/
+		/**********************************/
+	-->
+	<!-- Important : les boutons ont leurs propres valeurs par défaut
+	(Cocher "Style > Afficher les styles calculés" dans Firebug pour l'observer).
+	=> Il faut donc redéfinir certaines valeurs définies dans le body pour le texte -->
+
+	<!-- On peut également préciser pour des liens transformés en bouton le 
+	caractère souligné ou pas... Attention, ceci ne s'applique qu'à des liens
+	et non pas pour des boutons en XHTML strict. (Pour obtenir toutefois un 
+	rendu souligné sur des boutons, il existe un contournement _ hack _ consiste
+	à adjoindre la propriété "position:absolute" au côté de la propriété 
+	"text-decoration:underline"... Toutefois, ceci nécessite de revoir le positionnement
+	des boutons. Ex : espacement bouton champ / password dans la page de login) -->
+	
+	<u:selector name="input.boutonAction">
+		<u:style name="padding" skin="boutonActionInputPadding"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonBorderWidth"/>
+		<u:style name="border-color" skin="buttonBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-family" skin="defaultFontFamily"/>
+		<u:style name="font-weight" skin="buttonFontWeight"/>
+		<u:style name="font-size" skin="buttonFontSize"/>
+		<u:style name="height" skin="buttonHeight"/>
+		<u:style name="overflow" value="visible"/><!-- (4) -->
+	</u:selector>
+	<u:selector name="input.boutonActionHover">
+		<u:style name="padding" skin="boutonActionInputPadding"/>
+		<u:style name="color" skin="buttonHoverTextColor"/>
+		<u:style name="background-color" skin="buttonHoverBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonHoverBorderWidth"/>
+		<u:style name="border-color" skin="buttonHoverBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-family" skin="defaultFontFamily"/>
+		<u:style name="font-weight" skin="buttonHoverFontWeight"/>
+		<u:style name="font-size" skin="buttonHoverFontSize"/>
+		<u:style name="height" skin="buttonHeight"/>
+		<u:style name="overflow" value="visible"/><!-- (4) -->
+	</u:selector>
+	<u:selector name="input.boutonInaction">
+		<u:style name="padding" skin="boutonActionInputPadding"/>
+		<u:style name="color" skin="buttonInactifTextColor"/>
+		<u:style name="background-color" skin="buttonInactifBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonInactifBorderWidth"/>
+		<u:style name="border-color" skin="buttonInactifBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-family" skin="defaultFontFamily"/>
+		<u:style name="font-weight" skin="buttonInactifFontWeight"/>
+		<u:style name="font-size" skin="buttonInactifFontSize"/>
+		<u:style name="height" skin="buttonHeight"/>
+		<u:style name="overflow" value="visible"/><!-- (4) -->
+	</u:selector>
+	<u:selector name="input.boutonInactionHover">
+		<u:style name="height" skin="buttonHeight"/>
+		<u:style name="overflow" value="visible"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) pour IE6 qui met de l'"extra padding" en fonction de la taille du texte ce qui 
+	donne des boutons trop larges, overflow n'a aucune influence sur FF et IE8 sur les input -->
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <a>        **/
+		/**********************************/
+	-->
+	
+	<!-- Propriétés communes aux <input et aux liens transformés en boutons -->
+	<u:selector name="a.boutonAction">
+		<u:style name="padding" skin="boutonActionInputPadding"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonBorderWidth"/>
+		<u:style name="border-color" skin="buttonBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-weight" skin="buttonFontWeight"/>
+		<u:style name="font-size" skin="buttonFontSize"/>
+		<u:style name="text-decoration" skin="buttonTextDecoration"/>
+	</u:selector>
+	
+	<!-- Propriétés communes aux <input et aux liens transformés en boutons au survol.
+	Dans le cas du bouton, l'ajout n'est pas automatique mais nécessite de coder l'ajout
+	d'une classe au survol (et le retrait quand on cesse d'être au-dessus).
+	Cela se fait en rajoutant le bout de code suivant :
+		onmouseover="$(this).addClassName('boutonActionHover')"
+		onmouseout="$(this).removeClassName('boutonActionHover')" -->
+	<u:selector name="a.boutonAction:hover">
+		<u:style name="color" skin="buttonHoverTextColor"/>
+		<u:style name="background-color" skin="buttonHoverBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonHoverBorderWidth"/>
+		<u:style name="border-color" skin="buttonHoverBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-weight" skin="buttonHoverFontWeight"/>
+		<u:style name="font-size" skin="buttonHoverFontSize"/>
+		<u:style name="text-decoration" skin="buttonHoverTextDecoration"/>
+	</u:selector>
+	
+	<!-- Propriétés communes aux <input et aux liens transformés en boutons inactifs -->
+	<u:selector name="a.boutonInaction">
+		<u:style name="color" skin="buttonInactifTextColor"/>
+		<u:style name="background-color" skin="buttonInactifBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="border-width" skin="buttonInactifBorderWidth"/>
+		<u:style name="border-color" skin="buttonInactifBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="font-weight" skin="buttonInactifFontWeight"/>
+		<u:style name="font-size" skin="buttonInactifFontSize"/>
+	</u:selector>
+	
+	<!-- Même remarque que précédemment... -->
+	<u:selector name="a.boutonInaction:hover">
+		<u:style name="text-decoration" skin="buttonInactifTextDecoration"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************************/
+		/**   BOUTONS SPECIFIQUES                    **/
+		/**           DE FORMULAIRES (actionButtons) **/
+		/**********************************************/
+	-->
+	
+	<!-- On régit l'ordre de disposition des boutons. Utile pour canal agence natixis qui inverse l'ordre -->
+	<u:selector name=".actionButtons input">
+		<u:style name="float" skin="blocButtonInversionOrdre"/><!-- (3) -->
+		<u:style name="margin" skin="boutonFormulaireMargin"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) On mettra généralement 'none' en cas d'ordre naturel (celui d'écriture dans la page) et 'right'
+	pour inverser. Attention, 'left' et 'none' ne sont pas équivalents dans leur rapport à la hauteur du conteneur.-->
+	<!-- Cela se fera par ajout d'un duo de classes. Ex : class="actionButtons modalButtons" ; la seconde venant amender la première. -->
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE HEADERS DE TABLEAUX (tableActions)    **/
+		/***************************************************/
+	-->
+	
+	<!-- positionnement au dessus des tableaux -->
+	<u:selector name=".tableActions input">
+		<u:style name="margin" value="0 3px" />
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE FOOTERS DE TABLEAUX (tableButtons)    **/
+		/***************************************************/
+	-->
+	
+	<!-- zone action liée aux données du tableau -->
+	<u:selector name=".tableButtons input">
+		<u:style name="margin" value="5px 3px 8px"/>
+	</u:selector>
+	
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE BLOCS DE PAGINATION (blocPagination)  **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".blocPagination a">
+		<u:style name="margin" value="0px 3px"/>
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+	
+	<!-- 
+		/**************************************/
+		/**   BOUTONS SPECIFIQUES            **/
+		/**      DE POPUP (modalButtons)     **/
+		/**************************************/
+	-->
+
+	<u:selector name=".modalButtons input">
+		<u:style name="margin" skin="boutonModalMargin"/>
+		<u:style name="float" skin="blocButtonInversionOrdre"/><!-- (3) plus haut -->
+	</u:selector>
+	
+
+</f:template>

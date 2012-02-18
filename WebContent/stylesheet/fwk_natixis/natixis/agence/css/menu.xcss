@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		Styles dynamiques pour les menus conformes à la charte Multi Enseigne (canal agence) pour le
+		theme Natixis.
+		
+		Les propriétés utilisées ici sont : 
+			
+			menuLevel1TextColor
+			menuLevel1BgColor
+			menuLevel1ActifTextColor
+			menuLevel1ActifBgColor
+			menuLevel2SeparatorColor
+			menuLevel2TextColor
+			menuLevel2HoverTextColor
+			menuOpenTextColor
+			menuCloseTextColor
+			
+		Les ressources externes : 
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/flecherouge_off.gif" />
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/flecherouge.gif" />
+
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/froff_niv2.gif" />
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/fron_niv2.gif" />
+
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/flechegrise.gif" />
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/img/flechegrise_niv2.gif" />
+	 -->
+
+	<f:verbatim>
+		
+		/************************************/
+		/*              MENU                */
+		/************************************/
+
+		/* dimensions, padding et marge général */
+
+		
+		
+		#menu ul{
+			margin:0;
+			padding:0 0 0 10px;
+			overflow:hidden;
+			list-style-type:none;
+		}
+		
+		#menu ul ul{
+			margin:0;
+			padding:5px 0 5px 0;
+		}
+		
+		#menu ul li{
+			margin:0;
+			padding:5px 0 0 0;
+		}
+		
+			/* pour IE */
+		#menu ul .niveau1b,
+		#menu ul .niveau2b,
+		#menu ul .niveau1,
+		#menu ul .niveau2
+		{
+			width:200px;
+		}
+		
+		#menu ul .niveau2{
+			font-size:1em;
+			padding: 12px 0;
+		}
+		
+		/* pour FF */
+		html>body #menu ul .niveau2{
+			min-height:28px;
+			padding:12px 0 0 0;
+			width:180px;
+			font-weight:bold;
+		}
+			
+		#menu ul .niveau3{
+			font-weight:normal;
+		}
+		
+		#menu .nostyle{
+			list-style-type:none;
+			padding:0px;
+			margin:0px;
+			display:none;
+		}
+		
+		#menu .nostyle ul{
+			padding:0;
+			margin:0;
+		}
+
+		/* petit padding pour FF */
+		html>body #menu ul.niveau2b {
+			padding-bottom:5px;
+		}
+
+		/* retrait de la bordure sur les liens sélectionnés dans les menus */
+		#menu a:focus {
+			outline: none;
+		}
+		
+	</f:verbatim>
+	
+	<!-- 
+		/**************/   
+		/*  NIVEAU 1  */
+		/**************/   
+
+		/* bordure blanche entre les lignes */
+		/* couleur de fond : menuLevel1Color */
+
+		#menu ul .niveau1 {
+			border-bottom:1px solid #fff;
+			padding:8px 0 8px 0px;
+			margin:0px;
+			font-size:1.07em;
+			font-weight:bold;
+			background-color:#00A0C6;  => menuLevel1Color
+		}
+		
+		/* changement de couleur en cas d'ouverture  */
+		#menu ul .niveau1.menuOuvert{
+			background-color:#35339A; => menuActifLevel1Color
+		}
+
+		/* lien blanc avec un petit padding à gauche */
+		#menu ul .niveau1 a{
+			padding-left:8px;
+			color:#fff;
+			display:block;
+		}
+
+	-->
+
+	<u:selector name="#menu ul .niveau1">
+		<u:style name="border-bottom" value="1px solid #fff"/>
+		<u:style name="padding" value="8px 0 8px 0px"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="font-size" value="1.07em"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="background-color" skin="menuLevel1BgColor"/>
+	</u:selector> 
+
+
+	<u:selector name="#menu ul .niveau1.menuOuvert">
+		<u:style name="background-color" skin="menuLevel1ActifBgColor"/>
+	</u:selector>
+
+	<u:selector name="#menu ul .niveau1 a">
+		<u:style name="padding-left" value="8px"/>
+		<u:style name="color" skin="menuLevel1TextColor"/>
+		<u:style name="display" value="block"/>
+	</u:selector> 
+
+	<u:selector name="#menu ul .niveau1.menuOuvert a">
+		<u:style name="color" skin="menuLevel1ActifTextColor"/>
+	</u:selector>
+
+	<!-- liseré bleu séparateur de niveau 2 -->
+	<u:selector name="#menu ul .niveau2">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="border-bottom-color" skin="menuLevel2SeparatorColor" />
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-width" value="1px"/>
+	</u:selector>
+
+	<u:selector name="#menu .nostyle .menuOuvert">
+		<u:style name="background-color" value="transparent"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flecherouge_off.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 15px"/>
+		<u:style name="padding-left" value="12px"/>
+	</u:selector>
+
+	<u:selector name="#menu .nostyle .menuFerme">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flecherouge.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 13px"/>
+		<u:style name="padding-left" value="12px"/>
+	</u:selector>
+
+	<!-- 
+	
+		/**************/   
+		/*  NIVEAU 2  */
+		/**************/   
+
+		/* ferme : fleche ... */
+		#menu .niveau2 .menuFerme{
+			font-family:Arial;
+			font-size:1em;
+			list-style-type:none;
+			background:url('../img/froff_niv2.gif') no-repeat left 7px;
+		}
+		
+		/* ouvert : fleche ... */
+		#menu .niveau2 .menuOuvert{
+			font-family:Arial;
+			font-size:1em;
+			list-style-type:none;
+			background:url('../img/fron_niv2.gif') no-repeat left 7px;
+		}
+
+		/* sans fils (niveau 1) */
+		#menu .nostyle .hasNoChild{
+			list-style-type:none;
+			background:url('../img/flechegrise.gif') no-repeat left 15px;
+		}
+		
+		/* sans fils de niveau 2 */
+		#menu .niveau2 .hasNoChild{
+			list-style-type:none;
+			background:url('../img/flechegrise_niv2.gif') no-repeat left 7px;
+			padding-left:12px;
+			margin-left:0px;
+		}
+	-->
+	
+	<u:selector name="#menu .niveau2 .menuFerme">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 7px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/froff_niv2.gif" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name="#menu .niveau2 .menuOuvert">
+		<u:style name="background-position" value="left 7px"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/fron_niv2.gif" />
+		</u:style>
+	</u:selector>
+	
+	<u:selector name="#menu .nostyle .hasNoChild">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 15px"/>
+		<u:style name="padding-left" value="12px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flechegrise.gif" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name="#menu .niveau2 .hasNoChild">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 7px"/>
+		<u:style name="padding-left" value="12px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/flechegrise_niv2.gif" />
+		</u:style>
+	</u:selector>
+	
+	<!-- 
+	
+		/************************/   
+		/*  couleur des liens   */
+		/************************/
+
+		#menu ul li .niveau2 a{
+			color: #0d0d37; /* => menuLinkLevel2Color */
+		}
+		
+		#menu ul li .niveau2 a:hover {
+			color: #00a0c6; /* => menuLinkLevel2HoverColor */
+		}
+		
+		/* menu ouvert => rouge */
+		#menu li .nostyle .menuOuvert a,
+		#menu ul .nostyle .menuOuvert a{
+			color: #ff0000; /* => menuLinkOpenColor */
+		}
+		
+		#menu li .niveau2 .menuFerme a {
+			color: #666666; /* => menuLinkCloseColor */
+		}
+		
+		#menu li .niveau2 .menuFerme a:hover {
+			color: #00a0c6; /* => menuLinkLevel2HoverColor */
+		}
+		
+		#menu li .nostyle .hasNoChild a,
+		#menu ul li ul .hasNoChild a:hover {
+			color: #666666;
+		}
+		
+		#menu ul .nostyle .hasNoChild a:hover {
+			color: #0d0d37; /* => menuLinkLevel2Color */
+		}
+		
+		#menu li .niveau3 .menuOuvert a:hover{
+			color:#F00; /* => menuLinkOpenColor */
+		}
+		
+	-->
+
+	<u:selector name="#menu ul li .niveau2 a">
+		<u:style name="color" skin="menuLevel2TextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu ul li .niveau2 a:hover">
+		<u:style name="color" skin="menuLevel2HoverTextColor"/>
+	</u:selector>
+	
+	<u:selector name="#menu li .nostyle .menuOuvert a, #menu ul .nostyle .menuOuvert a">
+		<u:style name="color" skin="menuOpenTextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu li .niveau2 .menuFerme a">
+		<u:style name="color" skin="menuCloseTextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu li .niveau2 .menuFerme a:hover">
+		<u:style name="color" skin="menuLevel2HoverTextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu li .nostyle .hasNoChild a, #menu ul li ul .hasNoChild a:hover">
+		<u:style name="color" skin="menuCloseTextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu ul .nostyle .hasNoChild a:hover">
+		<u:style name="color" skin="menuLevel2TextColor"/>
+	</u:selector>
+		
+	<u:selector name="#menu li .niveau3 .menuOuvert a:hover">
+		<u:style name="color" skin="menuOpenTextColor"/>
+	</u:selector>
+
+
+	<!-- 
+		/**************/   
+		/*  NIVEAU 3  */
+		/**************/   
+
+		#menu li .niveau3 .menuOuvert{
+			background:url('../img/froff_niv2.gif') no-repeat left 7px;
+		}
+	 -->
+
+	<u:selector name="#menu li .niveau3 .menuOuvert">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 7px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/agence/img/froff_niv2.gif" />
+		</u:style>
+	</u:selector>
+
+</f:template>

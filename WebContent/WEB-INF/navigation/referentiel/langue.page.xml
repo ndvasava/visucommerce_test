@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+       
+       <!-- 
+       	 o Regles d'implementation de la navigation jsf
+       	 	* La page source est indiquée au moyen de la balise <page>. Les règles de navigation pouvant être déclenchées par cette page source 
+       	 		sont spécifiées au travers de la balise <navigation>.
+       	 	* Vous précisez alors une balise <navigation> pour chaque action pouvant être exécutée sur la page source (grosso modo pour chaque lien / bouton de la page), 
+       	 		en valorisant l'attribut 'from-action' à la valeur de l'attribut 'action' du composant jsf cliqué. C'est la balise render qui pemettra 
+       	 		d'indiquer quelle est la page web à afficher.
+       
+       	 o Quelques Précisions sur Render, Redirect et la navigation via JSF
+       		* Balise <render> spécifie la page à atteindre et que la condition pour atteindre cette page est définie au moyen de l'attribut 
+       			'from-action' de la balise <navigation> et de l'attribut 'if-outcome' de la balise <rule>.
+       		* Balise <redirect> permet de faire un appel supplémentaire vers le serveur afin de "nettoyer" l'url affichée. on indique in fine 
+       			à Seam qu'il doit retourner au client un code d'erreur HTTP 302 en indiquant au navigateur d'appeler la page {view-id}.
+       		* CC : aucune différence fondamentale , ce qui impose d'utiliser render plutot que redirect pour des questions de performances.	
+        -->
+       
+       <!-- A declarer dans les resources de navigation seam dans le components.xml -->
+       
+		<page view-id="/views/langue/recherche_langue.xhtml">
+			<!-- Gestion bouton Retour sur l'ecran detail -->
+			<action execute="#{navigationHelper.addCurrentViewId('detailLangueFrom')}"/>
+			
+			<navigation from-action="#{editerLangueAction.find}">
+				<rule>
+	           		<render view-id="/views/langue/detail_langue.xhtml"/>
+        		</rule>
+        	</navigation>
+        	<navigation from-action="#{editerLangueAction.edit}">
+				<rule>
+		            <render view-id="/views/langue/edit_langue.xhtml"/>
+	        	</rule>
+	        </navigation>
+	        <navigation from-action="#{editerLangueAction.remove}">
+				<rule>
+		        	<render view-id="/views/langue/recherche_langue.xhtml"/>
+	        	</rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/langue/detail_langue.xhtml">
+			<navigation from-action="#{editerLangueAction.remove}">
+	        	<rule>
+		            <render view-id="#{empty navigationHelper['detailLangueFrom'] ? '/home.xhtml' : navigationHelper['detailLangueFrom']}"/>
+	           	</rule>
+	        </navigation>
+		</page>
+       
+		<page view-id="/views/langue/edit_langue.xhtml">
+			<navigation from-action="#{editerLangueAction.persist}">
+	        	<rule>
+		            <render view-id="/views/langue/detail_langue.xhtml"/>
+		        </rule>
+	        </navigation>
+	        <navigation from-action="#{editerLangueAction.update}">
+	        	<rule>
+		            <render view-id="/views/langue/detail_langue.xhtml"/>
+	            </rule>
+	        </navigation>
+	        <navigation from-action="#{editerLangueAction.cancel}">
+	        	<rule>
+					<render view-id="/views/langue/detail_langue.xhtml"/>
+				</rule>
+	        </navigation>
+		</page>
+       
+</pages>

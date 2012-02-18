@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Tableau complexe.
+| - Définition de la couleur et de la taille des bordures
+| 
+| Idéalement :
+| - bordures intérieures et extérieures différentes
+| - contrainte : bordure sur le footer
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Table
++===============================================================================
+-->
+	<u:selector name=".rich-table">
+	
+		<u:style name="border" skin="tableCadreBorder"/>
+		<u:style name="border-collapse" value="collapse"/><!-- [IE 6] seulement -->
+		<u:style name="border-spacing" value="0px"/>
+	</u:selector>
+
+	<!-- ========== -->
+	<!-- [IE7-8 FF] -->
+	<!-- ========== -->
+
+	<u:selector name="html > body .rich-table">
+	
+		<u:style name="border-collapse" value="separate"/><!--(a)-->
+	</u:selector>
+	<!-- (a) évite le chevauchement des lignes horizontal et vertical -->
+
+
+<!-- 
++===============================================================================
+| Header : cellule
++===============================================================================
+-->
+	<u:selector name="	.sx-table-header .rich-table-headercell, 
+						.rich-table-subheadercell, 
+						.rich-subtable-headercell,
+						.sx-headercell-middle">
+
+		<!-- Merci de le laisser avant les autres -->
+		<u:style name="border-width" value="0px"/>
+
+		<u:style name="border-left">
+			<f:verbatim value="1px solid"/>
+			<f:verbatim skin="tableCadreHeaderBorderLeftColor" default="tomato"/>
+		</u:style>
+		<u:style name="border-top">
+			<f:verbatim value="1px solid"/>
+			<f:verbatim skin="tableCadreHeaderBorderTopColor" default="gold"/>
+		</u:style>		
+	</u:selector>
+
+
+	<!-- ========== -->	
+	<!-- [IE6     ] -->
+	<!-- ========== -->	
+	<u:selector name="	* html .sx-table-header .rich-table-headercell, 
+						* html .rich-table-subheadercell, 
+						* html .rich-subtable-headercell,
+						* html .sx-headercell-middle">
+						
+		<u:style name="border">
+			<f:verbatim value="1px solid"/>
+			<f:verbatim skin="tableCadreHeaderBorderLeftColor" default="tomato"/>
+		</u:style>
+	</u:selector>
+	
+	 
+	<!-- ========== -->
+	<!-- [IE7-8 FF] -->
+	<!-- ========== -->
+
+	<u:selector name="	.sx-table-header .rich-table-headercell:FIRST-CHILD,
+						.rich-table-subheadercell:FIRST-CHILD,
+						.rich-subtable-headercell:FIRST-CHILD">
+						
+		<u:style name="border-left-width" 	value="0px"/><!-- (a) -->
+	</u:selector>
+	<!-- (a) avec border-collapse=separate, la bordure gauche du 1er th est en trop -->
+	
+	
+	<u:selector name="	.sx-headercell-middle:FIRST-CHILD,
+						.sx-table-header .sx-headercell-middle:FIRST-CHILD">
+						
+		<u:style name="border-left-width" 	value="1px"/>
+	</u:selector>
+	
+	
+	<u:selector name="thead tr:FIRST-CHILD th">
+		<u:style name="border-top-width" 	value="0px!important"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body : cellules de la 1ere ligne
++===============================================================================
+-->
+	<u:selector name=".rich-table-firstrow .rich-table-cell">
+
+		<u:style name="border-top">
+			<f:verbatim value="1px solid"/>
+			<f:verbatim skin="tableCadreCellFirstLineBorderColor" default="gold"/>
+		</u:style>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body : cellules
++===============================================================================
+-->
+	<u:selector name="	.rich-table-cell, 
+						.rich-subtable-cell,.sx-cell-middle">
+						
+		<u:style name="border-left-color" skin="tableCadreCellBorderLeftColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-top-color"  skin="tableCadreCellBorderTopColor"/>
+		<u:style name="border-width" value="1px 0px 0px 1px"/>
+	</u:selector>
+
+
+	<!-- ========== -->
+	<!-- [IE6     ] -->
+	<!-- ========== -->
+	
+	<u:selector name="	* html .rich-table-cell, 
+						* html .rich-subtable-cell, 
+						* html .sx-cell-middle">
+
+		<u:style name="border">
+			<f:verbatim value="1px solid"/>
+			<f:verbatim skin="tableCadreCellBorderTopColor" default="tomato"/>
+		</u:style>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body : 1er cellule : IE7-8 FF
++===============================================================================
+-->
+	<u:selector name="	.rich-table-cell:FIRST-CHILD, 
+						.rich-subtable-cell:FIRST-CHILD">
+						
+		<u:style name="border-left-width" 	value="0px"/>
+	</u:selector>
+
+	<u:selector name="	.sx-cell-middle:FIRST-CHILD">
+	
+		<u:style name="border-left-width" 	value="1px"/>
+	</u:selector>
+
+</f:template>
+

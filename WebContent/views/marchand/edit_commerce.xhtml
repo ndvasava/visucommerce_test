@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<h:form id="commerceF" styleClass="edit">
+		<rich:panel>
+			 <f:facet name="header">
+			 	<h:outputFormat value="#{editerPaysAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+					<f:param value="#{messages['commerce.label']}"/>
+				</h:outputFormat>
+			 </f:facet>
+			 
+			 <s:decorate id="userIdD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.user-id.label']}" />
+                </ui:define>
+                <h:inputText id="userId" label="#{messages['commerce.user-id.label']}"
+                		required="true" size="15" maxlength="15"
+                      	value="#{editerCommerceAction.instance.userId}" >
+                </h:inputText>
+			 </s:decorate>
+
+			 <s:decorate id="passwordD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.password.label']}" />
+                </ui:define>
+                <h:inputSecret id="password" label="#{messages['commerce.password.label']}"
+                		required="true" size="10" maxlength="10"
+                      	value="#{editerCommerceAction.instance.password}" >
+                </h:inputSecret>
+			 </s:decorate>
+			  
+			 <s:decorate id="passwordReTypeD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.password-retype.label']}" />
+                </ui:define>
+                <h:inputSecret id="passwordReType" label="#{messages['commerce.password-retype.label']}"
+                		required="true" size="10" maxlength="10"
+                      	value="#{editerCommerceAction.passwordReType}" >
+                </h:inputSecret>
+			 </s:decorate>
+			 
+			 <s:decorate id="nomCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.nom.label']}" />
+                </ui:define>
+                <h:inputText id="nomCommerce" label="#{messages['commerce.nom.label']}"
+                		required="true" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.instance.nomCommerce}" >
+                </h:inputText>
+			 </s:decorate>
+			 
+			 <s:decorate id="typeCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+			 		<h:outputText value="#{messages['commerce.typeCommerce.label']}"/>
+			 	</ui:define>
+			 	<h:selectManyCheckbox value="#{editerCommerceAction.listSelectedTypeCommerce}" required="true">
+   					<s:selectItems value="#{editerCommerceAction.listTypeCommerce}" var="type" label="#{type.typeCommerceName}"/>
+  					<s:convertEntity/>
+             	</h:selectManyCheckbox>	
+			 </s:decorate>
+			 			 
+			 <s:decorate id="regIdD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.reg-type.label']}" />
+                </ui:define>
+                <h:inputText id="regIdD" label="#{messages['commerce.reg-type.label']}"
+                		required="true" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.instance.regId}" >
+                </h:inputText>
+			 </s:decorate>
+
+			 <s:decorate id="ownerNameD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.owner-name.label']}" />
+                </ui:define>
+                <h:inputText id="ownerNameD" label="#{messages['commerce.owner-name.label']}"
+                		required="true" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.instance.ownerName}" >
+                </h:inputText>
+			 </s:decorate>
+
+			 <s:decorate id="ownerLastnameD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.owner-lastname.label']}" />
+                </ui:define>
+                <h:inputText id="ownerLastnameD" label="#{messages['commerce.owner-lastname.label']}"
+                		required="true" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.instance.ownerLastName}" >
+                </h:inputText>
+			 </s:decorate>
+			 
+			 <s:decorate id="adress1CommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.adress1.label']}" />
+                </ui:define>
+                <h:inputText id="adress1Commerce" label="#{messages['commerce.adress1.label']}"
+                		required="true" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.companyAddress.address1}" >
+                </h:inputText>
+			 </s:decorate>
+			 
+			 <s:decorate id="adress2CommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.adress2.label']}" />
+                </ui:define>
+                <h:inputText id="adress2Commerce" label="#{messages['commerce.adress2.label']}"
+                		required="false" size="30" maxlength="100"
+                      	value="#{editerCommerceAction.companyAddress.address2}" >
+                </h:inputText>
+			 </s:decorate>
+			 
+			 <s:decorate id="cityAdressCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+			 		<h:outputLabel value="#{messages['commerce.city.label']}"/>
+			 	</ui:define>
+			 	<h:selectOneMenu value="#{editerCommerceAction.companyAddress.city}" required="true">
+   					<s:selectItems value="#{editerCommerceAction.listVille}" var="vl" label="#{vl.nom} (#{vl.pin})"/>
+  					<s:convertEntity/>
+             	</h:selectOneMenu>	
+			 </s:decorate>
+			 
+			 <s:decorate id="emailCommerceD" template="../../layout/edit.xhtml">
+			 	<ui:define name="label">
+                	<h:outputLabel value="#{messages['commerce.email.label']}" />
+                </ui:define>
+                <h:inputText id="emailCommerce" label="#{messages['commerce.email.label']}"
+                		required="true" size="40" maxlength="40"
+                      	value="#{editerCommerceAction.instance.email}" >
+                      	<rich:ajaxValidator event="oninputblur" />
+                </h:inputText>
+			 </s:decorate>
+					
+			<div class="actionButtons">
+           		
+            	<h:commandButton id="doCreate" 
+					value="#{messages['default.button.validate.label']}"
+					action="#{editerCommerceAction.persistCommerceAccount}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+				
+				<s:button id="doCancel" 
+					value="#{messages['default.button.cancel.label']}" 
+					action="#{editerCommerceAction.cancel}"
+					styleClass="boutonAction boutonAnnuler"				                          
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')"
+					rendered="#{editerVilleAction.managed}"/>
+				
+       		</div>
+		</rich:panel>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</f:view>
+</jsp:root>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le zoning BP Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/zoning.xcss" />
+		
+	<!-- La page BP Agence est collée à gauche et ne possède pas de rail.
+	Elle n'a pas de liens transversaux mais des liens transversaux sous forme de picto.
+	Elle possède un menu gauche qui doit occuper TOUTE la hauteur de la colonne et pas
+	seulement la hauteur du texte contenu dedans. (Ceci s'obtient pas apposition d'une
+	couleur de fond sur l'ensemble du #conteneur compensée par une apposition d'une couleur
+	#ffffff sur la #zoneCentrale)
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<div id="conteneurHeader">
+				<div id="liensTransversauxPicto">...</div>
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="conteneur">
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<ul id="navTransversal" class="navTransversal">...</ul>
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="informationsPosteClient">...</ul>
+		</div>	
+	--> 	
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #bandeauHaut (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->
+	 
+	<!-- (Niveau 2) #conteneurHeader > Style du lien du logo comprenant une image -->
+	<u:selector name="body #logo"><!-- EXTENDS "#logo" -->
+		<u:style name="padding-top" value="10px"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- Prise en compte des pictos pour les liens transversaux -->
+	<u:selector name="body #liensTransversauxPicto"><!-- EXTENDS "#liensTransversauxPicto" -->
+		<u:style name="padding-top" value="15px"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) BP n'a pas de liens transversaux sous forme de texte... Les paddings ici permettent de ne pas coller
+	au haut de la bordure. -->
+	
+	
+	<!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->	 
+	 
+	<!-- Positionnement du #rail -->
+	<u:selector name="body #rail"><!-- EXTENDS "#conteneur #rail" -->
+		<u:style name="display" value="none"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) Pas de rail chez BP -->
+	
+	<!-- Positionnement du #corpsDePage qui occupe toute la largeur mais est décalé de la largeur du menu (+padding) -->
+	<u:selector name="body #corpsDePage"><!-- EXTENDS "#corpsDePage" -->
+		<u:style name="padding-right" value="5px"/>
+	</u:selector>
+	
+	<!-- Liens transversaux -->
+	<u:selector name="body #navTransversal"><!-- EXTENDS "#navTransversal" --> 
+		<u:style name="margin-bottom" value="1em"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) Non implémenté sur le canal agence mais mis par symétrie (on ne sait jamais...) -->
+	
+	<!-- 
+		/*******************/
+		/* Bandeau Client  */
+		/*******************/
+	 -->	 
+	 
+	 <!-- Mise en place d'un bandeau client en haut de la zone utile -->
+	 <u:selector name="#bandeauClient">
+	 	<u:style name="margin" value="5px 0 10px 0"/>
+	 </u:selector>	 
+	
+			
+	<!-- Le titre de la page (<h1>) supposé par défaut aligné avec à droite des liens -->
+	<u:selector name="body #titrePage"><!-- EXTENDS "#titrePage" --> 
+		<u:style name="padding-left" value="10px"/>
+		<u:style name="margin-right" value="10px"/>
+	</u:selector>
+	
+	<!-- Les liens situés à droite avec image (imprimer...) -->
+	<u:selector name="body #outilsContextuels"><!-- EXTENDS "#outilsContextuels" --> 
+		<u:style name="padding" value="4px 0 0 0"/>
+	</u:selector>
+		
+	<!-- La zone contenant le coeur de l'application : formulaires ; On souhaite la restreindre en largeur -->
+	<u:selector name="body #zoneCentrale"><!-- EXTENDS "#zoneCentrale" --> 
+		<u:style name="width" skin="zoneCentraleWidth" default="820px"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- (4) Voir si c'est gênant dans le cas de tableaux trop larges ; pourra être surchargé grâce à la variable -->
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #piedsDePage (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->	 
+		
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="body #piedsDePage"><!-- EXTENDS "#piedsDePage" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/agence/img/pied_motif.gif"/>
+		</u:style>
+		<u:style name="background-repeat" value="repeat"/>
+	</u:selector>
+	 
+	 <!-- On importe le style idoine à ce footer : un ensemble liens, copyright calés à gauche -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_footer_duo_gauche.xcss" />
+	
+</f:template>

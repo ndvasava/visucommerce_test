@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	   
+	<!-- 
+	
+		Feuille de style qui définit les formulaires, c'est à dire l'utilisation des templates Seam dans les pages 
+		
+		Les propriétés utilisées ici sont : 
+		- processusBorderColor : couleur du trait de séparation séparant le processus du reste du formulaire
+		- processusBgColor : couleur de fond du calque contenant la liste des processus
+		- processusSelectedTextColor : couleur d'écriture du processus actif
+		- processusSelectedBgColor : couleur de fond entourant le processus actif	
+		
+	-->
+	   
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss" />
+	
+	<!-- Spécificité de cette enseigne : les messages d'erreur de validation du formulaire doivent être
+	décalées sous le champ "input" et non pas sous le champ "label".
+	=> Autrement dit, on applique des styles permettant d'appliquer les margin et les padding idoines.
+	Ces styles sont mis à disposition par l'importation de la feuille transverse ci-dessous -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire_validation_decalee.xcss" />
+	
+	<!-- 
+		/*********************************************************/
+		/* Formulaire : Style en consultation du champ modifié   */
+		/*********************************************************/
+	 -->
+	
+	<!-- Style en consultation du champ modifié -->
+	<u:selector name=".detail_rubrique .value">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="height" value="1em"/>
+		<u:style name="display" value="block"/>
+	</u:selector>
+	
+	<!-- Style spécifique Firefox -->
+	<u:selector name="html>body .detail_rubrique .value">
+		<u:style name="height" value="auto"/>
+		<u:style name="min-height" value="1em"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : Style des Processus   */
+		/**************************************/
+	 -->
+	 
+	<u:selector name=".processus">
+	    <u:style name="font-size" value="1.1em" />
+	</u:selector>
+
+</f:template>

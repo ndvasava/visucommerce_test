@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- ********************************************************* -->
+	<!-- Menu compatible IE6, IE7, IE8, Firefox2, Firefox3, Opera9 -->
+	<!-- ********************************************************* -->
+	
+	<!-- 
+		/************************************/
+		/*              MENU                */
+		/************************************/
+		
+		Variables définies dans 
+		sphinx-jsf-css\src\main\resources\META-INF\skins\Natixis-internet.skin.properties
+		
+		menuBorderColor=#aae0fa
+		menuSelectedColor=#0e476f
+		menuTextColor=#002052
+		submenuBorderColor=#eaf7fe
+		submenuTextColor=#505050s
+	-->
+	
+	<!-- 
+	/****************************/
+	/*Caractéristiques générales*/
+	/****************************/
+	-->
+
+	<u:selector name="#menu">
+		<u:style name="overflow" value="hidden"/>
+		<u:style name="float" value="left"/>
+		<u:style name="margin-left" value="10px"/>
+		<u:style name="width" value="210px"/> 
+	</u:selector> 
+	
+	<u:selector name=".menuPartieGauche">
+		<u:style name="border-bottom-color" skin="menuBorderColor"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-width" value="1px"/>
+	</u:selector> 
+
+	<u:selector name=".menuPartieGauche a">
+		<u:style name="border-top-style" value="solid"/>
+		<u:style name="border-top-width" value="1px"/>
+		<u:style name="border-top-color" skin="menuBorderColor"/>
+		<u:style name="display" value="block"/>
+		
+	</u:selector> 
+	
+	<!-- Tous les liens du menu au survol sont soulignés -->
+	<u:selector name=".menuPartieGauche a:hover">
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector> 
+
+	<!-- Suppression des puces par défaut + réinitialisation -->
+	<u:selector name=".menuPartieGauche ul">
+		<u:style name="list-style-type" value="none"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="padding" value="0"/>
+	</u:selector> 
+
+	<!-- correction du pb de hauteur des li imbriques pour ie6 et 7 -->
+	<u:selector name=".menuPartieGauche ul li">
+		<u:style name="width" value="100%"/>
+	</u:selector>
+
+	<!-- correction du pb de hauteur des li imbriques pour ie6 et 7 pour le coloriage 
+		(qui ne remplit pas toute la cellule) 
+	-->
+	<u:selector name=".menuPartieGauche ul li a">
+		<u:style name="height" value="100%"/>
+		<u:style name="background-color" value="transparent"/>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-attachment" value="scroll"/>
+	</u:selector>	
+
+	<!-- 
+	/***************/
+	/*niveau 1 menu*/
+	/***************/
+	-->
+	
+	<!-- Caractéristiques : le niveau 1 sans descendance a la même allure que les autres.
+	Même couleur, même puce.
+	La puce est constituée d'une flèche rouge qui s'inverse vers le bas lorsque la rubrique
+	est cliquée.
+	Au survol : pas de changement de couleur mais un simple soulignement -->
+	
+	<!-- Caractéristiques communes -->
+	<u:selector name=".menuPartieGauche ul li a">
+		<u:style name="color" skin="menuTextColor"/>
+		<u:style name="font-size" value="1.16em"/>
+		<u:style name="font-weight" value="bold"/>	
+		<u:style name="padding" value="2px 0 2px 16px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/flecherouge.gif" />
+		</u:style>
+		<u:style name="background-position" value="5px 50%"/>
+		
+	</u:selector>
+	
+	<!-- Niveau 1 ouvert -->
+	<u:selector name=".menuPartieGauche ul li.menuOuvert a">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/flecherouge_off.gif" />
+		</u:style>
+		<u:style name="background-position" value="3px 50%"/>
+	</u:selector>
+	
+	
+	<!-- 
+	/***************/
+	/*niveau 2 menu*/
+	/***************/
+	-->
+	
+	<!-- Caractéristiques : le niveau 2 sans descendance n'a pas la même allure que les autres.
+	Une puce carrée si pas de descendance.
+	En cas de descendance, une flêche rouge qui s'inverse vers le bas lorsque la rubrique
+	est cliquée.
+	Au survol : pas de changement de couleur mais un simple soulignement 
+	Il existe désormais un style "sélectionné" pour indiquer la page dans laquelle nous nous trouvons-->
+
+	<!-- Caractéristiques communes -->
+	<u:selector name=".menuPartieGauche ul li li a">
+		<u:style name="font-size" value="1em"/>
+		<u:style name="font-weight" value="normal"/>			
+		<u:style name="padding-left" value="2.33em"/>		
+		<u:style name="border-top-style" value="solid"/>
+		<u:style name="border-top-width" value="1px"/>
+		<u:style name="border-top-color" skin="submenuBorderColor"/> 
+	</u:selector>
+	
+	<!-- a.Menu fermé mais avec descendance : flèche rouge -->
+	<u:selector name=".menuPartieGauche ul li li.menuFerme a">
+		<u:style name="color" skin="submenuTextColor"/>	
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_noeud_niv2_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="18px 6px"/>
+	</u:selector>
+	
+	<!-- b.Menu ouvert avec descendance : flèche rouge vers le bas -->
+	<u:selector name=".menuPartieGauche ul li li.menuOuvert a, .menuPartieGauche ul li li.menuOuvert a:hover">
+		<u:style name="color" skin="menuSelectedColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_noeud_niv2_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="18px 6px"/>
+	</u:selector>
+	
+	<!-- c.Elément sans descendance non séléctionné : puce carré grise -->
+	<u:selector name=".menuPartieGauche ul li li.hasNoChild a">
+		<u:style name="color" skin="submenuTextColor"/>	
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_rubrique_no_child.gif" />
+		</u:style>
+		<u:style name="background-position" value="18px 6px"/>		
+	</u:selector>
+
+	<!-- d.Elément sans descendance sélectionné : puce carré bleue -->
+	<u:selector name=".menuPartieGauche ul li li.itemSelected a, .menuPartieGauche ul li li.itemSelected a:hover">
+		<u:style name="color" skin="menuSelectedColor"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_niv2_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="18px 6px"/>
+	</u:selector>
+	
+	<!-- 
+	/***************/
+	/*niveau 3 menu*/
+	/***************/
+	 -->
+	 
+	 <!-- Caractéristiques communes -->
+	 <u:selector name=".menuPartieGauche ul li li li a">
+		<u:style name="padding-left" value="3.2em"/>
+		<u:style name="border-top" value="none"/>
+		<u:style name="font-weight" value="normal"/>
+	</u:selector>
+	 
+	 <!-- e.menu ouvert : -->
+	<u:selector name=".menuPartieGauche ul li li li.menuOuvert a, .menuPartieGauche ul li li li.menuOuvert a:hover">
+		<u:style name="color" skin="menuSelectedColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_noeud_niv3_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="28px 50%"/>
+	</u:selector>
+
+	<!-- f.menu fermé :  -->
+	<u:selector name=".menuPartieGauche ul li li li.menuFerme a,.menuPartieGauche ul li li li.menuFerme a:hover">
+		<u:style name="color" skin="submenuTextColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_noeud_niv3_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="28px 50%"/>		
+	</u:selector>
+
+	<!-- g.feuille : - tiret bleu -->
+	<u:selector name=".menuPartieGauche ul li li li.hasNoChild a, .menuPartieGauche ul li li li.hasNoChild a:hover">
+		<u:style name="color" skin="submenuTextColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_niv3_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="28px 50%"/>
+	</u:selector>
+
+	<!-- h.item sélectionné : tiret blanc -->
+	<u:selector name=".menuPartieGauche ul li li li.itemSelected a, .menuPartieGauche ul li li li.itemSelected a:hover">
+		<u:style name="color" skin="menuSelectedColor"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_niv3_7_on.png" />
+		</u:style>
+		<u:style name="background-position" value="28px 50%"/>
+	</u:selector>
+
+
+	<!-- 
+	/***************/
+	/*niveau 4 menu*/
+	/***************/
+	 -->
+	 
+	 <!-- Caractéristiques communes -->
+	 <u:selector name=".menuPartieGauche ul li li li li a">
+		<u:style name="padding-left" value="4em"/>
+		<u:style name="font-weight" value="normal"/>
+	</u:selector>
+	 
+	 <!--  i.feuille : puce ronde -->
+	<u:selector name=".menuPartieGauche ul li li li li.hasNoChild a,.menuPartieGauche ul li li li li.menuFerme a,.menuPartieGauche ul li li li li.hasNoChild a:hover,.menuPartieGauche ul li li li li.menuFerme a:hover">
+		<u:style name="color" skin="submenuTextColor"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_niv4_7_off.png" />
+		</u:style>
+		<u:style name="background-position" value="40px 6px"/>
+	</u:selector>
+	
+	<u:selector name=".menuPartieGauche ul li li li li.itemSelected a, .menuPartieGauche ul li li li li.itemSelected a:hover">
+		<u:style name="color" skin="menuSelectedColor"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis/internet/img/puce_niv4_7_on.png" />
+		</u:style>	
+		<u:style name="background-position" value="40px 6px"/>	
+	</u:selector>
+	
+</f:template>

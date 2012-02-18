@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style associée au composant rich:tree 
+		
+		Pour le moment, il n'existe aucun personnalisation. on se contente de reprendre les styles
+		natifs
+	-->
+
+	<f:importResource src="org/richfaces/renderkit/html/css/tree.xcss" />
+
+</f:template>

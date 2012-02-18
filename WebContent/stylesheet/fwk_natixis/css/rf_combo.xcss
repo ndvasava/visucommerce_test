@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style associée au composant rich:combobox
+		
+		Pour le moment, on se contente de reprendre les styles natifs, mais il faudra le personnaliser
+		avant utilisation.
+		
+		Pressés par le temps, nous reprenons quelques styles et quelques variables de <rich:suggestionBox, histoire
+		de ne pas avoir des choses totalement aberrantes...
+	-->
+
+	<f:importResource src="org/richfaces/renderkit/html/css/combobox.xcss" />
+	
+	<!-- 
+		/****************************************/
+		/* Formulaire : Position du composant   */
+		/****************************************/
+	 -->
+	
+	<!-- Style décrivant toute la combo -->
+	<u:selector name=".rich-combobox"/>
+	
+	<!-- 
+		/***********************************/
+		/* Formulaire : Police d'écriture  */
+		/***********************************/
+	 -->
+	
+	<!-- Style décrivant les polices de texte -->
+	<u:selector name=".rich-combobox-font,input.rich-combobox-font-inactive,input.rich-combobox-font-disabled">
+		<u:style name="font-family" skin="comboboxFontFamily" default="Arial"/>
+		<u:style name="font-size" skin="comboboxFontSize" default="1em"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************************/
+		/* Formulaire : Champ de saisie  */
+		/*********************************/
+	 -->
+	
+	<!-- Style décrivant le champ input dès lors que l'on a saisi quelques choses dedans -->
+	<u:selector name="input.rich-combobox-input, input.rich-combobox-input-inactive, input.rich-combobox-input-disabled">
+		<u:style name="background-color" skin="comboboxInputBgColor" default="#ffffff"/>
+		<u:style name="border-width" skin="comboboxInputBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="comboboxInputBorderColor" default="#000000"/>
+		<u:style name="color" skin="comboboxInputColor" default="#000000"/>
+	</u:selector>
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : liste de proposition  */
+		/**************************************/
+	 -->
+	
+	<!-- <div> constituant le bloc liste (liste+ombre). Positionnement directement à l'aide de l'attribut style -->
+	<u:selector name=".rich-combobox-list-coord"/>
+	
+	<!-- Classe permettant de définir l'image ombrée -->
+	<u:selector name=".rich-combobox-shadow-tl, .rich-combobox-shadow-tr, .rich-combobox-shadow-bl, .rich-combobox-shadow-br"/>
+	
+	<!-- <div> constituant la liste elle-même. -->
+	<u:selector name=".rich-combobox-list-position"/>
+		
+	<!-- Rectangle constituant la liste de proposition-->
+	<u:selector name=".rich-combobox-list-decoration">
+		<u:style name="background-color" skin="comboboxListBgColor" default="#ffffff"/>
+		<u:style name="border-width" skin="comboboxListBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="comboboxListBorderColor" default="#000000"/>
+		<u:style name="color" skin="comboboxListColor" default="#000000"/>
+	</u:selector>
+	
+	<!-- On va définir un style pour le nième élément de la liste -->
+	<u:selector name=".rich-combobox-item">
+		<u:style name="padding" skin="comboboxItemPadding" default="2px"/>
+	</u:selector>
+	
+	<!-- On va définir un style pour l'élément sélectionné dans la liste -->
+	<u:selector name=".rich-combobox-item-selected">
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="background-color" skin="listActiveBgColor"/>
+		<u:style name="color" skin="listActiveTextColor"/>
+		
+		<u:style name="background-color" skin="comboboxItemSelectedBgColor" default="#ffffff"/>
+		<u:style name="border-width" skin="comboboxItemSelectedBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="comboboxItemSelectedBorderColor" default="#000000"/>
+		<u:style name="color" skin="comboboxItemSelectedColor" default="#000000"/>
+	</u:selector>
+	
+	<u:selector name=".rich-combobox-strut"/>
+	<u:selector name=".rich-combobox-shell"/>
+	
+	<!-- 
+		/************************/
+		/* Formulaire : bouton  */
+		/************************/
+	 -->
+	
+	<u:selector name="input.rich-combobox-button,input.rich-combobox-button-inactive">
+		<u:style name="background-color" skin="comboboxButtonBgColor"/>
+		<u:style name="border-width" skin="comboboxButtonBorderWidth" default="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="comboboxButtonBorderColor" default="#000000"/>	
+	</u:selector>
+	
+	<u:selector name="input.rich-combobox-button-disabled"/>
+	
+	<!-- Curseur de sélection permettant l'ouverture de la fenêtre -->
+	<u:selector name="input.rich-combobox-button-icon, input.rich-combobox-button-icon-inactive">
+		<f:if when="#{richSkin.comboboxButtonIconImg != null}">
+			<u:style name="background-image">
+				<f:resource f:skin="comboboxButtonIconImg"/>	
+			</u:style>
+		</f:if>
+	</u:selector>
+	
+	<u:selector name="input.rich-combobox-button-icon-disabled"/>
+	
+	<u:selector name="input.rich-combobox-button-hovered">
+		<u:style name="background-color" skin="comboboxButtonHoverBgColor"/>
+		<f:if when="#{richSkin.comboboxButtonHoverIconImg != null}">
+			<u:style name="background-image">
+				<f:resource f:skin="comboboxButtonHoverIconImg"/>	
+			</u:style>
+		</f:if>
+	</u:selector>
+	
+</f:template>

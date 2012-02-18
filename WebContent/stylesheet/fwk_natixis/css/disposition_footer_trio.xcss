@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style transverse qui définit un footer possédant les 3 éléments suivants :
+		- liens
+		- copyright
+		- logoFooter : une image constituant un lien cliquable
+		
+		Organisation : on suppose ces blocs positionnés dans cet ordre : liens, copyright, logoFooter,
+		avec liens collés à gauche, copyright positionné au centre, logoFooter collé à droite.
+		
+		#piedsDePage :
+		
+		******************************************************************************************************
+	 	#liensFooter				|            #copyright	 			|						   #logoFooter	
+	 	******************************************************************************************************	
+		
+		Techniquement : 
+		a) la largeur de la zone utile est découpée en 3 (width:33%)
+		b) avec une sortie de flux pour permettre l'alignement des 3 blocs (float: left/right)
+		c) un alignement du texte à gauche / droite (pour coller à gauche / droite)
+		
+		Les propriétés utilisées ici sont : 
+		
+		- liensFooterWidth : largeur du bloc liens du footer 
+		['auto' pour une largeur n'excédant pas la largeur occupée par les liens ; 'x%' pour une largeur valeur x% de 'defaultPageWidth']
+		- liensFooterAlign : Alignement du texte au sein du bloc liens
+		
+		- copyrightFooterWidth : largeur du bloc copyright du footer 
+		['auto' pour une largeur n'excédant pas la largeur occupée par le copyright ; 'x%' pour une largeur valeur x% de 'defaultPageWidth']
+		- copyrightFooterAlign : Alignement du texte au sein du bloc copyright
+		
+		- logoFooterWidth : largeur du bloc logo du footer 
+		['auto' pour une largeur n'excédant pas la largeur occupée par le logo ; 'x%' pour une largeur valeur x% de 'defaultPageWidth']
+		- logoFooterAlign : Alignement du texte au sein du bloc logo
+		
+		Limitations : les flottants ne sont pas variabilisés. C'est-à-dire que l'ordre naturel est de gauche à droite par rapport à l'écriture.
+		=> Néanmoins, il est possible de leur appliquer un "sur-style" en spécifiant la classe .floatLeft ou .floatRight sur les blocs définis ci-dessous.
+		
+	-->
+	
+	 <!-- Le code se présente sous cette forme :
+		<div id="piedsDePage">
+			<ul id="liensFooter" (class="liensFooter")>...</ul>
+			<div id="copyright" class="copyright">...</div>	
+			<a id="logoFooter">...</a>		
+		</div>
+				
+	 -->	 
+	
+	 <!--  Blocs définissant les liens à gauche  -->
+	 <u:selector name="ul#liensFooter">
+		<u:style name="float" value="left"/><!-- (1) -->
+		<u:style name="text-align" skin="liensFooterAlign"/>
+		<u:style name="width" skin="liensFooterWidth"/>
+		<u:style name="margin" value="0"/><!-- (2) -->
+		<u:style name="padding" value="0"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Ce flottant permet de sortir les éléments du footer du flux pour un alignement horizontal.
+	=> Il peut être changé dans le code applicatif par application d'un sur-style : <ul id="liensFooter" class="floatLeft/floatRight/floatNone">-->
+	
+	<!-- (2) Les liens sont définis par des éléments de type <ul>.
+	=> Ces éléments doivent impérativement être réinitialisés en terme de "margin" et de "padding", eu égard aux différences entre navigateurs. 
+	Attention, l'ajout d'un décalage à gauche (margin ou padding) nécessite de réduire la taille de l'attribut "width:33%". 
+	Ce pourcentage s'entendant hors padding/margin et décale de fait le bloc "copyright" sur la droite.
+	=> Il faut alors réduire la valeur de l'attribut "liensFooterWidth". -->
+	
+	
+	<!-- Blocs définissant le copyright -->
+	<u:selector name="#copyright">
+		<u:style name="float" value="left"/><!-- (3) -->
+		<u:style name="text-align" skin="copyrightFooterAlign"/>
+		<u:style name="width" skin="copyrightFooterWidth"/>
+	</u:selector>
+	
+	<!-- (3) Ce flottant permet de continuer l'alignement avec le bloc précédent. Sinon, passage à la ligne. -->
+	
+	<u:selector name="#logoFooter">
+		<u:style name="float" value="right"/><!-- (4) -->
+		<u:style name="text-align" skin="logoFooterAlign"/>
+		<u:style name="width" skin="logoFooterWidth"/>
+		<u:style name="padding" value="0 3em 0 0"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (4) Un flottant "none" aurait pour effet de neutraliser l'attribut "width". 
+	=> Le bloc correspondant se trouverait réduit à la taille de l'image et collerait au bloc précédent.
+	Un flottant "right" ne colle pas tout à fait aux 2 blocs précédents (puisqu'il colle à droite) et
+	que la somme des .width ne vaut pas 100%.
+	Un flottant "left" colle aux 2 blocs précédents.-->
+	
+	<!-- (5) Précision d'un padding right pour éviter que le logo ne colle au bord droit. 
+	Attention, la précision d'un padding ne peut se faire qu'en précisant l'attribut ".width" à 'auto' car sinon 
+	cela fait passer le bloc en dessous (la largeur width:33% s'entend hors padding, donc le padding augmente la 
+	largeur de la zone et la fait passer en-dessous).-->
+	
+</f:template>

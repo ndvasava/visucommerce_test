@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		/************************************************************/
+		/*  Définition des 2 types de boutons : lien ou vrai bouton */
+		/************************************************************/
+	 -->
+	 
+	<!-- 	
+		Feuille de style décrivant le style des boutons Natixis Internet.
+		Elle hérite d'une feuille de style principale qui définit les propriétés communes
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/bouton.xcss" />
+	
+	<!-- 
+		/**********************************/
+		/**   BLOCS DE BOUTONS           **/
+		/**********************************/
+	-->
+	
+	<!-- On définit le pavé contenant les boutons à l'intérieur du cadre du formulaire  -->
+	<u:selector name=".actionButtons"><!-- EXTENDS ".actionButtons" -->
+		<u:style name="padding" value="0 5px 0 25px"/>
+	</u:selector>
+	
+	<!-- si on est dans un cadre : on modifie juste le margin à droite-->
+	<u:selector name=".rich-panel .actionButtons">
+		<u:style name="margin" value="10px -10px 0"/>
+	</u:selector>
+	
+	<!-- zone action au dessus des tableaux -->
+	<u:selector name=".tableActions">
+		<u:style name="margin-bottom" value="1em"/>
+	</u:selector>
+	
+	<!-- Positionnement dans les footers de tableaux -->
+	<u:selector name=".tableButtons">
+		<u:style name="padding-bottom" value="30px"/>
+	</u:selector>
+	
+	<!-- Positionnement dans les blocs de pagination -->
+	<u:selector name=".blocPagination">
+		<u:style name="margin-bottom" value="5px"/>
+		<u:style name="text-align" value="right"/>
+	</u:selector> 		
+	
+	<!-- Positionnement dans les popus -->
+	<u:selector name=".modalButtons">
+		<u:style name="padding" value="10px 0 0 0"/>
+		<u:style name="margin" value="0"/>
+	</u:selector>
+
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <input>    **/
+		/**********************************/
+	-->
+
+	<!-- Important : les boutons ont leurs propres valeurs par défaut
+	(Cocher "Style > Afficher les styles calculés" dans Firebug pour l'observer).
+	=> Il faut donc redéfinir certaines valeurs définies dans le body pour le texte -->
+	<u:selector name="input.boutonAction, input.boutonActionHover">
+		<u:style name="font-family" value="Arial"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonOK">
+		<u:style name="height" value="19px"/>
+		<u:style name="font-size" value="12px"/>
+		<u:style name="padding" value="0 3px 1px 3px"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <a>        **/
+		/**********************************/
+	-->
+	
+	<!-- On définit les espacements au niveau des liens transformés en bouton d'action -->
+	<u:selector name="a.boutonAction">
+		<u:style name="padding" value="2px 5px"/>
+	</u:selector>
+	
+	<!-- 
+		/********************************************/
+		/**   BOUTONS SPECIFIQUES                  **/
+		/**           DE FORMULAIRES (actionButtons)  **/
+		/********************************************/
+	-->
+
+	<u:selector name=".actionButtons input">
+		<u:style name="margin" value="5px 3px 5px 3px"/>
+		<u:style name="position" value="relative"/>
+		<u:style name="float" value="none"/><!-- Plus d'inversion d'ordre -->
+		<u:style name="padding" value="2px 10px"/>
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE HEADERS DE TABLEAUX (tableActions)    **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".tableActions input">
+		<u:style name="margin-left" value="3px"/>
+		<u:style name="margin-right" value="3px"/>
+		<u:style name="padding" value="2px 10px"/>
+	</u:selector>
+
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE FOOTERS DE TABLEAUX (tableButtons)    **/
+		/***************************************************/
+	-->
+	
+	<!-- zone action liée aux données du tableau -->
+	<u:selector name=".tableButtons input">
+		<u:style name="margin" value="5px 3px 5px 3px"/>
+		<u:style name="position" value="relative"/>
+		<u:style name="float" value="right"/>
+		<u:style name="padding" value="2px 10px"/>
+	</u:selector>
+	
+	<!-- 
+		/***************************************************/
+		/**   BOUTONS SPECIFIQUES                         **/
+		/**      DE BLOCS DE PAGINATION (blocPagination)  **/
+		/***************************************************/
+	-->
+	
+	<u:selector name=".blocPagination a">
+		<u:style name="margin" value="0px 3px"/>
+		<u:style name="text-decoration" value="underline"/>
+		<u:style name="color" skin="tableSelectionLinkColor"/>
+	</u:selector>
+
+	<u:selector name=".blocPagination a:hover">
+		<u:style name="color" skin="linkHoverColor"/>
+	</u:selector>
+
+	<!-- 
+		/**************************************/
+		/**   BOUTONS SPECIFIQUES            **/
+		/**      DE POPUP (modalButtons)     **/
+		/**************************************/
+	-->
+	<u:selector name=".modalButtons input">
+		<u:style name="padding" value="2px 10px"/>
+		<u:style name="margin" value="0 6px 0 0"/>
+	</u:selector>
+	
+</f:template>

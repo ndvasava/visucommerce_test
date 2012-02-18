@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+
+	<!-- 
+		Feuille de style associée aux composants rich:panelBar	-->
+		
+	<!-- On définit le style du cadre complet -->
+	<u:selector name=".rich-panelbar">
+		<u:style name="padding" value="1px"/>
+		<u:style name="border-width" skin="panelbarBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="panelbarBorderColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-panelbar-b">
+		<u:style name="margin" skin="defaultPanelMargin"/><!-- (1) -->
+	</u:selector>
+	<!-- (1) Marge du cadre par rapport à l'extérieur  -->
+	
+	<!-- On définit le style du titre et du titre actif -->	
+	<u:selector name=".rich-panelbar-header, .rich-panelbar-header-act">
+		<u:style name="padding" value="0 1px 1px 5px"/>
+		<u:style name="border-top-width" skin="panelbarHeaderBorderWidth"/>
+		<u:style name="border-top-style" value="solid"/>
+		<u:style name="border-top-color" skin="panelbarHeaderBorderColor"/>
+		<u:style name="background-color" skin="panelbarHeaderBgColor"/>
+		<u:style name="color" skin="panelbarHeaderTextColor"/>
+		<u:style name="font-size" skin="panelbarHeaderFontSize"/>
+		<u:style name="font-weight" skin="panelbarHeaderFontWeight"/>
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	<!-- On définit le style à l'intérieur du cadre -->
+	<u:selector name=".rich-panelbar-content">
+		<u:style name="padding" value="10px"/>
+	</u:selector>
+	
+</f:template>

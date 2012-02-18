@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Tableau Level 2 : surcharge des propriétés 
+| - rf_datatable_cadre.xcss
+| - rf_datatable_simple.xcss
+| - rf_datatable.xcss 
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Panel - Header - Agence
+| - 07/2010 : remplacé par formulaireImbrique, Agence uniquement
++===============================================================================
+-->
+<!-- 
+	<u:selector name=".rich-table-level2 .rich-panel-header">
+		<u:style name="background-color"	skin="tableLevel2PanelBgColor"/>
+		<u:style name="border" 				skin="tableLevel2PanelBorder"/>
+		<u:style name="color" 				skin="tableLevel2PanelColor"/>
+	</u:selector>
+-->
+
+<!-- 
++===============================================================================
+| Panel - Body - Agence
+| - 07/2010 : remplacé par formulaireImbrique, Agence uniquement
++===============================================================================
+-->
+<!-- 
+	<u:selector name=".rich-table-level2 .rich-panel-body">
+
+		<u:style name="border-width"	skin="tableLevel2PanelBodyBorderWidth"/>
+		<u:style name="margin-top" 		skin="tableLevel2PanelBodyMarginTop"/>
+		<u:style name="padding" 		skin="tableLevel2PanelBodyPadding"/>		
+	</u:selector>
+ -->
+
+<!-- 
++===============================================================================
+| Caption - Internet
+| - 07/2010 : Internet uniquement
++===============================================================================
+-->
+	<!-- sans définition de bordure -->	
+	<u:selector name="	.rich-table-level2 .rich-table-caption,
+						.rich-table-level2 caption">
+
+		<u:style name="background-color"	skin="tableLevel2CaptionBgColor"/>
+		<u:style name="border-color" 		skin="tableLevel2CaptionBorderColor"/>
+		<u:style name="border-style" 		skin="tableLevel2CaptionBorderStyle"/>
+		<u:style name="color" 				skin="tableLevel2CaptionColor"/>
+		<u:style name="font-size" 			skin="tableLevel2CaptionFontSize"/>
+		<u:style name="font-weight" 		skin="tableLevel2CaptionFontWeight"/>
+		<u:style name="margin" 				skin="tableLevel2CaptionMargin"/>
+		<u:style name="margin-top" 			skin="tableLevel2CaptionMarginTop"/>
+		<u:style name="padding" 			skin="tableLevel2CaptionPadding"/>
+		<u:style name="padding-bottom" 		skin="tableLevel2CaptionPaddingBottom"/>
+		<u:style name="padding-left" 		skin="tableLevel2CaptionPaddingLeft"/>		
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Caption - [IE6] - Internet
+| - 07/2010 : Internet uniquement
++===============================================================================
+-->	
+	<u:selector name="	.rich-table-level2 .rich-table-caption, 
+						.rich-table-level2 caption">
+						
+		<u:style name="border-width" skin="tableLevel2CaptionBorderWidth_ie6"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Caption - [IE7-8] - Internet
+| - 07/2010 : Internet uniquement
++===============================================================================
+-->	
+	<u:selector name="	html > body .rich-table-level2 .rich-table-caption,
+						html > body .rich-table-level2 caption">
+						
+		<u:style name="border-width" skin="tableLevel2CaptionBorderWidth"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Caption - [FF] - Internet
+| - 07/2010 : Internet uniquement
++===============================================================================
+-->		
+	<u:selector name="	html:not([lang*='']) .rich-table-level2 .rich-table-caption, 
+						html:not([lang*='']) .rich-table-level2 caption">
+						
+		<u:style name="border-width" skin="tableLevel2CaptionBorderWidth_FF"/>
+	</u:selector>	
+
+
+<!-- 
++===============================================================================
+| Caption - Titre - Internet
+| - 07/2010 : Internet uniquement
++===============================================================================
+-->	
+	<u:selector name=".rich-table-level2 .rich-table-title">
+	
+		<u:style name="background-color" skin="tableLevel2TitleBgColor"/>
+		<u:style name="color" skin="tableLevel2TitleColor"/>
+		<u:style name="float" skin="tableLevel2TitleFloat"/>
+		<u:style name="padding" skin="tableLevel2TitlePadding"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Caption - Titre - Decorate - Internet
+| - 07/2010 : 
+|   - Internet uniquement
+|   - BP Level 2 pour l'instant
++===============================================================================
+-->	
+	<u:selector name=".rich-table-title-decorate">
+	
+		<u:style name="display" value="none"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-level2 .rich-table-title-decorate">
+
+		<u:style name="border-bottom" 	skin="tableLevel2TitleDecorateBorderBottom"/>
+		<u:style name="clear" 			skin="tableLevel2TitleDecorateClear"/>
+		<u:style name="display" 		skin="tableLevel2TitleDecorateDisplay" default="none"/>
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Header - Cellule
++===============================================================================
+-->		
+	<u:selector name=".rich-table-level2 th">
+	
+		<u:style name="border" skin="tableLevel2ThBorder"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Header - Cellule
++===============================================================================
+-->
+	<u:selector name="	.rich-table-level2 .sx-table-header .rich-table-headercell,
+						.rich-table-level2 .rich-table-subheadercell, 
+						.rich-table-level2 .rich-subtable-headercell">
+						
+		<u:style name="background-color"	skin="tableLevel2HeadercellBgColor"/>
+		<u:style name="color" 				skin="tableLevel2HeadercellColor"/>
+		<u:style name="font-weight" 		skin="tableLevel2HeadercellFontWeight"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule
++===============================================================================
+-->	
+	<u:selector name="	.rich-table-level2 .rich-table-cell,
+						.rich-table-level2 .rich-subtable-cell">
+						
+		<u:style name="border-bottom-color"	skin="tableLevel2CellBorderBottomColor"/>
+		<u:style name="border-right-color" 	skin="tableLevel2CellBorderRightColor"/>
+		<u:style name="border-right-style" 	skin="tableLevel2CellBorderRightStyle"/>
+	</u:selector>	
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - droite
++===============================================================================
+-->		
+	<u:selector name=".rich-table-level2 .lastColumn">
+	
+		<u:style name="border-right" skin="tableLevel2LastColumnBorderRight"/>
+	</u:selector>
+	
+</f:template>

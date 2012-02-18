@@ -1,0 +1,206 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<style>
+		.customPanel{
+			margin: 0 0 20px;
+		}
+		.linkPagination a{
+			margin: 0 3px;
+		}
+		.rich-table-row-over{
+			background-color:	olive;
+			color:	gray;
+			cursor:	pointer;
+		}
+	</style>
+	
+    <h1>Search Commerce</h1>
+
+    <h:form id="recherche_commerce" styleClass="edit" >
+    	
+    	<rich:panel styleClass="customPanel">
+			<f:facet name="header" >
+				<h:outputFormat value="#{messages['default.list.label']}">
+					<f:param value="#{messages['commerce.label']}"/>
+				</h:outputFormat>
+			</f:facet>
+    
+    		<s:decorate id="nomD" template="../../layout/edit.xhtml">
+          		<ui:define name="label">#{messages['commerce.nom.label']}</ui:define>
+           		<h:inputText id="nom" 
+						label="#{messages['commerce.nom.label']}"
+						value="#{commerceSearchAction.searchString}">
+					<a4j:support id="onKeyUpnomD" event="onkeyup" actionListener="#{commerceSearchAction.search}" reRender="searchResults" />
+				</h:inputText>
+        	</s:decorate>
+    		
+    		<!-- s:decorate id="contractValidateD" template="../../layout/edit.xhtml" >
+	      		<h:selectBooleanCheckbox id="contractValidate" value="#{commerceSearchAction.commerceAValider}" />
+	      		<h:outputLabel value="#{messages['commerce.rechercheForm.rechercheValide.label']}" />
+	      	</s:decorate-->
+	      	
+    		<div class="actionButtons">
+           		<h:commandButton id="doSearch" 
+	        			styleClass="boutonAction boutonRechercher"
+	        			rendered="false"
+						onmouseover="$(this).addClassName('boutonActionHover')"
+						onmouseout="$(this).removeClassName('boutonActionHover')"
+            			value="#{messages['default.button.search.label']}" 
+            			action="#{commerceSearchAction.search}" />
+            	<a4j:commandButton id="findCommerce"
+            			value="#{messages['commerce.rechercheForm.recherche.label']}" 
+            			action="#{commerceSearchAction.search}" 
+            			reRender="searchResults"/>
+            	&#160;
+				<a4j:status id="status">
+					<f:facet id="StartStatus" name="start">
+						<h:graphicImage id="SpinnerGif" value="/img/spinner.gif"/>
+					</f:facet>
+				</a4j:status >
+       		</div>
+		</rich:panel>
+    </h:form>
+    
+	<a4j:outputPanel id="searchResults">
+		<h:form id="resF">
+	   		<rich:panel rendered="#{commerceSearchAction.resultListNotEmpty}">
+				<f:facet name="header">
+					<h:outputFormat value="#{messages['list.result.label']}">
+						<f:param value="#{messages['commerce.label']}"/>
+					</h:outputFormat>
+				</f:facet>
+				
+				<rich:dataTable id="commerceDt" var="commerce" value="#{commerceSearchAction.dataModel}" 
+						rows="#{commerceSearchAction.pageSize}"
+						rowClasses="rich-table-cell-impair, rich-table-cell-pair"
+						onRowMouseOver="#{not empty navigationHelper['recherchePaysFrom']? '$(this).addClassName(\'rich-table-row-over\')' : ''}"
+	                	onRowMouseOut="#{not empty navigationHelper['recherchePaysFrom']? '$(this).removeClassName(\'rich-table-row-over\')' : ''}">
+	        			
+	        			<rich:column styleClass="firstColumn " headerClass="firstColumn left">
+		            		<f:facet name="header">#{messages['commerce.id.label']}</f:facet>
+		           			<h:outputText value="#{commerce.id}" />
+	        			</rich:column>
+	        			<rich:column headerClass="left">
+		            		<f:facet name="header">#{messages['commerce.nom.label']}</f:facet>
+		           			<h:outputText value="#{commerce.nomCommerce}" />
+	        			</rich:column>
+	        			
+	        			<rich:column styleClass="lastColumn rich-table-cell-action" headerClass="lastColumn rich-table-cell-action" rendered="#{empty navigationHelper['recherchePaysFrom']}">
+	       					<f:facet name="header">
+	       						<h:outputText value="#{messages['default.action.label']}"/>
+	       					</f:facet>
+	       					<!-- Ensemble de bouton Edit - View - Delete avec image => moche ! -->
+							<h:commandButton id="doF" 
+									rendered="false"
+									action="#{editerCommerceAction.find}" 
+									immediate="true"
+									image="#{theme.images_statiques}/action_detail.png"
+									onmouseover="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail_hover.png'"
+									onmouseout="this.src='#{request.contextPath}#{theme.images_statiques}/action_detail.png'"
+									alt="#{messages['default.button.show.alt']}"
+									title="#{messages['default.button.show.label']}">
+								<f:setPropertyActionListener target="#{commerceSearchAction.commerceId}" value="#{commerce.id}"/> 
+							</h:commandButton>
+							<h:commandButton id="doE"
+									rendered="false" 
+									action="#{editerCommerceAction.edit}" 
+									immediate="true"
+									image="#{theme.images_statiques}/action_modifier.png"
+									onmouseover="this.src='#{request.contextPath}#{theme.images_statiques}/action_modifier_hover.png'"
+									onmouseout="this.src='#{request.contextPath}#{theme.images_statiques}/action_modifier.png'"
+									alt="#{messages['default.button.update.alt']}"
+									title="#{messages['default.button.update.label']}">
+								<f:setPropertyActionListener target="#{commerceSearchAction.commerceId}" value="#{commerce.id}"/> 
+							</h:commandButton>
+							
+							<!-- -->
+							<h:commandButton id="doFind" 
+									action="#{editerCommerceAction.find}"
+									value="View" 
+									immediate="true"
+									alt="#{messages['default.button.show.alt']}"
+									title="#{messages['default.button.show.label']}">
+								<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/> 
+							</h:commandButton>
+							<h:commandButton id="doEdit" 
+									action="#{editerCommerceAction.edit}"
+									value="Edit" 
+									immediate="true"
+									alt="#{messages['default.button.update.alt']}"
+									title="#{messages['default.button.update.label']}">
+								<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/> 
+							</h:commandButton>
+							<h:commandButton id="goAccHome" 
+									action="goCompanyAccountHome"
+									value="Edit" 
+									immediate="true"
+									alt="#{messages['default.button.update.alt']}"
+									title="#{messages['default.button.update.label']}">
+								<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/> 
+							</h:commandButton>
+						</rich:column>
+						
+						<!-- Gestion de la selection d'un commerce a partir de la creation/modification d'une ville -->
+						<a4j:support event="onRowClick" 
+					 		action="goBackPays" 
+					 		immediate="true"
+					 		rendered="#{not empty navigationHelper['rechercheCommerceFrom']}">
+					 		<f:setPropertyActionListener target="#{editerCommerceAction.commerceId}" value="#{commerce.id}"/>
+		            	</a4j:support>
+	        	</rich:dataTable>
+	        	
+	        	<div class="linkPagination">
+					<s:fragment rendered="#{commerceSearchAction.previousPageAvailable}">
+				   		<a4j:commandLink id="doFirstBottom" 
+				   				action="#{commerceSearchAction.first}" 
+				   				ajaxSingle="true"
+				   				value="#{messages['default.paginate.first']}"
+				   				reRender="searchResults,resF,msg"
+				   				limitToList="true"/>
+				        <a4j:commandLink id="doPreviousBottom"
+				        		action="#{commerceSearchAction.previousPage}" 
+				        		ajaxSingle="true"
+				        		value="#{messages['default.paginate.prev']}"
+				   				reRender="searchResults,resF,msg"
+				   				limitToList="true"/>
+				   	</s:fragment>
+			        <a4j:commandLink id="doNextBottom"
+			        		action="#{commerceSearchAction.nextPage}" 
+			        		ajaxSingle="true"
+			        		rendered="#{commerceSearchAction.nextPageAvailable}" 
+			        		value="#{messages['default.paginate.next']}"
+			   				reRender="searchResults,resF,msg"
+			   				limitToList="true"/>
+				</div>
+				
+			</rich:panel>
+		</h:form>
+	</a4j:outputPanel>
+	
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

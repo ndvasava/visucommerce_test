@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_datatable.xcss" />
+
+	<!-- 
+		/* ********* */
+		/* Tableaux  */
+		/* ********* */
+	-->
+	
+	<!-- Style englobant du tableau 
+	Mise en place d'une marge à gauche pour éviter la disparition
+	de la marge gauche.
+	Réduction de la largeur à 99.9% car 100% fait disparaître la 
+	marge droite sous Firefox -->
+	<u:selector name=".rich-table">
+		<u:style name="margin-bottom" value="10px"/>
+		<u:style name="margin-left" value="1px"/>
+		<u:style name="width" value="99.9%"/>
+		<u:style name="empty-cells" value="show"/>
+		<u:style name="border-collapse" value="collapse"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-cell-pair">
+		<u:style name="background-color" skin="tableCellPairBgColor"/>
+	</u:selector>
+		
+	<u:selector name="rich-table th">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="tableHeaderTextColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table th.rich-table-headercell">
+		<u:style name="padding" value="1px 6px"/>
+		<u:style name="border-right" value="none"/>
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-color" skin="tableCellPairBgColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table td">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="tableHeaderTextColor"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-caption, .rich-table caption">
+		<u:style name="color" value="#FFFFFF"/>
+		<u:style name="background-color" skin="defaultTextColor"/>
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-color" skin="tableHeaderTextColor"/>
+		<u:style name="text-align" value="left"/>
+		<u:style name="border-width" value="0 0 1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-collapse" value="collapse"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-title">
+		<u:style name="padding-left" value="5px"/>
+		<u:style name="font-weight" value="bold"/>
+	</u:selector>
+	
+	<u:selector name=".rich-subtable-headercell, .rich-table-subheadercell">
+		<u:style name="background-color" value="#00A0C6"/>
+		
+		<u:style name="border-bottom-width" value="1px"/>
+		<u:style name="border-bottom-style" value="solid"/>
+		<u:style name="border-bottom-color" skin="tableHeaderTextColor"/>
+		
+		<u:style name="border-right-width" value="1px"/>
+		<u:style name="border-right-style" value="solid"/>
+		<u:style name="border-right-color" skin="tableHeaderTextColor"/>
+		
+		<u:style name="border-left-width" value="1px"/>
+		<u:style name="border-left-style" value="solid"/>
+		<u:style name="border-left-color" skin="tableHeaderTextColor"/>
+		
+		<u:style name="color" value="#FFFFFF"/>
+
+		<u:style name="padding-left" value="8px"/>
+		<u:style name="padding-right" value="8px"/>
+		<u:style name="height" value="1.5em"/>
+
+		<u:style name="text-align" value="left"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-row-over">
+		<u:style name="background-color" skin="tableRowHoverBgColor"/>
+		<u:style name="color" value="#FFFFFF"/>
+		<u:style name="cursor" value="pointer"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-cell a">
+		<u:style name="text-decoration" value="none"/>
+		<u:style name="color" skin="defaultTextColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-cell a:hover">
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table .tableActions">
+		<u:style name="margin" value="5px"/>
+		<u:style name="font-weight" value="normal"/>
+		<u:style name="float" value="left"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-footer">
+		<u:style name="border-collapse" value="collapse"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-top-color" skin="tableFooterTextColor"/>
+		<u:style name="border-left-color" value="#FFFFFF"/>
+		<u:style name="border-right-color" value="#FFFFFF"/>
+		<u:style name="border-bottom-color" value="#FFFFFF"/>
+	</u:selector>
+	
+	<u:selector name="td.rich-table-footercell">
+		<u:style name="border-left" value="1px solid #FFFFFF"/>
+		<u:style name="border-right" value="1px solid #FFFFFF"/>
+		<u:style name="border-bottom" value="1px solid #FFFFFF"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table .rich-table-footer-checkbox">
+		<u:style name="margin" value="0"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-footer-checkbox">
+		<u:style name="margin" value="-11px 0 0"/>
+		<u:style name="padding-top" value="5px"/>
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-footer-checkAll">
+		<u:style name="float" value="left"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-footer-checkAll a">
+		<u:style name="color" skin="tableRowHoverBgColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-footer-checkAll label">
+		<u:style name="padding-right" value="0.5em"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-subheadercell img">
+		<u:style name="padding" value="0 3px"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-headerLevel2">
+		<u:style name="text-align" value="left"/>
+		<u:style name="color" value="#FFFFFF"/>
+		<u:style name="background-color" skin="tableRowHoverBgColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 th">
+		<u:style name="border" value="medium none"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 .rich-subtable-headercell, .rich-table-level2 .rich-table-subheadercell">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" value="#FFFFFF"/>
+		<u:style name="background-color" skin="defaultTextColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 .rich-table-subheader th">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="tableHeaderTextColor"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 .rich-table-caption">
+		<u:style name="padding" value="6px 6px 0.5em 0"/>
+		<u:style name="border" value="none"/>
+		<u:style name="color" skin="tableRowHoverBgColor"/>
+		<u:style name="background-color" value="transparent"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="font-size" value="1.08em"/>
+		<u:style name="margin" value="0 0px 0px -1px"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Changement OT : mise de la marge à 0 -->
+		
+	<u:selector name=".rich-table-level2 .rich-table-caption .rich-table-title">
+		<u:style name="padding" value="0"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 .rich-table-header">
+		<u:style name="border" value="none"/>
+	</u:selector>
+		
+	<u:selector name=".rich-table-sortable .rich-table-headercell,
+					  .rich-table-sortable .rich-subtable-headercell, 
+					  .rich-table-sortable .rich-table-subheadercell">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" value="#FFFFFF"/>
+	</u:selector>
+
+	<u:selector name=".rich-table th.sorted a, .rich-table th.sorted a:hover">
+		<u:style name="color" skin="tableHeaderSortedTextColor"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-header .sorted,
+					.rich-subtable-header .sorted, 
+					.rich-table-subheader .sorted,
+					.rich-table-header-continue .sorted">
+		<u:style name="background-color" skin="tableRowHoverBgColor"/>
+		<u:style name="color" value="#FFFFFF"/>
+	</u:selector>
+	
+	<u:selector name=".rich-table-level2 .rich-subtable-headercell a, 
+					  .rich-table-level2 .rich-table-subheadercell a">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" value="#FFFFFF"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-level2 .rich-subtable-headercell a:hover, 
+					  .rich-table-level2 .rich-table-subheadercell a:hover">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="color" value="#FFFFFF"/>
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-cell-action, .rich-table-cell-checkbox">
+		<u:style name="text-align" value="center"/>
+		<u:style name="white-space" value="nowrap"/>
+	</u:selector>
+
+</f:template>

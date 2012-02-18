@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+       login-view-id="/login.xhtml" 
+       no-conversation-view-id="/home.xhtml">
+
+	<!-- [SPHINX] BEGIN MENU NAVIGATION Vendeur -->	
+	<page view-id="/views/marchand/*">            	
+	    <navigation from-action="goEditSalesperson">
+    	    <render view-id="/views/marchand/edit_salesperson.xhtml"/>
+	    </navigation>
+    </page>
+	<!-- [SPHINX] END  MENU NAVIGATION Vendeur -->
+	
+	<page view-id="/views/marchand/edit_salesperson.xhtml">
+		<navigation from-action="#{editerSalespersonAction.persist}">
+			<rule if-outcome="PERSIST_OK">
+           		<render view-id="/views/marchand/show_company.xhtml"/>
+       		</rule>
+       	</navigation>
+    </page>
+</pages>

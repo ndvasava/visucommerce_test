@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.0.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!-- ********* DAO & Manager partie ENTITE ********** -->
+	   <!-- Entité VENDEUR -->
+
+	<!-- ********* DAO & Manager partie REFERENTIEL ********** -->	
+	   <!-- Referentiel PAYS -->
+	   		<bean id="paysManager" class="com.visuc.referentiel.pays.service.PaysManager">
+				<property name="paysDao" ref="paysDao"/>
+			</bean>
+			<bean id="paysDao" class="com.visuc.referentiel.pays.dao.PaysDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+	   <!-- Referentiel VILLE -->
+			<bean id="villeManager" class="com.visuc.referentiel.ville.service.VilleManager">
+				<property name="villeDao" ref="villeDao"/>
+			</bean>
+			<bean id="villeDao" class="com.visuc.referentiel.ville.dao.VilleDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+		<!-- Referentiel DEVISE -->
+			<bean id="deviseManager" class="com.visuc.referentiel.devise.service.DeviseManager">
+				<property name="deviseDao" ref="deviseDao"/>
+			</bean>
+			<bean id="deviseDao" class="com.visuc.referentiel.devise.dao.DeviseDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+		<!-- Referentiel LANGUE -->
+			<bean id="langueManager" class="com.visuc.referentiel.langue.service.LangueManager">
+				<property name="langueDao" ref="langueDao"/>
+			</bean>
+			<bean id="langueDao" class="com.visuc.referentiel.langue.dao.LangueDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+		<!-- Referentiel TYPE COMMERCE -->
+			<bean id="typeCommerceManager" class="com.visuc.referentiel.typeCommerce.service.TypeCommerceManager">
+				<property name="typeCommerceDao" ref="typeCommerceDao"/>
+			</bean>
+			<bean id="typeCommerceDao" class="com.visuc.referentiel.typeCommerce.dao.TypeCommerceDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+			
+		<!-- Commerce -->
+			<bean id="commerceManager" class="com.visuc.marchand.commerce.service.CommerceManager">
+				<property name="commerceDao" ref="commerceDao"/>
+			</bean>	
+			<bean id="commerceDao" class="com.visuc.marchand.commerce.dao.CommerceDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+
+		<!-- Vendeur -->
+			<bean id="spManager" class="com.visuc.marchand.vendeur.service.VendeurManager">
+				<property name="spDao" ref="spDao"/>
+			</bean>	
+			<bean id="spDao" class="com.visuc.marchand.vendeur.dao.VendeurDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+			
+		<!-- Reference Contract -->
+			<bean id="contractDao" class="com.visuc.referentiel.contract.dao.ContractDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+			<bean id="contractManager" class="com.visuc.referentiel.contract.service.ContractManager">
+				<property name="contractDao" ref="contractDao"/>
+			</bean>
+		
+		<!-- Reference Contract -->
+			<!-- bean id="addressDao" class="com.visuc.common.dao.AddressDao">
+				<property name="entityManagerFactory" ref="seamEntityManagerFactory"/>
+			</bean>
+			<bean id="addressManager" class="com.visuc.common.service.AddressManager">
+				<property name="addressDao" ref="addressDao"/>
+			</bean-->
+		
+</beans>

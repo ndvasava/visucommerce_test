@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Visu Commerce</display-name>
+  
+	<!-- ================================================================== -->
+	<!-- RichFaces Configuration                                            -->
+	<!-- ================================================================== -->
+  	  
+  	  <context-param>
+		<param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+		<param-value>com.sun.facelets.FaceletViewHandler</param-value>   
+	  </context-param>
+	  
+	  <!-- parseur optimise -->
+	  <!--  Ce parseur fait appel a des libraireis xerces, presentes dans le noyau de websphere, via xml.jar, mais absente de tomcat
+	  Il faut donc ajouter le package directement depuis Xerces afin de disposer des memes services d'optimisation de parsing , ainsi
+	  que nekohtml-0.9.5.jar, afin d'utiliser "org/cyberneko/html/filters/ElementRemover" -->
+	  <context-param>
+		<param-name>org.ajax4jsf.xmlparser.ORDER</param-name>
+		<param-value>NEKO</param-value>
+	  </context-param>
+  	  
+  	  <!-- le skin utilise est defini dans le theme -->
+	  <context-param>
+	    <param-name>org.richfaces.SKIN</param-name>
+	    <param-value>#{theme.skin}</param-value>
+	  </context-param>
+  
+	  <!-- desactivation possible des styles natifs RF (les skins sont suffisants) -->
+	  <!-- 
+		<context-param>
+			<param-name>org.richfaces.LoadStyleStrategy</param-name>
+			<param-value>NONE</param-value>
+		</context-param>
+	  -->
+	  
+	  <!-- filter richface, pouvant entrer en concurrence avec seam, a desactiver -->
+	  <!--
+	  <filter>
+	    <display-name>RichFaces Filter</display-name>
+	    <filter-name>richfaces</filter-name>
+	    <filter-class>org.ajax4jsf.Filter</filter-class>
+	  </filter>
+	  
+	  <filter-mapping>
+	    <filter-name>richfaces</filter-name>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <dispatcher>REQUEST</dispatcher>
+	    <dispatcher>FORWARD</dispatcher>
+	    <dispatcher>INCLUDE</dispatcher>
+	  </filter-mapping>
+	  -->
+  
+	<!-- ================================================================== -->
+    <!-- Seam Configuration                                                 -->
+    <!-- ================================================================== -->
+  
+	  <listener>
+	    <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
+	  </listener>
+  
+	  <filter>
+	    <filter-name>Seam Filter</filter-name>
+	    <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+	    <init-param>
+	      <param-name>maxRequestSize</param-name>
+	      <param-value>100000</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>createTempFiles</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	  </filter>
+	  
+	  <filter-mapping>
+	    <filter-name>Seam Filter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+  
+	  <servlet>
+	    <servlet-name>Seam Resource Servlet</servlet-name>
+	    <servlet-class>org.jboss.seam.servlet.SeamResourceServlet</servlet-class>
+	  </servlet>
+	  
+	  <servlet-mapping>
+	    <servlet-name>Seam Resource Servlet</servlet-name>
+	    <url-pattern>/seam/resource/*</url-pattern>
+	  </servlet-mapping>
+	  
+	<!-- ================================================================== -->
+	<!-- JSF Configuration                                                  -->
+	<!-- ================================================================== -->
+  
+	  <servlet>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	  </servlet>
+	  
+	  <servlet-mapping>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <url-pattern>*.action</url-pattern>
+	  </servlet-mapping>
+  
+	  <listener>
+	    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	  </listener>
+  
+	  <context-param>
+	    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+	    <param-value>.xhtml</param-value>
+	  </context-param>
+  
+	  <context-param>
+	    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+	    <param-value>resources.application</param-value>
+	  </context-param>
+	  
+	  <context-param>
+	    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+	    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+	    <param-value>client</param-value>
+	  </context-param>
+  
+  
+	<!-- ================================================================== -->
+	<!-- Facelets Configuration                                             -->
+	<!-- ================================================================== -->
+	
+	  <context-param>
+	    <param-name>facelets.DEVELOPMENT</param-name>
+	    <param-value>true</param-value>
+	  </context-param>
+	  
+	  <context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	  </context-param>
+	  
+	  <context-param>
+		<param-name>facelets.BUFFER_SIZE</param-name>
+		<param-value>100000</param-value>
+	  </context-param>
+	  
+	  <context-param>
+		<param-name>facelets.RESOURCE_RESOLVER</param-name>
+		<param-value>com.visuc.utils.jsf.facelets.TemplateResolver</param-value>
+	  </context-param>
+	  
+	  <welcome-file-list>
+	    <welcome-file>index.html</welcome-file>
+	    <welcome-file>index.htm</welcome-file>
+	    <welcome-file>index.jsp</welcome-file>
+	    <welcome-file>default.html</welcome-file>
+	    <welcome-file>default.htm</welcome-file>
+	    <welcome-file>default.jsp</welcome-file>
+	  </welcome-file-list>
+  
+</web-app>

@@ -1,0 +1,106 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+   	xmlns:a4j="http://richfaces.org/a4j"
+   	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<ui:composition template="../../layout/template.xhtml">
+    	<ui:define name="body">
+    
+	    <style>
+	    	.optionList {
+	          height:30px;
+	        }
+	    </style>
+    
+    
+    	<script type="text/javascript">
+	    	var maxx = -200;
+	    	var maxy = -100;
+	    	var minx = 200;
+	    	var miny = 100;
+	    	 
+	    	var l_map;
+	    	var equipes = new Array();
+	    	 
+	    	function init(map) {
+	    	    for (i = 0; i < equipes.length; i++) {
+	    	        try{
+	    	            map.addOverlay(equipes[i]);
+	    	        }catch(err){ alert(err);}
+	    	    }
+	    	}
+	    	 
+	    	function onClickSearch() {
+	    	    map.clearOverlays();
+	    	    equipes = new Array();
+	    	}
+	    	 
+	    	function onCompleteSearch(){
+	    	    init(map);
+	    	        //centralize my map
+	    	    var sw = new GLatLng(miny, minx);
+	    	    var ne = new GLatLng(maxy, maxx);
+	    	    var bounds = new GLatLngBounds(sw, ne);
+	    	    var fitLevel = map.getBoundsZoomLevel(bounds);
+	    	    if (fitLevel > 1) {
+	    	        fitLevel = fitLevel -1;
+	    	    }
+	    	    var center = new GLatLng(miny + (maxy-miny)/2, minx + (maxx-minx)/2);
+	    	    map.setCenter(center, fitLevel);
+	    	 
+	    	}
+	    	 
+	    	function addEquipe(lat, lng, caption) {
+	    	    if (lat != null && lat != '' && lng != null && lng != ''){
+	    	        lat = parseFloat(lat);
+	    	        lng = parseFloat(lng);
+	    	        marker = createMarker(lat,lng,caption);
+	    	        equipes[equipes.length] = marker;
+	    	        if (lat > maxy){
+	    	            maxy = lat;
+	    	        }
+	    	        if (lng > maxx){
+	    	            maxx = lng;
+	    	        }
+	    	        if (lat < miny){
+	    	            miny = lat;
+	    	        }
+	    	        if (lng < minx){
+	    	            minx = lng;
+	    	        }
+	    	    }
+	    	}
+	    	 
+	    	function createMarker(geoy, geox, caption) {
+	    	    var latlng = new GLatLng(geoy, geox);
+	    	    var marker = new GMarker(latlng);
+	    	    GEvent.addListener(marker, "click", function() {
+	    	      marker.openInfoWindowHtml(caption);
+	    	    });
+	    	    return marker;
+	    	}
+    	</script>
+    
+    	<rich:panel id="panelMapa" header="#{messages['Mapa']}">
+                <rich:gmap
+                    id="gmap" gmapVar="map" zoom="3"
+                    style="width:100%;height:500px" mapType="G_NORMAL_MAP"
+                    gmapKey="#{parametros['mapkey']['valor']}"
+                    lat="-46.000" lng="-20.000"
+                    locale="#{messages['localeGoogleMaps']}"
+                    oninit="init(map)"
+                    />
+        </rich:panel>
+    
+    	</ui:define>
+	</ui:composition>
+</f:view>
+</jsp:root>

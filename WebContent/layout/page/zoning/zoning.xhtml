@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sx="http://www.natixis.com/sphinx-jsf-ui/taglib"	
+	version="2.0">	
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+<!-- On importe de la page parente l'ensemble des ressources du <head> -->
+<ui:composition template="/layout/page/ancestor/head_resource.xhtml">
+
+	<!-- Définition du contenu du <body> -->
+	<ui:define name="body_content">
+	
+		<!-- ***********************
+			  Définition du header 
+			************************ -->	
+		<div id="bandeauHaut" class="bandeauHaut">
+			
+			<!-- Inclusion éventuelle de liens transversaux horizontaux (> Aide > #{messages['default.contacts.label']}...) -->
+			<ui:insert name="liens_transversaux"/>
+			
+			<!-- Définition du bandeau horizontal contenant logo, titre de l'application, moteur de recherche, liens transversaux sous forme de picto -->
+			<div id="conteneurHeader">
+			
+				<ui:remove>
+					Explication : l'écriture du bloc suivant dans cet ordre (gauche, droite, centre) se justifie par 
+					l'usage dans le style des flottants.
+					La taille des différents blocs n'étant pas connue, fixe et égale à la largeur totale, il est impératif
+					de ne pas faire flotter l'élement central. 
+					Celui-ci, par conséquent, doit donc figurer dans le html après les éléments flottants.				
+				</ui:remove>
+				
+				<!-- Inclusion fréquente du logo (collé à gauche) -->
+				<ui:insert name="logo"/>
+				
+				<!-- Inclusion éventuelle de liens transversaux imagés (à droite) -->
+				<ui:insert name="liens_transversaux_picto"/>
+				
+				<!-- Inclusion éventuelle d'un moteur de recherche (à droite). 
+				=> Rajouter alors la class="avecMoteurRecherche" au niveau de #bandeauHaut -->
+				<ui:insert name="moteur_recherche"/>
+				
+				<!-- Inclusion du titre de l'application (au centre)
+				=> Ceci est systématiquement présent, on le rajoute systématiquement -->
+				<ui:insert name="titre_appli">
+					<div id="titreAppli" class="titreAppli">#{messages['default.app.label']}</div>
+				</ui:insert>				
+			</div>			
+		</div>
+		
+		<!-- *************************************************************
+			  Définition de la zone intermédiaire bandeauHaut - conteneur 
+			************************************************************** -->
+			
+		<!-- Inclusion éventuelle d'un bandeau horizontal avec un titre sur toute la largeur 
+		Cela se trouvera notamment sur la page de login, côté Natixis Internet : un bandeau rouge "Authentification"
+		=> Rajouter alors la class="avecBandeauHorizontal" au niveau de #bandeauHaut -->
+		<ui:insert name="bandeau_horizontal"/>	
+		
+		<!-- Précision de l'emplacement pour un éventuel menu horizontal (non défini dans la charte mais...) -->
+		<ui:insert name="menu_horizontal"/>	
+		
+		<!-- *********************************
+			  Définition du coeur de la page 
+			********************************** -->
+			
+		<!-- Définition du corps de page, varianteConteneur est une cariable pointant une classe dependant du theme -->	
+		<!-- div id="conteneur" class="#{varianteConteneur}" -->
+		<div id="conteneur" class="conteneur">
+			<!-- Inclusion d'un rail -->
+			<ui:insert name="rail"/>
+		
+			<!-- Inclusion fréquente d'un menu vertical gauche -->
+			<ui:insert name="bloc_menu_gauche"/>
+			
+			<!-- FONDAMENTAL : Insertion du coeur de page qui contiendra dans la descendance la section <ui:insert name="content"/> 
+			qui sera, in fine, à définir dans les pages finales -->
+			<ui:insert name="corps_page"/>
+			
+			<ui:remove>En test pour l instant
+			<div style="clear: both;"></div>
+			</ui:remove>
+			
+			
+			<div id="conteneur_br"></div>
+			
+		</div>
+		
+		<!-- ***********************
+			  Définition du footer 
+			************************ -->
+			
+		<!-- Création d'une div englobante pour permettre (Nouveauté Natixis New Deal) d'occuper la largeur de l'écran -->
+		<!-- div id="footer" class="#{varianteFooter}" -->
+		<div id="footer" class="footer">
+					
+			<!-- Inclusion (Nouveauté Natixis New Deal) d'un plan du site installé dans le pieds de page -->
+			<ui:insert name="plan_site_footer"/>
+						
+			<!-- div id="piedsDePage" class="#{variantePiedsDePage}" -->
+			<div id="piedsDePage" class="piedsDePage">
+			
+				<!-- Inclusion de liens dans le footer -->
+				<ui:insert name="liens_footer"/>
+					
+				<!-- Inclusion d'un copyright -->
+				<ui:insert name="copyright"/>
+				
+				<!-- Inclusion d'un logo dans le footer -->
+				<ui:insert name="logo_footer"/>
+				
+				<!-- Inclusion d'un footer affichant des informations fonctionnelles sur un client recherché -->
+				<ui:insert name="footer_dynamique"/>
+				
+			</div>	
+		
+		</div>
+	
+	</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

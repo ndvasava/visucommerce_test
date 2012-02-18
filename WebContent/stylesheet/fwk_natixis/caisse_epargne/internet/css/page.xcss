@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le style des principaux éléments de la page CE Internet.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/page.xcss" />
+		 
+	<!-- 
+		/***************************************************/
+		/* Liens transversaux ( lien1  | lien2  | lien3)  */
+		/***************************************************/
+	-->
+	
+	<!-- Spécificité du lien situé le plus à gauche : il n'a pas d'image (la puce est à droite) -->
+	<u:selector name="body ul.liensTransversaux li.first"><!-- EXTENDS "ul.liensTransversaux li.first" -->
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	<!-- Style d'un lien n -->
+	<u:selector name="body ul.liensTransversaux li"><!-- EXTENDS "ul.liensTransversaux li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_outil_7.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 4px"/>
+		<u:style name="padding-right" value="5px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Style du texte du lien (décalage par rapport à la puce) -->
+	<u:selector name="body ul.liensTransversaux li a"><!-- EXTENDS "ul.liensTransversaux li a" -->
+		<u:style name="padding-left" value="9px"/><!-- (3) -->	
+	</u:selector>
+	
+	<!-- 
+		/****************/
+		/* Titre + logo */
+		/****************/
+	 -->
+	 
+	 <!-- Rendu :
+		
+		******************************************************************************************************
+			NATIXIS
+						AWS
+		******************************************************************************************************
+	 -->		
+		
+	<!-- Style spécifique au logo -->					
+	<u:selector name="body .logo"><!-- EXTENDS ".logo" -->
+		<u:style name="height" value="45px"/><!-- TODO : voir comment variabiliser ?? -->
+	</u:selector>					
+	 
+	<!-- 
+		/***********************/
+		/* Moteur de recherche */
+		/***********************/
+	 -->	
+	 
+	 <!-- On surcharge le moteur de recherche standard (juste pour la police non varialisable) -->
+	<u:selector name="body .inputMoteurRecherche"><!-- EXTENDS ".inputMoteurRecherche" -->
+		<u:style name="font-familly" value="Arial"/>
+	</u:selector>
+
+	<!-- 
+		/************************************************************/
+		/* rail (> Accueil > Rechercher client > Recherche Chargé)  */
+		/************************************************************/
+	 -->
+	
+	<!-- Définition de l'entrée spécifique au 1er élément -->
+	<u:selector name="body ul.rail li.first">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_niv1_7_off.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 4px"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="body ul.rail li"><!-- EXTENDS "ul.rail li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_lien_noire_sphinx_7.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 4px"/>
+		<u:style name="padding-left" value="10px"/>
+		<u:style name="padding-right" value="4px"/>
+	</u:selector>
+	
+	<!-- 
+		/*****************************/
+		/*  Navigation transversale  */
+		/*****************************/
+	 -->
+	 
+	 <!-- Premier élément de la liste -->
+	 <u:selector name="body ul.navTransversal li.first"><!-- EXTENDS "ul.navTransversal li.first" -->
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	 
+	 <!-- Elément unitaire de la liste -->
+	 <u:selector name="body ul.navTransversal li"><!-- EXTENDS "ul.navTransversal li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_nav_transversale.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 5px"/>
+		<u:style name="padding-left" value="8px"/>
+	</u:selector>
+			
+	<!-- 
+		/********************************************************/
+		/* Liens du footer (> Mentions légales > lien2 > lien3) */
+		/********************************************************/
+	-->
+	 
+	<!-- Premier élément de la liste -->
+	<u:selector name="body ul.liensFooter li.first">
+		<u:style name="background-image" value="none"/>
+	</u:selector>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="body ul.liensFooter li"><!-- EXTENDS "ul.liensFooter li" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/puce_footer_7.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 3px"/><!-- (1) -->
+		<u:style name="padding-right" value="3px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="body ul.liensFooter li a"><!-- EXTENDS "ul.liensFooter li a" -->
+		<u:style name="padding-left" value="8px"/><!-- (3) -->			
+	</u:selector>
+		
+	
+	<!-- (1) Position de l'image : 'horizontal vertical'. -->
+		
+	<!-- (2) Espace à droite située après chaque entrée de la liste. -->
+	
+	<!-- (3) Espace entre la puce et le lien -->
+	
+	<!-- 
+		/********************************/
+		/* Bloc de connexion intérieure */
+		/********************************/
+	-->
+	
+	<!-- Complément sur le bloc de connexion intérieure (précision d'un gradient) -->
+	<u:selector name="body .blocAuthentificationInterieure"><!-- EXTENDS ".blocConnexionInterieure" -->
+		<u:style name="background-image">
+            <f:resource f:key="SphinxGradient">
+                <f:attribute name="gradientHeight" value="100px"/>
+                <f:attribute name="height" value="150px"/>
+                <f:attribute name="gradientColor" skin="blocConnexionInterieureBackgroundColor"/>
+            </f:resource>
+		</u:style>
+		<u:style name="background-repeat" value="repeat"/>
+		<u:style name="background-position" value="0 50%"/>
+	</u:selector>
+	
+	<!-- Espacement entre le password et le bouton OK (si alignés) : peut-être utilisé à l'intérieur ou dans la page de login -->
+	<u:selector name="body .espacementPasswordLogin"><!-- EXTENDS ".blocConnexionInterieure .espacementPasswordLogin" -->
+		<u:style name="padding" value="0 3px 0 0"/><!-- (4) -->
+	</u:selector>
+	
+	<!-- Champs de saisie plus petit pour afficher le bouton ok juste apres le champs password -->
+	<u:selector name="body .blocAuthentificationInterieure .inputLogin">
+		<u:style name="width" value="120px"/>
+	</u:selector>
+	
+	<!-- (4) Cette propriété met un padding-right pour le td du password et le td du bouton (OK) 
+	mais seul le 1er nous intéresse (ne pas mettre une grande valeur toutefois pour éviter de sortir
+	du cadre à droite) -->
+	
+	<!-- Style permettra de créer le bouton "OK" de login (padding gauche / droit) -->
+	<u:selector name="body input.login"/><!-- EXTENDS ".blocConnexionInterieure input.login" -->
+			
+	<!-- Complément au style du lien de déconnexion (couleur, graisse définies dans la feuille mère)-->
+	<u:selector name="body .blocDeconnexionInterieure a"/><!-- EXTENDS ".blocDeconnexionInterieure a" -->
+		
+	<!-- Fait partie des zones personnalisables -->
+	<u:selector name="body .infoPersonneConnectee">
+		<u:style name="border" value="none"/>
+	</u:selector>
+			 
+</f:template>

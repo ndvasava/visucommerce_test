@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le zoning BP Internet.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/zoning.xcss" />
+	
+	<!-- La page BP est collée à gauche et ne possède pas de rail.
+	Elle possède des liens transversaux. 
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<ul id="liensTransversaux">...</ul>
+			<div id="conteneurHeader">
+				<a id="logo">...</a>
+				<div id="moteurRecherche">...</div>
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="conteneur">
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<ul id="navTransversal">...</ul>
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="liensFooter">...</ul>
+			<div id="copyright">...</div>
+			<a id="logoFooter">...</a>
+		</div> 	 --> 	
+		 
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #bandeauHaut (et de ses éléments fils)  */
+		/***********************************************************/
+	 --> 
+	 
+	<!-- #bandeauHaut définit la zone haute : liens transversaux et univers visuel -->
+	<u:selector name="#bandeauHaut"><!-- EXTENDS "body #bandeauHaut" -->
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/banque_populaire/internet/img/visuel_haut.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="left 1px"/>
+	</u:selector>
+			
+	<!-- Positionnement du bloc des liens transversaux situés dans le header.
+	Cette zone occupe toute la largeur de la zone utile mais est alignée à droite -->
+	<u:selector name="#liensTransversaux"><!-- EXTENDS "body #liensTransversaux" -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- Spécification d'une taille pour le bloc contenant des flottants (nécessaire pour IE6) -->
+	<u:selector name="body #conteneurHeader"><!-- EXTENDS "#conteneurHeader" -->
+		<u:style name="width" value="100%"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Rendu impératif pour IE6 : bug HasLayout. Sans ça, le titre de la page passe en dessous
+	du bloc #conteneurHeader.-->
+	
+	<!-- (Niveau 2) #conteneurHeader > Style du lien du logo comprenant une image -->
+	<u:selector name="body #logo"><!-- EXTENDS "#logo" -->
+		<u:style name="position" value="relative"/>
+		<u:style name="top" value="-4px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) Remontée du logo car la bande horizontale contenant les liens transversaux 
+	est trop large. Initialement, traitée avec avec un margin-top:-4px mais IE6 le gère très mal et 
+	exerce une troncature de l'image. La solution adoptée consiste donc en la mise d'une position:relative.-->
+				
+	<!-- (Niveau 2) #conteneurHeader > Moteur de recherche -->
+	<u:selector name="#moteurRecherche">
+		<u:style name="float" value="right"/><!-- (3) -->
+		<u:style name="margin" value="1em 0 0 0"/>
+		<u:style name="padding" value="0 1em 0 0"/>
+		<u:style name="text-align" value="right"/> <!-- (4) -->
+	</u:selector>
+	
+	<!-- (3) Une autre solution a été tentée : suppression du flottant. Seulement la reprise du flux 
+	ne se fait pas correctement sous IE6 (les éléments #logo et #titreAppli étant en float:left).
+	Le bloc de recherche passe à la ligne. 
+	Même remarque que plus haut : pas de margin-right sur un float:right -->
+	
+	<!-- (4) Cette propriété remplace la valeur bizarroïde "width:25%". Elle était directement liée au point (7) et
+	ne se comprenait qu'en liaison avec la propriété "width:74%" sur le champ <input situé à l'intérieur de ce bloc.
+	Pour éviter que le moteur de recherche ne passe à la ligne, il faut absolument que la taille du calque #moteurRecherche 
+	soit inférieure	à la somme des tailles #logo + #titreAppli. -->
+	
+	
+	<!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->	 
+
+	<!-- zone d'infos et autres -->
+	<u:selector name="#zoneInfo, #zonePersoHaut, #zonePersoBas">
+		<u:style name="border" value="1px solid #DDDDDD"/>
+		<u:style name="margin" value="10px 0"/>
+		<u:style name="padding-bottom" value="15px"/>
+		<u:style name="padding-left" value="10px"/>
+		<u:style name="padding-top" value="15px"/>
+	</u:selector> 
+	
+	<!-- Positionnement du #menu -->
+	<u:selector name="#menu">
+		<u:style name="overflow" value="hidden"/>
+		<u:style name="margin-left" value="10px"/>
+		<u:style name="font-size" value="1em"/>
+	</u:selector> 
+	
+	<u:selector name="html>body #menu">
+		<u:style name="margin-left" value="20px"/>
+	</u:selector>	
+
+	
+	
+	<!-- Positionnement du #rail -->
+	<u:selector name="body #rail"><!-- EXTENDS "#rail" -->
+		<u:style name="display" value="none"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (5) Pas de rail chez BP -->
+	
+	<!-- Bloc de login à l'intérieur des pages -->
+	<u:selector name="#blocAuthentificationInterieure">
+		<u:style name="border-width" skin="blocConnexionInterieureBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureBorderColor"/>
+		<u:style name="background-color" skin="blocConnexionInterieureBackgroundColor"/>
+		<u:style name="padding" value="3px 8px 8px"/>
+		<u:style name="margin" value="10px 0pt"/>
+	</u:selector>
+
+	<!-- Bloc de login à l'intérieur des pages, une fois connexté -->
+	<u:selector name="#blocAuthentificationInterieure.connected">
+		<u:style name="background-color" value="transparent"/>
+		<u:style name="padding-top" value="0"/>
+		<u:style name="border-color" value="#DDDDDD"/>
+	</u:selector>
+
+	<!-- Style du pavé généré par le s:decorate -->
+	<u:selector name="#blocAuthentificationInterieure .edition_rubrique">
+		<u:style name="margin-bottom" value="0"/>		
+	</u:selector>
+	
+	<!-- Style du bouton de connexion ... -->
+	<u:selector name="#blocAuthentificationInterieure .login, #blocAuthentificationInterieure .logout">
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="color" skin="buttonTextColor"/>
+		<u:style name="background-image" value="none"/>
+		<u:style name="border" value="none"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="font-size" value="1em"/>
+		<u:style name="padding" value="1px"/>
+		<u:style name="overflow" value="visible"/>
+		<u:style name="margin-top" value="-2.5em"/>
+	</u:selector>
+	
+	<u:selector name="#blocAuthentificationInterieure .login">
+		<u:style name="float" value="right"/>
+	</u:selector>
+	
+	<u:selector name="#blocAuthentificationInterieure .logout">
+		<u:style name="float" value="none"/>
+	</u:selector>
+	
+	<u:selector name="html>body #blocAuthentificationInterieure .login, #blocAuthentificationInterieure .logout">
+		<u:style name="margin-top" value="-2.33em"/>
+	</u:selector>
+
+	<!-- 
+		position du bouton OK à côté du mot de passe 
+		(faut modifier sa largeur et ajouter une marge gauche)
+	-->
+	<u:selector name="#blocAuthentificationInterieure .value input.login">
+	 	<u:style name="width" value="auto"/>
+		<u:style name="margin-left" value="5px"/>
+	 	<u:style name="border" value="none"/>
+	 	<u:style name="padding" value="1px"/>
+	 	<u:style name="overflow" value="visible"/>
+	</u:selector>
+	
+	<!-- libélle  (en bloc aligné à gauche)-->
+	<u:selector name="#blocAuthentificationInterieure .name">
+		<u:style name="display" value="block"/>
+		<u:style name="text-align" value="left"/>
+		<u:style name="float" value="none"/>
+		<u:style name="color" skin="blocConnexionInterieureLabelColor"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLabelFontWeight"/>
+		<u:style name="width" value="auto"/>
+	</u:selector>
+	
+	<!-- police des liens en plus petit et souligné -->
+	<u:selector name="#blocAuthentificationInterieure a">
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienTextDecoration"/>
+		<u:style name="font-size" skin="blocConnexionInterieureLienFontSize"/>
+		<u:style name="color" skin="blocConnexionInterieureLienColor"/>
+	</u:selector>
+	
+	<u:selector name="body #blocDeconnexionInterieure"><!-- EXTENDS #blocDeconnexionInterieure -->
+		<u:style name="margin-top" value="15px"/><!-- (6) -->
+		<u:style name="margin-left" value="7px"/><!-- (6) -->
+	</u:selector>
+	
+	<!-- (6) On augmente les valeurs de base (spécification d'une marge haute pour que, fusion de marges, 
+	on aille au-delà des 10px fournis par la marge basse du bloc précédent). -->
+	
+	<!-- Liens transversaux -->
+	<u:selector name="body #navTransversal"><!-- EXTENDS "#navTransversal" --> 
+		<u:style name="margin-bottom" value="10px"/>
+	</u:selector>
+		
+	<!-- La zone contenant le coeur de l'application : formulaires ; On souhaite la restreindre en largeur -->
+	<u:selector name="body #zoneCentrale"><!-- EXTENDS "#zoneCentrale" --> 
+		<u:style name="width" skin="zoneCentraleWidth" default="790px"/><!-- (7) -->
+	</u:selector>
+		
+	<!-- (7) Voir si c'est gênant dans le cas de tableaux trop larges ; pourra être surchargé grâce à la variable -->
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #piedsDePage (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->	
+	 
+	 <!-- On importe le style idoine à ce footer : un ensemble liens, copyright centré, logo -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_footer_trio.xcss" />
+	
+
+</f:template>

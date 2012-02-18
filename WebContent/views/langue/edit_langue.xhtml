@@ -1,0 +1,245 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- Pour obtenir la completion automatique des taglib jsf et richfaces, il faut
+		1. Associe xhtml au jsp dans window / preferences / General / Content Type / Text, selectionne JSP et y ajouter le type *.xhtml
+		2. editier les proprietes du projets, attribut : Project Faces
+			a. Activer JavaServer Faces (version 1.2 pour ce projet)
+			b. AJouter les lib JSF1.2, MyFaces 1.2 et downloader les lib RichFaces avec les class des taglibs. Attention à décocher inclure ces lib au classpath
+ -->
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:c="http://java.sun.com/jstl/core">
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+    
+    <style>
+    	.gridContent{
+    		vertical-align: top;
+    		width: 50%;
+    		height: 100%;
+    	}
+    	.localPanelGrid{
+    		width: 80%;
+    	}
+    	.localPanelGroup{
+    		height: 100%;
+    	}
+    	.rich-panel .MainBodyPanel {
+    		width: 100%;
+    	}
+    </style>
+    
+    <h:form id="langueF" styleClass="edit">
+		<!-- rich:panel style="padding:0" headerClass="outpanelHeader" bodyClass="MainBodyPanel" -->
+		<rich:panel style="padding:0" headerClass="outpanelHeader">
+        	<!-- f:facet name="header">
+        	    <rich:spacer height="4" />
+        	</f:facet -->
+        	
+			<h:panelGrid columns="2" columnClasses="gridContent" styleClass="localPanelGrid">
+			<h:panelGroup styleClass="localPanelGroup">
+		        <rich:panel bodyClass="inpanelBody">
+		            <f:facet name="header">
+						<h:outputFormat value="#{editerLangueAction.managed ? messages['default.edit.label'] : messages['default.create.label']}">
+							<f:param value="#{messages['langue.label']}"/>
+						</h:outputFormat>
+					</f:facet>
+					
+					<!-- Il est possible de définir pour chaque UIInput un valueChangeListener : 
+							valueChangeListener="#{bean.valueChangeMethod}" en tant qu'attribut de h:inputText
+					 -->
+		            <s:decorate id="nomD" template="../../layout/edit.xhtml">
+		                <ui:define name="label">
+		                	<h:outputLabel value="#{messages['langue.nom.label']}" />
+		                </ui:define>
+		                <h:inputText id = "nom"
+		                		label="#{messages['langue.nom.label']}"
+		                       	required="true"
+		                        size="50"
+		                      	maxlength="50"
+		                      	value="#{editerLangueAction.instance.nom}" >
+							<a4j:support id="onKeyUpnomD" event="onkeyup"
+									rendered="#{!editerLangueAction.managed}"
+									requestDelay="20" 
+									actionListener="#{editerLangueAction.refresh}" />
+						</h:inputText>
+		            </s:decorate>
+		            
+		            <s:decorate id="codeIsoD" template="../../layout/edit.xhtml">
+		                <ui:define name="label">
+		                	<h:outputLabel value="#{messages['langue.codeIso.label']}" />
+		                </ui:define>
+		                <h:inputText id = "codeIso"
+		                		label="#{messages['langue.codeIso.label']}"
+		                       	required="true"
+		                        size="5"
+		                      	maxlength="5"
+		                      	value="#{editerLangueAction.instance.codeIso}" >
+							<a4j:support id="onKeyUpnomD" event="onkeyup"
+									rendered="#{!editerLangueAction.managed}"
+									requestDelay="20" 
+									actionListener="#{editerLangueAction.refresh}" />
+						</h:inputText>
+		            </s:decorate>
+		            
+		            <div style="clear:both">
+		                <span class="required">*</span>
+		                required fields
+		            </div>
+		
+					<!-- Version Fwk Sphinx -->
+					<!-- 
+						h:commandButton, mecanisme de POST pour mettre à jour le model (fonctions Create ou Update)
+						s:button, mecanisme de GET pour naviguer et obtenir des informations (fonction Cancel)
+					 -->
+					<h:commandButton id="doCreate" 
+							value="#{messages['default.button.create.label']}" 
+							action="#{editerLangueAction.persist}"
+							styleClass="boutonAction boutonCreer"
+							onmouseover="$(this).addClassName('boutonActionHover')"
+							onmouseout="$(this).removeClassName('boutonActionHover')"
+							rendered="#{!editerLangueAction.managed}" /> 							          
+					 <h:commandButton id="doUpdate" 
+							value="#{messages['default.button.validate.label']}" 
+							action="#{editerLangueAction.update}"
+							styleClass="boutonAction boutonValider"
+							onmouseover="$(this).addClassName('boutonActionHover')"
+							onmouseout="$(this).removeClassName('boutonActionHover')"
+							rendered="#{editerLangueAction.managed}" />
+			       	<s:button id="doCancel" 
+							value="#{messages['default.button.cancel.label']}" 
+							action="#{editerLangueAction.cancel}"
+							styleClass="boutonAction boutonAnnuler"				                          
+							onmouseover="$(this).addClassName('boutonActionHover')"
+							onmouseout="$(this).removeClassName('boutonActionHover')"
+							rendered="#{editerLangueAction.managed}" />
+				
+				</rich:panel>
+			</h:panelGroup>
+			<h:panelGroup>	
+				<!-- Gestion des upload de fichiers par Seam -->  
+				<rich:panel bodyClass="inpanelBody">
+					<f:facet id="importHeader" name="header">
+						<h:outputFormat value="#{editerLangueAction.instance.drapeau==null ? messages['langue.create.drapeau.label'] : messages['langue.edit.drapeau.label']}" />
+					</f:facet>
+					
+				
+					<h:panelGrid columns="2" columnClasses="top,top" rendered="true">
+				            
+						<rich:fileUpload fileUploadListener="#{editerLangueAction.listener}"
+							maxFilesQuantity="1"
+							id="uploadDrapeau"
+							acceptedTypes="jpg, gif, png, bmp">
+							<a4j:support event="onuploadcomplete" reRender="infoSeam, importHeader" />
+						</rich:fileUpload>
+		                
+		                <h:panelGroup id="infoSeam">
+		                	<rich:panel bodyClass="info">
+			                    <f:facet name="header">
+			                        <h:outputText value="Uploaded Image Info" />
+			                    </f:facet>
+			                    <h:outputText value="No files currently uploaded"
+			                        rendered="#{editerLangueAction.instance.drapeau == null}" />
+			                    <rich:dataGrid columns="1" value="#{editerLangueAction.instance.drapeau}"
+			                        var="img" rowKeyVar="row">
+			                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+			                            <h:panelGrid columns="2" rendered="#{img.content != null}">
+			                            	<s:graphicImage value="#{img.content}" width="80px" height="80px"/>
+			                                <h:panelGrid columns="1">
+			                                    <h:outputText value="Img Name:" />
+			                                    <h:outputText value="#{img.name}" />
+			                                    <h:outputText value="Img Length(bytes):" />
+			                                    <h:outputText value="#{img.length}" />
+			                                </h:panelGrid>
+			                            </h:panelGrid>
+			                        </rich:panel>
+			                    </rich:dataGrid>
+			                </rich:panel>
+			                <rich:spacer height="3"/>
+			                <br />
+			                <a4j:commandButton action="#{editerLangueAction.clearUploadData}"
+			                    reRender="infoSeam, uploadDrapeau, importHeader" value="#{messages['langue.remove.drapeau.label']}"
+			                    rendered="#{editerLangueAction.instance.drapeau != null}" />
+			            </h:panelGroup>
+		                
+					</h:panelGrid>
+				</rich:panel>
+				
+	        </h:panelGroup>    
+			</h:panelGrid>
+			
+			<div style="clear:both" />
+			
+		</rich:panel>
+		
+		<!--
+			Utilisation du RichSelect - PickList de RichFaces afin d'afficher une boite de dialogue 
+			pour selectionner ou supprimer des pays liés a la devise courante.
+			cf::http://www.coderanch.com/t/214372/JSF/java/Preselection-Pick-List
+		 -->
+		<rich:tabPanel id="langueTp">
+	            <rich:tab limitToList="true" reRender="langueTp,msg" immediate="true">
+		  			<f:facet name="label">
+						<h:outputText styleClass="rounded-tab" value="#{messages['langue.pays.label']}"/>
+					</f:facet>
+					
+					<h:panelGrid columns="2" columnClasses="gridContent" rendered="true" >					
+						<h:panelGroup width="50%">
+							<rich:panel header="Gestion liste des pays">
+								<div class="association" id="langueChildren">
+									<h:outputText value="#{messages['default.noitem.message']}" rendered="#{editerLangueAction.instance.setPays == null}"/>
+								
+									<rich:pickList value="#{editerLangueAction.listSelectedPays}"
+											converter="#{editerLangueAction.paysConverter}" 
+											rendered="#{editerLangueAction.instance.setPays != null}"
+											copyAllControlLabel="copy All" 
+											removeAllControlLabel="remove All"   
+				        					copyControlLabel="copy"   
+				        					removeControlLabel="remove"
+				        					showButtonsLabel="false">
+										<s:selectItems value="#{editerLangueAction.listAvailablePays}" var="pays" label="#{pays.nom}" />
+										<s:convertEntity />
+										<a4j:support event="onlistchanged" reRender="selectedPaysDt"/>
+									</rich:pickList>
+								</div>
+							</rich:panel>
+						</h:panelGroup>	
+						
+						<h:panelGroup width="50%" > 
+							<rich:panel header="Pays Selectionnés">
+								<rich:dataTable id="selectedPaysDt" var="pays" value="#{editerLangueAction.listSelectedPays}"
+									rowClasses="rich-table-cell-impair, rich-table-cell-pair" >
+									<rich:column styleClass="firstColumn " headerClass="firstColumn left">
+					            		<f:facet name="header">#{messages['pays.id.label']}</f:facet>
+					           			<h:outputText value="#{pays.id}" />
+				        			</rich:column>
+				        			<rich:column headerClass="left">
+					            		<f:facet name="header">#{messages['pays.nom.label']}</f:facet>
+					           			<h:outputText value="#{pays.nom}" />
+				        			</rich:column>
+				        		</rich:dataTable>
+				        	</rich:panel>
+						</h:panelGroup>
+					</h:panelGrid>
+				</rich:tab>
+        </rich:tabPanel>
+		
+		
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</f:view>
+</jsp:root>

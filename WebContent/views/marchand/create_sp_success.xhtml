@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<rich:panel rendered="#{!editerSalespersonAction.managed}">
+         <h:panelGrid columns="2">
+             <h:graphicImage value="/img/seamlogo.png" alt="Seam logo"/>
+             <s:div styleClass="info">
+                 <p><strong>#{messages['sp.create-success.message']}</strong></p>
+                 <rich:panelMenu>
+			   			<rich:panelMenuItem id="editSalesperson"
+			   					label="#{messages['sp.add.label']}" 
+			   					action="goEditSalesperson">
+							<f:setPropertyActionListener target="#{editerSalespersonAction.companyAccId}" 
+								value="#{editerCommerceAction.instance.id}"/> 	
+						</rich:panelMenuItem>
+			   			<rich:panelMenuItem id="rechercheSalesperson"
+			   					label="#{messages['sp.search.label']}" 
+			   					action="goSearchSalesperson"
+								actionListener="#{conversationHelper.clearMyConversation()}">
+						<f:setPropertyActionListener target="#{editerSalespersonAction.companyAccId}" 
+								value="#{editerCommerceAction.instance.id}"/>
+						</rich:panelMenuItem>  		
+			     </rich:panelMenu>			     
+             </s:div>
+             
+         </h:panelGrid>
+     </rich:panel>
+     
+     <rich:panel rendered="#{editerCommerce.managed}">
+     	<p><strong>#{messages['commerce.no-commerce.error.message']}</strong></p>
+     </rich:panel>
+	<f:facet name="header" >
+		<h:outputFormat value="#{messages['commerce.create-success.message']}"/>
+	</f:facet>
+
+</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

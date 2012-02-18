@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style transverse qui définit une page dont l'alignement est centré.
+		Cela a un impact sur les 3 blocs principaux :
+		- bandeauHaut
+		- conteneur
+		- footer
+		
+		Techniquement, cela se matérialise par une marge 'left' et 'right' positionnée à 'auto'. 
+		
+		Les propriétés utilisées ici sont : 				
+		- defaultPageWidth : la largeur de la zone utile de la page
+		
+		Important : l'alignement centré d'une page se fait par application des propriétés suivantes :
+		  - margin: 0 auto; et width:XXX sur les blocs à centrer.
+		La largeur des blocs NE DOIT PAS être définie au niveau de la balise body (qui aura l'attribut width:auto)				
+	-->
+	
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut">...</div>
+			<div id="conteneur">...</div>
+			<div id="piedsDePage">...</div>
+		<body>
+	 --> 
+		
+	 <!-- Organisation générale de la zone utile.
+	1.Centrage : par application d'une marge auto à droite et à gauche.
+	2.Définition de la largeur de la zone utile -->
+	<u:selector name="#bandeauHaut, #conteneur, #piedsDePage">
+		<u:style name="margin" value="0 auto" /><!-- (1) -->
+		<u:style name="padding" value="0 10px" />
+		<u:style name="width" skin="defaultPageWidth" />
+	</u:selector>
+	
+	<!-- (1) propriété synthétique pour top,bottom:0 et left,right:auto.
+	Marges hautes et basses : pas de problème de fusion de marge -->
+	
+</f:template>

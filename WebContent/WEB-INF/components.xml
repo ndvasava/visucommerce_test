@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://jboss.com/products/seam/components"
+            xmlns:core="http://jboss.com/products/seam/core"
+            xmlns:navigation="http://jboss.com/products/seam/navigation"
+            xmlns:persistence="http://jboss.com/products/seam/persistence"
+            xmlns:drools="http://jboss.com/products/seam/drools"
+            xmlns:bpm="http://jboss.com/products/seam/bpm"
+            xmlns:security="http://jboss.com/products/seam/security"
+            xmlns:spring="http://jboss.com/products/seam/spring"
+            xmlns:transaction="http://jboss.com/products/seam/transaction"
+            xmlns:mail="http://jboss.com/products/seam/mail"
+            xmlns:web="http://jboss.com/products/seam/web"
+            xmlns:theme="http://jboss.com/products/seam/theme"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation=
+                "http://jboss.com/products/seam/core http://jboss.com/products/seam/core-2.2.xsd
+                 http://jboss.com/products/seam/persistence http://jboss.com/products/seam/persistence-2.2.xsd
+                 http://jboss.com/products/seam/transaction http://jboss.com/products/seam/transaction-2.2.xsd
+                 http://jboss.com/products/seam/navigation http://jboss.com/products/seam/navigation-2.2.xsd 
+                 http://jboss.com/products/seam/drools http://jboss.com/products/seam/drools-2.2.xsd
+                 http://jboss.com/products/seam/bpm http://jboss.com/products/seam/bpm-2.2.xsd
+                 http://jboss.com/products/seam/security http://jboss.com/products/seam/security-2.2.xsd
+                 http://jboss.com/products/seam/mail http://jboss.com/products/seam/mail-2.2.xsd
+                 http://jboss.com/products/seam/web http://jboss.com/products/seam/web-2.2.xsd
+               	 http://jboss.com/products/seam/spring http://jboss.com/products/seam/spring-2.2.xsd
+                 http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.2.xsd">
+    
+<!-- ====================================================================
+							Gestion navigation			
+===================================================================== -->
+		
+		<navigation:pages>
+			<navigation:resources>
+				<value>/WEB-INF/pages.xml</value>
+				<value>/WEB-INF/navigation/referentiel/pays.page.xml</value>
+				<value>/WEB-INF/navigation/referentiel/ville.page.xml</value>	
+				<value>/WEB-INF/navigation/referentiel/devise.page.xml</value>
+				<value>/WEB-INF/navigation/referentiel/langue.page.xml</value>
+				<value>/WEB-INF/navigation/referentiel/typeCommerce.page.xml</value>
+				<value>/WEB-INF/navigation/marchand.page.xml</value>
+				<value>/WEB-INF/navigation/commerce.page.xml</value>
+				<value>/WEB-INF/navigation/salesperson.page.xml</value>
+			</navigation:resources>
+		</navigation:pages>
+	
+<!-- ====================================================================
+							Configuration Spring			
+===================================================================== -->
+	
+		<!-- Chargement de la config Spring 
+			spring-config : pour la configuration général, le lien avec seam - persistence - datasource - transaction
+			spring-beans  : déclaration des beans de la couche service et dao 
+			-->
+		<spring:context-loader>
+			<!-- commenter le contenu suivant pour utiliser applicationContext.xml -->
+			<spring:config-locations>
+				<value>/WEB-INF/spring/spring-config.xml</value>
+				<value>/WEB-INF/spring/spring-beans.xml</value>
+			</spring:config-locations>
+		</spring:context-loader>
+    
+<!-- ====================================================================
+							Configuration Seam
+			1. config coeur
+			2. config transaction manager
+				a. lien sur le contexte de persistence décrit dans le META-INF : persistence.xml
+			3. config regle de securite (déclaration de l'utilsiation du identity seam)
+			4. parametrage d'event generique a l'application
+				a. org.jboss.seam.security.notLoggedIn
+				b. org.jboss.seam.security.loginSuccessful
+			5. delegation des regles de navigation pour Seam au pages.xml et ses fils
+				a. <navigation:pages> & <navigation:resources>
+			6. fichier seam.properties à déposer dans le répertoire des src, afin que seam sachent ou chercher les composants flaggués @Name qui sont réutilisés
+			dans les pages et/ou dans les regles de navigation. A commencer par Authenticator
+===================================================================== -->
+    
+    <core:manager conversation-timeout="12000000" default-flush-mode="MANUAL"
+                  concurrent-request-timeout="100000"
+                  conversation-id-parameter="cid"/>
+	
+    <!-- Pour debugger, via l'URL : debug.action -->
+   	<!-- 
+   	<core:init debug="@debug@">
+	   <core:interceptors>
+		  <value>org.jboss.seam.transaction.RollbackInterceptor</value>
+	   </core:interceptors>
+	</core:init>
+	-->
+                 
+    <!-- Déclaration du contexte de persistence Seam, utilise dans le SeamEntityManager, via l'attribut name. Ce contexte de persistence
+    	s'appuit sur la définition dans Spring d'une datasource+la persistence(dialect et hbm2dll mode)
+    -->
+	<persistence:managed-persistence-context name="entityManager"
+		auto-create="true" entity-manager-factory="#{entityManagerFactory}" />
+    
+<!-- ****************************************************************************** 
+    	Parametrage du transaction manager dans la couche Seam. Par défaut Seam utilise JTA transaction component qui est intégré
+    	 dans J2EE 5 et la programmation EJB. La transaction démarre alors avant le ResotreView.
+    	 Mais il est possible d'effectuer une config manuelle (4 solutions). Pour chacune, la transaction est démarrée à la fin de 
+    	 la phase 2 "Apply Request Values" 
+    	 
+    	 ATTENTION, a cette etape la config croisee Spring-Seam necessite d'avoir déclarer le DelegatingVariableResolver dans le faces-confi.xml. 
+    	 En 1er point il permet de résoudre par seam les EL pointant sur ses bean depuis les JSF. Mais il permet également de résoudre dans 
+    	 la config Seam les éléments déclarés dans Spring.
+    	 Sans cela, la déclaration du transactino manager, résolue en 1er dans Seam, reste inévitablement KO.
+    -->
+	    <!-- Configuration via EJB et JTA -->
+	    <!-- transaction:ejb-transaction / -->
+	    
+	    <!-- JPA RESOURCE_LOCAL transactions with the javax.persistence.EntityTransaction interface. Demarre phase 2 : Apply Request Value-->
+	    <!-- transaction:entity-transaction entity-manager="#{em}"/ -->
+	    
+	    <!-- Hibernate managed transactions with the org.hibernate.Transaction. Demare phase 2 : Apply Request Value -->
+	    <!-- transaction:hibernate-transaction session="#{hibernateSession}"/ -->
+	    
+	    <!-- Spring managed transactions with the org.springframework.transaction.PlatformTransactionManager. Demande a spring l'injection d'un manager
+	    depuis ses propres bean. Ce manager est en fait basé sur le SeamEntityManagerFactory -->
+	    <spring:spring-transaction platform-transaction-manager="#{transactionManager}" />
+	    
+	    <!-- Explicitly disable Seam managed transactions -->
+    	<!-- transaction:no-transaction / -->
+<!-- ****************************************************************************** --> 
+    
+<!--  ****************************************************************************** -->
+
+	<!-- security:identity authenticate-method="#{login.processLogin}" remember-me="true"/ -->
+	<security:identity authenticate-method="#{authenticator.authenticate}" remember-me="true"/>
+
+<!--  ****************************************************************************** -->
+   	
+   	<!-- 
+	***********************************************************************
+			Gestion des themes - skins			
+	*********************************************************************** 
+	-->
+   		<!-- le 1er theme est celui par defaut -->
+	   	<theme:theme-selector cookie-enabled="true">
+		    <theme:available-themes>
+				<value>themeVisuc</value>
+		    </theme:available-themes>
+		</theme:theme-selector>
+   	
+   	<!-- 
+	***********************************************************************
+			Gestion internationalisation			
+	*********************************************************************** 
+	-->
+	
+	<!-- Ci-dessous la liste des .properties utilises pour l'internationalisation
+	Veillez toutefois a lister les locales gerees dans le faces-config.xml-->
+	<core:resource-loader>
+		<core:bundle-names>			
+			<!-- value>com/natixis/sphinx/core/validator/hibernate/messages</value -->
+			<value>messages</value>		
+		</core:bundle-names>
+	</core:resource-loader>
+   	
+   	<!-- 
+	***********************************************************************
+			Gestion des evenements			
+	*********************************************************************** 
+	-->
+
+	<!-- sauvegarde de la page demandee avant redirect sur le login (origin from seam) -->
+	<event type="org.jboss.seam.security.notLoggedIn">
+		<action execute="#{redirect.captureCurrentView}"/>
+	</event>
+	
+	<!-- redirection vers la page ayant provoquee une demande de connexion non explicite (origin from seam) -->
+	<event type="org.jboss.seam.security.postAuthenticate">
+		<action execute="#{redirect.returnToCapturedView}"/>
+	</event>
+		
+	<!-- Gestion des evenements : utilises pour rafraîchir les listes a l'issue d'operation DML -->
+	
+    <!-- BEGIN EVENT Pays -->	
+    <event type="org.jboss.seam.afterTransactionSuccess.Pays">
+    	<action execute="#{rechercherPaysAction.refresh}" />
+	</event>
+	<!-- BEGIN EVENT Ville -->	
+    <event type="org.jboss.seam.afterTransactionSuccess.Ville">
+    	<action execute="#{rechercherVilleAction.refresh}" />
+	</event>
+	<!-- BEGIN EVENT Devise -->	
+    <event type="org.jboss.seam.afterTransactionSuccess.Devise">
+    	<action execute="#{rechercherDeviseAction.refresh}" />
+	</event>
+	<!-- BEGIN EVENT Langue -->	
+    <event type="org.jboss.seam.afterTransactionSuccess.Langue">
+    	<action execute="#{rechercherLangueAction.refresh}" />
+	</event>
+	<!-- BEGIN EVENT TypeCommerce -->	
+    <event type="org.jboss.seam.afterTransactionSuccess.TypeCommerce">
+    	<action execute="#{rechercherTypeCommerceAction.refresh}" />
+	</event>
+    
+</components>                 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template' 
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+	<!-- 
+		
+		Fichier principal du skin visuc.
+		
+		Il est référencé directement dans le fichier de propriétés du skin (META-INF/skins/xxx.skin.properties)
+		comme valeur du paramétre "generalStyleSheet"
+		
+		ex : 
+		generalStyleSheet=resource:///com/visuc/jsf/ui/skins/visuc-internet.xcss
+		
+		
+		On y trouve essentiellement (et uniquement) les feuilles de styles dynamiques
+		qui composeront le skin par inclusion à l'aide de la balise f:importReource. 
+		Rem : 
+		On aurait très bien pu y mettre directement des styles CSS mais pour des raisons de maintenabilité, 
+		il est préférable de séparer les styles par fonctionnalité ou par composant auquel ils se rapportent.
+		Il est ainsi possible de factoriser les CSS d'un même composant Richfaces pour toutes les enseignes après lui
+		avoir appliqué des propriétés (couleurs) spécifique à l'enseigne.
+		
+		On distinguera deux types de feuilles : 
+		- communes à toutes les enseignes : com/visuc/jsf/ui/css
+		- spécifique à l'enseigne : com/visuc/jsf/ui/skins/<enseigne>/css (ici enseigne vaut visuc-internet .... Unique cible de déploiement pour l'instant)
+		
+		
+	-->
+	
+	<!-- styles très généraux -->
+	<!-- f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/commun.xcss" / -->
+	
+	<f:importResource src="com/visuc/jsf/ui/skins/visuc/css/page.xcss" />
+	<f:importResource src="com/visuc/jsf/ui/skins/visuc/css/zoning.xcss" />
+	
+</f:template>

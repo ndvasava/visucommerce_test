@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant l'apparence des éléments de la page :
+			- liens transversaux (texte)
+			- liens transversaux (picto)
+			- titre de la page
+			- outils contextuels
+			- moteur de recherche
+			- rail
+			- liens du footer
+			- copyright
+			
+		Cette feuille ne décrit pas la disposition des éléments. 
+		=> Pour cette dernière, consulter la feuille "zoning.xcss" située dans le même répertoire.	
+		
+		La feuille "zoning.xcss" fait usage exclusivement des styles appliqués à des id	(#XXX) ; les class (.YYYY)
+		constituant des variantes autour de blocs standards (Ex : bandeau haut avec / sans moteur de recherche).
+		
+		Ici, en revanche, les id n'ont pas le droit de cité : on ne décrit l'apparence qu'à l'aide de class.
+		
+	-->	
+	
+	<!-- Style pour le conteneur (page intérieure) qui vient compenser les couleurs de fond du menu -->
+	<u:selector name=".conteneur">
+		<u:style name="background-color" skin="conteneurBgColor"/><!-- (0) -->
+	</u:selector>
+	
+	<!-- (0) Rajouté pour permettre de mettre une couleur sur tout le côté gauche
+	et pas seulement sur la <div> contenant le menu. On applique ici une couleur
+	sur tout le contenu... que l'on compense par une autre couleur appliqué sur
+	la #corpsDePage (généralement le #ffffff)-->
+		 
+	<!-- 
+		/***********************/
+		/* Liens transversaux  */
+		/***********************/
+	 -->
+	 
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>
+				<ul id="liensTransversaux" class="liensTransversaux">
+					<li class="first">
+						<a>...</a>
+					</li>
+					<li>
+						<a>...</a>
+					</li>
+					...
+					<li class="last">
+						<a>...</a>
+					</li>
+				</ul>
+			</div>
+			...
+		</body>
+		
+		pour un rendu :
+		
+		******************************************************************************************************
+																			> lien1   > lien2   > lien3		
+		******************************************************************************************************
+	 -->	 
+	 
+	 									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+									 	  	Liens sous forme de texte
+									  	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	 
+	<!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.liensTransversaux">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="liensTransversauxFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Réinitialisation de la valeur par défaut de l'<ul> : 'list-style-type:disc' -->
+	
+	<!-- (2) Détermination de la taille par application d'un filtre sur la valeur définie dans le <body> -->
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensTransversaux li">
+		<u:style name="display" value="inline"/><!-- (3) -->
+		<u:style name="color" skin="liensTransversauxCurrentPageColor"/>
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.last"/>
+	
+	<!-- (3) Solution permettant d'afficher le lien à l'horizontal. Cette solution n'est à envisager que si l'on
+	n'a pas besoin d'éléments de largeur identique (il faudrait alors utiliser une solution en 'float')-->
+	
+	<!-- (4) Cette propriété définit un couple de valeurs : 'horizontal vertical'. 
+	En l'espèce, l'image est collée à gauche du <li> et est située '0.25em' du haut. -->
+	
+	<!-- (5) Cette propriété définit l'espace à droite située après chaque entrée de la liste. On ne combine pas 
+	ici avec un padding-left (redondant). Le 'padding-left' sera utilisé pour séparer la puce '>' du lien proprement
+	dit. -->
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.first a"/>
+
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensTransversaux li a">
+		<u:style name="color" skin="liensTransversauxColor"/>	
+		<u:style name="text-decoration" skin="liensTransversauxTextDecoration"/>		
+	</u:selector>
+	
+	<!-- (6) <a> étant un élément de type 'inline', on ne peut lui associer de padding-top/bottom. Ce type 
+	de propriété ne peut être ajouté qu'au niveau de l'<ul> parent. -->
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.liensTransversaux li.last a"/>
+	
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.liensTransversaux li a:hover">
+		<u:style name="color" skin="liensTransversauxHoverColor"/>	
+		<u:style name="text-decoration" skin="liensTransversauxHoverTextDecoration"/>	
+	</u:selector>
+	
+	
+										<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+									 	  	Liens sous forme de picto
+									  	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+									  	
+	<!-- Style des images au sein du bloc #liensTransversauxPicto -->
+	<u:selector name=".liensTransversauxPicto a"/>
+		
+	
+	
+	<!-- 
+		/***************************/
+		/* Titre de l'application  */
+		/***************************/
+	 -->
+	 
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>
+				...
+				<div id="conteneurHeader">
+					<a id="logo" class="logo">...</a>
+					<div id="titreAppli" class="titreAppli">...</div>
+					...
+				</div>
+			</div>
+			...
+		<body>
+		
+		pour un rendu :
+		
+		******************************************************************************************************
+			NATIXIS
+						AWS
+		******************************************************************************************************
+	 -->		
+		
+	<!-- Style spécifique au logo -->					
+	<u:selector name=".logo"/>
+		
+	<!-- Titre principal de l'application -->	
+	<u:selector name=".titreAppli">
+		<u:style name="font-size" skin="applicationTitleFontSize"/>
+		<u:style name="font-weight" skin="applicationTitleFontWeight"/>
+		<u:style name="text-transform" skin="applicationTitleTextTransform"/>
+		<u:style name="color" skin="applicationTitleColor"/>
+	</u:selector>	
+	
+	<!-- 
+		/***********************/
+		/* Moteur de recherche */
+		/***********************/
+	 -->	
+	 
+	<!-- Champ de saisie du moteur de recherche -->
+	<u:selector name=".inputMoteurRecherche">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="moteurRechercheInputBorderColor"/>
+		<u:style name="color" skin="moteurRechercheInputTextColor"/>
+		<u:style name="width" skin="moteurRechercheInputWidth"/>
+		<u:style name="font-weight" skin="moteurRechercheInputFontWeight"/>
+		<u:style name="font-size" skin="moteurRechercheInputFontSize"/>
+		<u:style name="padding-left" value="3px"/><!-- (1) -->
+		<u:style name="margin-right" value="10px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Espace à l'intérieur du champ de saisie -->
+	
+	<!-- (2) Espace entre le champ de saisie et le bouton OK -->
+			
+	<!-- 
+		/********/
+		/* rail */
+		/********/
+	 -->
+	 
+	 <!-- Le code, généré, se présente sous cette forme :
+		<ul id="rail" class="rail">
+			<li id="accueil" class="first">
+				<a id="j_id104" href="/aws/accueil.action?actionMethod=views%2Fclient%2Frecherche_client.xhtml%3Amanager.endRootConversation%28true%29&amp;cid=48">
+					Accueil
+				</a>
+			</li>
+			<li>
+				<a id="railForm:j_id107:0:j_id109" href="/aws/views/charge/recherche_charge.action?viewId=%2Fviews%2Fclient%2Frecherche_client.xhtml&amp;actionMethod=views%2Fcharge%2Frecherche_charge.xhtml%3Abreadcrumb.navigate&amp;cid=48">
+					Rechercher client
+				</a>
+			</li>
+			<li>Recherche Chargé</li>							
+		</ul>
+			
+		pour un rendu :
+		
+		******************************************************************************************************
+			> Accueil > Rechercher client > Recherche Chargé
+		******************************************************************************************************
+		
+		Commentaires :
+		
+		a. La page courante se présente sans lien (puisqu'on y est déjà) et peut être dans un style différent
+		b. Les pages précédentes se présentent sous forme de liens... avec des styles sur le survol
+		=> Moralité : le style a. va être porté par le style relatif à la balise <li> qui sera surchargé dans 
+		le style relatif à "li a"
+	 -->	
+	 
+	 <!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.rail">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="railFontSize"/><!-- (2) -->
+		<u:style name="margin" value="0"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée spécifique au 1er élément -->
+	<u:selector name="ul.rail li.first"/>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="ul.rail li">
+		<u:style name="display" value="inline"/><!-- (3) -->
+		<u:style name="color" skin="railCurrentPageColor"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (7) Explication : on définit ici la couleur de l'élément du rail qui n'est pas un lien (qui surchargera la
+	valeur). Cette couleur permettra donc de définir la couleur de la page actuelle dans le rail. -->
+	
+	<!-- Définition des liens du rail (ne concerne donc pas la page en cours) -->
+	<u:selector name="ul.rail li a">
+		<u:style name="color" skin="railLinkColor"/><!-- (8) -->
+		<u:style name="text-decoration" skin="railLinkTextDecoration"/>
+		<u:style name="background-color" skin="railLinkBgColor"/>
+	</u:selector>
+	
+	<!-- Définition du survol des liens du rail (ne concerne donc pas la page en cours) -->
+	<u:selector name="ul.rail li a:hover">
+		<u:style name="color" skin="railLinkHoverColor"/><!-- (8) -->
+		<u:style name="text-decoration" skin="railLinkHoverTextDecoration"/><!-- (9) -->
+		<u:style name="background-color" skin="railLinkHoverBgColor"/>
+	</u:selector>
+	
+	<!-- (8) Stricto sensu, cette valeur n'a pas être spécifiée ici dans la mesure où pour cette enseigne la couleur
+	appliquée est celle du lien classique. Toutefois, elle est spécifiée ici pour la définir et éventuellement la surcharger-->
+	
+	<!-- (9) Même remarque que précédemment. 'underline' ici est superfétatoire puisque déjà défini dans le bloc précédent.-->
+	
+	<!-- 
+		/*********************/
+		/*  Titre de la page */
+		/*********************/
+	 -->
+	
+	<!-- Le titre de la page -->
+	<u:selector name=".titrePage">
+		<u:style name="color" skin="pageTitleColor"/>
+		<u:style name="font-size" skin="pageTitleFontSize"/>
+		<u:style name="font-weight" skin="pageTitleFontWeight"/>
+		<u:style name="text-transform" skin="pageTitleTextTransform"/>
+		<u:style name="background-color" skin="pageTitleBgColor"/>
+	</u:selector>
+	
+	<!-- 
+		/***********************/
+		/*  Outils contextuels */
+		/***********************/
+	 -->
+	
+	<!-- Les liens situés à droite du titre (imprimer, aide...) -->
+	<u:selector name="ul.outilsContextuels">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="outilsContextuelsFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="ul.outilsContextuels li">
+		<u:style name="display" value="inline"/>
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.outilsContextuels li a">
+		<u:style name="color" skin="outilsContextuelsColor"/>	
+		<u:style name="text-decoration" skin="outilsContextuelsTextDecoration"/>
+		<u:style name="font-weight" skin="outilsContextuelsFontWeight"/>	
+		<u:style name="padding-right" skin="outilsContextuelsPaddingRight"/>		
+	</u:selector>
+	
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.outilsContextuels li a:hover">
+		<u:style name="color" skin="outilsContextuelsHoverColor"/>	
+		<u:style name="text-decoration" skin="outilsContextuelsHoverTextDecoration"/>	
+	</u:selector>
+	
+	<!-- 
+		/*****************************/
+		/*  Navigation transversale  */
+		/*****************************/
+	 -->
+	
+	<!-- Les liens situés à droite du titre (imprimer, aide...) -->
+	<u:selector name="ul.navTransversal">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="navTransversalFontSize"/><!-- (2) -->
+		<u:style name="border-left-width" skin="navTransversalBorderLeftWidth"/>
+		<u:style name="border-left-style" value="solid"/>
+		<u:style name="border-left-color" skin="navTransversalBorderColor"/>
+		<u:style name="background-color" skin="navTransversalBackgroundColor"/>
+	</u:selector>
+	
+	<!-- Définition de l'entrée n -->
+	<u:selector name="ul.navTransversal li">
+		<u:style name="display" value="inline"/>
+		<u:style name="margin-left" skin="navTransversalMarginLeft"/>
+	</u:selector>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.navTransversal li a">
+		<u:style name="color" skin="navTransversalColor"/>	
+		<u:style name="text-decoration" skin="navTransversalTextDecoration"/>
+		<u:style name="font-weight" skin="navTransversalFontWeight"/>	
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.navTransversal li.first"/>
+	
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.navTransversal li a:hover">
+		<u:style name="color" skin="navTransversalHoverColor"/>	
+		<u:style name="text-decoration" skin="navTransversalHoverTextDecoration"/>	
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.navTransversal li.last"/>
+	
+	<!-- 
+		/*****************************/
+		/*  Zones personnalisables  */
+		/*****************************/
+	 -->
+	 
+	<!-- Style par défaut des zones personnalisables -->	
+	<u:selector name=".zoneInfo, .zonePersoHaut, .zonePersoBas">
+		<u:style name="border" value="1px solid #dddddd"/>
+		<u:style name="padding-bottom" value="15px"/>
+		<u:style name="padding-left" value="10px"/>
+		<u:style name="padding-top" value="15px"/>
+	</u:selector>
+	
+	<!-- Style du bloc d'authentification intérieure  -->
+	<u:selector name=".blocConnexionInterieure">
+		<u:style name="background-color" skin="blocConnexionInterieureBackgroundColor"/>
+		<u:style name="border-width" skin="blocConnexionInterieureBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureBorderColor"/>
+		<u:style name="padding" skin="blocConnexionInterieurePadding"/>
+	</u:selector>
+	
+	<!-- A l'intérieur du bloc de connexion, on se retrouve dans un formulaire... avec des spécificités. Ici : label -->
+	<u:selector name=".blocConnexionInterieure .name">
+		<u:style name="float" value="none"/><!-- (1) -->
+		<u:style name="color" skin="blocConnexionInterieureLabelColor"/>
+		<u:style name="font-size" skin="blocConnexionInterieureLabelFontSize"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLabelFontWeight"/>
+	</u:selector>
+	
+	<!-- (1) Surcharge la valeur flottante présente dans les formulaires de coeur de page-->
+	
+	<!-- Style des champs de saisie (ne marche pas pour IE6) -->
+	<u:selector name=".blocConnexionInterieure input[type=text], .blocConnexionInterieure input[type=password]">
+		<u:style name="border-width" skin="blocConnexionInterieureInputBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureInputBorderColor"/>
+		<u:style name="color" skin="blocConnexionInterieureInputColor"/>
+		<u:style name="width" skin="blocConnexionInterieureInputWidth"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- Style des champs de saisie (pourra être supprimé quand on n'aura plus IE6) -->
+	<u:selector name=".blocConnexionInterieure .blocConnexionInterieureInput">
+		<u:style name="border-width" skin="blocConnexionInterieureInputBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="blocConnexionInterieureInputBorderColor"/>
+		<u:style name="color" skin="blocConnexionInterieureInputColor"/>
+		<u:style name="width" skin="blocConnexionInterieureInputWidth"/><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) Impératif pour IE6 qui ne donne pas la même longueur au champ password-->
+	
+	<!-- Espacement entre le password et le bouton OK (si alignés) via l'utilisation du 
+	<h:panelGrid columns="2" columnClasses="espacementPasswordLogin">
+    	<h:inputSecret id="password" label="Mot de passe" value="#{credentials.password}" maxlength="10" size="18" required="true"/>		                            
+    	<h:commandButton id="doLogin" styleClass="bouton login" value="OK" action="#{identity.login}"/>
+    </h:panelGrid>-->
+	<u:selector name=".blocConnexionInterieure .espacementPasswordLogin"/>
+	
+	<!-- Style du bouton de connexion (image ou carré avec padding) -->
+	<u:selector name=".blocConnexionInterieure input.login"/>
+	
+	<!-- Style des liens "Changement de password"... -->
+	<u:selector name=".blocConnexionInterieure a">
+		<u:style name="color" skin="blocConnexionInterieureLienColor"/>	
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienTextDecoration"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLienFontWeight"/>	
+		<u:style name="font-size" skin="blocConnexionInterieureLienFontSize"/>
+	</u:selector>
+	
+	<!-- Style des liens "Changement de password"... -->
+	<u:selector name=".blocConnexionInterieure a:hover">
+		<u:style name="color" skin="blocConnexionInterieureLienHoverColor"/>	
+		<u:style name="text-decoration" skin="blocConnexionInterieureLienHoverTextDecoration"/>
+		<u:style name="font-weight" skin="blocConnexionInterieureLienHoverFontWeight"/>	
+	</u:selector>
+			
+	<!-- Style du bloc de déconnexion -->
+	<u:selector name=".blocDeconnexionInterieure"/>
+	
+	<!-- Style du lien du bloc de déconnexion -->
+	<u:selector name=".blocDeconnexionInterieure a">
+		<u:style name="color" skin="blocDeconnexionInterieureLienColor"/>	
+		<u:style name="text-decoration" skin="blocDeconnexionInterieureLienTextDecoration"/>
+		<u:style name="font-weight" skin="blocDeconnexionInterieureLienFontWeight"/>	
+		<u:style name="font-size" skin="blocDeconnexionInterieureLienFontSize"/>
+	</u:selector>
+	
+	<!-- Style du lien du bloc de déconnexion au survol -->
+	<u:selector name=".blocDeconnexionInterieure a:hover">
+		<u:style name="color" skin="blocDeconnexionInterieureLienHoverColor"/>	
+		<u:style name="text-decoration" skin="blocDeconnexionInterieureLienHoverTextDecoration"/>
+		<u:style name="font-weight" skin="blocDeconnexionInterieureLienHoverFontWeight"/>	
+	</u:selector>
+		
+	<!-- 
+		/*******************/
+		/* Liens du footer */
+		/*******************/
+	 -->
+	 
+	 <!-- Le code, généré, se présente sous cette forme :
+		<ul id="liensFooter" class="liensFooter">
+			<li class="first">
+				<a id="j_id104" href="/aws/accueil.action?actionMethod=views%2Fclient%2Frecherche_client.xhtml%3Amanager.endRootConversation%28true%29&amp;cid=48">
+					Mentions l&#233;gales
+				</a>
+			</li>
+			<li>
+				<a id="railForm:j_id107:0:j_id109" href="/aws/views/charge/recherche_charge.action?viewId=%2Fviews%2Fclient%2Frecherche_client.xhtml&amp;actionMethod=views%2Fcharge%2Frecherche_charge.xhtml%3Abreadcrumb.navigate&amp;cid=48">
+					lien2
+				</a>
+			</li>
+			<li class="last">
+				<a id="j_id104" href="/aws/accueil.action?actionMethod=views%2Fclient%2Frecherche_client.xhtml%3Amanager.endRootConversation%28true%29&amp;cid=48">
+					lien3
+				</a>
+			</li>							
+		</ul>
+			
+		pour un rendu :
+		
+		******************************************************************************************************
+			> Mentions légales > lien2 > lien3
+		******************************************************************************************************
+				
+	 -->	
+	 
+	<!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.liensFooter">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="liensFooterFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensFooter li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensFooter li">
+		<u:style name="display" value="inline"/><!-- (3) -->		
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.liensFooter li.last"/>
+	
+	<!-- (3) Solution permettant d'afficher le lien à l'horizontal. Cette solution n'est à envisager que si l'on
+	n'a pas besoin d'éléments de largeur identique (il faudrait alors utiliser une solution en 'float')-->
+	
+	<!-- (4) Cette propriété définit un couple de valeurs : 'horizontal vertical'. 
+	En l'espèce, l'image est collée à gauche du <li> et est située '0.25em' du haut. -->
+	
+	<!-- (5) Cette propriété définit l'espace à droite située après chaque entrée de la liste. On ne combine pas 
+	ici avec un padding-left (redondant). Le 'padding-left' sera utilisé pour séparer la puce '>' du lien proprement
+	dit. -->
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensFooter li a">
+		<u:style name="color" skin="liensFooterColor"/>	
+		<u:style name="text-decoration" skin="liensFooterTextDecoration"/>	
+		<u:style name="font-weight" skin="liensFooterFontWeight"/>		
+	</u:selector>
+	
+	<!-- (6) <a> étant un élément de type 'inline', on ne peut lui associer de padding-top/bottom. Ce type 
+	de propriété ne peut être ajouté qu'au niveau de l'<ul> parent. -->
+		
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.liensFooter li a:hover">
+		<u:style name="color" skin="liensFooterHoverColor"/>	
+		<u:style name="text-decoration" skin="liensFooterHoverTextDecoration"/>	
+	</u:selector>
+	
+	<!-- Style du copyright -->
+	<u:selector name=".copyright">
+		<u:style name="font-size" skin="copyrightFontSize"/>
+		<u:style name="font-weight" skin="copyrightFontWeight"/>
+		<u:style name="color" skin="copyrightColor"/>					
+	</u:selector>
+	
+	<!-- 
+		/***********************************/
+		/* Liens vers des sites extérieurs */
+		/***********************************/
+	 -->
+	 
+	 <!-- Le code, généré, se présente sous cette forme :
+		<ul id="liensSitesExterieursMenu" class="liensSitesExterieursMenu">
+			<li class="first">
+				<h:outputLink value="http://fwk.intranatixis.com/sphinx">Site Sphinx</h:outputLink>
+			</li>
+			<li>
+				<h:outputLink value="http://was.dev.intranatixis.com/aws">AWS</h:outputLink>
+			</li>			
+			<li class="last">
+				<h:outputLink value="http://formationsisp.intranet/">Site des formations</h:outputLink>
+			</li>
+		</ul>
+			
+		pour un rendu :
+		
+		******************************************************************************************************
+			> lien1
+			> lien2 
+			> lien3
+		******************************************************************************************************
+				
+	 -->	
+	 
+	<!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.liensSitesExterieursMenu">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="liensSitesExterieursMenuFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensSitesExterieursMenu li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensSitesExterieursMenu li"/>
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.liensSitesExterieursMenu li.last"/>
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensSitesExterieursMenu li a">
+		<u:style name="color" skin="liensSitesExterieursMenuColor" default="red"/>	
+		<u:style name="text-decoration" skin="liensSitesExterieursMenuTextDecoration"/>	
+		<u:style name="font-weight" skin="liensSitesExterieursMenuFontWeight"/>		
+	</u:selector>
+		
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.liensSitesExterieursMenu li a:hover">
+		<u:style name="color" skin="liensSitesExterieursMenuHoverColor"/>	
+		<u:style name="text-decoration" skin="liensSitesExterieursMenuHoverTextDecoration"/>	
+		<u:style name="font-weight" skin="liensSitesExterieursMenuHoverFontWeight"/>	
+	</u:selector>
+	
+	<!-- 
+		/**********************************/
+		/* Réalisation du bandeau client  */
+		/**********************************/
+	-->
+	
+	<!-- Style pour le bandeau client (permet de définir des bordures) -->
+	<u:selector name=".bandeauClient">
+		<u:style name="border-width" skin="bandeauClientBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="bandeauClientBorderColor"/>
+		<u:style name="background-color" skin="bandeauClientBgColor"/>
+		<u:style name="padding" skin="bandeauClientPadding"/>
+	</u:selector>
+	
+	<!-- Style pour définir une ligne d'information du client-->
+	<u:selector name=".ligneInformationsClient">
+		<u:style name="display" value="block"/><!-- (1) -->
+		<u:style name="border-width" skin="ligneInfoBandeauClientBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="ligneInfoBandeauClientBorderColor"/>
+		<u:style name="margin" skin="ligneInfoBandeauClientMargin"/>	
+	</u:selector>
+	
+	<!-- (1) Pour que cela occupe toute la hauteur -->
+	
+	<!-- Style pour définir l'information située à droite relative à la dernière connexion -->
+	<u:selector name=".informationsDerniereConnexion">
+		<u:style name="text-align" skin="infoDerniereConnexionBandeauTextAlign"/>	
+		<u:style name="font-style" skin="infoDerniereConnexionBandeauFontStyle"/>
+	</u:selector>
+	
+	<!-- Style des valeurs des libellés du bandeau client -->
+	<u:selector name=".libelleBC">
+		<u:style name="font-weight" skin="libelleBCFontWeight" default="normal"/>
+	</u:selector>
+		
+	<!-- Style des valeurs des informations du bandeau client -->
+	<u:selector name=".valeurBC">
+		<u:style name="font-weight" skin="valeurBCFontWeight" default="bold"/>
+	</u:selector>
+		 
+</f:template>

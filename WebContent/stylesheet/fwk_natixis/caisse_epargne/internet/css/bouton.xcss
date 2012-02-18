@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+		/************************************************************/
+		/*  Définition des 2 types de boutons : lien ou vrai bouton */
+		/************************************************************/
+	 -->
+	 
+	<!-- 	
+		Feuille de style décrivant le style des boutons CE Internet.
+		Elle hérite d'une feuille de style principale qui définit les propriétés communes
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/bouton.xcss" />
+	
+	<!-- 
+		/**********************************/
+		/**   BLOCS DE BOUTONS           **/
+		/**********************************/
+	-->
+	
+	<!-- zone action en dessous des tableaux -->
+	<u:selector name=".tableButtons"><!-- EXTENDS ".tableButtons" -->
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- si on est dans un cadre : on modifie juste le margin à droite-->
+	<u:selector name=".rich-panel .actionButtons">
+		<u:style name="margin" value="10px -5px 0"/>
+	</u:selector>
+
+	<!-- si on est dans un cadre de niveau 2 (rich-table-level2) : on supprime la bordure haute -->
+	<u:selector name=".rich-table-level2 .actionButtons">
+		<u:style name="border-top" value="none"/>
+	</u:selector>
+	
+	<!-- zone pagination des tableaux -->
+	<u:selector name=".blocPagination">
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <input>    **/
+		/**********************************/
+	-->
+		
+	<!-- Important : les boutons ont leurs propres valeurs par défaut
+	(Cocher "Style > Afficher les styles calculés" dans Firebug pour l'observer).
+	=> Il faut donc redéfinir certaines valeurs définies dans le body pour le texte -->
+	<u:selector name="input.boutonAction, input.boutonActionHover">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="top left"/>
+		<u:style name="display" value="inline"/>
+	</u:selector>
+	
+	<!-- Style pour le bouton OK (qui n'a pas de flèches blanches) -->		
+ 	<u:selector name="input.boutonOK, .boutonArrondiRouge24">
+ 		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_ok.png" />
+		</u:style>
+		<u:style name="width" value="24px"/>
+		<u:style name="height" value="19px"/><!-- (1) -->
+		<u:style name="padding" value="0"/><!-- TODO : voir si on garde ici -->
+ 	</u:selector>	
+ 	
+	<!-- ROUGE CLASSES PAR TAILLE : Styles utilisés conjointement avec le style input.boutonAction -->
+	<u:selector name="input.boutonArrondiRouge54, input.boutonCreer">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_54.png" />
+		</u:style>
+		<u:style name="width" value="54px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge61">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_61.png" />
+		</u:style>
+		<u:style name="width" value="61px"/>
+	</u:selector>
+	
+	<u:selector name=" input.boutonArrondiRouge66, input.boutonSuivant">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_66.png" />
+		</u:style>
+		<u:style name="width" value="66px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge69, input.boutonAjouter, input.boutonUpload, input.boutonExporter, input.boutonModifier">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_69.png" />
+		</u:style>
+		<u:style name="width" value="69px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge79, input.boutonEnvoyerMail, input.boutonValider, input.boutonSoumettre, input.boutonConfirmer, input.boutonImprimer, input.boutonRerouter">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_79.png" />
+		</u:style>
+		<u:style name="width" value="79px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge82, input.boutonTransferer, input.boutonTelecharger, input.boutonSelectionner">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_82.png" />
+		</u:style>
+		<u:style name="width" value="82px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge87, input.boutonRechercher, input.boutonGenerer">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_87.png" />
+		</u:style>
+		<u:style name="width" value="87px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge98, input.boutonGenererSeam ">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_98.png" />
+		</u:style>
+		<u:style name="width" value="98px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge106">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_106.png" />
+		</u:style>
+		<u:style name="width" value="106px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge122, input.boutonReporting">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_122.png" />
+		</u:style>
+		<u:style name="width" value="122px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiRouge130, input.boutonGenererSefas">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_130.png" />
+		</u:style>
+		<u:style name="width" value="130px"/>
+	</u:selector>
+	
+	<!-- MARRON CLASSES PAR TAILLE : Styles utilisés conjointement avec le style input.boutonAction -->
+	<u:selector name="input.boutonArrondiMarron60, input.boutonRetour">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_marron_60.png" />
+		</u:style>
+		<u:style name="width" value="60px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiMarron69">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_marron_69.png" />
+		</u:style>
+		<u:style name="width" value="69px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiMarron79, input.boutonAnnuler, input.boutonSupprimer">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_marron_79.png" />
+		</u:style>
+		<u:style name="width" value="79px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiMarron82, input.boutonPrecedent">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_marron_82.png" />
+		</u:style>
+		<u:style name="width" value="82px"/>
+	</u:selector>
+	
+	<u:selector name="input.boutonArrondiMarron87, input.boutonAbandonner">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_marron_87.png" />
+		</u:style>
+		<u:style name="width" value="87px"/>
+	</u:selector>
+
+	<!-- 
+		/**********************************/
+		/**   BOUTONS DE TYPE <a>        **/
+		/**********************************/
+	-->
+	
+	<!-- On définit les espacements au niveau des liens transformés en bouton d'action -->
+	<u:selector name="a.boutonAction, a.boutonAction:hover">
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="background-position" value="top left"/>
+		<u:style name="height" value="14px"/><!-- (1) -->
+		<u:style name="display" value="block"/>
+	</u:selector>
+ 	<!-- (1) Nécessaire car s'applique à un bouton dont on précise la taille du texte : le bouton se contracte...-->
+	
+	<!-- Styles utilisés conjointement avec le style a.boutonAction -->
+	<u:selector name="a.boutonConnexion">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_79.png" />
+		</u:style>
+		<u:style name="width" value="61px"/>
+	</u:selector>
+	
+	<u:selector name="a.boutonDeconnexion, a.boutonDeconnexion:hover">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_106.png" />
+		</u:style>
+		<u:style name="width" value="88px"/>
+	</u:selector>
+	
+	<!-- 
+		/**************************************/
+		/**   BOUTONS SPECIFIQUES            **/
+		/**      AUTRES                      **/
+		/**************************************/
+	-->
+
+	<!-- style special pour la page d acceuil car le texte du bouton deconnexion est "deconnexion" au lieu de "se deconnecter"
+		 surcharge du bouton précédent
+	 -->
+	<u:selector name="#blocDeconnexionInterieure a.boutonDeconnexion, #blocDeconnexionInterieure a.boutonDeconnexion:hover">
+		<u:style name="margin-left" value="35px"/>
+	</u:selector>
+	
+	<u:selector name="#connexion a.boutonDeconnexion, #connexion a.boutonDeconnexion:hover">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/caisse_epargne/internet/img/bouton_arrondi_rouge_93.png" />
+		</u:style>
+		<u:style name="width" value="75px"/>
+	</u:selector>
+	
+	<!-- correction pour la hauteur des boutons .... trop petit ici -->
+	<u:selector name=".rich-datascr-button">
+		<u:style name="padding-top" value="0"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/* ~~~~~~~~~~~~ */
+		/* => picklist  */
+		/* ~~~~~~~~~~~~ */
+	-->	
+	
+	<u:selector name=".rich-list-picklist-button-content">
+		<u:style name="background-color" skin="menuSelectedColor"/>
+		<u:style name="border" value="0 solid #000000"/>
+		<u:style name="color" value="#000000"/>
+	</u:selector>
+	
+	<!-- 
+		image statique remplacant un h:commandButton avec du texte
+		exemple : 
+		
+			<h:commandButton action="# return false;" value="OK" 
+				styleClass="text-image"
+				image="#{theme.images}/ok.png" rendered="#{theme.staticImages}"
+				/> 
+			<h:commandButton action="# return false;" 
+					value="OK" 
+					styleClass="bouton"
+					rendered="#{! theme.staticImages}"/> 
+
+	 -->
+	 
+	 <u:selector name="input.text-image">
+		<u:style name="vertical-align" value="top"/>
+		<u:style name="border" value="none"/>
+		<u:style name="width" value="auto"/>
+		<u:style name="background" value="none"/>
+	</u:selector>
+	
+</f:template>

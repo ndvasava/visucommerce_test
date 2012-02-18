@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 
+	
+		Feuille de style qui définit les formulaires, c'est à dire l'utilisation des templates Seam dans les pages 
+		
+		Les propriétés utilisées ici sont : 
+		- alignementLabelFormulaire : alignement du libellé dans l'écran de formulaire (généralement à droite)
+		- espacementLabelInput : espacement entre ":" et le champ "input" (utile pour décaler le message d'erreur sous le champ input)
+		- defaultWidthLabel : largeur par défaut du label du formulaire (Celui-ci est modifiable, ponctuellement dans une page par un sur-style : widthLabelX)
+		- requiredInputColor : la couleur d'un champ obligatoire
+		- errorMessageTextColor : la couleur du message d'erreur (Ex : "Nom : Valeur requise.")
+		- errorInputBgColor : la couleur de fond du champ de saisie
+		- errorInputTextColor : le style d'écriture du champ de saisie
+		- errorLabelTextColor : le style d'écriture du libellé associé à un champ de saisie en erreur
+		- errorLabelWeightColor : la graisse d'écriture du libellé associé à un champ de saisie en erreur
+	-->
+	
+	<!-- 
+		Seront définies dans les fichiers "formulaire.xcss" fils (chaque enseigne possède des spécificités)
+		- les espacements entre les rubriques : ".detail_rubrique,.edition_rubrique"
+		- le style en consultation du champ modifié : ".detail_rubrique .value" + "html>body .detail_rubrique .value"
+		- les styles relatifs au processus : ".processus", "html>body .processus", ".processus ol", ".processus li", ".processus li.selected"
+			
+	-->
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : Style des Processus   */
+		/**************************************/
+	 -->
+	
+	<u:selector name=".processus">
+	    <u:style name="padding" value="3px 0" />
+	    <u:style name="background-color" skin="processusBgColor"/>
+	    <u:style name="margin-bottom" value="10px" />
+	</u:selector>
+
+	<u:selector name=".processus ol">
+	    <u:style name="padding" value="0" />
+	    <u:style name="margin" value="0" />
+	</u:selector>
+
+   <u:selector name=".processus li">
+	    <u:style name="padding" value="0 10px 0 0" />
+	    <u:style name="display" value="inline" />
+	</u:selector>
+	
+	<u:selector name=".processus li.selected">
+		<u:style name="color" skin="processusSelectedTextColor"/>
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="background-color" skin="processusSelectedBgColor"/>
+	</u:selector>	
+	
+	
+	<!-- 
+		/*******************************************************/
+		/* Formulaire : propriétés de la zone label à gauche   */
+		/*******************************************************/
+	 -->
+	
+	<!-- Style définissant dans un formulaire, le libellé gauche,
+	c'est à dire le nom de l'attribut qui est modifié.
+	On considère que l'alignement est général à l'enseigne, elle est variabilisé.
+	La largeur n'est pas systématique à une enseigne : certains formulaires dans certaines pages
+	peuvent avoir des largeurs différentes. On donne ici une valeur par défaut (10em). 
+	Sur un formulaire particulier, on peut élargir la zone, en appliquant dans une div englobante
+	un des styles trouvés dans "commun.xcss" s'intitulant ".widthLabelX"  
+	
+	Voir + bas "Centrage vertical..." pour l'alignement par rapport aux champs de saisie.
+	-->
+	<u:selector name=".name">
+		<u:style name="padding-right" skin="espacementLabelInput"/><!-- Cf remarque (1) -->
+		<u:style name="text-align" skin="alignementLabelFormulaire"/>
+		<u:style name="float" value="left"/>
+		<u:style name="width" skin="defaultWidthLabel"/>
+		<u:style name="margin-right" value="-3px"/><!-- Cf remarque (2)(2a) -->
+	</u:selector>
+	
+	<u:selector name="html > body .name"><!-- Cf remarque (2)(2b) -->
+		<u:style name="margin-right" value="0px"/>
+	</u:selector>
+
+	<!-- (1) Cette propriété permet de séparer les ":" du formulaire du début du champ "input".
+	Autrement dit, si l'on souhaite positionner le message d'erreur en dessous du champ "input" 
+	et non pas en dessous du libellé du formulaire, il convient d'appliquer un padding-left d'autant.
+	Ceci est défini dans com/natixis/sphinx/jsf/ui/skins/css/formulaire_validation_decalee.xcss -->
+	
+	<!-- 
+	(2) Cette propriété permet d'aligner les champs de saisies avec les messages d'erreur.
+	(2a) Pour IE6
+	(2b) Pour IE7 - 8  / Firefox 3.5.1	
+	-->
+
+	<!-- 
+	+==================================================================================+
+	| Centrage vertical pour toutes les enseignes des libellés						   |
+	|   par rapport aux champs de saisie.			                                   |
+	|   - input type="text"                                                            |
+	|   - input type="checkbox"	class="selectBooleanCheckbox"                          |
+	+==================================================================================+
+	| C'est pas encore ça mais y'a du mieux. Les libellés en erreur avec ou sans       |	
+	|   image pose encore des soucis d'alignement       							   |
+	| Tests pour + tard                                                                |
+	|   libellé, champ vide                                                            |
+	|   libellé, champ = :gGpPqQYy                                                     |
+	|   libellé en erreur, champ = :gGpPqQYy                                           |
+	+==================================================================================+ 
+	-->	
+	
+	<u:selector name=".name">
+		<!-- Fixe la hauteur et aligne verticalement le libellé -->
+		<u:style name="line-height" 	value="1.39em" />
+		<u:style name="border" 			value="none" />		
+	</u:selector>
+
+	<!-- 
+	=================================
+	Champ de saisie input type="text" 
+	=================================
+	-->
+	
+	<!-- IE 6 -->
+	<u:selector name=".value input">
+		<u:style name="font-family" 	value="Arial" />	
+		<u:style name="font-size" 		value="1.00em" />	
+		<u:style name="height" 			value="1.30em" />	
+
+		<u:style name="padding" 		value="0 0 0 0.15em" />
+
+		<!-- Récupère le décalage haut. -->
+		<u:style name="margin-top" 		value="-1px" />
+		<u:style name="margin-bottom" 	value="0px" />
+	</u:selector>
+
+	<!-- Adaptation IE 7,8 -->
+	<u:selector name="html >body .value input">
+		<!-- IE8 -->
+		<u:style name="margin-top" 		value="0px" />
+		<u:style name="margin-bottom" 	value="1px" />
+		
+		<!-- IE7 : comme IE6 -->		
+		<u:style name="!margin-top" 	value="-1px" />
+		<u:style name="!margin-bottom" 	value="0px" />
+	</u:selector>
+
+	<!-- 
+	=================================
+	Champ de saisie en affichage
+	=================================
+	-->
+	<u:selector name=".detail_rubrique, .edition_rubrique">
+		<u:style name="margin-bottom" value="1em"/>
+	</u:selector>
+	
+	<!-- IE 6,7,8 -->	
+	<u:selector name=".detail_rubrique .value">
+		<u:style name="line-height" 	value="1.39em" />
+		<u:style name="border" 			value="none" />
+		<u:style name="padding-right" 	value="0.15em" />
+	</u:selector>
+
+	<!-- 
+	=====================================
+	Champ de saisie input type="checkbox" 
+	=====================================
+	-->
+
+	<!-- IE 6 -->	
+	<u:selector name=".value input.selectBooleanCheckbox">
+		<u:style name="position" 		value="relative" />
+		<u:style name="top" 			value="2px" />
+		<u:style name="left" 			value="-4px" />
+		<u:style name="border-width" 	value="0em" />
+		<u:style name="margin" 			value="0 0 4px 0" />
+		<u:style name="padding" 		value="0em" />
+	</u:selector>
+	
+	<!-- Adaptation IE 7,8 -->
+	<u:selector name="html >body .value input.selectBooleanCheckbox">
+		<!-- IE 8 -->
+		<u:style name="margin" 			value="0" />
+		<u:style name="left" 			value="0px" />
+		
+		<!-- IE 7 : comme IE 6 -->
+		<u:style name="!top" 			value="2px" />
+		<u:style name="!left" 			value="-4px" />
+		<u:style name="!margin" 		value="0 0 4px 0" />
+	</u:selector>
+	
+	<!-- Dans un formulaire en édition, la présence d'un <input à droite nous 
+	provoque un léger décalage -->
+	<u:selector name="edition_rubrique .name, errors .name">
+		<u:style name="padding-top" value="0.3em"/>
+	</u:selector>
+	
+	<!-- Dans un formulaire en consultation (page de détail, il n'y a pas de décalage) -->
+	<u:selector name="detail_rubrique .name">
+		<u:style name="padding-top" value="0"/>
+	</u:selector>
+	
+	<!-- TODO : voir à quoi correspond ce style -->
+	<u:selector name=".saisie_inscription">
+		<u:style name="margin-bottom" value="0.5em"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/****************************************/
+		/* Formulaire : Validité de la saisie   */
+		/****************************************/
+	 -->
+	
+	<!-- Style pour indiquer qu'un champ est obligatoire -->
+	<u:selector name=".required">
+		<u:style name="padding-left" value="3px"/>
+		<u:style name="font-size" value="1em"/>
+		<u:style name="color" skin="requiredInputColor"/>
+	</u:selector>
+	
+	<!-- Mention champs obligatoire situé en bas ou en haut du formulaire -->
+	<u:selector name=".mention">
+		<u:style name="margin-bottom" value="1em"/>
+		<u:style name="color" skin="requiredInputColor"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/***********************************************/
+		/* Formulaire : Messages d'erreur de RichFaces */
+		/***********************************************/
+	 -->
+	
+	<!-- Style du message général situé en amont du formulaire -->
+	<u:selector name=".rich-messages">
+		<!-- u:style name="padding" value="1em"/-->
+		<u:style name="padding" skin="messagesPadding" default="0"/>
+		<u:style name="margin-top" value="0"/>
+		<u:style name="margin-bottom" value="1em"/>
+		<u:style name="font-size" skin="messagesFontSize" default="1em"/>
+	</u:selector>
+	
+	<u:selector name=".rich-messages .info">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/img/info.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="15px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .warn">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/img/warn.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="15px"/>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .error">
+		<u:style name="padding-left" value="25px"/>
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/img/error.gif" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat"/>
+		<u:style name="height" value="15px"/>
+	</u:selector>	
+	
+	<!-- 
+		/********************************************************************/
+		/* Formulaire : Messages d'erreur associés aux contrôles de surface */
+		/********************************************************************/
+	 -->
+	
+	<!-- Style du message d'erreur (Ex : Nom : Valeur requise).-->
+	<u:selector name=".error">
+		<u:style name="color" skin="errorMessageTextColor"/>
+	</u:selector>
+	
+	<!-- Style du champ de formulaire en erreur -->	
+	<u:selector name=".edition_rubrique .errors input">
+		<u:style name="background-color" skin="errorInputBgColor"/>
+		<u:style name="color" skin="errorInputTextColor"/>
+	</u:selector>
+	
+	<!-- Style du libellé associé à un champ de formulaire en erreur -->	
+	<u:selector name=".errors .name">
+		<u:style name="color" skin="errorLabelTextColor"/>
+		<u:style name="font-weight" skin="errorLabelWeightColor"/>
+	</u:selector>
+	
+	<!-- décalage de l'icone d'aide sur les champs -->
+	<u:selector name=".edition_rubrique .help">
+		<u:style name="padding" value="0 5px"/>
+		<u:style name="vertical-align" value="top"/>
+	</u:selector>
+	
+	<!-- picto d'erreur -->
+	<u:selector name=".edition_rubrique .errorImage">
+		<u:style name="padding-right" value="5px"/>
+		<u:style name="height" value="1em"/><!-- histoire de ne pas déborder du libellé et provoquer un decalage -->
+	</u:selector>	
+
+</f:template>

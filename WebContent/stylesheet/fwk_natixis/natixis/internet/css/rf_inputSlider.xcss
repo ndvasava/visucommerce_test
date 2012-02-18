@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+
+	<!-- 
+		Feuille de style associée au composant rich:inputNumberSlider 
+		
+		Il s'agit d'une tirette permettant de matérialiser des chiffres.
+		Ce genre de composant n'est pas défini dans la charte.
+		Aussi, seules les couleurs de contour ont été repris.
+		Notamment, les couleurs du "tip" (ie le triangle contenant le chiffre 
+		sur la barre horizontale) sont celles du composant originel.
+		(=> Ces couleurs sont définies dans ".rich-inslider-tip")
+		Tout comme le dégradé de couleur. (Cf "rich-inslider-track" et 
+		"rich-inslider-field").
+
+	-->
+
+
+	<!-- pour des raisons de simplicité (pour le moment) on reprend pour commencer le style natif -->
+	<f:importResource src="org/richfaces/renderkit/html/css/slider.xcss" />
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Caractéristiques globales */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	 -->
+	 
+	<!-- Ce style définit le composant dans son ensemble. -->
+	<u:selector name=".rich-inslider-tip">
+		<u:style name="position" value="absolute"/>
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="border" value="none"/>
+		<u:style name="padding" value="0 2px"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Données numériques bornées   */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->	
+		<!-- Style pour le chiffre constituant la borne basse -->
+		<u:selector name=".rich-inslider-left-num, .rich-inslider-right-num, .dr-insldr-track-decor-1, .dr-insldr-track-decor-2">
+		<u:style name="border" value="none"/>
+	</u:selector>
+	
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Descriptif du curseur  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->		
+	
+	<!-- Style définissant le curseur que l'on déplace. -->
+	<!-- .rich-inslider-handler  -->
+		
+	<!-- Style définissant le curseur que l'on déplace sélectionné. -->
+	<!-- .rich-inslider-handler-selected  -->
+		
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Descriptif de la barre numérique  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->
+
+	<!-- Style définissant la barre indiquant la plage numérique balayée. -->
+	<u:selector name=".rich-inslider-track">
+		<u:style name="background-image" value="none"/>
+		<u:style name="background-color" skin="buttonBgColor"/>
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="separateurButtonColor"/>
+	</u:selector>
+	
+
+	<!-- 
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		/* => Champ associé à la barre numérique  */
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	-->		
+
+	<!-- Style du champ contenant la valeur sélectionnée à l'aide de la tirette. -->
+	<u:selector name=".rich-inslider-field">
+		<u:style name="border-width" value="1px"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="inputBorderColor"/>
+		<u:style name="background-image" value="none"/>
+		<u:style name="padding" value="0 2px"/>
+		<u:style name="width" value="30px"/>
+		<u:style name="text-align" value="center"/>
+		<u:style name="color" skin="defaultTextColor"/>
+	</u:selector>
+	
+</f:template>

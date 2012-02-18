@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+		 
+	<!-- 	
+		Feuille de style décrivant l'apparence des composants <rich:panel.
+		Ils sont présents dans toutes les pages et revêtent l'apparence de cadres bien 
+		utiles dans la gestion des formulaires.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/rf_panel.xcss" />
+	
+	<!-- 
+		/* ****** */
+		/* Panel  */
+		/* ****** */
+		
+	-->
+	
+	<!-- Titre du cadre de niveau 1 -->
+	<u:selector name=".rich-panel .rich-panel-header"><!-- EXTENDS "body .rich-panel .rich-panel-header" -->
+		<u:style name="padding" value="4px 10px"/>
+		<u:style name="line-height" value="22px" /><!-- (1) -->
+	</u:selector>
+	
+	<!-- (1) line-height pour que la ligne fasse une hauteur de la taille du texte + taille du padding
+	Ceci a cause du display:inline qui ne prend pas en compte la taille du texte.
+	Du coup en ajoutant 4 px de padding en bas, cela permet d'agrandir le rendu du texte' mais la bordure du panel-body
+	s'aligne sur le texte sans prendre en compte le padding... donc on ajoute un margin-top de 4px => pas beau 
+	-->
+
+	<!-- Corps du cadre -->
+	<u:selector name=".rich-panel .rich-panel-body"><!-- EXTENDS "body .rich-panel .rich-panel-body" -->
+		<u:style name="padding" value="20px 10px 10px"/>		
+	</u:selector>
+	
+	<!-- remontée des boutons -->	
+	<u:selector name=".rich-panel .rich-panel-body .boutonsExt">
+		<u:style name="padding-top" value="0"/>
+	</u:selector>
+
+	<!-- 
+		/* *************************** */
+		/* Panel de niveaux supérieurs */
+		/* *************************** */	
+		
+		Les panels imbriqués sont utilisés pour donner un aspect multi-colonnes aux formulaires.
+	-->
+
+
+	<u:selector name=".rich-panel .rich-panel">
+		<u:style name="margin" value="10px 20px 0 0"/>
+	</u:selector>
+
+	<!-- Corps du cadre : aucune bordure -->
+	<u:selector name=".rich-panel .rich-panel .rich-panel-body">
+		<u:style name="border" value="0"/>
+		<u:style name="margin-top" value="-8px"/>
+		<u:style name="margin-bottom" value="20px"/>
+		<u:style name="padding" value="20px 10px 0"/>
+	</u:selector>
+
+</f:template>

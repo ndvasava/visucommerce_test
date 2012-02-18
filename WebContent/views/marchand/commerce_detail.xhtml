@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+   	xmlns:a4j="http://richfaces.org/a4j">
+
+<f:view>
+
+<ui:composition template="../../layout/template.xhtml">
+<ui:define name="body">
+
+	<h:form id="paysF">
+	    <rich:panel>
+	    	<f:facet name="header">
+				<h:outputFormat value="#{messages['default.show.label']}">
+					<f:param value="#{messages['commerce.label']}" />
+				</h:outputFormat>
+   			</f:facet>
+   			
+   			<s:decorate id="idD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.id.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.id}"/>
+	        </s:decorate>
+   			
+   			<s:decorate id="nomD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.nom.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.nomCommerce}"/>
+	        </s:decorate>
+	        <s:decorate id="typeCommerceD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.typeCommerce.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.type.typeCommerceName}"/>
+	        </s:decorate>
+	    	
+	        <s:decorate id="adress1D" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.adress1.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.adress1}"/>
+	        </s:decorate>
+	        <s:decorate id="adress2D" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.adress2.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.adress2}"/>
+	        </s:decorate>	      	
+	       	<s:decorate id="cityD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['commerce.city.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.city.nom}"/>
+	        </s:decorate>
+
+			<!-- CONTRACT -->
+	       	<s:decorate id="contractTypeD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['contract.type.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.contract.comissionType}"/>
+	        </s:decorate>
+	       	<s:decorate id="contractAmountD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['contract.amount.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.contract.comissionAmount}"/>
+	        </s:decorate>
+	       	<s:decorate id="contractDescriptionD" template="../../layout/display.xhtml">
+	            <ui:define name="label">
+	            	<h:outputLabel value="#{messages['contract.description.label']}" />
+	            </ui:define>
+	            <h:outputText value="#{editerCommerceAction.instance.contract.contractDescription}"/>
+	        </s:decorate>
+	      	
+	      	<div class="actionButtons">
+	      		
+	      		<h:commandButton id="doValidate" 
+	      			rendered="#{editerCommerceAction.toValidate}"
+					value="#{messages['default.button.validate.label']}" 
+					action="#{editerCommerceAction.validateCommerceContract}"
+					styleClass="boutonAction boutonCreer"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+				
+				<s:button id="goBack" 
+					view="#{navigationHelper['searchCommerceView']}"
+					value="#{messages['default.button.back.label']}"
+					rendered="#{not empty navigationHelper['searchCommerceView']}"
+					styleClass="boutonAction boutonRetour"
+					onmouseover="$(this).addClassName('boutonActionHover')"
+					onmouseout="$(this).removeClassName('boutonActionHover')" />
+										
+			</div>
+	        
+   			
+		</rich:panel>
+	</h:form>
+</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

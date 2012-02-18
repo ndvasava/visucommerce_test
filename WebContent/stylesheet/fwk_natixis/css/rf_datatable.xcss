@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template 
+	xmlns:f='http:/jsf.exadel.com/template'
+	xmlns:u='http:/jsf.exadel.com/template/util'
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- 
++===============================================================================
+| Tableau : Définition des propriétés hors bordures
++===============================================================================
+-->
+
+<!-- 
++===============================================================================
+| Table
++===============================================================================
+-->
+	<u:selector name=".rich-table">
+	
+		<u:style name="background-color" skin="tableBgColor"/>
+		<u:style name="empty-cells" value="show"/>
+		<u:style name="margin" skin="tableMargin" default="0 0 5px"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Table - [IE6]
++===============================================================================
+-->	
+	<u:selector name=".rich-table">	
+	
+		<u:style name="width" skin="tableWidth_ie6" default="100%" />
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Table - [IE7-8 FF]
++===============================================================================
+-->	
+	<u:selector name="html > body .rich-table">
+	
+		<u:style name="width" skin="tableWidth" default="100%"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Table - [blocPagination]
++===============================================================================
+-->	
+
+	<!-- diminution de la taille du bloc de pagination quand il est contenu dans la table -->
+	<u:selector name=".rich-table .blocPagination">
+		<u:style name="font-weight" value="normal"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Table - Debordant
+| 07/2010 : pas vu d'exemple
++===============================================================================
+-->	
+
+	<!-- Création d'un sur-style provisoire pour débugger les tableaux qui sortent du cadre 
+	A rajouter au niveau du composant rich:datatable en styleClass-->	
+	<u:selector name=".tableauDebordant">
+		<u:style name="display" value="block"/>	
+		<u:style name="overflow" value="scroll"/>	
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - ligne
++===============================================================================
+-->
+	<!-- 
+	.rich-table-header, : réservé boutons, pagination
+	 -->
+	<u:selector name="	.sx-table-header .rich-table-header,
+						.sx-table-header .rich-table-header-continue,
+					  	.rich-table-subheader, .rich-subtable-header,
+					  	.tableFooterGroupement">
+					  	
+		<u:style name="background-color" skin="tableHeaderBgColor"/>
+		<u:style name="background-image" value="none"/>
+		<u:style name="font-weight" value="bold"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule
++===============================================================================
+-->
+	<u:selector name=".rich-table-headercell">
+
+		<u:style name="text-align" 	value="left"/>
+	</u:selector>	
+
+
+	<u:selector name="	.sx-table-header .rich-table-headercell,
+					  	.rich-table-subheadercell, 
+					  	.rich-subtable-headercell">
+					  	
+		<u:style name="background-color"	skin="tableHeaderBgColor"/>
+		<u:style name="color" 				skin="tableHeaderTextColor"  />
+		<u:style name="height"				skin="tableHeadHeight" 		default="2.5em"/>
+		<u:style name="padding"				skin="tableHeadPadding" 	default="1px 5px 0px 5px"/>
+		<u:style name="text-align" 			skin="tableHeaderTextAlign" default="center"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - Image
++===============================================================================
+-->
+	<u:selector name="	.rich-table-headercell img, 
+						.rich-table-subheadercell img">
+						
+		<u:style name="padding" skin="tableHeaderImgPadding" default="0px 3px"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - Lien
++===============================================================================
+-->
+	<u:selector name="	.sx-table-header .rich-table-headercell a,
+					  	.rich-table-subheadercell a">
+					  	
+		<u:style name="color" skin="tableHeaderTextColor"/>
+		<u:style name="text-decoration" value="none"/>
+	</u:selector>
+
+
+	<u:selector name="	.sx-table-header .rich-table-headercell a:hover,
+					 	.rich-table-subheadercell a:hover">
+					 	
+		<u:style name="text-decoration" skin="tableHeaderHoverTextDecoration" default="none"/>
+		<u:style name="color" 			skin="tableHeaderHoverColor"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Action
+| 07/2010 : 
+| - Agence/Internet : c'est un div dans thead-tr-th
++===============================================================================
+-->
+	<u:selector name=".rich-table .tableActions">
+	
+		<u:style name="float" 			skin="tableActionsFloat"/>
+		<u:style name="font-weight" 	skin="tableActionsFontWeight" 	default="normal"/>
+		<u:style name="margin" 			value="0px"/>
+		<u:style name="padding" 		value="0.75em 0 0.75em 1em"/>
+		<u:style name="text-align" 		skin="tableActionsTextAlign" default="left"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - [Tri]
++===============================================================================
+-->
+	<u:selector name="	.sx-table-header .sorted,
+					  	.rich-table-header-continue .sorted,
+					  	.rich-table-subheader .sorted,
+					  	.rich-subtable-header .sorted">
+					  	
+		<u:style name="background-color">
+			<f:verbatim skin="tableHeaderSortedBgColor"/>
+			<f:verbatim value=" !important"/>
+		</u:style>
+		<u:style name="color">
+			<f:verbatim skin="tableHeaderSortedColor"/>
+			<f:verbatim value=" !important"/>
+		</u:style>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Header - Cellule - [Tri] - Lien
++===============================================================================
+-->
+	<u:selector name="	.sx-table-header .sorted a, 
+					  	.rich-table-header-continue .sorted a, 
+					  	.rich-table-subheader .sorted a,
+					  	.rich-subtable-header .sorted a">
+					  	
+		<u:style name="color">
+			<f:verbatim skin="tableHeaderSortedColor"/>
+			<f:verbatim value=" !important"/>
+		</u:style>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Caption
++===============================================================================
+-->
+	<u:selector name="	.rich-table-caption, 
+						.rich-table caption">
+						
+ 		<u:style name="background-color" 	skin="tableCaptionBgColor"/>
+ 		<u:style name="border-color"    	skin="tableCaptionBorderColor"/>
+ 		<u:style name="border-style"     	skin="tableCaptionBorderStyle"/>
+		<u:style name="color"				skin="tableCaptionColor"/>
+	 	<u:style name="font-weight"			skin="tableCaptionFontWeight" default="bold"/>
+		<u:style name="margin-left"			skin="tableCaptionMarginLeft"/>
+	 	<u:style name="padding"				skin="tableCaptionPadding" default="0px"/>
+	 	<u:style name="text-align"			value="left"/>
+	</u:selector>
+	
+<!-- 
++===============================================================================
+| Caption - [IE6]
++===============================================================================
+-->	
+	<u:selector name="	.rich-table-caption, 
+						.rich-table caption">
+		<u:style name="border-width" skin="tableCaptionBorderWidth_ie6"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Caption - [IE7-8]
++===============================================================================
+-->	
+	<u:selector name="	html > body .rich-table-caption,
+						html > body .rich-table caption">
+		<u:style name="border-width" skin="tableCaptionBorderWidth"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Caption - [FF]
++===============================================================================
+-->		
+	<u:selector name="	html:not([lang*='']) .rich-table-caption, 
+						html:not([lang*='']) .rich-table caption">
+		<u:style name="border-width" skin="tableCaptionBorderWidth_FF"/>
+	</u:selector>	
+
+<!-- 
++===============================================================================
+| Caption - Titre
++===============================================================================
+-->	
+	<u:selector name=".rich-table-title">
+	
+		<u:style name="background-color" 	skin="tableTitleBgColor"/>
+		<u:style name="color" 				skin="tableTitleColor"/>
+	 	<u:style name="float"     			skin="tableTitleFloat"/>
+		<u:style name="font-weight" 		skin="tableTitleFontWeight" default="bold"/>
+	 	<u:style name="padding"     		skin="tableTitlePadding" 	default="0px"/>
+	 	<u:style name="position"     		skin="tableTitlePosition" 	/>
+	 	<u:style name="top"     			skin="tableTitleTop" 	/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - ligne - Pyjama
+| - ie de l'alternance de couleur de la ligne
++===============================================================================
+-->
+	<u:selector name=".rich-table-cell-impair">
+	
+		<u:style name="background-color" skin="tableCellImpairBgColor" default="transparent"/>
+	</u:selector>
+
+	<u:selector name=".rich-table-cell-pair">
+	
+		<u:style name="background-color" skin="tableCellPairBgColor" default="transparent"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - ligne - Survol
++===============================================================================
+-->
+	<u:selector name=".rich-table-row-over">
+	
+		<u:style name="background-color" 	skin="tableRowHoverBgColor"/>
+		<u:style name="color" 				skin="tableRowHoverTextColor"/>
+		<u:style name="cursor" 				skin="tableRowHoverCursor" default="pointer"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Survol - [Tri]
++===============================================================================
+-->
+	<u:selector name=".rich-table-row-over .sorted">
+	
+		<u:style name="background-color">		
+			<f:verbatim skin="tableRowHoverBgColor"/>
+			<f:verbatim value=" !important"/>
+		</u:style>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule
++===============================================================================
+-->	
+	<u:selector name="	.rich-table tbody td,
+						.rich-table tbody th">
+						
+		<u:style name="height"		skin="tableCellHeight" 		default="1.5em"/>
+		<u:style name="padding"		skin="tableCellPadding" 	default="1px 5px 0px 5px"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-cell, .rich-subtable-cell">
+		<u:style name="empty-cells" value="show"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Action
++===============================================================================
+-->
+	<u:selector name=".rich-table-cell-action">
+	
+		<u:style name="text-align"  default="center" skin="tableCellActionTextAlign"/>
+		<u:style name="white-space" default="nowrap" skin="tableCellActionWhiteSpace"/>
+	</u:selector>	
+
+
+	<u:selector name=".rich-table-cell-action input">
+	
+		<u:style name="border" value="none"/>
+		<u:style name="padding" value="0 3px"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Checkbox
++===============================================================================
+-->
+	<u:selector name=".rich-table-cell-checkbox">
+
+		<u:style name="background-color"	skin="tableCellCheckboxBgColor"/>
+		<u:style name="text-align"  		skin="tableCellCheckboxTextAlign" default="center"/>
+		<u:style name="white-space"			skin="tableCellCheckboxWhiteSpace" default="nowrap"/>
+		<u:style name="width" value="33px"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-cell-checkbox input">
+	
+		<u:style name="border-width" value="0px"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - [Tri]
++===============================================================================
+-->
+	<u:selector name=".rich-table-cell-impair .sorted">
+
+		<u:style name="background-color" skin="tableCellSortedImpairBgColor"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-cell-pair .sorted">
+	
+		<u:style name="background-color" skin="tableCellSortedPairBgColor"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - Lien
++===============================================================================
+-->
+	<u:selector name="	.rich-table-cell a,
+						.rich-subtable-cell a">
+						
+		<u:style name="color" 	skin="tableCellAColor"/>
+		<u:style name="cursor" 	skin="tableCellACursor"/>
+		<u:style name="text-decoration" skin="tableCellATextDecoration"/>
+	</u:selector>
+
+
+	<u:selector name="	.rich-table-cell a:hover,
+						.rich-subtable-cell a:hover">
+						
+		<u:style name="color" skin="tableCellAHoverColor"/>
+		<u:style name="text-decoration" skin="tableCellAHoverTextDecoration"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Lien - Image
++===============================================================================
+-->
+	<u:selector name="	.rich-table-cell a img,
+						.rich-subtable-cell a img">
+						
+		<u:style name="border" default="none"/>
+	</u:selector>
+
+
+<!-- 
++===============================================================================
+| Body - Cellule - [Tableau Complexe] - Header
++===============================================================================
+-->	
+	<u:selector name=".headerGroupement">
+	
+		<u:style name="background-color" 	skin="tableHeaderGroupementBgColor"/>
+		<u:style name="color" 				skin="tableHeaderGroupementColor"/>
+		<u:style name="font-weight" 		skin="tableHeaderGroupementFontWeight" 
+											default="bold"/>
+		<u:style name="text-align" 			value="left"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - [Tableau Complexe] - [Footers]
++===============================================================================
+-->	
+	<u:selector name="	.footerGroupement, 
+						.footerGroupement_first, 
+						.footerGroupement_middle, 
+						.footerGroupement_last">
+						
+		<u:style name="background-color"	skin="tableFooterGroupementBgColor"/>
+		<u:style name="color" 				skin="tableFooterGroupementColor"/>
+		<u:style name="font-weight" 		skin="tableFooterGroupementFontWeight" 
+											default="bold"/>
+		<u:style name="text-transform" 		skin="tableFooterGroupementTextTransform" 
+											default="none"/>
+		<u:style name="text-align" 			value="right"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Tableau Complexe - [Footer]
++===============================================================================
+-->	
+	<u:selector name="	.footerGroupement,
+						.footerGroupement_first,
+						.footerGroupement_middle,
+						.footerGroupement_last
+	">
+		<!-- 
+		<u:style 
+			name="border-width" 
+			skin="tableFooterGroupement_borderWidth" 
+			default="0px 1px 1px 1px!important"/>
+		 -->
+		 
+		<u:style name="border-bottom" skin="tableFooterGroupementBorderBottom" />
+		<u:style name="border-left" skin="tableFooterGroupementBorderLeft" />
+		<u:style name="border-right" skin="tableFooterGroupementBorderRight" />
+		<u:style name="border-top" skin="tableFooterGroupementBorderTop" />
+
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Tableau Complexe - [Footer premier]
++===============================================================================
+-->	
+	
+	<u:selector name=".footerGroupement_first">
+		<!-- 
+		<u:style 
+			name="border-width" 
+			skin="tableFooterGroupement_firstBorderWidth" 
+			default="0px 0px 1px 1px!important"/>
+		-->
+		
+		<u:style name="border-width" skin="tableFooterGroupement_firstBorderWidth" />
+			
+		<u:style name="border-bottom" skin="tableFooterGroupement_firstBorderBottom" />
+		<u:style name="border-left" skin="tableFooterGroupement_firstBorderLeft" />
+		<u:style name="border-right" skin="tableFooterGroupement_firstBorderRight" />
+		<u:style name="border-top" skin="tableFooterGroupement_firstBorderTop" />
+
+
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Tableau Complexe - [Footer milieu]
++===============================================================================
+-->	
+	<u:selector name=".footerGroupement_middle">
+		<!-- 
+		<u:style 
+			name="border-width" 
+			skin="tableFooterGroupement_middleBorderWidth" 
+			default="0px 0px 1px 0px!important"/>
+		 -->
+
+		<u:style 
+			name="border-width" skin="tableFooterGroupement_middleBorderWidth" />
+
+		<u:style name="border-bottom" skin="tableFooterGroupement_middleBorderBottom" />
+		<u:style name="border-left" skin="tableFooterGroupement_middleBorderLeft" />
+		<u:style name="border-right" skin="tableFooterGroupement_middleBorderRight" />
+		<u:style name="border-top" skin="tableFooterGroupement_middleBorderTop" />
+
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Body - Cellule - Tableau Complexe - [Footer dernier]
++===============================================================================
+-->	
+	<u:selector name=".footerGroupement_last">
+		<!-- 
+		<u:style 
+			name="border-width" 
+			skin="tableFooterGroupement_lastBorderWidth" 
+			default="0px 1px 1px 0px!important"/>
+		 -->
+
+		<u:style name="border-width" skin="tableFooterGroupement_lastBorderWidth" />
+
+		<u:style name="border-bottom" skin="tableFooterGroupement_lastBorderBottom" />
+		<u:style name="border-left" skin="tableFooterGroupement_lastBorderLeft" />
+		<u:style name="border-right" skin="tableFooterGroupement_lastBorderRight" />
+		<u:style name="border-top" skin="tableFooterGroupement_lastBorderTop" />
+
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Footer - rich-table-footer-checkbox
+| 07/2010 : 
+| - Agence   : div en dessous du tableau
+| - Internet : div dans tfoot-tr-td
++===============================================================================
+-->
+	<u:selector name=".rich-table .rich-table-footer-checkbox">
+
+		<u:style name="margin" 			skin="tableFooterCheckboxMargin"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-footer-checkbox">
+
+		<u:style name="background-color" skin="tableFooterCheckboxBgColor"/>
+		<u:style name="border-color" 	 skin="tableFooterCheckboxBorderColor"/>
+		<u:style name="border-style" 	 skin="tableFooterCheckboxBorderStyle"/>
+		<u:style name="border-width" 	 skin="tableFooterCheckboxBorderWidth"/>
+		<u:style name="padding" 		 skin="tableFooterCheckboxBorderPadding"/>
+		<u:style name="text-align" 		 skin="tableFooterCheckboxTextAlign" default="left"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Footer - rich-table-footer-checkbox - [IE6]
++===============================================================================
+-->
+
+	<u:selector name=".rich-table-footer-checkbox">
+		<u:style name="margin" 			 skin="tableFooterCheckboxBorderMarginIE6"/>
+	</u:selector>
+
+	
+<!-- 
++===============================================================================
+| Footer - rich-table-footer-checkbox - [IE7-8 FF]
++===============================================================================
+-->
+	<u:selector name="html > body .rich-table-footer-checkbox">
+		<u:style name="margin" 			 skin="tableFooterCheckboxBorderMargin"/>
+	</u:selector>	
+
+	
+<!-- 
++===============================================================================
+| Footer - [selection tous|aucun]
+| 07/2010 : 
+| - Agence   : div dans un div en dessous du tableau
+| - Internet : div dans un div dans tfoot-tr-td
++===============================================================================
+-->
+	<u:selector name=".rich-table-footer-checkAll"	>
+
+		<u:style name="float" 	skin="tableFooterCheckAllFloat" 	default="left"/>
+		<u:style name="padding" skin="tableFooterCheckAllPadding" 	default="0px"/>
+	</u:selector>
+
+	<!-- 
+	Permet un retour chariot "si besoin" après un div rich-table-footer-checkAll.
+	Voir exemple dans datatable_tri_selection.xhtml.
+	-->
+	<u:selector name=".rich-table-footer-checkAll-br">
+		
+		<u:style name="padding" skin="tableFooterCheckAllPadding" 	default="0px"/>
+	</u:selector>
+
+
+	<!-- aspect des liens tous et aucun -->
+	<u:selector name=".rich-table-footer-checkAll a">
+	
+		<u:style name="color" skin="tableFooterCheckAllLinkColor"/>
+		<u:style name="cursor" value="pointer"/>
+		<u:style name="text-decoration" value="underline"/>
+	</u:selector>
+
+
+	<u:selector name=".rich-table-footer-checkAll a:hover">
+
+		<u:style name="color" skin="tableFooterCheckAllHoverLinkColor"/>
+	</u:selector>
+
+
+	<!-- aspect du label Sélectionner -->
+	<u:selector name=".rich-table-footer-checkAll label">
+	
+		<u:style name="padding-right" value="0.5em"/>
+	</u:selector>
+
+
+
+<!-- 
++===============================================================================
+| Footer - Cellule
++===============================================================================
+-->
+	<u:selector name=".rich-table-footercell">
+
+		<u:style name="border-color" skin="tableFooterCellBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-width" skin="tableFooterCellBorderWidth"/>
+		<u:style name="font-weight" skin="tableFooterCellFontWeight"/>
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Footer - Cellule - Regroupement
+| 07/2010 : un seul exemple dans datatable_aggregation.xhtml
+| .tableFooterGroupement remplace .tableFooterCell
++===============================================================================
+-->
+	<u:selector name=".tableFooterGroupement">
+		<u:style name="border" skin="tableFooterCellBorder"/>
+		<u:style name="border-color" skin="tableFooterCellBorderColor"/>
+		<u:style name="border-style" value="solid"/>
+		
+		<!-- 07/2010 : on garde le paramétrage actuel -->
+		<u:style name="border-width" skin="tableFooterCellBorderWidth"/>
+		
+		<u:style name="color" skin="tableFooterCellTextColor"/>
+		<u:style name="height"		skin="tableHeadHeight" 		default="2.5em"/>
+		<u:style name="padding"		skin="tableHeadPadding" 	default="1px 5px 0px 5px"/>
+	</u:selector>
+
+	<!-- 07/2010 : surcharge du paramétrage -->
+	<u:selector name=".tableFooterGroupement">
+		<u:style name="border-width" skin="tableFooterGroupementBorderWidth"/>		
+	</u:selector>
+
+<!-- 
++===============================================================================
+| Footer - Cellule - [blocPagination]
+| 07/2010 : un seul exemple dans datatable_aggregation.xhtml
++===============================================================================
+-->
+	<u:selector name=".rich-table-footercell .blocPagination">
+		<u:style 
+			name="padding-top" 
+			skin="tableFooterCellBlocPaginationPadding-top" 
+			default="5px"/>
+	</u:selector>
+
+	
+</f:template>
+
+

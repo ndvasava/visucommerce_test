@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	version="2.0">
+	
+<meta name="GENERATOR" content="Rational Software Architect" />
+<f:view>
+
+<!-- Inclusion de la dtd definie dans le template parent -->
+<ui:composition template="/layout/page/ancestor/dtd.xhtml">
+
+	<!-- Insertion au sein de ce bloc parent -->
+	<ui:define name="master_content">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+			<title>Visu-commerce</title>
+			<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico"/>
+			
+			<!-- chargement d'un complement de style applicatif generique theme et css seam-->
+			<a4j:loadStyle src="resource:///stylesheet/css/theme.xcss"/>
+      		<a4j:loadStyle src="/stylesheet/css/theme.css"/>
+			
+			<!-- chargement d'un complement de style applicatif theme et css sphinx-->
+			<a4j:loadStyle src="#{theme.css}/local.xcss"/>
+			
+			<ui:remove>
+		        <!-- 
+		        Rajout d'une classe CSS au niveau du <br> de edit_help.xhtml pour assurer la compatibilité Chrome...
+		        Car ce <br> doit etre annule pour ce navigateur puisque la présence du tooltip entraine
+		        déjà un retour à la ligne...
+		        Cette classe CSS ne doit être comprise que par Chrome... et fait donc l'objet d'un Hack.
+		        Cependant, celui-ci n'est pas compatible avec le format XCSS et est donc directement integre 
+		        au head_resource.xhtml
+		        -->        
+        	</ui:remove>
+	        
+			<!-- Ajout de styles par les templates fils -->
+			<ui:insert name="css"/>
+ 		</head>
+ 		
+ 		<!-- Definition du corps de la page -->
+		<body>
+		
+			<!-- La definition du contenu est deleguee a la descendance -->
+			<ui:insert name="body_content"/>
+			<!-- div class="body">
+		       <h:messages id="messages" globalOnly="true" styleClass="message"
+		          errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
+		          rendered="#{showGlobalMessages != 'false'}"/>
+		       <ui:insert name="body"/>
+		    </div -->
+			
+			<a4j:status id="ajaxStatus">
+                <f:facet name="start">
+                    <h:graphicImage  value="#{theme.images}/ajax-loader.gif" styleClass="ajaxStatus"/>
+                </f:facet>
+            </a4j:status>
+            
+            <c:if test="${debugEnabled}">
+				<div style="clear:both"/>
+				<div id="theme">
+					<h:form id="formTheme">
+						<h:selectOneMenu value="#{themeSelector.theme}" 
+								onchange="javascript:$('formTheme:themeSelector').click();">
+						    <f:selectItems value="#{themeSelector.themes}"/>
+						</h:selectOneMenu>
+						<h:commandButton id="themeSelector" action="#{themeSelector.select}" style="display:none;"/>
+					</h:form>
+				</div>
+			</c:if>
+
+		</body>
+	
+	</ui:define>
+</ui:composition>
+</f:view>
+</jsp:root>

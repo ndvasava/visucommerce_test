@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant le zoning Natixis Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/visuc/jsf/ui/skins/css/zoning.xcss" />
+	
+	<!-- La page VisuCommerce est centrée (pour le corps de page). Le bandeau haut et le pieds de page occupent
+	eux toute la largeur de l'écran...
+	Elle possède des liens transversaux. 
+	
+	Ce centrage est obtenu par des propriétés présentes à chaque balise, ou tag, mais aussi a une propriete centralte : defaultPageWidth=994px, qui
+	est definit dans le skin.properties
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<ul id="liensTransversaux">...</ul>
+			<div id="conteneurHeader">
+				<a id="logo">...</a>				
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="conteneur">
+			<ul id="rail">...</ul>
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="liensFooter">...</ul>
+			<div id="copyright">...</div>
+		</div>		
+	-->
+	
+	<!--  Centrage des éléments idoines -->
+	
+	<u:selector name="#conteneurHeader,ul#liensTransversaux,#conteneur,#piedsDePage">
+		<u:style name="margin" value="0 auto" /><!-- (1) -->
+		<u:style name="width" skin="defaultPageWidth" />
+	</u:selector>
+	
+	<!-- (1) Ceci permet de centrer tous les éléments -->	
+		 
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #bandeauHaut (et de ses éléments fils)  */
+		/***********************************************************/
+	 --> 
+	 
+	<!-- Positionnement du bloc des liens transversaux situés dans le header.
+	Cette zone occupe toute la largeur de la zone utile mais est alignée à droite -->
+	<u:selector name="ul#liensTransversaux"><!-- EXTENDS "body #liensTransversaux" -->
+		<u:style name="text-align" value="right"/>
+		<u:style name="line-height" value="25px"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (2) Line-height pour que la hauteur globale fasse 20px au lieu de padding + height
+	 et le texte est centré obligatoirement -->
+	 
+	 
+	 <!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->	
+	 
+	<!-- Positionnement du #rail dans le header côté agence -->
+	<u:selector name="body #rail"><!-- EXTENDS "#rail" -->
+		<u:style name="padding-bottom" value="3px"/>
+	</u:selector>	
+	
+	<!-- Alignement du #corpsDePage -->
+	<u:selector name="body #corpsDePage"/><!-- EXTENDS "#corpsDePage" -->
+	
+	<!-- Le #corpsDePage peut sortir de son conteneur si le contenu excède la taille usuelle...
+	Les anciens navigateurs (IE6, IE7) gêrent ça très mal et entraînent un retour à la ligne décalé 
+	de la marge gauche positionnée. De ce fait, nous sommes obligés pour ces navigateurs de positionner
+	une taille explicite ('width') et de déterminer le dépassement de cette taille explicite ('overflow') -->
+	
+	<!-- Hack pour IE6  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="* html #corpsDePage">
+		<u:style name="width" value="760px"/>
+		<u:style name="overflow-x" value="auto"/>		
+	</u:selector>
+	
+	<!-- Hack pour IE7  (dû à l'arrivée de Chrome) --> 
+	<u:selector name="*+html #corpsDePage">
+		<u:style name="width" value="760px"/>
+		<u:style name="overflow-x" value="auto"/>	
+		<u:style name="overflow-y" value="hidden"/><!-- (3) -->
+	</u:selector>
+	
+	<!-- (3) Permet d'éviter que les liens d'action soient définies sous la barre de scroll...
+	Car le #conteneur fournira déjà l'ascenseur -->
+	
+	
+	
+	<!-- 
+		/***********************************************************/
+		/* Organisation du #piedsDePage (et de ses éléments fils)  */
+		/***********************************************************/
+	 -->	
+	 
+	<!-- Création d'un calque supplémentaire englobant l'ensemble (#piedsDePage) -->
+	<u:selector name="#footer">
+		<u:style name="border-width" skin="footerBorderWidth"/>
+		<u:style name="border-style" value="solid"/>
+		<u:style name="border-color" skin="footerBorderColor"/>
+		<u:style name="background-color" skin="footerBgColor"/>
+		<u:style name="clear" value="both"/>
+	</u:selector>  
+	
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="#piedsDePage"><!-- EXTENDS "body #piedsDePage" -->
+		<u:style name="line-height" value="24px"/><!-- (5) -->
+	</u:selector>
+	 
+	<!-- (5) Permet de situer le texte à l'intérieur du footer au milieu de la bande -->
+	
+	<!-- ul#liensFooter : les liens habituels -->
+	<u:selector name="ul#liensFooter">
+		<u:style name="float" value="left"/>
+		<u:style name="margin" value="0"/>
+		<u:style name="padding" value="0"/>
+		<u:style name="width" value="32%"/>
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	
+	<!-- #copyright -->
+	<u:selector name="#copyright">
+		<u:style name="text-align" value="right"/>
+	</u:selector>
+	 
+</f:template>
+	

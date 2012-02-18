@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+	
+	<!-- 
+	
+		Feuille de style qui définit les formulaires, c'est à dire l'utilisation des templates Seam dans les pages 
+		
+		Les propriétés utilisées ici sont : 
+		- processusBorderColor : couleur du trait de séparation séparant le processus du reste du formulaire
+		- processusBgColor : couleur de fond du calque contenant la liste des processus
+		- processusSelectedTextColor : couleur d'écriture du processus actif
+		- processusSelectedBgColor : couleur de fond entourant le processus actif	
+		
+	-->
+	
+	<!-- styles communs à tous les formulaires -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire.xcss" />
+	
+	<!-- Spécificité de cette enseigne : les messages d'erreur de validation du formulaire doivent être
+	décalées sous le champ "input" et non pas sous le champ "label".
+	=> Autrement dit, on applique des styles permettant d'appliquer les margin et les padding idoines.
+	Ces styles sont mis à disposition par l'importation de la feuille transverse ci-dessous -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/formulaire_validation_decalee.xcss" />
+	
+	<!-- Refonte des champs de saisie (application d'une couleur de fond) -->
+	<u:selector name=".value input, .value select, .value textarea">
+		<u:style name="background-color" skin="currentInputBgColor"/>
+	</u:selector>
+	
+	<!-- 
+		/*********************************************************/
+		/* Formulaire : Style en consultation du champ modifié   */
+		/*********************************************************/
+	 -->
+	
+	<!-- Style en consultation du champ modifié -->
+	<u:selector name=".detail_rubrique .value">
+		<u:style name="font-weight" value="bold"/>
+		<u:style name="height" value="1em"/>
+		<u:style name="display" value="block"/>
+	</u:selector>
+	
+	<!-- Style spécifique Firefox -->
+	<u:selector name="html>body .detail_rubrique .value">
+		<u:style name="height" value="auto"/>
+		<u:style name="min-height" value="1em"/>
+	</u:selector>
+	
+	<!-- 
+		/**************************************/
+		/* Formulaire : Style des Processus   */
+		/**************************************/
+	 -->
+	
+	<u:selector name="body .processus"><!-- EXTENDS ".processus" -->
+	    <u:style name="font-size" value="1.05em" />
+	    <u:style name="border-width" value="0 0 1px" />
+	    <u:style name="border-style" value="solid" />
+	    <u:style name="border-color" skin="processusBorderColor" />
+	</u:selector>
+
+	<!-- 
+		/***********************************************/
+		/* Formulaire : Messages d'erreur de RichFaces */
+		/***********************************************/
+	 -->
+	
+	<!-- Style du message général situé en amont du formulaire -->
+	<u:selector name=".rich-messages .info">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/img/erreur.png" />
+		</u:style>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .warn">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/img/erreur.png" />
+		</u:style>
+	</u:selector>	
+
+	<u:selector name=".rich-messages .error">
+		<u:style name="background-image">
+			<f:resource f:key="/com/natixis/sphinx/jsf/ui/skins/natixis_nd/commun/img/erreur.png" />
+		</u:style>
+	</u:selector>	
+
+</f:template>

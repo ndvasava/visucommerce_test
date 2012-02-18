@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>false</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation></warLocation>
+    <extraInfo></extraInfo>
+    <webPath>visucommerce</webPath>
+    <webClassPathEntries>
+        <webClassPathEntry>/visucommerce/build/classes</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/annotations-api.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/catalina-ant.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/catalina-ha.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/catalina-tribes.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/catalina.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/commons-logging-1.1.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/ecj-3.6.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/el-api.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/jasper-el.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/jasper.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/jotm-core-2.1.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/jsp-api.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/log4j-1.2.16.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/ow2-connector-1.5-spec-1.0-M1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/ow2-jta-1.1-spec-1.0-M1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/servlet-api.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-api.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-coyote.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-dbcp.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-i18n-es.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-i18n-fr.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-i18n-ja.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Apache_Software_Foundation/Tomcat7/lib/tomcat-util.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/antlr-2.7.6.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/aopalliance-1.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/asm-2.2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/asm-attrs-2.2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/asm-commons-2.2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/asm-tree-2.2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/asm-util-2.2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/aspectjweaver-1.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/avalon-framework-api-4.3.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/avalon-framework-impl-4.3.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/backport-util-concurrent-3.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/cglib-nodep-2.1_3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-beanutils-1.7.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-beanutils-core-1.7.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-codec-1.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-collections-3.2.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-configuration-1.5.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-digester-1.8.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-io-1.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-lang-2.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-logging-1.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/commons-pool-1.3.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/concurrent-1.3.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/darkX-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/dom4j-1.6.1-jboss.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/ejb3-persistence-1.0.2.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/facelets-tld.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/glassX-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hibernate-annotations-3.4.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hibernate-commons-annotations-3.1.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hibernate-core-3.3.1.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hibernate-entitymanager-3.4.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hibernate-validator-3.1.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/hsqldb_2.2.5.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/javassist-3.8.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-common-5.0.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-el.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-debug.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-excel.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-ioc.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-mail.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-pdf.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-remoting.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam-ui.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jboss-seam.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jsf-api-1.2_04-p02.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jsf-facelets-1.1.14.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jsf-impl-1.2_04-p02.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jstl-api-1.2.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jstl-impl-1.2.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/jta-1.1.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/laguna-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/log4j-1.2.12.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/mysql-connector-java-5.1.14.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/persistence-api-1.0.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/richfaces-api-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/richfaces-impl-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/richfaces-ui-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/skins-css-1.2.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/slf4j-api-1.5.8.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/slf4j-log4j12-1.5.8.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/sphinx-jsf-css-1.2.0.GA.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-aop-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-beans-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-context-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-context-support-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-core-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-jdbc-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-jms-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-orm-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-tx-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/spring-web-2.5.4.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/themes-3.3.3.Final.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/xercesImpl.jar</webClassPathEntry>
+        <webClassPathEntry>C:/Program Files/Developpements/_formation/gildas_formation/workspace/visucommerce/WebContent/WEB-INF/lib/xml-apis.jar</webClassPathEntry>
+        <webClassPathEntry>org.eclipse.jst.j2ee.internal.web.container</webClassPathEntry>
+        <webClassPathEntry>org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0</webClassPathEntry>
+    </webClassPathEntries>
+</tomcatProjectProperties>

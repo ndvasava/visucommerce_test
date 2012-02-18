@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" 	   
+	   >
+
+	<!-- 	
+		Feuille de style décrivant le zoning Caisse d'Epargne Agence.
+		Elle hérite d'une feuille de style principale qui définit les principales propriétés variabilisées : 
+	-->	
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/zoning.xcss" />
+	
+	<!-- La page Caisse d'Epargne est collée à gauche et possède un rail défini dans le header.
+	Elle possède des panneaux rétractables qui concernent le bandeau client situé dans le header
+	et le menu.
+	
+	Le code se présente sous cette forme :
+		<div id="bandeauHaut">
+			<div id="conteneurHeader">
+				<div id="liensTransversauxPicto">...</div>
+				<div id="titreAppli">...</div>
+			</div>
+		</div>	
+		<div id="bandeauClient">...</div>
+		<div id="conteneur">
+			<ul id="rail">...</ul>
+			<div id="menu">
+				<div id="menuGauche">...</div>
+				<div id="bandeauGaucheFermer">...</div>
+				<div id="bandeauGaucheOuvrir">...</div>
+				<div style="clear:both;">...</div>
+			</div>
+			<div id="corpsDePage">
+				<ul id="navTransversal" class="navTransversal">...</ul>
+				<div id="zoneTitrePage">
+					<h1 id="titrePage" class="titrePage|titrePleineLargeur">...</h1>
+					<ul id="outilsContextuels" class="outilsContextuels">...</ul>
+				</div>
+				<div id="zoneCentrale">...</div>
+			</div>
+		</div>
+		<div id="piedsDePage">
+			<ul id="informationsPosteClient">...</ul>
+		</div>						
+	 -->
+	 
+	<!-- 
+		/*********************************************************/
+		/* Organisation du #conteneur (et de ses éléments fils)  */
+		/*********************************************************/
+	 -->
+	 
+	<!-- Positionnement du #rail -->
+	<u:selector name="#rail"><!-- EXTENDS "body #rail" -->
+		<u:style name="margin-bottom" value="3px"/><!-- (1) -->
+		<u:style name="margin-left" value="9px"/>
+		<u:style name="padding-bottom" value="3px"/>
+	</u:selector>
+	
+	<!-- (1) Marge séparant le #rail du reste du corps de page (#corpsDePage) -->
+		
+	<!-- Pour permettre d'ajouter un panneau rétractable sur le menu, on fixe la largeur du menu intrinsèque -->
+	<u:selector name="#menuGauche">
+		<u:style name="float" value="left"/><!-- (2) -->
+		<u:style name="width" skin="menuGaucheWidth" default="142px"/><!-- (3) -->
+	</u:selector>		
+	
+	<!-- Style pour le bandeau rétractable du menu -->
+	<u:selector name="#bandeauGaucheFermer, #bandeauGaucheOuvrir">
+		<u:style name="float" value="left"/><!-- (3) -->
+		<u:style name="width" value="9px"/><!-- (4) -->
+		<u:style name="height" value="1px"/>
+	</u:selector>
+	
+	<!-- (2) Essentiel, sinon la barre rétractable du menu passe sous le menu -->
+	
+	<!-- (3) On définit ici une variable supplémentaire. Il existe une variable qui définit toute la largeur du
+	menu 'menuWidth' mais qui englobe l'intégralité : menu + barre verticale. En cas d'absence de barre, on doit
+	pouvoir aboutir à un menu seul occupant toute la largeur. Il conviendrait de surcharger la valeur de 
+	'menuGaucheWidth' pour lui octroyer la valeur actuelle de menuWidth(ie 155px) -->
+	
+	<!-- (4) La somme de cette valeur couplée à celle de (3) est de fait égale à la 
+	largeur du #menu... variabilisée (non mise en 'auto' pour cause d'incompatibilité IE6) -->
+	
+	<!-- Positionnement du #corpsDePage qui occupe toute la largeur mais est décalé de la largeur du menu (+padding) -->
+	<u:selector name="#corpsDePage"><!-- EXTENDS "body #corpsDePage" -->
+		<u:style name="padding-right" value="10px"/><!-- (5) -->
+	</u:selector>
+	
+	<!-- (5) Pour éviter que le contenu de la zone utile (images, bande des liens transversaux) ne colle 
+	à la bordure droite -->
+
+	<!-- IE8 - FireFox -->
+	<u:selector name="html > body #corpsDePage, html > body #bandeauxForm">
+		<u:style name="float" value="none"/>
+		<u:style name="margin-left" value="155px"/>
+	</u:selector>
+	
+	<!-- vitseli : 
+	#bandeauxForm sert à prendre la mesure de margin-left en javascript
+	lorsque le bandeau gauche est ouvert ou fermé. 
+	Même principe pour IE6.
+	Voir manipulation de #corpsDePage et #bandeauxForm dans bandeaux-jquery.js.	
+	-->
+		
+	<!-- IE6 -->
+	<u:selector name="#corpsDePage, #bandeauxForm">
+		<u:style name="float" value="left"/>
+		<u:style name="margin-left" value="0px"/><!-- (6) -->
+	</u:selector>
+	
+	<!-- (6) Pour éviter que le contenu de la zone utile (images, bande des liens transversaux) ne colle 
+	à la bordure droite lorsque le bloc menu est ouvert. -->
+
+	<!-- ========================================== -->
+	<!-- Corps de page avec le bandeau gauche fermé -->
+	<!-- ========================================== -->
+	
+	<!-- IE 7-8 FF 3.5 -->
+	<u:selector name="html > body .corpsDePageWithoutBandeauGauche">
+		<u:style name="margin-left" value="12px!important"/>
+	</u:selector>
+
+	<!-- IE 6 -->	
+	<u:selector name=".corpsDePageWithoutBandeauGauche">
+		<u:style name="margin-left" value="0px!important"/>		
+	</u:selector>
+	
+	
+	<!-- Navigation transversale (A priori n'existe que pour Internet mais on le laisse au cas où...) -->
+	<u:selector name="#navTransversal"><!-- EXTENDS "body #navTransversal" --> 
+		<u:style name="margin-bottom" value="1em"/>
+	</u:selector>
+		
+	<!-- 
+		/********************************/
+		/* Organisation du piedsDePage  */
+		/********************************/
+	 -->
+	
+	<!-- #piedsDePage définit la zone basse : liens, mentions légales et copyright -->
+	<u:selector name="body #piedsDePage">
+		<u:style name="font-family" value="Trebuchet MS, Arial, Helvetica, sans-serif"/><!-- (7) -->
+	</u:selector>
+	
+	<!-- (7) Non variabilisé eu égard à la présence d'une virgule comprise comme un séparateur -->
+	 
+	 <!-- On importe le style idoine à ce footer : un ensemble liens, copyright aligné à gauche -->
+	<f:importResource src="com/natixis/sphinx/jsf/ui/skins/css/disposition_footer_duo_gauche.xcss" />	
+
+</f:template>

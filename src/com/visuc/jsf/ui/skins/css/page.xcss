@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+	   xmlns:u='http:/jsf.exadel.com/template/util' 
+	   xmlns="http://www.w3.org/1999/xhtml" >
+
+	<!-- 	
+		Feuille de style décrivant l'apparence des éléments de la page :
+			- liens transversaux (texte)
+			- liens transversaux (picto)
+			- titre de la page
+			- outils contextuels
+			- moteur de recherche
+			- rail
+			- liens du footer
+			- copyright
+			
+		Cette feuille ne décrit pas la disposition des éléments. 
+		=> Pour cette dernière, consulter la feuille "zoning.xcss" située dans le même répertoire.	
+		
+		La feuille "zoning.xcss" fait usage exclusivement des styles appliqués à des id	(#XXX) ; les class (.YYYY)
+		constituant des variantes autour de blocs standards (Ex : bandeau haut avec / sans moteur de recherche).
+		
+		Ici, en revanche, les id n'ont pas le droit de cité : on ne décrit l'apparence qu'à l'aide de class.
+		
+	-->
+	
+	<!-- (0) Rajouté pour permettre de mettre une couleur sur tout le côté gauche
+	et pas seulement sur la <div> contenant le menu. On applique ici une couleur
+	sur tout le contenu... que l'on compense par une autre couleur appliqué sur
+	la #corpsDePage (généralement le #ffffff)-->
+	
+	<!-- 
+		/***********************/
+		/* Liens transversaux  */
+		/***********************/
+	 -->
+	 
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>
+				<ul id="liensTransversaux" class="liensTransversaux">
+					<li class="first">
+						<a>...</a>
+					</li>
+					<li>
+						<a>...</a>
+					</li>
+					...
+					<li class="last">
+						<a>...</a>
+					</li>
+				</ul>
+			</div>
+			...
+		</body>
+		
+		pour un rendu :
+		
+		******************************************************************************************************
+																			> lien1   > lien2   > lien3		
+		******************************************************************************************************
+	 -->
+	 
+	 
+	  									<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+									 	  	Liens sous forme de texte
+									  	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	 
+	<!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.liensTransversaux">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="liensTransversauxFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- (1) Réinitialisation de la valeur par défaut de l'<ul> : 'list-style-type:disc' -->
+	
+	<!-- (2) Détermination de la taille par application d'un filtre sur la valeur définie dans le <body> -->
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensTransversaux li">
+		<u:style name="display" value="inline"/><!-- (3) -->
+		<u:style name="color" skin="liensTransversauxCurrentPageColor"/>
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.last"/>
+	
+	<!-- (3) Solution permettant d'afficher le lien à l'horizontal. Cette solution n'est à envisager que si l'on
+	n'a pas besoin d'éléments de largeur identique (il faudrait alors utiliser une solution en 'float')-->
+	
+	<!-- (4) Cette propriété définit un couple de valeurs : 'horizontal vertical'. 
+	En l'espèce, l'image est collée à gauche du <li> et est située '0.25em' du haut. -->
+	
+	<!-- (5) Cette propriété définit l'espace à droite située après chaque entrée de la liste. On ne combine pas 
+	ici avec un padding-left (redondant). Le 'padding-left' sera utilisé pour séparer la puce '>' du lien proprement
+	dit. -->
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensTransversaux li.first a"/>
+
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensTransversaux li a">
+		<u:style name="color" skin="liensTransversauxColor"/>	
+		<u:style name="text-decoration" skin="liensTransversauxTextDecoration"/>		
+	</u:selector>
+	
+	<!-- (6) <a> étant un élément de type 'inline', on ne peut lui associer de padding-top/bottom. Ce type 
+	de propriété ne peut être ajouté qu'au niveau de l'<ul> parent. -->
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.liensTransversaux li.last a"/>
+	
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.liensTransversaux li a:hover">
+		<u:style name="color" skin="liensTransversauxHoverColor"/>	
+		<u:style name="text-decoration" skin="liensTransversauxHoverTextDecoration"/>	
+	</u:selector>
+	
+	
+										<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+									 	  	Liens sous forme de picto
+									  	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+									  	
+	<!-- Style des images au sein du bloc #liensTransversauxPicto -->
+	<u:selector name=".liensTransversauxPicto a"/>
+	
+	
+	<!-- 
+		/***************************/
+		/* Titre de l'application  */
+		/***************************/
+	 -->
+	 
+	 <!-- Le code se présente sous cette forme :
+		<body>
+			<div id="bandeauHaut" (class="avecMoteurRecherche|bandeauHautAuthentification")>
+				...
+				<div id="conteneurHeader">
+					<a id="logo" class="logo">...</a>
+					<div id="titreAppli" class="titreAppli">...</div>
+					...
+				</div>
+			</div>
+			...
+		<body>
+		
+		pour un rendu :
+		
+		******************************************************************************************************
+			NATIXIS
+						AWS
+		******************************************************************************************************
+	 -->		
+		
+	<!-- Style spécifique au logo -->					
+	<u:selector name=".logo"/>
+		
+	<!-- Titre principal de l'application -->	
+	<u:selector name=".titreAppli">
+		<u:style name="font-size" skin="applicationTitleFontSize"/>
+		<u:style name="font-weight" skin="applicationTitleFontWeight"/>
+		<u:style name="text-transform" skin="applicationTitleTextTransform"/>
+		<u:style name="color" skin="applicationTitleColor"/>
+	</u:selector>
+	
+	
+	<!-- 
+		/*******************/
+		/* Liens du footer */
+		/*******************/
+	 -->
+	 
+	 <!-- Le code, généré, se présente sous cette forme :
+		<ul id="liensFooter" class="liensFooter">
+			<li class="first">
+				<a id="j_id104" href="/aws/accueil.action?actionMethod=views%2Fclient%2Frecherche_client.jspx%3Amanager.endRootConversation%28true%29&amp;cid=48">
+					Mentions l&#233;gales
+				</a>
+			</li>
+			<li>
+				<a id="railForm:j_id107:0:j_id109" href="/aws/views/charge/recherche_charge.action?viewId=%2Fviews%2Fclient%2Frecherche_client.jspx&amp;actionMethod=views%2Fcharge%2Frecherche_charge.jspx%3Abreadcrumb.navigate&amp;cid=48">
+					lien2
+				</a>
+			</li>
+			<li class="last">
+				<a id="j_id104" href="/aws/accueil.action?actionMethod=views%2Fclient%2Frecherche_client.jspx%3Amanager.endRootConversation%28true%29&amp;cid=48">
+					lien3
+				</a>
+			</li>							
+		</ul>
+			
+		pour un rendu :
+		
+		******************************************************************************************************
+			> Mentions légales > lien2 > lien3
+		******************************************************************************************************
+				
+	 -->	
+	 
+	<!-- Définition du bloc contenant la liste (initialisation des margin et padding faite dans le "zoning.xcss" -->
+	<u:selector name="ul.liensFooter">
+		<u:style name="list-style-type" value="none"/><!-- (1) -->
+		<u:style name="font-size" skin="liensFooterFontSize"/><!-- (2) -->
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à gauche -->
+	<u:selector name="ul.liensFooter li.first"/>
+	
+	<!-- Réalisation d'un lien n -->
+	<u:selector name="ul.liensFooter li">
+		<u:style name="display" value="inline"/><!-- (3) -->		
+	</u:selector>
+	
+	<!-- Spécificité du lien situé le plus à droite -->
+	<u:selector name="ul.liensFooter li.last"/>
+	
+	<!-- (3) Solution permettant d'afficher le lien à l'horizontal. Cette solution n'est à envisager que si l'on
+	n'a pas besoin d'éléments de largeur identique (il faudrait alors utiliser une solution en 'float')-->
+	
+	<!-- (4) Cette propriété définit un couple de valeurs : 'horizontal vertical'. 
+	En l'espèce, l'image est collée à gauche du <li> et est située '0.25em' du haut. -->
+	
+	<!-- (5) Cette propriété définit l'espace à droite située après chaque entrée de la liste. On ne combine pas 
+	ici avec un padding-left (redondant). Le 'padding-left' sera utilisé pour séparer la puce '>' du lien proprement
+	dit. -->
+	
+	<!-- Au sein de l'entrée, propriété du lien proprement dit (décalage par rapport à l'image de gauche...) -->
+	<u:selector name="ul.liensFooter li a">
+		<u:style name="color" skin="liensFooterColor"/>	
+		<u:style name="text-decoration" skin="liensFooterTextDecoration"/>	
+		<u:style name="font-weight" skin="liensFooterFontWeight"/>		
+	</u:selector>
+	
+	<!-- (6) <a> étant un élément de type 'inline', on ne peut lui associer de padding-top/bottom. Ce type 
+	de propriété ne peut être ajouté qu'au niveau de l'<ul> parent. -->
+		
+	<!-- Comportement du lien au survol -->
+	<u:selector name="ul.liensFooter li a:hover">
+		<u:style name="color" skin="liensFooterHoverColor"/>	
+		<u:style name="text-decoration" skin="liensFooterHoverTextDecoration"/>	
+	</u:selector>
+	
+	<!-- Style du copyright -->
+	<u:selector name=".copyright">
+		<u:style name="font-size" skin="copyrightFontSize"/>
+		<u:style name="font-weight" skin="copyrightFontWeight"/>
+		<u:style name="color" skin="copyrightColor"/>					
+	</u:selector>
+	
+</f:template>
